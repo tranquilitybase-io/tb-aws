@@ -1,7 +1,7 @@
 provider "aws" {
-  region = TF_VAR_REGION
-  access_key = TF_VAR_ACCESS_KEY
-  secret_key = TF_VAR_SECRET_KEY
+  region = "us-west-2"
+  access_key = "AKIAILHH6F5MWXP4HV3A"
+  secret_key = "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"
 }
 
 terraform {
