@@ -1,0 +1,5 @@
+include:
+  - local: 'automation/cicd/.gitlab-ci.yml'
+  #- project: 'aws/lz'
+  #  ref: 'develop'
+  #  file: '/automation/cicd/.gitlab-ci.yml'

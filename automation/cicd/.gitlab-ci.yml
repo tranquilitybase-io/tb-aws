@@ -1,0 +1,33 @@
+#variables:
+#  WRK_PATH
+#  CICD_SCRIPTS_DIR  
+
+test_job:
+  image:
+    name: hashicorp/terraform:full
+    entrypoint: [""]
+  tags:
+    - docker
+  script:
+    - automation/cicd/main.sh
+  only:
+    refs:
+      - develop
+
+initial_job:
+  tags:
+    - shell
+  script:
+    - echo "Initial job ok... ${ID_SYSTEM}"
+
+configure_aws_config:
+  tags:
+    - shell
+  script:
+    - pwd
+    - ls
+  only:
+    refs:
+      - develop
+    changes:
+      - gitlab-ci.yml
