@@ -3,11 +3,13 @@
 #  CICD_SCRIPTS_DIR
 
 test_job:
+  image:
+    name: hashicorp/terraform:full
+    entrypoint: [""]
   tags:
     - shell
   script:
     - ls
-    - pwd
 
 initial_job:
   tags:
