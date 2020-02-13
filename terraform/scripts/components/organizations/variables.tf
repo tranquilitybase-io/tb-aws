@@ -47,3 +47,22 @@ variable "ou_parent_id" {
     default = ""
 }
 
+variable "policy_name" {
+    type = string
+    default = ""
+}
+
+variable "policy_description" {
+    type = string
+    default = ""
+}
+
+variable "policy_type" {
+    type = string
+    default = ""
+}
+
+variable "policy_content" {
+    type = string
+    default = ""
+}

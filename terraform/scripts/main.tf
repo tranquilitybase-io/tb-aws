@@ -43,6 +43,35 @@ module "aws_lz_ou_sharedservices" {
   ou_parent_id = module.aws_lz_organization_main.org_id
 }
 
+module "aws_lz_policy_tagging" {
+  source = "./components/organizations"
+
+  policy_name = "Tagging"
+  policy_description = "Tagging resources on AWS"
+  policy_type = "TAG_POLICY"
+  policy_content = <<CONTENT
+{
+    "tags": {
+        "CostCenter": {
+            "tag_key": {
+                "@@assign": "CostCenter",
+                "@@operators_allowed_for_child_policies": ["@@none"]
+            }
+        },
+        "Project": {
+            "tag_key": {
+                "@@assign": "Project",
+                "@@operators_allowed_for_child_policies": ["@@none"]
+            }
+        }
+    }
+}
+CONTENT
+
+}
+
+
+
 
 
 

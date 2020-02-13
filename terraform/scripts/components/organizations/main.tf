@@ -21,3 +21,14 @@ resource "aws_organizations_organizational_unit" "aws_lz_ou" {
   parent_id = var.ou_parent_id
 }
 
+resource "aws_organizations_policy" "aws_lz_policy" {
+  count = length(var.policy_name) > 0 ? 1 : 0
+
+  name = var.policy_name
+  description = var.policy_description
+
+  type = var.policy_type
+
+  content = var.policy_content
+}
+
