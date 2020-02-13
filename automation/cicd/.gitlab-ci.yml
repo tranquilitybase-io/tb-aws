@@ -4,7 +4,7 @@
 
 test_job:
   image:
-    name: ubuntu:latest
+    name: hashicorp/terraform:full
     entrypoint: [""]
   tags:
     - docker
