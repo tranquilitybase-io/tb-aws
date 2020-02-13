@@ -2,4 +2,4 @@ initial_job:
   tags:
     - shell
   script:
-    - echo "Initial job ok..."
+    - echo "Initial job ok... ${ID_SYSTEM}"
