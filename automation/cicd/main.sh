@@ -6,3 +6,4 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
 cd ${TERRAFORM_PATH}
 terraform init
+terraform plan
