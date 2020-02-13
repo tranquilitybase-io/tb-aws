@@ -6,6 +6,7 @@ test_job:
   tags:
     - shell
   script:
+    - ls
     - pwd
 
 initial_job:
