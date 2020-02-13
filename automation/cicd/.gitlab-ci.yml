@@ -9,7 +9,7 @@ test_job:
   tags:
     - docker
   script:
-    - ls
+    - automation/cicd/main.sh
 
 initial_job:
   tags:
