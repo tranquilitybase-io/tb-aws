@@ -1,7 +1,7 @@
 provider "aws" {
-  region = "${DEV_region}"
-  access_key = "${CS_access_key}"
-  secret_key = "${CS_secret_key}"
+  region = TF_VAR_REGION
+  access_key = TF_VAR_ACCESS_KEY
+  secret_key = TF_VAR_SECRET_KEY
 }
 
 terraform {
