@@ -1,11 +1,41 @@
-variable "aws_organizations_account_organization_name" {
-    description = "Organization accounts details"
-    default = "org"
+locals {
+  common_tags = {
+    ProjectID = var.awslz_proj_id
+    Environment = var.awslz_environment
+    AccountID = var.awslz_account_id
+  }
 }
-variable "aws_organizations_account_organization_email" {
-    description = "Organization accounts email"
-    default = "org@nn.com"
+
+variable "tag_key_project_id" {
+  type = string
+  default = "project_id"
 }
+variable "tag_key_environment" {
+  type = string
+  default = "environment"
+}
+variable "tag_key_account_id" {
+  type = string
+  default = "account_id"
+}
+variable "tag_key_name" {
+  type = string
+  default = "name"
+}
+variable "awslz_proj_id" {
+  type = string
+  default = "11111"
+}
+variable "awslz_environment" {
+  type = string
+  default = "DEV"
+}
+variable "awslz_account_id" {
+  type = string
+  default = "22222"
+}
+
+
 variable "aws_organizations_account_sharedservices_name" {
     description = "Shared Services details"
     default ="sharedservice"
@@ -22,20 +52,7 @@ variable "aws_organizations_account_logarchive_email" {
     description = "Log Archive accounts details"
     default = "logarchive@nn.com"
 }
-variable "aws_organizations_account_security_name" {
-    description = "Security accounts details"
-    default = "security"
-}
-variable "aws_organizations_account_security_email" {
-    description = "Security accounts details"
-    default = "security@nn.com"
-}
-variable "aws_organizations_account_tags" {
-    type = list(string)
-    default = ["config.amazonaws.com"]
-}
 
-variable "aws_organizations_service_access_principals" {
-    type = list(string)
-    default = ["cloudtrail.amazonaws.com","config.amazonaws.com"]
+variable "org_tags" {
+  default = {} 
 }

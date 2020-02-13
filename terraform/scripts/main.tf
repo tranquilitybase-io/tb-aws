@@ -14,33 +14,36 @@ provider "null" {
   version = "~> 2.1"
 }
 
-variable "tag_key_project_id" {
-  type = string
-  default = "project_id"
+module "aws_lz_organization_main" {
+  source = "./components/organizations"
+  create_lz_organization = true 
 }
-variable "tag_key_environment" {
-  type = string
-  default = "environment"
+
+module "aws_lz_account_sharedservices" {
+  source = "./components/organizations"
+  
+  org_account_name = var.aws_organizations_account_sharedservices_name
+  org_account_email = var.aws_organizations_account_sharedservices_email
+  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
 }
-variable "tag_key_account_id" {
-  type = string
-  default = "account_id"
+
+module "aws_lz_account_logarchive" {
+  source = "./components/organizations"
+  
+  org_account_name = var.aws_organizations_account_logarchive_name
+  org_account_email = var.aws_organizations_account_logarchive_email
+  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
+  
 }
-variable "tag_key_name" {
-  type = string
-  default = "name"
+
+module "aws_lz_ou_sharedservices" {
+  source = "./components/organizations"
+
+  ou_name = "Shared Services"
+  ou_parent_id = module.aws_lz_organization_main.org_id
 }
-variable "awslz_proj_id" {
-  type = string
-  default = "11111"
-}
-variable "awslz_environment" {
-  type = string
-  default = "DEV"
-}
-variable "awslz_account_id" {
-  type = string
-  default = "22222"
-}
+
+
+
 
 
