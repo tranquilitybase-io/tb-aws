@@ -10,6 +10,9 @@ test_job:
     - docker
   script:
     - automation/cicd/main.sh
+  only:
+    refs:
+      - develop
 
 initial_job:
   tags:
