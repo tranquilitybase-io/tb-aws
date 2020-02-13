@@ -1,6 +1,6 @@
 #variables:
 #  WRK_PATH
-#  CICD_SCRIPTS_DIR
+#  CICD_SCRIPTS_DIR  
 
 test_job:
   image:
