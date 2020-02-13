@@ -7,8 +7,8 @@ export TF_VAR_SECRET_KEY=${CS_secret_key}
 
 # Paths
 MAIN_PATH=$(pwd)
-TERRAFORM_PATH="${MAIN_PATH}/terraform"
+TERRAFORM_PATH="${MAIN_PATH}/terraform/scripts"
 
 cd ${TERRAFORM_PATH}
 terraform init
-#terraform plan
+terraform plan
