@@ -1,0 +1,28 @@
+#variables:
+#  WRK_PATH
+#  CICD_SCRIPTS_DIR
+
+test_job:
+  tags:
+    - shell
+  script:
+    - ls
+    - pwd
+
+initial_job:
+  tags:
+    - shell
+  script:
+    - echo "Initial job ok... ${ID_SYSTEM}"
+
+configure_aws_config:
+  tags:
+    - shell
+  script:
+    - pwd
+    - ls
+  only:
+    refs:
+      - develop
+    changes:
+      - gitlab-ci.yml
