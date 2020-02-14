@@ -18,7 +18,7 @@ stages:
     changes:
       - terraform/**/*
       - automation/cicd/.gitlab-ci.yml
-      - automation/cicd/*
+      - automation/cicd/**
 
 initial_job:
   stage: Prepare
