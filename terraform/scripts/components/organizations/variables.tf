@@ -66,3 +66,12 @@ variable "policy_content" {
     type = string
     default = ""
 }
+
+variable "target_id" {
+    default = []
+}
+
+variable "policy_id" {
+    type = string
+    default = ""
+}
