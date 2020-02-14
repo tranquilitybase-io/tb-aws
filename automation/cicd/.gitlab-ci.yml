@@ -10,6 +10,11 @@ stages:
   image:
     name: hashicorp/terraform:full
     entrypoint: [""]
+  only:
+    refs:
+      - feature/*
+    changes:
+      - terraform/**/*
 
 initial_job:
   stage: Prepare
@@ -25,9 +30,6 @@ organization provision:
     - docker
   script:
     - automation/cicd/main.sh
-  only:
-    refs:
-      - develop
 
 configure_aws_config:
   stage: Prepare
