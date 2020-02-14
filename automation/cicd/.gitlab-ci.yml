@@ -1,5 +1,6 @@
 variables:
   CICD_SCRIPTS_DIR: automation/cicd/
+  # test line
 
 stages:
   - Prepare
@@ -12,9 +13,11 @@ stages:
     entrypoint: [""]
   only:
     refs:
-      - feature/*
+      - /^((feature/.*))$/
+      - /^((develop/.*))$/
     changes:
       - terraform/**/*
+      - automation/cicd/.gitlab-ci.yml 
 
 initial_job:
   stage: Prepare
@@ -29,7 +32,7 @@ organization provision:
   tags:
     - docker
   script:
-    - automation/cicd/main.sh
+    - automation/cicd/prepare.sh
 
 configure_aws_config:
   stage: Prepare
