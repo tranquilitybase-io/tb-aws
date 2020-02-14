@@ -1,6 +1,8 @@
+#Enable GuardDuty on Master account
 resource "aws_guardduty_detector" "master" {
   enable = true
   finding_publishing_frequency = "FIFTEEN_MINUTES"
+  depends_on = [aws_organizations_organization.aws_lz_organization]
 }
 
 #Send invite
