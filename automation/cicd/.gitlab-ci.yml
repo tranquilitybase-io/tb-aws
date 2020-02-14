@@ -1,5 +1,6 @@
 variables:
   CICD_SCRIPTS_DIR: automation/cicd/
+  # test line
 
 stages:
   - Prepare
