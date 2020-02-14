@@ -1,0 +1,43 @@
+variables:
+  CICD_SCRIPTS_DIR: automation/cicd/
+
+stages:
+  - Prepare
+  - Provision
+  - Permissions
+
+.docker_terraform:
+  image:
+    name: hashicorp/terraform:full
+    entrypoint: [""]
+
+initial_job:
+  stage: Prepare
+  tags:
+    - shell
+  script:
+    - echo "Initial job ok... ${ID_SYSTEM}"
+
+organization provision:
+  extends: .docker_terraform
+  stage: Prepare
+  tags:
+    - docker
+  script:
+    - automation/cicd/main.sh
+  only:
+    refs:
+      - develop
+
+configure_aws_config:
+  stage: Prepare
+  tags:
+    - shell
+  script:
+    - pwd
+    - ls
+  only:
+    refs:
+      - develop
+    changes:
+      - gitlab-ci.yml

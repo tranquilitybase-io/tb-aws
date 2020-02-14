@@ -1,6 +1,12 @@
 provider "aws" {
+<<<<<<< terraform/scripts/main.tf
   region = "us-east-2"
   version = "~> 2.48"
+=======
+  region = var.aws_default_region
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_secret_access_key
+>>>>>>> terraform/scripts/main.tf
 }
 
 terraform {
@@ -25,7 +31,7 @@ module "aws_lz_account_sharedservices" {
   
   org_account_name = var.aws_organizations_account_sharedservices_name
   org_account_email = var.aws_organizations_account_sharedservices_email
-  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
+  org_tags = { (var.tag_key_project_id) = var.awslz_project_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
 }
 
 module "aws_lz_account_logarchive" {
@@ -33,7 +39,7 @@ module "aws_lz_account_logarchive" {
   
   org_account_name = var.aws_organizations_account_logarchive_name
   org_account_email = var.aws_organizations_account_logarchive_email
-  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
+  org_tags = { (var.tag_key_project_id) = var.awslz_project_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
   
 }
 
@@ -77,6 +83,7 @@ module "aws_lz_policy_tagging" {
 }
 CONTENT
 
+<<<<<<< terraform/scripts/main.tf
 }
 
 
@@ -87,3 +94,6 @@ CONTENT
 
 
 
+=======
+}
+>>>>>>> terraform/scripts/main.tf
