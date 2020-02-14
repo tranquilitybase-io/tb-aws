@@ -11,9 +11,9 @@ stages:
   image:
     name: hashicorp/terraform:full
     entrypoint: [""]
-  #only:
-  #  refs:
-  #    - feature/*
+  only:
+    refs:
+      - /^((feature/.*))$/
     #changes:
     #  - terraform/**/*
     #  - ${CICD_SCRIPTS_DIR}.gitlab-ci.yml
