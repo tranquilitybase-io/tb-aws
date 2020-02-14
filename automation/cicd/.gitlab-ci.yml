@@ -7,6 +7,11 @@ stages:
   - Provision
   - Permissions
 
+.docker_terraform:
+  image:
+    name: hashicorp/terraform:full
+    entrypoint: [""]
+
 initial_job:
   tags:
     - shell
@@ -14,9 +19,7 @@ initial_job:
     - echo "Initial job ok... ${ID_SYSTEM}"
 
 organization provision:
-  image:
-    name: hashicorp/terraform:full
-    entrypoint: [""]
+  extends: .docker_terraform
   tags:
     - docker
   script:
