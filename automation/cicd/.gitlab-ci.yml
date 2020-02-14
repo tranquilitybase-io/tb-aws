@@ -10,6 +10,12 @@ stages:
   image:
     name: hashicorp/terraform:full
     entrypoint: [""]
+  only:
+    refs:
+      - feature/*
+    changes:
+      - terraform/**/*
+      - ${CICD_SCRIPTS_DIR}.gitlab-ci.yml
 
 initial_job:
   stage: Prepare
@@ -25,9 +31,6 @@ organization provision:
     - docker
   script:
     - automation/cicd/main.sh
-  only:
-    refs:
-      - develop
 
 configure_aws_config:
   stage: Prepare
