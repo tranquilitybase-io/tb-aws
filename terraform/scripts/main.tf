@@ -1,12 +1,8 @@
 provider "aws" {
-<<<<<<< terraform/scripts/main.tf
-  region = "us-east-2"
-  version = "~> 2.48"
-=======
   region = var.aws_default_region
   access_key = var.aws_access_key_id
   secret_key = var.aws_secret_access_key
->>>>>>> terraform/scripts/main.tf
+  version = "~> 2.48"
 }
 
 terraform {
@@ -83,17 +79,4 @@ module "aws_lz_policy_tagging" {
 }
 CONTENT
 
-<<<<<<< terraform/scripts/main.tf
 }
-
-
-
-
-
-
-
-
-
-=======
-}
->>>>>>> terraform/scripts/main.tf

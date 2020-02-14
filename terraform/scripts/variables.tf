@@ -22,18 +22,6 @@ variable "aws_secret_access_key" {
 }
 
 variable "tag_key_project_id" {
-<<<<<<< terraform/scripts/variables.tf
-  type = string
-  default = "ProjectId"
-}
-variable "tag_key_environment" {
-  type = string
-  default = "Environment"
-}
-variable "tag_key_account_id" {
-  type = string
-  default = "AccountId"
-=======
   type        = string
   default     = "project_id"
 }
@@ -44,7 +32,6 @@ variable "tag_key_environment" {
 variable "tag_key_account_id" {
   type        = string
   default     = "account_id"
->>>>>>> terraform/scripts/variables.tf
 }
 variable "tag_key_name" {
   type        = string
@@ -69,20 +56,14 @@ variable "aws_organizations_account_sharedservices_name" {
   default     = "sharedservice"
 }
 variable "aws_organizations_account_sharedservices_email" {
-<<<<<<< terraform/scripts/variables.tf
     description = "Shared Services details"
     default = "test.gft.aws.01@gmail.com"
-=======
-  description = "Shared Services details"
-  default     = "sharedservice@nn.com"
->>>>>>> terraform/scripts/variables.tf
 }
 variable "aws_organizations_account_logarchive_name" {
   description = "Log Archive accounts details"
   default     = "logarchive"
 }
 variable "aws_organizations_account_logarchive_email" {
-<<<<<<< terraform/scripts/variables.tf
     description = "Log Archive accounts details"
     default = "test.gft.aws.02@gmail.com"
 }
@@ -93,10 +74,6 @@ variable "aws_organizations_account_security_name" {
 variable "aws_organizations_account_security_email" {
     description = "Security accounts details"
     default = "test.gft.aws.03@gmail.com"
-=======
-  description = "Log Archive accounts details"
-  default     = "logarchive@nn.com"
->>>>>>> terraform/scripts/variables.tf
 }
 variable "org_tags" {
   default = {} 
