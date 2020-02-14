@@ -12,4 +12,4 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform/scripts"
 cd ${TERRAFORM_PATH}
 terraform init
 terraform plan
-terraform apply 
+terraform apply -auto-approve
