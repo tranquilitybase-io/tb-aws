@@ -17,7 +17,8 @@ stages:
       - /^((develop/.*))$/
     changes:
       - terraform/**/*
-      - automation/cicd/.gitlab-ci.yml 
+      - automation/cicd/.gitlab-ci.yml
+      - automation/cicd/*
 
 initial_job:
   stage: Prepare
