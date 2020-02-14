@@ -1,6 +1,5 @@
-#variables:
-#  WRK_PATH
-#  CICD_SCRIPTS_DIR  
+variables:
+  CICD_SCRIPTS_DIR: automation/cicd/
 
 stages:
   - Prepare
