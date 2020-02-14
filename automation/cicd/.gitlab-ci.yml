@@ -14,9 +14,9 @@ stages:
   only:
     refs:
       - feature/*
-    changes:
-      - terraform/**/*
-      - ${CICD_SCRIPTS_DIR}.gitlab-ci.yml
+    #changes:
+    #  - terraform/**/*
+    #  - ${CICD_SCRIPTS_DIR}.gitlab-ci.yml
 
 initial_job:
   stage: Prepare
