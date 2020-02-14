@@ -13,6 +13,7 @@ stages:
     entrypoint: [""]
 
 initial_job:
+  stage: Prepare
   tags:
     - shell
   script:
@@ -20,6 +21,7 @@ initial_job:
 
 organization provision:
   extends: .docker_terraform
+  stage: Prepare
   tags:
     - docker
   script:
@@ -29,6 +31,7 @@ organization provision:
       - develop
 
 configure_aws_config:
+  stage: Prepare
   tags:
     - shell
   script:
