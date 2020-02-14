@@ -2,6 +2,11 @@
 #  WRK_PATH
 #  CICD_SCRIPTS_DIR  
 
+stages:
+  - Prepare
+  - Provision
+  - Permissions
+
 initial_job:
   tags:
     - shell
