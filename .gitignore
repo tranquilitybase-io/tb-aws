@@ -1,1 +1,2 @@
 terraform/scripts/.terraform/*
+terraform/scripts/terraform.tfstate

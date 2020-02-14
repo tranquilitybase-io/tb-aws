@@ -8,15 +8,15 @@ locals {
 
 variable "tag_key_project_id" {
   type = string
-  default = "project_id"
+  default = "ProjectId"
 }
 variable "tag_key_environment" {
   type = string
-  default = "environment"
+  default = "Environment"
 }
 variable "tag_key_account_id" {
   type = string
-  default = "account_id"
+  default = "AccountId"
 }
 variable "tag_key_name" {
   type = string
@@ -42,7 +42,7 @@ variable "aws_organizations_account_sharedservices_name" {
 }
 variable "aws_organizations_account_sharedservices_email" {
     description = "Shared Services details"
-    default = "sharedservice@nn.com"
+    default = "test.gft.aws.01@gmail.com"
 }
 variable "aws_organizations_account_logarchive_name" {
     description = "Log Archive accounts details"
@@ -50,9 +50,16 @@ variable "aws_organizations_account_logarchive_name" {
 }
 variable "aws_organizations_account_logarchive_email" {
     description = "Log Archive accounts details"
-    default = "logarchive@nn.com"
+    default = "test.gft.aws.02@gmail.com"
 }
-
+variable "aws_organizations_account_security_name" {
+    description = "Security accounts details"
+    default = "security"
+}
+variable "aws_organizations_account_security_email" {
+    description = "Security accounts details"
+    default = "test.gft.aws.03@gmail.com"
+}
 variable "org_tags" {
   default = {} 
 }

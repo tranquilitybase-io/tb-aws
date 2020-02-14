@@ -1,3 +1,7 @@
+locals {
+  policy_id = coalescelist(aws_organizations_policy.aws_lz_policy.*.id, [var.policy_id])
+}
+
 resource "aws_organizations_organization" "aws_lz_organization" {
   count = var.create_lz_organization ? 1 : 0
 
@@ -30,5 +34,12 @@ resource "aws_organizations_policy" "aws_lz_policy" {
   type = var.policy_type
 
   content = var.policy_content
+}
+
+resource "aws_organizations_policy_attachment" "aws_lz_pa" {
+  count = length(var.target_id) > 0 ? length(var.target_id) : 0
+
+  policy_id = local.policy_id[0]
+  target_id = var.target_id[count.index]
 }
 

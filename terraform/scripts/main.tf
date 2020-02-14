@@ -1,5 +1,6 @@
 provider "aws" {
   region = "us-east-2"
+  version = "~> 2.48"
 }
 
 terraform {
@@ -36,10 +37,18 @@ module "aws_lz_account_logarchive" {
   
 }
 
-module "aws_lz_ou_sharedservices" {
+module "aws_lz_account_security" {
+  source = "./components/organizations"
+  
+  org_account_name = var.aws_organizations_account_security_name
+  org_account_email = var.aws_organizations_account_security_email
+  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
+  
+}
+module "aws_lz_ou_core" {
   source = "./components/organizations"
 
-  ou_name = "Shared Services"
+  ou_name = "CoreOU"
   ou_parent_id = module.aws_lz_organization_main.org_id
 }
 
@@ -69,6 +78,8 @@ module "aws_lz_policy_tagging" {
 CONTENT
 
 }
+
+
 
 
 
