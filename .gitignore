@@ -1,3 +1,5 @@
 terraform/scripts/.terraform/*
 lz-aws-config/.terraform/plugins/linux_amd64/terraform-provider-aws_v2.48.0_x4
 lz-aws-config/.terraform/plugins/linux_amd64/terraform-provider-template_v2.1.2_x4
+terraform/components/lz-aws-config/terraform.tfstate.backup
+terraform/components/lz-aws-config/terraform.tfstate
