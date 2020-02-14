@@ -1,8 +1,8 @@
 locals {
   common_tags = {
-    ProjectID = var.aws_project_id
-    Environment = var.aws_environment
-    AccountID = var.aws_account_id
+    ProjectID = var.awslz_project_id
+    Environment = var.awslz_environment
+    AccountID = var.awslz_account_id
   }
 }
 
@@ -37,15 +37,15 @@ variable "tag_key_name" {
   type        = string
   default     = "name"
 }
-variable "aws_project_id" {
+variable "awslz_project_id" {
   type        = string
   default     = "11111"
 }
-variable "aws_environment" {
+variable "awslz_environment" {
   type        = string
   default     = "DEV"
 }
-variable "aws_account_id" {
+variable "awslz_account_id" {
   type        = string
   default     = "22222"
 }
