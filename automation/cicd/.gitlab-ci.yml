@@ -1,11 +1,26 @@
-#variables:
-#  WRK_PATH
-#  CICD_SCRIPTS_DIR  
+variables:
+  CICD_SCRIPTS_DIR: automation/cicd/
 
-test_job:
+stages:
+  - Prepare
+  - Provision
+  - Permissions
+
+.docker_terraform:
   image:
     name: hashicorp/terraform:full
     entrypoint: [""]
+
+initial_job:
+  stage: Prepare
+  tags:
+    - shell
+  script:
+    - echo "Initial job ok... ${ID_SYSTEM}"
+
+organization provision:
+  extends: .docker_terraform
+  stage: Prepare
   tags:
     - docker
   script:
@@ -14,13 +29,8 @@ test_job:
     refs:
       - develop
 
-initial_job:
-  tags:
-    - shell
-  script:
-    - echo "Initial job ok... ${ID_SYSTEM}"
-
 configure_aws_config:
+  stage: Prepare
   tags:
     - shell
   script:

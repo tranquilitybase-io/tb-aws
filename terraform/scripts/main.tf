@@ -1,7 +1,7 @@
 provider "aws" {
-  access_key  = "AKIAILHH6F5MWXP4HV3A"
-  secret_key  = "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"
-  region      = "us-west-2"
+  region = var.aws_default_region
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_secret_access_key
 }
 
 terraform {
@@ -26,7 +26,7 @@ module "aws_lz_account_sharedservices" {
   
   org_account_name = var.aws_organizations_account_sharedservices_name
   org_account_email = var.aws_organizations_account_sharedservices_email
-  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
+  org_tags = { (var.tag_key_project_id) = var.awslz_project_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
 }
 
 module "aws_lz_account_logarchive" {
@@ -34,7 +34,7 @@ module "aws_lz_account_logarchive" {
   
   org_account_name = var.aws_organizations_account_logarchive_name
   org_account_email = var.aws_organizations_account_logarchive_email
-  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
+  org_tags = { (var.tag_key_project_id) = var.awslz_project_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = var.awslz_account_id, (var.tag_key_name) = "organization" }
   
 }
 
