@@ -2,7 +2,13 @@
 #  WRK_PATH
 #  CICD_SCRIPTS_DIR  
 
-test_job:
+initial_job:
+  tags:
+    - shell
+  script:
+    - echo "Initial job ok... ${ID_SYSTEM}"
+
+organization provision:
   image:
     name: hashicorp/terraform:full
     entrypoint: [""]
@@ -13,12 +19,6 @@ test_job:
   only:
     refs:
       - develop
-
-initial_job:
-  tags:
-    - shell
-  script:
-    - echo "Initial job ok... ${ID_SYSTEM}"
 
 configure_aws_config:
   tags:
