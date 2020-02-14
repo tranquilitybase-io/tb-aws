@@ -14,9 +14,9 @@ stages:
   only:
     refs:
       - /^((feature/.*))$/
-    #changes:
-    #  - terraform/**/*
-    #  - ${CICD_SCRIPTS_DIR}.gitlab-ci.yml
+    changes:
+      - terraform/**/*
+      - ${CICD_SCRIPTS_DIR}.gitlab-ci.yml
 
 initial_job:
   stage: Prepare
@@ -31,7 +31,7 @@ organization provision:
   tags:
     - docker
   script:
-    - automation/cicd/main.sh
+    - automation/cicd/prepare.sh
 
 configure_aws_config:
   stage: Prepare
