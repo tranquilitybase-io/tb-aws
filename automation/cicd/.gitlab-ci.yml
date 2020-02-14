@@ -16,7 +16,7 @@ stages:
       - /^((feature/.*))$/
     changes:
       - terraform/**/*
-      - ${CICD_SCRIPTS_DIR}.gitlab-ci.yml
+      - automation/cicd/.gitlab-ci.yml 
 
 initial_job:
   stage: Prepare
