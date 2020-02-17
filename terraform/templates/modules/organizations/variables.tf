@@ -47,6 +47,11 @@ variable "ou_parent_id" {
     default = ""
 }
 
+variable "account_parent_id" {
+    type = string
+    default = ""
+}
+
 variable "policy_name" {
     type = string
     default = ""
@@ -74,4 +79,9 @@ variable "target_id" {
 variable "policy_id" {
     type = string
     default = ""
+}
+
+variable "org_accounts"{
+    type = list
+    default = []
 }
