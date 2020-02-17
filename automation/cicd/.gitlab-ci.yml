@@ -38,7 +38,7 @@ Files preparation and validation:
     changes:
       - terraform/**/*
       - automation/cicd/.gitlab-ci.yml
-      - automation/cicd/preparation.sh
+      - automation/cicd/prepare.sh
       - automation/cicd/terraform-pre-run.py
 
 
