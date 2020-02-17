@@ -1,2 +1,6 @@
-terraform/scripts/.terraform/*
-terraform/scripts/terraform.tfstate
+.terraform/*
+/**/*.tfstate
+/**/*.tfstate.*
+terraform/main.tf
+terraform/outputs.tf
+terraform/variables.tf
