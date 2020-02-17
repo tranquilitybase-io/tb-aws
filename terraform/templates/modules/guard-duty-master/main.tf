@@ -1,9 +1,5 @@
 #Enable GuardDuty on Master account
 resource "aws_guardduty_detector" "detector" {
-  for_each = var.regions
-  providers = {
-    aws = aws[each.value]
-  }  
   enable = true
   finding_publishing_frequency = var.cloudwatch_notify_frecuency
 }
