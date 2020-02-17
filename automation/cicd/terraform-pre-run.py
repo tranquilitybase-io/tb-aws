@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import fileinput
 import os
 from pathlib import Path
