@@ -14,10 +14,8 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 # Files preparation
 python3 automation/cicd/terraform-pre-run.py
 
-
 cd ${TERRAFORM_PATH}
 terraform init
-
 terraform validate
-terraform refresh
+#terraform refresh
 #terraform plan
