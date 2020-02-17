@@ -7,6 +7,7 @@ stages:
   - Provision
   - Permissions
 
+# Templates
 .docker_terraform:
   image:
     name: hashicorp/terraform:full
@@ -15,10 +16,9 @@ stages:
     refs:
       - /^((feature/.*))$/
       - /^((develop/.*))$/
-    changes:
-      - terraform/**/*
-      - automation/cicd/.gitlab-ci.yml 
 
+# Jobs
+# Initial job
 initial_job:
   stage: Prepare
   tags:
@@ -26,13 +26,19 @@ initial_job:
   script:
     - echo "Initial job ok... ${ID_SYSTEM}"
 
-organization provision:
+# Preparation
+Files preparation and validation:
   extends: .docker_terraform
   stage: Prepare
   tags:
     - docker
   script:
     - automation/cicd/prepare.sh
+  only:
+    changes:
+      - terraform/**/*
+      - automation/cicd/.gitlab-ci.yml
+
 
 configure_aws_config:
   stage: Prepare
