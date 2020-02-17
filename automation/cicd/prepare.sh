@@ -19,5 +19,5 @@ cd ${TERRAFORM_PATH}
 terraform init
 
 terraform validate
-#terraform refresh
+terraform refresh
 #terraform plan
