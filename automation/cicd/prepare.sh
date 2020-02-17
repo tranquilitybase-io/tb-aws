@@ -15,7 +15,7 @@ python3 automation/cicd/terraform-pre-run.py
 
 
 cd ${TERRAFORM_PATH}
-terraform init
+sudo terraform init
 
 terraform validate
 #terraform refresh
