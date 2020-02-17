@@ -1,35 +1,9 @@
-variable "account_id" {
-  description = "Account ID"
-  type        = string  
+variable "recorder_main" {
+  description = "Recorder"
 }
 
-variable "config_name" {
-  description = "The name of the AWS Config instance."
-  type        = string
-  default     = "aws-config"
-}
-
-variable "config_aggregator_name" {
-  description = "The name of the aggregator."
-  type        = string
-  default     = "aws-config-aggregator"
-}
-
-variable "aggregate_organization" {
-  description = "Aggregate compliance data by organization"
-  type        = bool
-  default     = true
-}
-
-variable "config_logs_bucket" {
-  description = "The S3 bucket for AWS Config logs."
-  type        = string
-}
-
-variable "config_logs_prefix" {
-  description = "The S3 prefix for AWS Config logs."
-  type        = string
-  default     = "config"
+variable "delivery_channel" {
+  description = "Delivery Channel"
 }
 
 variable "config_max_execution_frequency" {
