@@ -2,6 +2,9 @@
 # Project: AWS-LZ
 # Company: GFT
 # Use this docker file to run docker scripts. Python is required to run the pre-run step
+# Usage:
+# docker build -t deiverk/ubuntu_terraform_python3:latest .
+# docker push deiverk/ubuntu_terraform_python3:latest
 
 FROM ubuntu:18.04
 LABEL maintainer Deiver Kiel "deikiel@gmail.com"
