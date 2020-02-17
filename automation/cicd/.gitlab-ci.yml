@@ -34,7 +34,7 @@ Files preparation and validation:
     - docker
   script:
     - echo "run pre-run"
-    - python automation/cicd/terraform-pre-run.py
+    - automation/cicd/terraform-pre-run.py
     - pwd
     - ls
     - automation/cicd/prepare.sh
