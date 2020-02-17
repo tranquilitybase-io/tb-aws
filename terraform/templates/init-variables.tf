@@ -6,21 +6,6 @@ locals {
   }
 }
 
-variable "aws_default_region" {
-  type        = string
-  description = "Default region for the landing zone"
-}
-
-variable "aws_access_key_id" {
-  type        = string
-  description = "access key"
-}
-
-variable "aws_secret_access_key" {
-  type        = string
-  description = "access key"
-}
-
 variable "tag_key_project_id" {
   type = string
   default = "ProjectId"
