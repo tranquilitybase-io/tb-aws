@@ -3,6 +3,7 @@ import fileinput
 import os
 from pathlib import Path
 
+print("Starting Python script")
 
 def read_import_files(name_filter = 'template'):
     path_import_file = '../../terraform/templates/imports.txt'
@@ -48,7 +49,8 @@ def merge_files():
                 else:
                     print(f'\n WARNING : File with name {file_name} does not exist in path {absolut_path}  \n')   
         fout.close()
-    
+
+print("Merginf files")
 
 if __name__== "__main__":
     merge_files()
