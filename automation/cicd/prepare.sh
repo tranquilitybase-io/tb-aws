@@ -12,8 +12,11 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform/scripts"
 
 echo "run pre-run"
 ${AUTOMATION_SCRIPTS}/terraform-pre-run.py
+pwd
+ls
 
 cd ${TERRAFORM_PATH}
+ls
 terraform init
 terraform validate
 terraform refresh
