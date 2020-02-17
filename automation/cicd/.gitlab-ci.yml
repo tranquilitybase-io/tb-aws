@@ -33,6 +33,10 @@ Files preparation and validation:
   tags:
     - docker
   script:
+    - echo "run pre-run"
+    - python automation/cicd/terraform-pre-run.py
+    - pwd
+    - ls
     - automation/cicd/prepare.sh
   only:
     changes:

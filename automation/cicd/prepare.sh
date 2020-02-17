@@ -10,11 +10,6 @@ MAIN_PATH=$(pwd)
 AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
-echo "run pre-run"
-python ${AUTOMATION_SCRIPTS}/terraform-pre-run.py
-pwd
-ls
-
 cd ${TERRAFORM_PATH}
 pwd
 ls
