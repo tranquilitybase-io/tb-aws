@@ -2,10 +2,6 @@
 # test line
 
 # Variables
-#export TF_VAR_aws_default_region=${DEV_region}
-#export TF_VAR_aws_access_key_id=${access_key}
-#export TF_VAR_aws_secret_access_key=${secret_key}
-
 export AWS_ACCESS_KEY_ID=${access_key}
 export AWS_SECRET_ACCESS_KEY=${secret_key}
 export AWS_DEFAULT_REGION=${DEV_region}
