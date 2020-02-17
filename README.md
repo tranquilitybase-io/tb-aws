@@ -44,17 +44,17 @@ python3 automation/cicd/terrraform-pre-run.py
 
 3- Execute terraform initialization command
 ``` sh
-terraform init ./terraform/scripts/
+terraform init ./terraform
 ```
 
 4- Execute terraform plan command
 ``` sh
-terraform plan ./terraform/scripts/
+terraform plan ./terraform
 ```
 
 5- Execute terraform plan command
 ``` sh
-terraform apply ./terraform/scripts/
+terraform apply ./terraform
 ```
 ## Coding standards and naming conventions
 
@@ -88,7 +88,7 @@ terraform apply ./terraform/scripts/
      
 
 
-## Componets Reference
+## Module Reference
 | Module         | Completeness  | Documentation  |
 | ----------------- |:-------------:| -----:|
 | organizations     | WIP            |[README](/terraform/modules/organization/README.md)|
