@@ -7,9 +7,9 @@ resource "aws_guardduty_detector" "detector" {
 #Send invite
 resource "aws_guardduty_member" "memberInvite" {
   detector_id = aws_guardduty_detector.detector.id
-  account_id = ["${data.aws_organizations_organization.all_accounts.id}"]
-  email = ["${data.aws_organizations_organization.all_accounts.email}"]
-  invite = true
+  account_id = module.aws_lz_account_security.
+  email = 
+  invite = var.invite_members
   invitation_message = var.member_invite_message 
 }
 
@@ -19,10 +19,4 @@ resource "aws_guardduty_invite_accepter" "memberAccepter" {
   depends_on = [aws_guardduty_member.memberInvite]
   detector_id = aws_guardduty_detector.member.id
   master_account_id = 
-}
-
-data "aws_organizations_organization" "all_accounts" {}
-
-output "account_ids" {
-  value = data.aws_organizations_organization.all_accounts.accounts[*].id
 }

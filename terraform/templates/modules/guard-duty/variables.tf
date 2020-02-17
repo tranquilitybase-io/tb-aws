@@ -14,8 +14,15 @@ variable "member_invite_message" {
   default = ""  
 }
 
+variable "invite_members"{
+  type = boolean
+  description = "Send GuardDuty invites to member accounts"
+  default = true 
+}
+
 variable "auto_accept_invites" {
   type = boolean
   description = "Members will accept invties automatically (recommended)"
   default = true 
 }
+
