@@ -10,7 +10,8 @@ stages:
 # Templates
 .docker_terraform:
   image:
-    name: hashicorp/terraform:full
+    #name: hashicorp/terraform:full
+    name: deiverk/ubuntu_terraform_python3
     entrypoint: [""]
   only:
     refs:
@@ -34,7 +35,8 @@ Files preparation and validation:
     - docker
   script:
     - echo "run pre-run"
-    - automation/cicd/terraform-pre-run.py
+    #- automation/cicd/terraform-pre-run.py
+    - python -V
     - pwd
     - ls
     - automation/cicd/prepare.sh
