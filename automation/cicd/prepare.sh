@@ -19,4 +19,4 @@ terraform init
 terraform validate
 terraform refresh
 terraform plan
-terraform apply
+terraform apply -auto-approve
