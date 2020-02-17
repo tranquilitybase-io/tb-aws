@@ -1,25 +1,25 @@
 variables:
   CICD_SCRIPTS_DIR: automation/cicd/
-  # test line  
+  # test line 
 
 stages:
   - Prepare
   - Provision
   - Permissions
 
+# Templates
 .docker_terraform:
   image:
-    name: hashicorp/terraform:full
+    #name: hashicorp/terraform:full
+    name: deiverk/ubuntu_terraform_python3:latest
     entrypoint: [""]
   only:
     refs:
       - /^((feature/.*))$/
       - /^((develop/.*))$/
-    changes:
-      - terraform/**/*
-      - automation/cicd/.gitlab-ci.yml
-      - automation/cicd/**
 
+# Jobs
+# Initial job
 initial_job:
   stage: Prepare
   tags:
@@ -27,13 +27,21 @@ initial_job:
   script:
     - echo "Initial job ok... ${ID_SYSTEM}"
 
-organization provision:
+# Preparation
+Files preparation and validation:
   extends: .docker_terraform
   stage: Prepare
   tags:
     - docker
   script:
     - automation/cicd/prepare.sh
+  only:
+    changes:
+      - terraform/**/*
+      - automation/cicd/.gitlab-ci.yml
+      - automation/cicd/prepare.sh
+      - automation/cicd/terraform-pre-run.py
+
 
 configure_aws_config:
   stage: Prepare
