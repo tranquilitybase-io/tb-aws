@@ -1,4 +1,5 @@
 #!/bin/bash
+# test line
 
 # Variables
 export TF_VAR_aws_default_region=${DEV_region}
