@@ -11,7 +11,7 @@ AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
 echo "run pre-run"
-${AUTOMATION_SCRIPTS}/terraform-pre-run.py
+python ${AUTOMATION_SCRIPTS}/terraform-pre-run.py
 pwd
 ls
 
