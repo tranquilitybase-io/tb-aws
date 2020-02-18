@@ -18,6 +18,9 @@ cd ${TERRAFORM_PATH}
 echo "location: $(pwd)"
 echo "Files to use: "
 ls
+cat main.tf 
+cat variables.tf 
+cat outputs.tf 
 echo "--------------------------------------------------------------------"
 terraform init
 echo "--------------------------------------------------------------------"
