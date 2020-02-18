@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "s3_main" {
       }
     }
   }
-  tags = var.org_tags
+  tags = var.config_tags
 }
 
 resource "aws_s3_bucket" "s3_log" {
@@ -35,5 +35,5 @@ resource "aws_s3_bucket" "s3_log" {
       }
     }
   }
-  tags = var.org_tags
+  tags = var.config_tags
 }
