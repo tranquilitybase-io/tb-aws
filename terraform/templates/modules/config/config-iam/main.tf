@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com"]
+      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com"]
     }
 
     effect = "Allow"
