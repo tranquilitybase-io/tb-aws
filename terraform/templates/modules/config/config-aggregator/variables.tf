@@ -6,9 +6,7 @@ variable "aggregate_organization" {
 }
 
 variable "default_tags" {
-  default = var.default_tags
 }
 
 variable "config_name" {
-  default = var.config_name
 }

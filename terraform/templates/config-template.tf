@@ -32,6 +32,7 @@ module "aws_lz_config_service"{
 
 module "aws_lz_config_aggregator"{
   source = "./templates/modules/config/config-aggregator"
+  config_name = var.config_name
   default_tags {
     AccountID   = local.account_id
   }
