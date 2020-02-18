@@ -18,5 +18,6 @@ cd ${TERRAFORM_PATH}
 terraform init
 terraform validate
 terraform refresh
+terraform import
 terraform plan
 terraform apply -auto-approve
