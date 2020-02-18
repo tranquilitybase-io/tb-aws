@@ -41,5 +41,5 @@ module "aws_lz_config_aggregator"{
 module "aws_lz_config_rules"{
   source = "./templates/modules/config/config-rules"
   recorder_main = module.aws_lz_config_service.recorder_main
-  delivery_channel = module.config-service.delivery_channel
+  delivery_channel = module.aws_lz_config_service.delivery_channel
 }
