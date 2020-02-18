@@ -14,8 +14,7 @@ resource "aws_s3_bucket" "s3_main" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = "${aws_kms_key.lz_config_key.arn}"
-        sse_algorithm     = "aws:kms"
+        sse_algorithm = "AES256"
       }
     }
   }
@@ -37,8 +36,7 @@ resource "aws_s3_bucket" "s3_log" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = "${aws_kms_key.lz_config_key.arn}"
-        sse_algorithm     = "aws:kms"
+        sse_algorithm = "AES256"
       }
     }
   }
