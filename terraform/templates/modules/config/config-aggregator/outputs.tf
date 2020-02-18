@@ -1,3 +1,3 @@
 output "aggregator_name" {
-    value = aws_config_configuration_aggregator.organization.name
+    value = concat(aws_config_configuration_aggregator.organization.*.name, [""])[0]
 }
