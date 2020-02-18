@@ -11,7 +11,7 @@ def read_import_files(name_filter = 'template'):
     joined_paths = os.path.join(os.path.dirname(__file__),path_import_file)
     absolut_path = os.path.abspath(joined_paths)
     try:
-        print(joined_paths)
+        #print(joined_paths)
         if os.path.isfile(absolut_path) != '':
             #print('File path :' + os.path.abspath(absolut_path))
             items = []
