@@ -15,6 +15,10 @@ variable "role_arn" {
   type        = string
 }
 
+variable "config_tags" {
+  default = {} 
+}
+
 variable "config_delivery_frequency" {
   description = "The frequency with which AWS Config delivers configuration snapshots."
   default     = "Six_Hours"

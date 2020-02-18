@@ -11,6 +11,7 @@ resource "aws_config_configuration_recorder_status" "main" {
 resource "aws_sns_topic" "config-rules" {
   name              = "${var.config_name}-rules-sns-topic"
   kms_master_key_id = "alias/aws/sns"
+  tags = var.config_tags
 }
 
 resource "aws_config_delivery_channel" "main" {
