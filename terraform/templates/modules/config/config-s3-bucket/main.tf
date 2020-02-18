@@ -1,11 +1,15 @@
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
 
-resource "aws_kms_key" "lz_config_key" {
-  description             = "This key is used to encrypt bucket objects"
-  deletion_window_in_days = 10
+locals {  
+  account_id = data.aws_caller_identity.current.account_id  
+  region = data.aws_region.current.name
+  bucket_name = "aws-lz-s3-access-logs-${local.account_id}-${local.region}"
+  bucket_name_log = "aws-lz-s3-logs-${local.account_id}-${local.region}"  
 }
 
 resource "aws_s3_bucket" "s3_main" {
-  bucket = var.bucket_name
+  bucket = local.bucket_name
   acl    = "log-delivery-write"
   versioning {
     enabled = true
@@ -22,7 +26,7 @@ resource "aws_s3_bucket" "s3_main" {
 }
 
 resource "aws_s3_bucket" "s3_log" {
-  bucket = var.bucket_name_log
+  bucket = local.bucket_name_log
   acl    = "private"
 
   logging {

@@ -14,7 +14,9 @@ module "aws_lz_config_bucket"{
 
 module "aws_lz_config_iam"{
     source = "./templates/modules/config/config-iam"
-    config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log    
+    config_name = var.config_name
+    config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
+    config_logs_prefix = module.aws_lz_config_bucket.config_logs_prefix    
     default_tags {
       AccountID = local.account_id
     }
@@ -23,6 +25,7 @@ module "aws_lz_config_iam"{
 module "aws_lz_config_service"{
   source = "./templates/modules/config/config-service"
   role_arn = module.aws_lz_config_iam.arn
+  config_name = var.config_name
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   config_logs_prefix = module.aws_lz_config_bucket.config_logs_prefix
   default_tags {

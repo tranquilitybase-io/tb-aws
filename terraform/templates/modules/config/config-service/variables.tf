@@ -1,5 +1,4 @@
 variable "config_name" {
-  default = var.config_name
 }
 
 variable "config_logs_bucket" {  
