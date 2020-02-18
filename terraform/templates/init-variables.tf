@@ -1,11 +1,3 @@
-locals {
-  common_tags = {
-    ProjectID = var.awslz_proj_id
-    Environment = var.awslz_environment
-    AccountID = var.awslz_account_id
-  }
-}
-
 variable "tag_key_project_id" {
   type = string
   default = "ProjectId"
