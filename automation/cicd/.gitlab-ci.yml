@@ -28,10 +28,10 @@ initial_job:
 
 # Preparation
 Files preparation and validation:
-  extends: .docker_terraform
+  #extends: .docker_terraform
   stage: Prepare
   tags:
-    - docker
+    - shell #docker
   script:
     - automation/cicd/prepare.sh
   only:
