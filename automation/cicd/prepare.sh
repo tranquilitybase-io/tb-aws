@@ -15,28 +15,28 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 python3 automation/cicd/terraform-pre-run.py
 
 cd ${TERRAFORM_PATH}
-echo "location: $(pwd)"
-echo "Files to use: "
-ls
-cat main.tf 
-cat variables.tf 
-cat outputs.tf 
-echo "--------------------------------------------------------------------"
+#echo "location: $(pwd)"
+#echo "Files to use: "
+#ls
+#cat main.tf 
+#cat variables.tf 
+#cat outputs.tf 
+#echo "--------------------------------------------------------------------"
 terraform init
-ls
+#ls
 echo "--------------------------------------------------------------------"
 terraform validate
-ls
+#ls
 echo "--------------------------------------------------------------------"
-terraform refresh
+#terraform refresh
 echo "--------------------------------------------------------------------"
 #terraform import
 echo "--------------------------------------------------------------------"
-terraform plan
+#terraform plan
 ls
-echo "Start: Teraaform file"
-cat terraform.tfstate
-echo "END: Teraaform file"
+#echo "Start: Teraaform file"
+#cat terraform.tfstate
+#echo "END: Teraaform file"
 echo "--------------------------------------------------------------------"
 terraform apply -auto-approve
 ls
