@@ -15,9 +15,15 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 python3 automation/cicd/terraform-pre-run.py
 
 cd ${TERRAFORM_PATH}
+echo "--------------------------------------------------------------------"
 terraform init
+echo "--------------------------------------------------------------------"
 terraform validate
+echo "--------------------------------------------------------------------"
 terraform refresh
+echo "--------------------------------------------------------------------"
 terraform import
+echo "--------------------------------------------------------------------"
 terraform plan
+echo "--------------------------------------------------------------------"
 terraform apply -auto-approve
