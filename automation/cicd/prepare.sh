@@ -38,5 +38,5 @@ ls
 #cat terraform.tfstate
 #echo "END: Teraaform file"
 echo "--------------------------------------------------------------------"
-terraform apply -auto-approve
+terraform apply -refresh=true -auto-approve
 ls
