@@ -1,10 +1,13 @@
 variable "config_name" {
+  default = ""
 }
 
 variable "config_logs_bucket" {  
+  default = ""
 }
 
 variable "config_logs_prefix" {
+  default = ""
 }
 
 variable "role_arn" {

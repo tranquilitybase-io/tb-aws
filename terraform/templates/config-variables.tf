@@ -4,3 +4,7 @@ variable "config_name" {
   type        = string
   default = "aws-lz-config"
 }
+
+variable "config_tags" {
+  default = {} 
+}

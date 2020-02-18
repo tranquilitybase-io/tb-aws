@@ -1,18 +1,9 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
-locals {  
-  account_id = data.aws_caller_identity.current.account_id  
-  region = data.aws_region.current.name
-  bucket_name = "aws-lz-s3-access-logs-${local.account_id}-${local.region}"
-  bucket_name_log = "aws-lz-s3-logs-${local.account_id}-${local.region}"  
-}
 
 resource "aws_s3_bucket" "s3_main" {
-  bucket = local.bucket_name
+  bucket = var.bucket_name
   acl    = "log-delivery-write"
   versioning {
-    enabled = true
+    enabled = var.versioning_enabled
   }
   
   server_side_encryption_configuration {
@@ -22,11 +13,11 @@ resource "aws_s3_bucket" "s3_main" {
       }
     }
   }
-  tags = var.default_tags
+  tags = var.org_tags
 }
 
 resource "aws_s3_bucket" "s3_log" {
-  bucket = local.bucket_name_log
+  bucket = var.bucket_name_log
   acl    = "private"
 
   logging {
@@ -34,7 +25,7 @@ resource "aws_s3_bucket" "s3_log" {
     target_prefix = var.config_logs_prefix
   }
   versioning {
-    enabled = true
+    enabled = var.versioning_enabled
   }
   
   server_side_encryption_configuration {
@@ -44,5 +35,5 @@ resource "aws_s3_bucket" "s3_log" {
       }
     }
   }
-  tags = var.default_tags
+  tags = var.org_tags
 }
