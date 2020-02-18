@@ -34,7 +34,9 @@ echo "--------------------------------------------------------------------"
 echo "--------------------------------------------------------------------"
 terraform plan
 ls
+echo "Start: Teraaform file"
 cat terraform.tfstate
+echo "END: Teraaform file"
 echo "--------------------------------------------------------------------"
 terraform apply -auto-approve
 ls
