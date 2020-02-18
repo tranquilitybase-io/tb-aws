@@ -10,7 +10,6 @@ stages:
 # Templates
 .docker_terraform:
   image:
-    #name: hashicorp/terraform:full
     name: deiverk/ubuntu_terraform_python3:latest
     entrypoint: [""]
   only:
