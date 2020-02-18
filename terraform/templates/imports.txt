@@ -5,5 +5,5 @@ init-variables.tf
 organization-template.tf
 organization-variables.tf
 # Config 
-config-template.tf
-config-variables.tf
+#config-template.tf
+#config-variables.tf
