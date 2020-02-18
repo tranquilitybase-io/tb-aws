@@ -6,7 +6,6 @@ variable "config_logs_bucket" {
 }
 
 variable "config_logs_prefix" {
-  default = var.config_logs_prefix
 }
 
 variable "role_arn" {

@@ -24,6 +24,7 @@ module "aws_lz_config_service"{
   source = "./templates/modules/config/config-service"
   role_arn = module.aws_lz_config_iam.arn
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
+  config_logs_prefix = module.aws_lz_config_bucket.config_logs_prefix
   default_tags {
     AccountID   = local.account_id
   }
