@@ -7,7 +7,7 @@ locals {
 
 module "aws_lz_config_bucket"{
   source = "./templates/modules/config/config-s3-bucket"
-  default_tags {
+  default_tags = {
     AccountID   = local.account_id
   }
 }
@@ -17,7 +17,7 @@ module "aws_lz_config_iam"{
     config_name = var.config_name
     config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
     config_logs_prefix = module.aws_lz_config_bucket.config_logs_prefix    
-    default_tags {
+    default_tags = {
       AccountID = local.account_id
     }
 }
@@ -28,7 +28,7 @@ module "aws_lz_config_service"{
   config_name = var.config_name
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   config_logs_prefix = module.aws_lz_config_bucket.config_logs_prefix
-  default_tags {
+  default_tags = {
     AccountID   = local.account_id
   }
 }
@@ -36,7 +36,7 @@ module "aws_lz_config_service"{
 module "aws_lz_config_aggregator"{
   source = "./templates/modules/config/config-aggregator"
   config_name = var.config_name
-  default_tags {
+  default_tags = {
     AccountID   = local.account_id
   }
 }
