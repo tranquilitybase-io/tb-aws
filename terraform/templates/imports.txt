@@ -2,8 +2,10 @@
 init-template.tf
 init-variables.tf
 # Organization module
-organization-template.tf
-organization-variables.tf
+#organization-template.tf
+#organization-variables.tf
 # Config 
 #config-template.tf
 #config-variables.tf
+# VPC
+vpc.tf
