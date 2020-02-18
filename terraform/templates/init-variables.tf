@@ -27,7 +27,7 @@ variable "awslz_account_id" {
   default = "22222"
 }
 
-variable "default_tags"{
+variable "default_tags" {
   description = "Default TAGS for GFT AWS LZ Project"
   type = map
   default = {
