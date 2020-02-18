@@ -17,7 +17,7 @@ python3 automation/cicd/terraform-pre-run.py
 cd ${TERRAFORM_PATH}
 #echo "location: $(pwd)"
 #echo "Files to use: "
-#ls
+#ls  
 cat main.tf 
 #cat variables.tf 
 #cat outputs.tf 
