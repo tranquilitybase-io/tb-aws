@@ -8,4 +8,4 @@ init-variables.tf
 #config-template.tf
 #config-variables.tf
 # VPC
-vpc.tf
+vpc-template.tf
