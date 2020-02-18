@@ -32,6 +32,7 @@ module "aws_lz_config_service"{
   config_name = var.config_name
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   config_logs_prefix = module.aws_lz_config_bucket.config_logs_prefix
+  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.root_account_id, (var.tag_key_name) = "config" }
 }
 
 module "aws_lz_config_aggregator"{
