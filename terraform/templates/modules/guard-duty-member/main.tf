@@ -7,5 +7,5 @@ resource "aws_guardduty_detector" "detector" {
 #Accept invite
 resource "aws_guardduty_invite_accepter" "memberAccepter" {
   count = var.auto_accept_invites == true ? 1 : 0
-  detector_id = aws_guardduty_detector.member.id
+  detector_id = aws_guardduty_detector.member.id 
   master_account_id = module.aws_lz_account_security.account_id
