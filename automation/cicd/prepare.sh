@@ -1,5 +1,5 @@
 #!/bin/bash
-# test line
+# test line    
 
 # Variables
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -15,7 +15,15 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 python3 automation/cicd/terraform-pre-run.py
 
 cd ${TERRAFORM_PATH}
+echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
+
+cat main.tf
+echo "------------------------TERRAFORM VALIDATE----------------------------------------"
 terraform validate
-terraform refresh
+#terraform refresh
+#echo "--------------------------------------------------------------------"
+echo "------------------------TERRAFORM PLAN--------------------------------------------"
 terraform plan
+echo "------------------------TERRAFORM APPLY--------------------------------------------"
+terraform apply -refresh=true -auto-approve
