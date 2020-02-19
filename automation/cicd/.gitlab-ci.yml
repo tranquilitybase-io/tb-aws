@@ -1,6 +1,6 @@
 variables:
   CICD_SCRIPTS_DIR: automation/cicd/
-  # test line    
+  # test line     
 
 stages:
   - Prepare
@@ -28,7 +28,7 @@ initial_job:
 
 # Preparation
 Files preparation and validation:
-  #extends: .docker_terraform
+  extends: .docker_terraform
   stage: Prepare
   tags:
     - docker
