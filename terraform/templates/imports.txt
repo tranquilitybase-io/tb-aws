@@ -1,11 +1,11 @@
-# Init module 
+# Init module (Validated)
 init-template.tf
 init-variables.tf
-# Organization module
+# Organization module (Validated)
 organization-template.tf
 organization-variables.tf
-# Config 
-#config-template.tf
-#config-variables.tf
-# VPC
+# Config (Validated)
+config-template.tf
+config-variables.tf
+# Simple test for resources
 resources-test-template.tf

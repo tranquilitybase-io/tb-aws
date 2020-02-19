@@ -39,10 +39,12 @@ JSON
       "arn:aws:s3:::%s/%s/AWSLogs/%s/Config/*",
       var.config_logs_bucket,
       var.config_logs_prefix,
-      var.log_archive_account_id,
+      var.bucket_account_id,     
     )
   }
 }
+
+#var.log_archive_account_id,
 
 # Allow IAM policy to assume the role for AWS Config
 data "aws_iam_policy_document" "aws-config-role-policy" {
