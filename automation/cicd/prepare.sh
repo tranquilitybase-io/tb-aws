@@ -19,7 +19,7 @@ echo "------------------------TERRAFORM INIT------------------------------------
 terraform init
 cat main.tf
 echo "------------------------TERRAFORM IMPORT--------------------------------------------"
-terraform import aws_lz_organization_main.aws_organizations_organization.aws_lz_organization o-8lg1h3pzea
+terraform import aws_lz_organization_main.aws_organizations_organization.aws_lz_organization[0] o-8lg1h3pzea
 cat main.tf
 echo "------------------------TERRAFORM VALIDATE----------------------------------------"
 terraform validate
