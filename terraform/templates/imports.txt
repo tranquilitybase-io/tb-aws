@@ -9,3 +9,6 @@ organization-variables.tf
 #config-variables.tf
 # VPC
 resources-test-template.tf
+#guardduty
+guardduty-template.tf
+guardduty-variables.tf
