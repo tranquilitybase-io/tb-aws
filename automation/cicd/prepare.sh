@@ -22,7 +22,7 @@ terraform init
 #terraform import module.aws_lz_organization_main.aws_organizations_organization.aws_lz_organization o-8lg1h3pzea
 #terraform import module.aws_lz_account_security.aws_organizations_account.aws_lz_account 971696596064
 #terraform import module.aws_lz_account_logarchive.aws_organizations_account.aws_lz_account 371811507364
-erraform import module.aws_lz_account_sharedservices.aws_organizations_account.aws_lz_account 268856297607
+terraform import module.aws_lz_account_sharedservices.aws_organizations_account.aws_lz_account 268856297607
 cat main.tf
 echo "------------------------TERRAFORM VALIDATE----------------------------------------"
 terraform validate
