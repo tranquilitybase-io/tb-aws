@@ -1,6 +1,7 @@
 ## Usage
 
-**Module to activate AWS Config Service, also is created a topic to send notifications to SNS subscriptions**
+**Module to create a S3 bucket to store logs files from Config and Cloudtrail, the bucket is encrypted at rest using "AES256" as algorithm. The module create 2 buckets one for access and another with logging activated**
+
 
 ## Inputs
 
@@ -11,9 +12,8 @@
 | config\_logs\_bucket | The S3 bucket for AWS Config Access logs. | `string` | n/a | yes |
 | config\_logs\_bucket_logs | The S3 bucket for AWS Config logs. | `string` | n/a | yes |
 | config\_logs\_prefix | The S3 prefix for AWS Config logs. | `string` | `"config"` | no |
-| config\_role_arn | The ARN role from IAM module. | `string` | `""` | yes |
-| config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | `string` | `"Six_Hours"` | no |
 
 ## Output
-"recorder_main"
-"delivery_channel"
+"bucket_name"
+"bucket_name_log"
+"config_logs_prefix"

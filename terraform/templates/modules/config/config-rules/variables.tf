@@ -12,12 +12,6 @@ variable "config_max_execution_frequency" {
   default     = "TwentyFour_Hours"
 }
 
-variable "config_delivery_frequency" {
-  description = "The frequency with which AWS Config delivers configuration snapshots."
-  default     = "Six_Hours"
-  type        = string
-}
-
 variable "acm_days_to_expiration" {
   description = "Specify the number of days before the rule flags the ACM Certificate as noncompliant."
   default     = 14
