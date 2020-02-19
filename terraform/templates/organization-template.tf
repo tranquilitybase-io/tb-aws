@@ -2,9 +2,9 @@
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
-#locals {
-#  current_account_id = data.aws_caller_identity.current.account_id
-#}
+locals {
+  current_account_id = data.aws_caller_identity.current.account_id
+}
 
 module "aws_lz_organization_main" {
   source = "./templates/modules/organizations"
