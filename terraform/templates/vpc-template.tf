@@ -4,7 +4,7 @@ resource "aws_vpc" "example" {
 }
 
 resource "aws_s3_bucket" "test-bucket" {
-  bucket = "my-tf-test-bucket-drk"
+  bucket = "my-tf-test-bucket-drk-2"
   acl    = "private"
 
   tags = {
