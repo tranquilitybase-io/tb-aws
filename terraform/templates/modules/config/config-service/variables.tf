@@ -2,12 +2,17 @@ variable "config_name" {
   default = ""
 }
 
-variable "config_logs_bucket" {  
-  default = ""
+variable "bucket_name" {
+  description = "The S3 Bucket Name source for log bucket"
+  type        = string
+}
+
+variable "bucket_name_log" {
+  description = "The S3 Bucket Name for log."
 }
 
 variable "config_logs_prefix" {
-  default = ""
+  description = "The S3 prefix for AWS Config logs."
 }
 
 variable "role_arn" {

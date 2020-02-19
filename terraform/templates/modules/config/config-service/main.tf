@@ -16,7 +16,7 @@ resource "aws_sns_topic" "config-rules" {
 
 resource "aws_config_delivery_channel" "main" {
   name           = "${var.config_name}-delivery"
-  s3_bucket_name = var.config_logs_bucket
+  s3_bucket_name = var.bucket_name_log
   s3_key_prefix  = var.config_logs_prefix
 
   sns_topic_arn = aws_sns_topic.config-rules.arn
