@@ -11,7 +11,7 @@ MAIN_PATH=$(pwd)
 AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
-# Files preparation
+# Files preparation script
 python3 automation/cicd/terraform-pre-run.py
 
 cd ${TERRAFORM_PATH}
