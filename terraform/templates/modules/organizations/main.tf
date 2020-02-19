@@ -23,7 +23,7 @@ resource "aws_organizations_organizational_unit" "aws_lz_ou" {
   count = length(var.ou_name) > 0 ? 1 : 0
   name      = var.ou_name
   #parent_id = var.ou_parent_id
-  parent_id   = module.aws_lz_organization_main.aws_organizations_organization.id
+  parent_id   = module.aws_organizations_organization.id
 }
 
 resource "aws_organizations_policy" "aws_lz_policy" {

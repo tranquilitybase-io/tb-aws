@@ -28,4 +28,4 @@ terraform validate
 echo "------------------------TERRAFORM PLAN--------------------------------------------"
 terraform plan
 echo "------------------------TERRAFORM APPLY--------------------------------------------"
-terraform apply -refresh=true -auto-approve
+#terraform apply -refresh=true -auto-approve
