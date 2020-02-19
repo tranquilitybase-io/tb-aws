@@ -31,7 +31,7 @@ Files preparation and validation:
   #extends: .docker_terraform
   stage: Prepare
   tags:
-    - shell #docker
+    - docker
   script:
     - automation/cicd/prepare.sh
   only:
