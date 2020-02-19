@@ -17,10 +17,10 @@ python3 automation/cicd/terraform-pre-run.py
 cd ${TERRAFORM_PATH}
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
+echo "------------------------TERRAFORM IMPORT--------------------------------------------"
+terraform import aws_organizations_organization.aws_lz_organization o-8lg1h3pzea
 echo "------------------------TERRAFORM VALIDATE----------------------------------------"
 terraform validate
-echo "------------------------TERRAFORM IMPORT--------------------------------------------"
-terraform import aws_organizations_organization.aws_lz_organization
 #terraform refresh
 #echo "--------------------------------------------------------------------"
 echo "------------------------TERRAFORM PLAN--------------------------------------------"
