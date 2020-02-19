@@ -3,6 +3,11 @@ output "org_id" {
   description = "ID of the organization"
 }
 
+output "roots" {
+  value = concat(aws_organizations_organization.aws_lz_organization.*.roots, [""])[0]
+  description = "List of organization roots"
+}
+
 output "ou_id" {
   value = concat(aws_organizations_organizational_unit.aws_lz_ou.*.id, [""])[0]
   description = "Identifier of the organization unit"
@@ -56,9 +61,4 @@ output "master_account_id" {
 output "non_master_accounts" {
   value = concat(aws_organizations_organization.aws_lz_organization.*.non_master_accounts, [""])[0]
   description = "List of organization accounts excluding the master account"
-}
-
-output "roots" {
-  value = concat(aws_organizations_organization.aws_lz_organization.*.roots, [""])[0]
-  description = "List of organization roots"
 }
