@@ -5,10 +5,10 @@ variable "aggregate_organization" {
   default     = true
 }
 
-variable "default_tags" {
-  default = var.default_tags
+variable "config_tags" {
+  default = {} 
 }
 
 variable "config_name" {
-  default = var.config_name
+  default = ""
 }

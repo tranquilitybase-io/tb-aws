@@ -1,15 +1,20 @@
 
 variable "config_logs_bucket" {    
+    default = ""
 }
 
 variable "config_name" {  
-  default = var.config_name
+    default = ""
 }
 
-variable "default_tags" {
-  default = var.default_tags
+variable "config_tags" {
+  default = {} 
 }
 
 variable "config_logs_prefix" { 
-  default = var.config_logs_prefix
+    default = ""
+}
+
+variable "log_archive_account_id" { 
+    description = "Log Archive Account ID"
 }
