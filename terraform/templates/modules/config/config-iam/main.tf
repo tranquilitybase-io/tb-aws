@@ -1,6 +1,8 @@
 # Allow the AWS Config role to deliver logs to configured S3 Bucket.
 # Derived from IAM Policy document found at https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html
 
+data "aws_caller_identity" "current" {}
+
 data "template_file" "aws_config_policy" {
   template = <<JSON
 {
@@ -39,10 +41,12 @@ JSON
       "arn:aws:s3:::%s/%s/AWSLogs/%s/Config/*",
       var.config_logs_bucket,
       var.config_logs_prefix,
-      var.log_archive_account_id,
+      data.aws_caller_identity.current.account_id,     
     )
   }
 }
+
+#var.log_archive_account_id,
 
 # Allow IAM policy to assume the role for AWS Config
 data "aws_iam_policy_document" "aws-config-role-policy" {
