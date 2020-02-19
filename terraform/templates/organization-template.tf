@@ -3,12 +3,33 @@ module "aws_lz_organization_main" {
   create_lz_organization = true 
 }
 
-module "aws_lz_account_sharedservices" {
+module "aws_lz_ou_awsgftlz" {
+  source = "./templates/modules/organizations"
+
+  ou_name = "AWS-GFT-LZ"
+  ou_parent_id = module.aws_lz_organization_main.roots[0].id
+}
+
+module "aws_lz_ou_company" {
+  source = "./templates/modules/organizations"
+
+  ou_name = "ACME"
+  ou_parent_id = module.aws_lz_ou_awsgftlz.ou_id
+}
+
+module "aws_lz_ou_core" {
+  source = "./templates/modules/organizations"
+
+  ou_name = "Core OU"
+  ou_parent_id = module.aws_lz_ou_company.ou_id
+}
+
+module "aws_lz_account_security" {
   source = "./templates/modules/organizations"
   
-  org_account_name = var.aws_organizations_account_sharedservices_name
-  org_account_email = var.aws_organizations_account_sharedservices_email
-  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.root_account_id, (var.tag_key_name) = "organization" }
+  org_account_name = var.aws_organizations_account_security_name
+  org_account_email = var.aws_organizations_account_security_email
+  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "organization" }
   account_parent_id = module.aws_lz_ou_core.ou_id
 }
 
@@ -17,26 +38,27 @@ module "aws_lz_account_logarchive" {
   
   org_account_name = var.aws_organizations_account_logarchive_name
   org_account_email = var.aws_organizations_account_logarchive_email
-  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.root_account_id, (var.tag_key_name) = "organization" }
+  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "organization" }
   account_parent_id = module.aws_lz_ou_core.ou_id
 }
 
-module "aws_lz_account_security" {
+module "aws_lz_account_sharedservices" {
   source = "./templates/modules/organizations"
   
-  org_account_name = var.aws_organizations_account_security_name
-  org_account_email = var.aws_organizations_account_security_email
-  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.root_account_id, (var.tag_key_name) = "organization" }
+  org_account_name = var.aws_organizations_account_sharedservices_name
+  org_account_email = var.aws_organizations_account_sharedservices_email
+  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "organization" }
   account_parent_id = module.aws_lz_ou_core.ou_id
 }
 
-module "aws_lz_ou_core" {
+/*module "aws_lz_account_network" {
   source = "./templates/modules/organizations"
-
-  ou_name = "CoreOU"
-  #ou_parent_id = module.aws_lz_organization_main.org_id
-  ou_parent_id = module.aws_lz_organization_main.roots.0.id
-}
+  
+  org_account_name = var.aws_organizations_account_network_name
+  org_account_email = var.aws_organizations_account_network_email
+  org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "organization" }
+  account_parent_id = module.aws_lz_ou_core.ou_id
+}*/
 
 module "aws_lz_policy_tagging" {
   source = "./templates/modules/organizations"
