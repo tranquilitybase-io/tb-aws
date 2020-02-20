@@ -5,7 +5,7 @@ init-variables.tf
 organization-template.tf
 organization-variables.tf
 # Config (Validated)
-config-template.tf
-config-variables.tf
+#config-template.tf
+#config-variables.tf
 # Simple test for resources
 resources-test-template.tf
