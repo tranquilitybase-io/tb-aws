@@ -24,6 +24,6 @@ terraform validate
 #terraform refresh
 #echo "--------------------------------------------------------------------"
 echo "------------------------TERRAFORM PLAN--------------------------------------------"
-terraform plan
+#terraform plan
 echo "------------------------TERRAFORM APPLY--------------------------------------------"
-terraform apply -refresh=true -auto-approve
+#terraform apply -refresh=true -auto-approve

@@ -44,6 +44,9 @@ Files preparation and validation:
   stage: Prepare
   tags:
     - docker
+  cache:
+    paths:
+      - terraform/*.tf
   script:
     #- automation/cicd/prepare.sh
     - ls terraform/*.tf
