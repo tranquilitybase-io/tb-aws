@@ -35,7 +35,7 @@ JSON
 
   vars = {
     #bucket_arn = format("arn:aws:s3:::%s",var.config_logs_bucket)
-    resource = format("/%s/AWSLogs/*/*",var.config_logs_prefix)
+    resource = format("%s/%s/AWSLogs/*/*",var.bucket_log_arn,var.config_logs_prefix)
   }
 }
 
