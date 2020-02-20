@@ -1,8 +1,4 @@
 
-variable "config_logs_bucket" {    
-    default = ""
-}
-
 variable "config_logs_prefix" { 
     default = ""
 }
@@ -10,7 +6,6 @@ variable "config_logs_prefix" {
 variable "bucket_log_arn" {
     description = "Bucket ARN of logging bucket"
 }
-
 
 variable "config_name" {  
     default = ""
@@ -25,9 +20,10 @@ variable "bucket_account_id" {
     default = ""
 }
 
+/* 
 variable "iam_role_name" {
     description = "Name of IAM role"
-    default = ["$${config_name}-iam-role"]
+    default = "$${config_name}-iam-role"
 }
 
 variable "iam_managed_policy_attachment_name" {
@@ -43,4 +39,5 @@ variable "aws_iam_policy_name" {
 variable "iam_policy_attachment_name" {
     description = "Name of IAM policy attached to IAM policy role"
     default = "$${config_name}-iam-policy-attachment"
-}
+} 
+*/

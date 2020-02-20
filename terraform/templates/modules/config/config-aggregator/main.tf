@@ -34,7 +34,7 @@ resource "aws_iam_role_policy_attachment" "aggregator" {
 #
 resource "aws_config_configuration_aggregator" "organization" {
   count      = var.aggregate_organization ? 1 : 0
-  name       = var.aggregator_name
+  name       = "${config_name}-aggregator"
 
   organization_aggregation_source {
     all_regions = true
