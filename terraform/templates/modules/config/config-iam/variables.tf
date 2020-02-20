@@ -30,7 +30,7 @@ variable "iam_role_name" {
     default = "$${config_name}-iam-role"
 }
 
-variable "iam-managed-policy-attachment_name" {
+variable "iam_managed_policy_attachment_name" {
     description = "Name of Managed Policy to be attached to IAM Role"
     default = "$${config_name}-iam-managed-policy-attachment"
 }
@@ -40,7 +40,7 @@ variable "aws_iam_policy_name" {
     default = "$${config_name}-iam-policy"
 }
 
-variable "iam-policy-attachment_name" {
+variable "iam_policy_attachment_name" {
     description = "Name of IAM policy attached to IAM policy role"
     default = "$${config_name}-iam-policy-attachment"
 }
