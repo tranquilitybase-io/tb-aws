@@ -53,15 +53,16 @@ def merge_files():
                             second_line = second_line.replace('#','')
                             regions = second_line.split(",")
                             for region in regions:
-                                for line in lines:
-                                    if line.startswith("module"):
-                                        line = line.replace("REGION",region)
-                                    elif "providers = {aws = aws.alias}" in line:
-                                        line = line.replace("alias",region)
-                                    if line != first_line and line != second_line:
-                                        print("INSERTING LINE")
-                                        print(line)
-                                        fout.write(line)
+                                if len(region) > 0:
+                                    for line in lines:
+                                        if line.startswith("module"):
+                                            line = line.replace("REGION",region)
+                                        elif "providers = {aws = aws.alias}" in line:
+                                            line = line.replace("alias",region)
+                                        if line != first_line and line != second_line:
+                                            print("INSERTING LINE")
+                                            print(line)
+                                            fout.write(line)
                         else:
                             #################################################
 
