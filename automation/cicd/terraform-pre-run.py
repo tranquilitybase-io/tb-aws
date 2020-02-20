@@ -55,13 +55,13 @@ def merge_files():
                             print("*****SECOND_LINE:********" + second_line)
                             regions = second_line.split(",")
                             print("*****REGIONS********")
-                            print(region)
+                            print(regions)
                             for region in regions:
                                 print(region)
-                              #  for line in lines:
-                               #     if "providers = {aws = aws.alias}" in line:
-                              #          line.replace("alias",region)
-                               #     fout.write(line)
+                                for line in lines:
+                                   if "providers = {aws = aws.alias}" in line:
+                                        line.replace("alias",region)
+                                   fout.write(line)
                         else:
                             #Ronald code end
 
