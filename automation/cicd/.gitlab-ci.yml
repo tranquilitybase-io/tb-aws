@@ -30,7 +30,7 @@ Validate files:
     - ls terraform
   cache:
     paths:
-      - terraform/
+      - terraform/*.tf
   only:
     changes:
       - terraform/**/*
@@ -45,7 +45,8 @@ Files preparation and validation:
   tags:
     - docker
   script:
-    - automation/cicd/prepare.sh
+    #- automation/cicd/prepare.sh
+    ls *.tf
   only:
     changes:
       - terraform/**/*
