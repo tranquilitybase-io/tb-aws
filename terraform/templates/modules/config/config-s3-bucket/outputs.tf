@@ -2,7 +2,7 @@ output "bucket_name" {
     value = aws_s3_bucket.s3_main.bucket
 }
 
-output "bucket_name" {
+output "bucket_name_arn" {
     value = aws_s3_bucket.s3_main.arn
 }
 
