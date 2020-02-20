@@ -10,13 +10,13 @@ data "template_file" "aws_config_policy" {
         "Sid": "AWSConfigBucketPermissionsCheck",
         "Effect": "Allow",
         "Action": "s3:GetBucketAcl",
-        "Resource": "$${var.bucket_log_arn}"
+        "Resource": "${var.bucket_log_arn}"
     },
     {
         "Sid": "AWSConfigBucketExistenceCheck",
         "Effect": "Allow",
         "Action": "s3:ListBucket",
-        "Resource": "$${var.bucket_log_arn}"
+        "Resource": "${var.bucket_log_arn}"
     },
     {
         "Sid": "AWSConfigBucketDelivery",
