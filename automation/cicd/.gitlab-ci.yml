@@ -3,7 +3,7 @@ variables:
   # test line      
 
 stages:
-  - Validate
+  - Generate+Validate Terraform
   - Prepare
   - Provision
   - Permissions
@@ -22,7 +22,7 @@ stages:
 # Initial job
 Validate Terraform files:
   extends: .docker_terraform
-  stage: Validate
+  stage: Generate+Validate Terraform
   tags:
     - docker
   script:
