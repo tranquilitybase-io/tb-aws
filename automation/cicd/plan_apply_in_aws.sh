@@ -11,13 +11,11 @@ MAIN_PATH=$(pwd)
 AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
-# Files preparation script
-#python3 automation/cicd/terraform-pre-run.py
-
 cd ${TERRAFORM_PATH}
-ls
-cat main.tf
+echo "------------------------TERRAFORM INIT--------------------------------------------"
+terraform init
+ls *.tf
 echo "------------------------TERRAFORM PLAN--------------------------------------------"
-terraform plan
+#terraform plan
 echo "------------------------TERRAFORM APPLY--------------------------------------------"
-#terraform apply -refresh=true -auto-approve
+terraform apply -refresh=true -auto-approve
