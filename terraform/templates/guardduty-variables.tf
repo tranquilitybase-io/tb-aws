@@ -1,5 +1,4 @@
-#testLine
-variable "cloudwatch_notify_frequency" {
+variable "finding_publishing_frequency" {
   description = "Frequency for CloudWatch Events to be notified. Accepted values: FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS."
   default = "SIX_HOURS"
  #POC: validation is experimental
