@@ -44,7 +44,7 @@ def merge_files():
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
                     with open(absolut_path) as finput:
                         
-                        
+                        #########################################################
                         lines = finput.readlines()
                         first_line = lines[0]                       
                         if first_line.startswith("#multiregion"):
@@ -58,11 +58,10 @@ def merge_files():
                                         line = line.replace("REGION",region)
                                     elif "providers = {aws = aws.alias}" in line:
                                         line = line.replace("alias",region)
-                                    if line != first_line and line != second_line
+                                    if line != first_line and line != second_line:
                                         fout.write(line)
                         else:
-                            #Ronald code end
-
+                            #################################################
 
                             fout.write(finput.read())
 
