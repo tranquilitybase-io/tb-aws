@@ -7,5 +7,10 @@ organization-variables.tf
 # Config (Validated)
 config-template.tf
 config-variables.tf
+
+#guardduty
+guardduty-template.tf
+guardduty-variables.tf
+
 # Simple test for resources
 resources-test-template.tf
