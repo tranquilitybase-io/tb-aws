@@ -39,7 +39,7 @@ Validate files:
       - automation/cicd/terraform-pre-run.py
 
 # Preparation
-Files preparation and validation:
+Plan and Apply:
   extends: .docker_terraform
   stage: Prepare
   tags:
@@ -48,8 +48,8 @@ Files preparation and validation:
     paths:
       - terraform/*.tf
   script:
-    #- automation/cicd/prepare.sh
-    - ls terraform/*.tf
+    - automation/cicd/plan_apply_in_aws.sh
+    #- ls terraform/*.tf
   only:
     changes:
       - terraform/**/*
