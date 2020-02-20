@@ -8,7 +8,7 @@ variable "cloudwatch_notify_frecuency" {
  #   error_message = "The Notifications frecuency value in not valid."
  # }
 }
-
+/*
 variable "invite_members"{
   description = "Send GuardDuty invites to member accounts"
   default = true 
@@ -22,4 +22,4 @@ variable "member_invite_message" {
 variable "disable_email_notification"{
   description = "Disable email notification for members"
   default = false
-}
+}*/

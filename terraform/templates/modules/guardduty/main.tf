@@ -1,7 +1,7 @@
 #Enable GuardDuty on Master account
 resource "aws_guardduty_detector" "detector" {
   enable = true
-  finding_publishing_frequency = var.cloudwatch_notify_frecuency
+ # finding_publishing_frequency = var.cloudwatch_notify_frecuency
 }
 
 
