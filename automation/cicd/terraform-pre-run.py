@@ -46,24 +46,20 @@ def merge_files():
                         
                         
                         lines = finput.readlines()
-                        first_line = lines[0]
-                        print("*****FIRST_LINE:********" + first_line)
+                        first_line = lines[0]                       
                         if first_line.startswith("#multiregion"):
                             print("Multiregion Starts")
                             second_line = lines[1]
                             second_line = second_line.replace('#','')
-                            print("*****SECOND_LINE:********" + second_line)
                             regions = second_line.split(",")
-                            print("*****REGIONS********")
-                            print(regions)
                             for region in regions:
-                                print(region)
                                 for line in lines:
                                     if line.startswith("module"):
                                         line = line.replace("REGION",region)
-                                    if "providers = {aws = aws.alias}" in line:
+                                    elif "providers = {aws = aws.alias}" in line:
                                         line = line.replace("alias",region)
-                                    fout.write(line)
+                                    if line != first_line && line != second_line
+                                        fout.write(line)
                         else:
                             #Ronald code end
 
