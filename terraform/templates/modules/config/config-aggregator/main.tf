@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "aws_config_aggregator_role_policy" {
 
 resource "aws_iam_role" "aggregator" {
   count              = var.aggregate_organization ? 1 : 0
-  name               = "${config_name}-aggregator-role"
+  name               = "${var.config_name}-aggregator-role"
   assume_role_policy = data.aws_iam_policy_document.aws_config_aggregator_role_policy.json
   tags = var.config_tags
 }
@@ -34,7 +34,7 @@ resource "aws_iam_role_policy_attachment" "aggregator" {
 #
 resource "aws_config_configuration_aggregator" "organization" {
   count      = var.aggregate_organization ? 1 : 0
-  name       = "${config_name}-aggregator"
+  name       = "${var.config_name}-aggregator"
 
   organization_aggregation_source {
     all_regions = true
