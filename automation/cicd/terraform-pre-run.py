@@ -58,7 +58,7 @@ def merge_files():
                                         line = line.replace("REGION",region)
                                     elif "providers = {aws = aws.alias}" in line:
                                         line = line.replace("alias",region)
-                                    if line != first_line && line != second_line
+                                    if line != first_line and line != second_line
                                         fout.write(line)
                         else:
                             #Ronald code end
