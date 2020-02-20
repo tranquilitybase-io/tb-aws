@@ -27,8 +27,8 @@ provider "null" {
 ##############
 # us-east-1 
 provider "aws" {
-  alias  = "multiregion"
-  region = "us-east-2"
+  alias  = "us-east-1"
+  region = "us-east-1"
 
 # us-east-2 
 provider "aws" {
