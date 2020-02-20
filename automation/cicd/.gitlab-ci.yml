@@ -3,6 +3,7 @@ variables:
   # test line     
 
 stages:
+  - Validate
   - Prepare
   - Provision
   - Permissions
@@ -19,12 +20,23 @@ stages:
 
 # Jobs
 # Initial job
-initial_job:
-  stage: Prepare
+Validate files:
+  extends: .docker_terraform
+  stage: Validate
   tags:
-    - shell
+    - docker
   script:
-    - echo "Initial job ok... ${ID_SYSTEM}"
+    - automation/cicd/prepare.sh
+  artifacts:
+    paths:
+      - tmp/terraform
+      - ls tmp/terraform
+  only:
+    changes:
+      - terraform/**/*
+      - automation/cicd/.gitlab-ci.yml
+      - automation/cicd/prepare.sh
+      - automation/cicd/terraform-pre-run.py
 
 # Preparation
 Files preparation and validation:
