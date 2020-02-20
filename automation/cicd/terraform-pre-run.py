@@ -59,9 +59,11 @@ def merge_files():
                             for region in regions:
                                 print(region)
                                 for line in lines:
-                                   if "providers = {aws = aws.alias}" in line:
-                                        line.replace("alias",region)
-                                   fout.write(line)
+                                if line.startswith("module"):
+                                    line = line.replace("REGION",region)
+                                if "providers = {aws = aws.alias}" in line:
+                                    line = line.replace("alias",region)
+                                fout.write(line)
                         else:
                             #Ronald code end
 
