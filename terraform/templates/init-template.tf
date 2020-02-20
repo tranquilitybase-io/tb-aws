@@ -19,9 +19,6 @@ provider "null" {
   version = "~> 2.1"
 }
 
-
-
-
 ##############
 # US REGIONS #
 ##############
