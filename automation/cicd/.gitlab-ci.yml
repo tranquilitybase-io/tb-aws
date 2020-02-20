@@ -1,5 +1,5 @@
 variables:
-  CICD_SCRIPTS_DIR: automation/cicd/
+  CICD_SCRIPTS_DIR: "automation/cicd"
   # test line     
 
 stages:
@@ -26,7 +26,7 @@ Validate Terraform files:
   tags:
     - docker
   script:
-    - automation/cicd/generate_validate_tf_files.sh
+    - ${CICD_SCRIPTS_DIR}/generate_validate_tf_files.sh
     - ls terraform
   cache:
     paths:
