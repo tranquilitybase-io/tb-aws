@@ -48,11 +48,11 @@ def merge_files():
                         lines = finput.readlines()
                         first_line = lines[0]                       
                         if first_line.startswith("#multiregion"):
-                            print("Multiregion Starts")
                             second_line = lines[1]
                             second_line_format = second_line.replace('#','')
                             regions = second_line_format.split(",")
                             for region in regions:
+                                print("Region " + region + " has len of " + len(region))
                                 if len(region) > 0:
                                     for line in lines:
                                         if line.startswith("module"):
