@@ -20,3 +20,7 @@ variable "config_tags" {
   default = {} 
 }
 
+variable "bucket_account_id" {
+    description = "Account ID for Bucket creator"
+    default = ""
+}
