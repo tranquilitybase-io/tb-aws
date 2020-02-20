@@ -4,11 +4,11 @@ variables:
 
 stages:
   - Generate+Validate Terraform
-  - Prepare
+  - Apply AWS
   - Provision
   - Permissions
 
-# Templates
+################### BASE TEMPLATES ######################
 .docker_terraform:
   image:
     name: deiverk/ubuntu_terraform_python3:latest
@@ -19,7 +19,7 @@ stages:
       - /^((develop/.*))$/
 
 # Jobs
-# Initial job
+# Generates and Validates the Terraform files
 Validate Terraform files:
   extends: .docker_terraform
   stage: Generate+Validate Terraform
@@ -37,10 +37,10 @@ Validate Terraform files:
       - automation/cicd/generate_validate_tf_files.sh
       - automation/cicd/terraform-pre-run.py
 
-# Preparation
+# Apply the Terraform files in AWS root account
 Plan and Apply in AWS:
   extends: .docker_terraform
-  stage: Prepare
+  stage: Apply AWS
   tags:
     - docker
   cache:
