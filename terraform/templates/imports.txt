@@ -1,14 +1,16 @@
-# Init module 
+# Init module (Validated)
 init-template.tf
 init-variables.tf
-# Organization module
+# Organization module (Validated)
 organization-template.tf
 organization-variables.tf
-# Config 
-#config-template.tf
-#config-variables.tf
-# VPC
-resources-test-template.tf
+# Config (Validated)
+config-template.tf
+config-variables.tf
+
 #guardduty
 guardduty-template.tf
 guardduty-variables.tf
+
+# Simple test for resources
+resources-test-template.tf

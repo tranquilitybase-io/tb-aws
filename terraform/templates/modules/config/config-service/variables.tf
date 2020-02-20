@@ -1,22 +1,23 @@
-variable "config_name" {
-  default = ""
+
+variable "config_logs_bucket" {    
+    default = ""
 }
 
-variable "config_logs_bucket" {  
-  default = ""
+variable "config_name" {  
+    default = ""
 }
 
-variable "config_logs_prefix" {
-  default = ""
+variable "config_tags" {
+  default = {} 
+}
+
+variable "config_logs_prefix" { 
+    default = ""
 }
 
 variable "role_arn" {
   description = "The ARN of role."
   type        = string
-}
-
-variable "config_tags" {
-  default = {} 
 }
 
 variable "config_delivery_frequency" {
