@@ -13,7 +13,7 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 cd ${TERRAFORM_PATH}
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
-cho "------------------------TERRAFORM PLAN---------------------------------------------"
-terraform plan
+#echo "------------------------TERRAFORM PLAN---------------------------------------------"
+#terraform plan
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 terraform apply -refresh=true -auto-approve
