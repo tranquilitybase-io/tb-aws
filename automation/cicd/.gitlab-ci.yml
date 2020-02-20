@@ -20,13 +20,13 @@ stages:
 
 # Jobs
 # Initial job
-Validate files:
+Validate Terraform files:
   extends: .docker_terraform
   stage: Validate
   tags:
     - docker
   script:
-    - automation/cicd/prepare.sh
+    - automation/cicd/generate_validate_tf_files.sh
     - ls terraform
   cache:
     paths:
@@ -40,7 +40,7 @@ Validate files:
       - automation/cicd/terraform-pre-run.py
 
 # Preparation
-Plan and Apply:
+Plan and Apply in AWS:
   extends: .docker_terraform
   stage: Prepare
   tags:
