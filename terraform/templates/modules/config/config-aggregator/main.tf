@@ -1,5 +1,3 @@
-data "aws_caller_identity" "current" {}
-
 #
 # IAM Role
 #
@@ -20,7 +18,7 @@ data "aws_iam_policy_document" "aws_config_aggregator_role_policy" {
 
 resource "aws_iam_role" "aggregator" {
   count              = var.aggregate_organization ? 1 : 0
-  name               = "${var.config_name}_aggregator_role"
+  name               = var.aggregator_role_name
   assume_role_policy = data.aws_iam_policy_document.aws_config_aggregator_role_policy.json
   tags = var.config_tags
 }
@@ -37,7 +35,7 @@ resource "aws_iam_role_policy_attachment" "aggregator" {
 resource "aws_config_configuration_aggregator" "organization" {
   count      = var.aggregate_organization ? 1 : 0
   depends_on = [aws_iam_role_policy_attachment.aggregator]
-  name       = "${var.config_name}_aggregator"
+  name       = var.aggregator_name
 
   organization_aggregation_source {
     all_regions = true
@@ -46,6 +44,6 @@ resource "aws_config_configuration_aggregator" "organization" {
 }
 
 resource "aws_config_aggregate_authorization" "lz_config_aggregate_auth" {
-  account_id = data.aws_caller_identity.current.account_id
+  account_id = var.authorization_account_id
   region     = data.aws_region.current.name
 }

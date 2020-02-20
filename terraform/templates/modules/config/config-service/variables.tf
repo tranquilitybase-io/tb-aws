@@ -17,11 +17,24 @@ variable "config_logs_prefix" {
 
 variable "role_arn" {
   description = "The ARN of role."
-  type        = string
+}
+
+variable "sns_topic_name" {
+  description = "Topic Name"
+  default = "${var.config_name}-sns-topic"
+}
+
+variable "kms_master_key_id" {
+  description = "KMS by default for SNS topic"
+  default = "alias/aws/sns"
+}
+
+variable "aws_config_delivery_channel_name" {
+  description = "Name of Delivery Channel"
+  default = "${var.config_name}-delivery"
 }
 
 variable "config_delivery_frequency" {
   description = "The frequency with which AWS Config delivers configuration snapshots."
   default     = "Six_Hours"
-  type        = string
 }
