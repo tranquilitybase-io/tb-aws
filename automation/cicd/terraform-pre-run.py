@@ -52,7 +52,7 @@ def merge_files():
                             second_line_format = second_line.replace('#','')
                             regions = second_line_format.split(",")
                             for region in regions:
-                                print("Region " + region + " has len of " + len(region))
+                                print("Region " + region + " has len of " + str(len(region)))
                                 if len(region) > 0:
                                     for line in lines:
                                         if line.startswith("module"):
