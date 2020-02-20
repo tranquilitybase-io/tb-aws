@@ -35,8 +35,8 @@ Validate Terraform files:
     changes:
       - terraform/**/*
       - automation/cicd/.gitlab-ci.yml
-      - automation/cicd/prepare.sh
-      - automation/cicd/plan_apply_in_aws.sh
+      - automation/cicd/generate_validate_tf_files.sh
+      #- automation/cicd/plan_apply_in_aws.sh
       - automation/cicd/terraform-pre-run.py
 
 # Preparation
@@ -55,9 +55,9 @@ Plan and Apply in AWS:
     changes:
       - terraform/**/*
       - automation/cicd/.gitlab-ci.yml
-      - automation/cicd/prepare.sh
+      #- automation/cicd/prepare.sh
       - automation/cicd/plan_apply_in_aws.sh
-      - automation/cicd/terraform-pre-run.py
+      #- automation/cicd/terraform-pre-run.py
 
 
 configure_aws_config:
