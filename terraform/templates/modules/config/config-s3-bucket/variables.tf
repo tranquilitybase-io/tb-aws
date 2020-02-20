@@ -11,8 +11,7 @@ variable "bucket_name_log" {
 
 variable "config_logs_prefix" {
   description = "The S3 prefix for AWS Config logs."
-  type        = string
-  default = ""
+  type        = string  
 }
 
 variable "config_tags" {
