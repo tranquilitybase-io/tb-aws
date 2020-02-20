@@ -4,7 +4,7 @@ variables:
 
 stages:
   - Generate+Validate Terraform
-  - Apply AWS
+  - Apply in AWS
   - Provision
   - Permissions
 
@@ -40,7 +40,7 @@ Validate Terraform files:
 # Apply the Terraform files in AWS root account
 Plan and Apply in AWS:
   extends: .docker_terraform
-  stage: Apply AWS
+  stage: Apply in AWS
   tags:
     - docker
   cache:
@@ -54,9 +54,9 @@ Plan and Apply in AWS:
       - automation/cicd/.gitlab-ci.yml
       - automation/cicd/plan_apply_in_aws.sh
 
-
+# Template job
 configure_aws_config:
-  stage: Prepare
+  stage: Provision
   tags:
     - shell
   script:
