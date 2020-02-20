@@ -61,7 +61,7 @@ def merge_files():
                                             line = line.replace("alias",region)
                                         if line != first_line and line != second_line:
                                             fout.write(line)
-                        print(line)
+                            print(line)
                         else:
                             #################################################
 
