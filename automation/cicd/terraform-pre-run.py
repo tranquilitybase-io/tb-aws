@@ -43,11 +43,9 @@ def merge_files():
                 if os.path.isfile(absolut_path):
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
                     with open(absolut_path) as finput:
-                        
-                        #########################################################
                         lines = finput.readlines()
                         first_line = lines[0]                       
-                        if first_line.startswith("#multiregion"):
+                        if first_line == "#multiregion":
                             second_line = lines[1]
                             second_line_format = second_line.replace('#','')
                             regions = second_line_format.split(",")
@@ -61,11 +59,7 @@ def merge_files():
                                         if line != first_line and line != second_line:
                                             fout.write(line)
                         else:
-                            #################################################
-
                             fout.write(finput.read())
-
-
                     fout.write(f'\n ####### END FILE {file_name} #####  \n')
                     finput.close()
                 else:
