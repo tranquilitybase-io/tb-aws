@@ -50,8 +50,8 @@ def merge_files():
                         if first_line.startswith("#multiregion"):
                             print("Multiregion Starts")
                             second_line = lines[1]
-                            second_line = second_line.replace('#','')
-                            regions = second_line.split(",")
+                            second_line_format = second_line.replace('#','')
+                            regions = second_line_format.split(",")
                             for region in regions:
                                 if len(region) > 0:
                                     for line in lines:
