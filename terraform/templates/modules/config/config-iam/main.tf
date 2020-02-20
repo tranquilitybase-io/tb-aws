@@ -10,13 +10,13 @@ data "template_file" "aws_config_policy" {
         "Sid": "AWSConfigBucketPermissionsCheck",
         "Effect": "Allow",
         "Action": "s3:GetBucketAcl",
-        "Resource": "$${bucket_arn}"
+        "Resource": "$${var.bucket_log_arn}"
     },
     {
         "Sid": "AWSConfigBucketExistenceCheck",
         "Effect": "Allow",
         "Action": "s3:ListBucket",
-        "Resource": "$${bucket_arn}"
+        "Resource": "$${var.bucket_log_arn}"
     },
     {
         "Sid": "AWSConfigBucketDelivery",
@@ -34,8 +34,8 @@ data "template_file" "aws_config_policy" {
 JSON
 
   vars = {
-    bucket_arn = format("arn:aws:s3:::%s", var.config_logs_bucket)
-    resource = format("%s/%s/AWSLogs/*/*",var.bucket_log_arn,var.config_logs_prefix)
+    #bucket_arn = format("arn:aws:s3:::%s",var.config_logs_bucket)
+    resource = format("%s/AWSLogs/*/*",var.config_logs_prefix)
   }
 }
 
