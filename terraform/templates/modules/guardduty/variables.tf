@@ -1,4 +1,4 @@
-variable "cloudwatch_notify_frecuency" {
+variable "cloudwatch_notify_frequency" {
   type = string
   default = "SIX_HOURS"
 }
