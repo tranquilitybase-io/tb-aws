@@ -46,7 +46,7 @@ Files preparation and validation:
     - docker
   script:
     #- automation/cicd/prepare.sh
-    - ls *.tf
+    - ls terraform/*.tf
   only:
     changes:
       - terraform/**/*
