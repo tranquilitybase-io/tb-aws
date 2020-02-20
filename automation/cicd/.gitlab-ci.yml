@@ -1,13 +1,14 @@
 variables:
-  CICD_SCRIPTS_DIR: automation/cicd/
-  # test line     
+  CICD_SCRIPTS_DIR: "automation/cicd"
+  # test line      
 
 stages:
-  - Prepare
+  - Generate+Validate Terraform
+  - Apply in AWS
   - Provision
   - Permissions
 
-# Templates
+################### BASE TEMPLATES ######################
 .docker_terraform:
   image:
     name: deiverk/ubuntu_terraform_python3:latest
@@ -18,32 +19,44 @@ stages:
       - /^((develop/.*))$/
 
 # Jobs
-# Initial job
-initial_job:
-  stage: Prepare
-  tags:
-    - shell
-  script:
-    - echo "Initial job ok... ${ID_SYSTEM}"
-
-# Preparation
-Files preparation and validation:
+# Generates and Validates the Terraform files
+Validate Terraform files:
   extends: .docker_terraform
-  stage: Prepare
+  stage: Generate+Validate Terraform
   tags:
     - docker
   script:
-    - automation/cicd/prepare.sh
+    - ${CICD_SCRIPTS_DIR}/generate_validate_tf_files.sh
+  cache:
+    paths:
+      - terraform/*.tf
   only:
     changes:
       - terraform/**/*
       - automation/cicd/.gitlab-ci.yml
-      - automation/cicd/prepare.sh
+      - automation/cicd/generate_validate_tf_files.sh
       - automation/cicd/terraform-pre-run.py
 
+# Apply the Terraform files in AWS root account
+Plan and Apply in AWS:
+  extends: .docker_terraform
+  stage: Apply in AWS
+  tags:
+    - docker
+  cache:
+    paths:
+      - terraform/*.tf
+  script:
+    - ${CICD_SCRIPTS_DIR}/plan_apply_in_aws.sh
+  only:
+    changes:
+      - terraform/**/*
+      - automation/cicd/.gitlab-ci.yml
+      - automation/cicd/plan_apply_in_aws.sh
 
+# Template job
 configure_aws_config:
-  stage: Prepare
+  stage: Provision
   tags:
     - shell
   script:
