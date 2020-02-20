@@ -17,6 +17,5 @@ python3 automation/cicd/terraform-pre-run.py
 cd ${TERRAFORM_PATH}
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
-cat main.tf
 echo "------------------------TERRAFORM VALIDATE----------------------------------------"
 terraform validate
