@@ -3,10 +3,9 @@ variables:
   # test line      
 
 stages:
-  - Generate and Validate TF Files
-  - Plan and Apply in AWS
-  - Provision
-  - Permissions
+  - Generate_Validate_TF
+  - Apply_in_AWS
+  - Test
 
 # Templates
 .docker_terraform:
@@ -22,7 +21,7 @@ stages:
 # Initial job
 Validate Terraform files:
   extends: .docker_terraform
-  stage: Generate and Validate TF Files
+  stage: Generate_Validate_TF
   tags:
     - docker
   script:
@@ -40,7 +39,7 @@ Validate Terraform files:
 # Preparation
 Plan and Apply in AWS:
   extends: .docker_terraform
-  stage: Plan and Apply in AWS
+  stage: Apply_in_AWS
   tags:
     - docker
   cache:
