@@ -18,7 +18,7 @@ variable "authorization_account_id" {
 }
 
 variable "aggregator_name" {
-  default = "$${config_name}-aggregator"
+  default = ["$${config_name}-aggregator"]
 }
 
 variable "aggregator_role_name" {
