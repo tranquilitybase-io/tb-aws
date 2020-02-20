@@ -15,7 +15,9 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 python3 automation/cicd/terraform-pre-run.py
 
 cd ${TERRAFORM_PATH}
+ls
+cat main.tf
 echo "------------------------TERRAFORM PLAN--------------------------------------------"
 terraform plan
 echo "------------------------TERRAFORM APPLY--------------------------------------------"
-terraform apply -refresh=true -auto-approve
+#terraform apply -refresh=true -auto-approve
