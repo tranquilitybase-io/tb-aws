@@ -46,7 +46,7 @@ def merge_files():
                         lines = finput.readlines()
                         first_line = lines[0]     
                         print("File Start: " + first_line)                  
-                        if first_line == "#multiregion":
+                        if "#multiregion" in first_line:
                             fout.write(f'multiregion module found')
                             second_line = lines[1]
                             second_line_format = second_line.replace('#','')
