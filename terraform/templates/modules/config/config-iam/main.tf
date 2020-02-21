@@ -35,10 +35,8 @@ JSON
   }
 }
 
-#var.log_archive_account_id,
-
 # Allow IAM policy to assume the role for AWS Config
-data "aws_iam_policy_document" "aws-config-role-policy" {
+data "aws_iam_policy_document" "aws_config_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -56,7 +54,7 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
 #
 resource "aws_iam_role" "main" {
   name               = var.iam_role_name
-  assume_role_policy = data.aws_iam_policy_document.aws-config-role-policy.json
+  assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
   tags = var.config_tags
 }
 
@@ -66,14 +64,14 @@ resource "aws_iam_policy_attachment" "managed-policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"  
 }
 
-resource "aws_iam_policy" "aws-config-policy" {
+resource "aws_iam_policy" "aws_config_policy" {
   name   = var.aws_iam_policy_name
   policy = data.template_file.aws_config_policy.rendered  
 }
 
-resource "aws_iam_policy_attachment" "aws-config-policy" {
+resource "aws_iam_policy_attachment" "aws_config_policy" {
   name       = var.aws_iam_policy_name
   roles      = [aws_iam_role.main.name]
-  policy_arn = aws_iam_policy.aws-config-policy.arn  
+  policy_arn = aws_iam_policy.aws_config_policy.arn  
 }
 
