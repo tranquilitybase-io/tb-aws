@@ -1,5 +1,5 @@
 #!/bin/bash
-# test line           
+# test line  
 
 # Variables
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -12,18 +12,10 @@ AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
 # Files preparation script
-python3 automation/cicd/terraform-pre-run.py 
+python3 ${AUTOMATION_SCRIPTS}/terraform-pre-run.py
 
 cd ${TERRAFORM_PATH}
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
-
-cat main.tf
 echo "------------------------TERRAFORM VALIDATE----------------------------------------"
 terraform validate
-#terraform refresh
-#echo "--------------------------------------------------------------------"
-echo "------------------------TERRAFORM PLAN--------------------------------------------"
-#terraform plan
-echo "------------------------TERRAFORM APPLY--------------------------------------------"
-#terraform apply -refresh=true -auto-approve
