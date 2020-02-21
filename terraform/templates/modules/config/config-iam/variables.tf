@@ -22,15 +22,20 @@ variable "bucket_account_id" {
 
 variable "iam_role_name" {
     description = "Name of IAM role"
-    default = "$${config_name}-iam-role"
-}
-
-variable "iam_managed_policy_attachment_name" {
-    description = "Name of Managed Policy to be attached to IAM Role"
-    default = "$${config_name}-iam-managed-policy-attachment"
+    default = "$${config_name}_iam_role"
 }
 
 variable "aws_iam_policy_name" {
     description = "Name of IAM policy"
-    default = "$${config_name}-policy"
+    default = "$${config_name}_policy"
+}
+
+variable "iam_policy_attachment_name" {
+    description = "Name of Policy to be attached to IAM Role"
+    default = "$${config_name}_iam_policy_attachment"
+}
+
+variable "iam_managed_policy_attachment_name" {
+    description = "Name of Managed Policy to be attached to IAM Role"
+    default = "$${config_name}_iam_managed_policy_attachment"
 }
