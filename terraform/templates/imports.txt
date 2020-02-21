@@ -2,13 +2,12 @@
 init-template.tf
 init-variables.tf
 # Organization module (Validated)
-#organization-template.tf
-#organization-variables.tf
+organization-template.tf
+organization-variables.tf
 # Config (Validated)
-#config-template.tf
-#config-variables.tf
-
-#guardduty
+config-template.tf
+config-variables.tf
+#guardduty 
 guardduty-template.tf
 guardduty-variables.tf
 

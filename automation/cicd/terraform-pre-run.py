@@ -44,8 +44,7 @@ def merge_files():
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
                     with open(absolut_path) as finput:
                         lines = finput.readlines()
-                        first_line = lines[0]     
-                        print("File Start: " + first_line)                  
+                        first_line = lines[0]
                         if "#multiregion" in first_line:
                             second_line = lines[1]
                             second_line_format = second_line.replace('#','')
