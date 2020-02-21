@@ -65,7 +65,7 @@ resource "aws_iam_policy_attachment" "iam_managed_policy_attachment" {
 }
 
 resource "aws_iam_policy" "aws_config_policy" {
-  name   = var.aws_iam_policy_name
+  #name   = var.aws_iam_policy_name
   policy = data.template_file.aws_config_policy.rendered  
 }
 

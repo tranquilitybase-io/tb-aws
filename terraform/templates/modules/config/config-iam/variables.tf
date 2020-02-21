@@ -25,10 +25,10 @@ variable "iam_role_name" {
     default = "$${config_name}_iam_role"
 }
 
-variable "aws_iam_policy_name" {
+/* variable "aws_iam_policy_name" {
     description = "Name of IAM policy"
     default = "$${config_name}_policy"
-}
+} */
 
 variable "iam_policy_attachment_name" {
     description = "Name of Policy to be attached to IAM Role"
