@@ -58,7 +58,7 @@ resource "aws_iam_role" "main" {
   tags = var.config_tags
 }
 
-resource "aws_iam_policy_attachment" "managed-policy" {
+resource "aws_iam_policy_attachment" "iam_managed_policy_attachment" {
   name       = var.iam_managed_policy_attachment_name
   roles      = [aws_iam_role.main.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"  
@@ -69,7 +69,7 @@ resource "aws_iam_policy" "aws_config_policy" {
   policy = data.template_file.aws_config_policy.rendered  
 }
 
-resource "aws_iam_policy_attachment" "aws_config_policy" {
+resource "aws_iam_policy_attachment" "aws_config_policy_attachment" {
   name       = var.aws_iam_policy_name
   roles      = [aws_iam_role.main.name]
   policy_arn = aws_iam_policy.aws_config_policy.arn  
