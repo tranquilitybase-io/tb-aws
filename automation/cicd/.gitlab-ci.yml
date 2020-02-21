@@ -1,6 +1,5 @@
 variables:
   CICD_SCRIPTS_DIR: "automation/cicd"
-  
 
 stages:
   - Generate+Validate Terraform
