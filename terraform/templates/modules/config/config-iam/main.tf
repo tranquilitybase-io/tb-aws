@@ -44,8 +44,6 @@ JSON
   }
 }
 
-#var.log_archive_account_id,
-
 # Allow IAM policy to assume the role for AWS Config
 data "aws_iam_policy_document" "aws-config-role-policy" {
   statement {
