@@ -31,7 +31,7 @@ def read_import_files(name_filter = 'template'):
 
 #print(read_import_files)
 cwd = os.getcwd()
-def look_file(import_file):
+def search_file_path(import_file):
     for path in Path(cwd).rglob(import_file):
         return os.path.abspath(path.name)
 
@@ -52,8 +52,9 @@ def merge_files():
             for line in iter(import_list):
                 file_name = line.rstrip()
                 #joined_paths = os.path.join(os.curdir,"./terraform/implementations/"+file_name) 
-                joined_paths = look_file(file_name)
-                absolut_path = os.path.abspath(joined_paths)
+                #joined_paths = search_file_path(file_name)
+                #absolut_path = os.path.abspath(joined_paths)
+                absolut_path = search_file_path(file_name)
                 if os.path.isfile(absolut_path):
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
                     with open(absolut_path) as finput:
