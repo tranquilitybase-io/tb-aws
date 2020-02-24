@@ -25,7 +25,7 @@ variable "authorization_account_id" {
 
 
 variable "aggregator_name" {
-  default = concat(var.config_name,"_aggregator"
+  default = "multi_account_aggregator"
 }
 
 variable "aggregator_role_name" {
