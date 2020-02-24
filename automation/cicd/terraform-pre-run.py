@@ -8,14 +8,10 @@ imports_file = '../../terraform/implementations/imports.txt'
 
 # The file imports contains the list of files that will be included
 def read_import_files(name_filter = 'template'):
-    #path_import_file = '../../terraform/implementations/imports.txt'
-    #joined_paths = os.path.join(os.path.dirname(__file__),path_import_file)
     joined_paths = os.path.join(os.path.dirname(__file__),imports_file)
     absolut_path = os.path.abspath(joined_paths)
     try:
-        #print(joined_paths)
         if os.path.isfile(absolut_path) != '':
-            #print('File path :' + os.path.abspath(absolut_path))
             items = []
             with open(absolut_path) as f:
                 for file_name in f.readlines():
@@ -31,6 +27,7 @@ def read_import_files(name_filter = 'template'):
         print(err)
 
 
+# This functions returns the path of the files that were included in the imports file
 cwd = os.getcwd()
 def search_file_path(import_file):
     for root, dirs, files in os.walk(cwd, topdown=False):
