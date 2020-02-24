@@ -30,7 +30,7 @@ def read_import_files(name_filter = 'template'):
         print(err)
 
 #print(read_import_files)
-
+cwd = os.getcwd()
 def look_file(import_file):
     for path in Path(cwd).rglob(import_file):
         return os.path.abspath(path.name)
