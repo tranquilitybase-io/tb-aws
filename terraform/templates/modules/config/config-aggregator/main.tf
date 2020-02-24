@@ -1,7 +1,3 @@
-#
-# IAM Role
-#
-data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "aws_config_aggregator_role_policy" {
   statement {
@@ -38,11 +34,11 @@ resource "aws_config_configuration_aggregator" "organization" {
 
   organization_aggregation_source {
     all_regions = true
-    role_arn    = aws_iam_role.aggregator[0].arn
+    role_arn    = aws_iam_role.aggregator_role[0].arn
   }  
 }
 
 resource "aws_config_aggregate_authorization" "lz_config_aggregate_auth" {
   account_id = var.authorization_account_id
-  region     = data.aws_region.current.name
+  region     = var.region
 }
