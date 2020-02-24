@@ -6,11 +6,11 @@ variable "aggregate_organization" {
 }
 
 variable "config_tags" {
-  default = {} 
+  description = "Required TAGS" 
 }
 
 variable "config_name" {
-  default = ""
+  description = "Name of Config Service"
 }
 
 variable "region" {
@@ -23,9 +23,14 @@ variable "authorization_account_id" {
 
 
 variable "aggregator_name" {
-  default = "$${config_name}_aggregator"
+  default = "multi_account_aggregator"
 }
 
 variable "aggregator_role_name" {
-  default = "$${config_name}_aggregator_role"
+  default = "aggregator_role"
 }
+
+variable "policy_arn" {
+  default = "arn:aws:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
+}
+
