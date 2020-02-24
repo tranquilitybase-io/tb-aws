@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "aws_config_aggregator_role_policy" {
 
 resource "aws_iam_role" "aggregator_role" {
   count              = var.aggregate_organization ? 1 : 0
-  name               = concat(var.config_name,"_",var.aggregator_role_name)
+  name               = concat(${var.config_name},"_",var.aggregator_role_name)
   assume_role_policy = data.aws_iam_policy_document.aws_config_aggregator_role_policy.json
   tags = var.config_tags
 }
