@@ -30,6 +30,14 @@ def read_import_files(name_filter = 'template'):
 
 #print(read_import_files)
 
+def imports():
+    imports_file = '../../terraform/implementations/imports.txt'
+    with open(imports_file) as imports:
+        for line in imports:
+            li=line.strip()
+                if not li.startswith("#"):
+                    print line.rstrip()
+
 def merge_files():
     files_merged = ['main.tf','variables.tf','outputs.tf']
     file_filter_names = ['template','variables','outputs']
@@ -53,5 +61,6 @@ def merge_files():
 
 
 if __name__== "__main__":
-    merge_files()
+    imports()
+    #merge_files()
     
