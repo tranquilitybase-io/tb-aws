@@ -1,5 +1,5 @@
 #!/bin/bash
-# test line 
+# test line  
 
 # Variables
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -14,4 +14,4 @@ cd ${TERRAFORM_PATH}
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
-#terraform apply -refresh=true -auto-approve
+terraform apply -refresh=true -auto-approve

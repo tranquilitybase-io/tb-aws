@@ -15,9 +15,8 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 python3 ${AUTOMATION_SCRIPTS}/terraform-pre-run.py
 
 cd ${TERRAFORM_PATH}
-ls
-cat main.tf
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
 echo "------------------------TERRAFORM VALIDATE----------------------------------------"
 terraform validate
+cat main.tf
