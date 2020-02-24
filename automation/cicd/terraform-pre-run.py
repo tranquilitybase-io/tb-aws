@@ -58,8 +58,7 @@ def merge_files():
                                             line = line.replace("alias",region)
                                         if line != first_line and line != second_line:
                                             fout.write(line)
-                        else:
-                            fout.write(f'\n #######NOT MULTIREGION  \n')                            
+                        else:                      
                             fout.write(finput.read())
                     fout.write(f'\n ####### END FILE {file_name} #####  \n')
                     finput.close()
