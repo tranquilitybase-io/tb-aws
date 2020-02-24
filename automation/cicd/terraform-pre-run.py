@@ -54,6 +54,8 @@ def merge_files():
                 #joined_paths = os.path.join(os.curdir,"./terraform/implementations/"+file_name) 
                 #joined_paths = search_file_path(file_name)
                 #absolut_path = os.path.abspath(joined_paths)
+                print(file_name)
+                print(search_file_path(file_name))
                 absolut_path = search_file_path(file_name)
                 if os.path.isfile(absolut_path):
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
