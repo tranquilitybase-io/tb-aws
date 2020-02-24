@@ -6,11 +6,13 @@ variable "aggregate_organization" {
 }
 
 variable "config_tags" {
-  description = "Required TAGS" 
+  description = "Required TAGS"
+  default = {} 
 }
 
 variable "config_name" {
   description = "Name of Config Service"
+  default = ""
 }
 
 variable "region" {
@@ -23,7 +25,7 @@ variable "authorization_account_id" {
 
 
 variable "aggregator_name" {
-  default = "multi_account_aggregator"
+  default = "$${config_name}-aggregator"
 }
 
 variable "aggregator_role_name" {
