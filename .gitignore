@@ -4,3 +4,4 @@
 terraform/main.tf
 terraform/outputs.tf
 terraform/variables.tf
+settings.json
