@@ -14,4 +14,4 @@ cd ${TERRAFORM_PATH}
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
-terraform apply -refresh=true -auto-approve
+#terraform apply -refresh=true -auto-approve
