@@ -1,6 +1,7 @@
 .terraform/*
 /**/*.tfstate
 /**/*.tfstate.*
+/**/.terraform/*
 terraform/main.tf
 terraform/outputs.tf
 terraform/variables.tf
