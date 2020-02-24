@@ -7,7 +7,7 @@ print("Starting Python script")
 
 # The file imports contains the list of files that will be included
 def read_import_files(name_filter = 'template'):
-    path_import_file = '../../terraform/templates/imports.txt'
+    path_import_file = '../../terraform/implementations/imports.txt'
     joined_paths = os.path.join(os.path.dirname(__file__),path_import_file)
     absolut_path = os.path.abspath(joined_paths)
     try:
