@@ -4,7 +4,7 @@ variable "aws_organizations_account_sharedservices_name" {
 }
 variable "aws_organizations_account_sharedservices_email" {
     description = "Shared Services email"
-    default = "test.gft.aws.01@gmail.com"
+    default = "tl93372@gmail.com"
 }
 variable "aws_organizations_account_logarchive_name" {
     description = "Log Archive accounts name"
@@ -12,7 +12,7 @@ variable "aws_organizations_account_logarchive_name" {
 }
 variable "aws_organizations_account_logarchive_email" {
     description = "Log Archive accounts email"
-    default = "test.gft.aws.02@gmail.com"
+    default = "tl93373@gmail.com"
 }
 variable "aws_organizations_account_security_name" {
     description = "Security accounts name"
