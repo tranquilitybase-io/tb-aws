@@ -4,6 +4,7 @@ from pathlib import Path
 
 print("Starting Python script")
 
+imports_file = '../../terraform/implementations/imports.txt'
 
 # The file imports contains the list of files that will be included
 def read_import_files(name_filter = 'template'):
@@ -30,13 +31,16 @@ def read_import_files(name_filter = 'template'):
 
 #print(read_import_files)
 
-def imports():
-    imports_file = '../../terraform/implementations/imports.txt'
+def look_file(import_file):
+    for path in Path(cwd).rglob(import_file):
+        return os.path.abspath(path.name)
+
+def read_imports():
     with open(imports_file) as imports:
         for line in imports:
-            li=line.strip()
-                if not li.startswith("#"):
-                    print line.rstrip()
+            li = line.rstrip()
+            if not li.startswith("#"):
+                print(look_file(line.rstrip()))
 
 def merge_files():
     files_merged = ['main.tf','variables.tf','outputs.tf']
@@ -47,9 +51,10 @@ def merge_files():
         with open('./terraform/'+item, 'w') as fout:
             for line in iter(import_list):
                 file_name = line.rstrip()
-                joined_paths = os.path.join(os.curdir,"./terraform/implementations/"+file_name)
+                #joined_paths = os.path.join(os.curdir,"./terraform/implementations/"+file_name) 
+                joined_paths = look_file(file_name)
                 absolut_path = os.path.abspath(joined_paths)
-                if os.path.isfile(absolut_path):
+                if os.path.isfile(absolut_path)::x
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
                     with open(absolut_path) as finput:
                         fout.write(finput.read())
