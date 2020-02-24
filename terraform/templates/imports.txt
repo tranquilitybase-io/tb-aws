@@ -1,6 +1,8 @@
 # Init module (Validated)
 init-template.tf
 init-variables.tf
+#region Providers
+regionproviders-template.tf
 # Organization module (Validated)
 organization-template.tf
 organization-variables.tf
