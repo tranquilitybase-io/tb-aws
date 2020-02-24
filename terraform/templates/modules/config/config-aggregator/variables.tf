@@ -17,12 +17,11 @@ variable "authorization_account_id" {
   description = "Authorization Account ID - Required"
 }
 
-/*
+
 variable "aggregator_name" {
-  default = "$${config_name}-aggregator"
+  default = "$${config_name}_aggregator"
 }
 
 variable "aggregator_role_name" {
-  default = "$${config_name}-aggregator-role"
+  default = "$${config_name}_aggregator_role"
 }
-*/

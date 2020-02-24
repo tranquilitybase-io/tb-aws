@@ -81,6 +81,6 @@ resource "aws_iam_policy" "aws_iam_config_policy" {
 resource "aws_iam_policy_attachment" "aws_config_policy_attach" {
   name       = "${var.config_name}_policy"
   roles      = [aws_iam_role.main.name]
-  policy_arn = aws_iam_policy.aws_config_policy.arn  
+  policy_arn = aws_iam_policy.aws_iam_config_policy.arn
 }
 

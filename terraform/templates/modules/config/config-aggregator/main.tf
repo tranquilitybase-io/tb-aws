@@ -16,16 +16,16 @@ data "aws_iam_policy_document" "aws_config_aggregator_role_policy" {
   }
 }
 
-resource "aws_iam_role" "aggregator" {
+resource "aws_iam_role" "aggregator_role" {
   count              = var.aggregate_organization ? 1 : 0
-  name               = "${var.config_name}-aggregator-role"
+  name               = var.aggregator_role_name
   assume_role_policy = data.aws_iam_policy_document.aws_config_aggregator_role_policy.json
   tags = var.config_tags
 }
 
 resource "aws_iam_role_policy_attachment" "aggregator" {
   count      = var.aggregate_organization ? 1 : 0
-  role       = aws_iam_role.aggregator[0].name
+  role       = aws_iam_role.aggregator_role[0].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"  
 }
 
@@ -34,7 +34,7 @@ resource "aws_iam_role_policy_attachment" "aggregator" {
 #
 resource "aws_config_configuration_aggregator" "organization" {
   count      = var.aggregate_organization ? 1 : 0
-  name       = "${var.config_name}-aggregator"
+  name       = var.aggregator_name
 
   organization_aggregation_source {
     all_regions = true
