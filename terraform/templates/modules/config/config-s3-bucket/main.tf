@@ -1,7 +1,7 @@
 
 resource "aws_s3_bucket" "s3_main" {
   bucket = var.bucket_name
-  acl    = "log-delivery-write"
+  acl    = var.acl_access_bucket
   versioning {
     enabled = var.versioning_enabled
   }
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "s3_main" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
+        sse_algorithm = var.sse_aes256
       }
     }
   }
@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "s3_main" {
 
 resource "aws_s3_bucket" "s3_log" {
   bucket = var.bucket_name_log
-  acl    = "private"
+  acl    = var.acl_logs_bucket
 
   logging {
     target_bucket = aws_s3_bucket.s3_main.id
@@ -31,7 +31,7 @@ resource "aws_s3_bucket" "s3_log" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
+        sse_algorithm = var.sse_aes256
       }
     }
   }
