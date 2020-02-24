@@ -66,6 +66,4 @@ def merge_files():
 
 
 if __name__== "__main__":
-    imports()
-    #merge_files()
-    
+    merge_files()
