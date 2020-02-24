@@ -10,8 +10,9 @@ MAIN_PATH=$(pwd)
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
 cd ${TERRAFORM_PATH}
-echo "------------------------TERRAFORM INIT--------------------------------------------"
+echo "-----------------------PRINTING MAIN.TF-------------------------------------------"
 cat main.tf
+echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 terraform apply -refresh=true -auto-approve
