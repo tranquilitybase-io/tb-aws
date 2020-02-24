@@ -19,4 +19,3 @@ echo "------------------------TERRAFORM INIT------------------------------------
 terraform init
 echo "------------------------TERRAFORM VALIDATE----------------------------------------"
 terraform validate
-cat main.tf
