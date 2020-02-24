@@ -38,7 +38,7 @@ def merge_files():
         with open('./terraform/'+item, 'w') as fout:
             for line in iter(import_list):
                 file_name = line.rstrip()
-                joined_paths = os.path.join(os.curdir,"./terraform/templates/"+file_name)
+                joined_paths = os.path.join(os.curdir,"./terraform/implementations/"+file_name)
                 absolut_path = os.path.abspath(joined_paths)
                 if os.path.isfile(absolut_path):
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
