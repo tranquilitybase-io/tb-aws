@@ -5,8 +5,8 @@ init-variables.tf
 organization-template.tf
 organization-variables.tf
 # Config (Validated)
-#config-template.tf
-#config-variables.tf
+config-template.tf
+config-variables.tf
 
 #guardduty
 guardduty-template.tf
