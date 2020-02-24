@@ -21,7 +21,7 @@ variable "role_arn" {
 
 variable "sns_topic_name" {
   description = "Topic Name"
-  default = "$${config_name}_sns_topic"
+  default = "config_sns_topic"
 }
 
 variable "kms_master_key_id" {
@@ -31,7 +31,7 @@ variable "kms_master_key_id" {
 
 variable "aws_config_delivery_channel_name" {
   description = "Name of Delivery Channel"
-  default = "$${config_name}_delivery"
+  default = "config_delivery_channel"
 }
 
 variable "config_delivery_frequency" {
