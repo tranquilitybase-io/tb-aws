@@ -17,7 +17,7 @@ python3 ${AUTOMATION_SCRIPTS}/terraform-pre-run.py
 cd ${TERRAFORM_PATH}
 
 echo "-----------------------PRINTING MAIN.TF-------------------------------------------"
-cat main.tf
+cat main.tf 
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
 echo "------------------------TERRAFORM VALIDATE----------------------------------------"
