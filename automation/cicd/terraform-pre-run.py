@@ -32,9 +32,10 @@ def read_import_files(name_filter = 'template'):
 #print(read_import_files)
 cwd = os.getcwd()
 def search_file_path(import_file):
-    print(cwd)
-    for path in Path(cwd).rglob(import_file):
-        return os.path.abspath(path.name)
+    for root, dirs, files in os.walk(cwd, topdown=False):
+        for name in files:
+            if name == import_file:
+                return(os.path.join(root, name))
 
 def read_imports():
     with open(imports_file) as imports:
