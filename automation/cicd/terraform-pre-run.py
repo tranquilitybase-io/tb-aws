@@ -8,8 +8,9 @@ imports_file = '../../terraform/implementations/imports.txt'
 
 # The file imports contains the list of files that will be included
 def read_import_files(name_filter = 'template'):
-    path_import_file = '../../terraform/implementations/imports.txt'
-    joined_paths = os.path.join(os.path.dirname(__file__),path_import_file)
+    #path_import_file = '../../terraform/implementations/imports.txt'
+    #joined_paths = os.path.join(os.path.dirname(__file__),path_import_file)
+    joined_paths = os.path.join(os.path.dirname(__file__),imports_file)
     absolut_path = os.path.abspath(joined_paths)
     try:
         #print(joined_paths)
@@ -29,7 +30,7 @@ def read_import_files(name_filter = 'template'):
         print(type(err))
         print(err)
 
-#print(read_import_files)
+
 cwd = os.getcwd()
 def search_file_path(import_file):
     for root, dirs, files in os.walk(cwd, topdown=False):
@@ -37,12 +38,6 @@ def search_file_path(import_file):
             if name == import_file:
                 return(os.path.join(root, name))
 
-def read_imports():
-    with open(imports_file) as imports:
-        for line in imports:
-            li = line.rstrip()
-            if not li.startswith("#"):
-                print(look_file(line.rstrip()))
 
 def merge_files():
     files_merged = ['main.tf','variables.tf','outputs.tf']
@@ -53,11 +48,6 @@ def merge_files():
         with open('./terraform/'+item, 'w') as fout:
             for line in iter(import_list):
                 file_name = line.rstrip()
-                #joined_paths = os.path.join(os.curdir,"./terraform/implementations/"+file_name) 
-                #joined_paths = search_file_path(file_name)
-                #absolut_path = os.path.abspath(joined_paths)
-                print(file_name)
-                print(search_file_path(file_name))
                 absolut_path = search_file_path(file_name)
                 if os.path.isfile(absolut_path):
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
