@@ -1,5 +1,4 @@
 #!/bin/bash
-# test line 
 
 # Variables
 export AWS_ACCESS_KEY_ID=${access_key}
