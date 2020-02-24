@@ -28,6 +28,7 @@ def read_import_files(name_filter = 'template'):
         print(type(err))
         print(err)
 
+print(items)
 
 def merge_files():
     files_merged = ['main.tf','variables.tf','outputs.tf']
