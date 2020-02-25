@@ -34,8 +34,12 @@ def read_import_files(name_filter = 'template'):
 cwd = os.getcwd()
 def search_file_path(import_file):
     for root, dirs, files in os.walk(cwd, topdown=False):
+        #print(f' :: root {root} dirs {dirs}')
         for name in files:
-            if name == import_file:
+            #print(f'>>> root {root} dirs {dirs} files {name}')
+            head, tail = os.path.split(import_file)
+            if name == tail:
+                #print(f'||| head {head} tail {tail} file-name {name}')
                 return(os.path.join(root, name))
 
 
