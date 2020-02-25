@@ -3,13 +3,13 @@
 #
 
 resource "aws_config_configuration_recorder_status" "main" {
-  name       = var.config_name
+  name       = "${var.config_name}_${var.recorder_name}"
   is_enabled = true
   depends_on = [aws_config_delivery_channel.main]
 }
 
 resource "aws_config_configuration_recorder" "main" {
-  name     = var.config_name
+  name     = "${var.config_name}_${var.recorder_name}"
   role_arn = var.role_arn
 
   recording_group {
@@ -19,7 +19,7 @@ resource "aws_config_configuration_recorder" "main" {
 }
 
 resource "aws_sns_topic" "config_sns_topic" {
-  name              = var.sns_topic_name
+  name              = "${var.config_name}_${var.sns_topic_name}"
   kms_master_key_id = var.kms_master_key_id
   tags = var.config_tags
 }

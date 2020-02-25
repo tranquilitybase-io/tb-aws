@@ -7,6 +7,10 @@ variable "config_name" {
     default = ""
 }
 
+variable "recorder_name" {  
+    default = "recorder"
+}
+
 variable "config_tags" {
   default = {} 
 }
@@ -21,7 +25,7 @@ variable "role_arn" {
 
 variable "sns_topic_name" {
   description = "Topic Name"
-  default = "config_sns_topic"
+  default = "sns_topic"
 }
 
 variable "kms_master_key_id" {
