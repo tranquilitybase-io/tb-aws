@@ -77,7 +77,7 @@ def merge_files():
                 absolut_path = search_file_path(file_name)                              # This returns the path and the filename
                 if os.path.isfile(absolut_path):
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
-                    if file_name == "guardduty-template.tf":
+                    if file_name == "/core/guardduty-template.tf":
                         fout.write(get_content(absolut_path))
                     else:
                         with open(absolut_path) as finput:
