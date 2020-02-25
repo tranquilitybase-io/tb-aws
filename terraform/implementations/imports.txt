@@ -1,7 +1,7 @@
 ### Init module (Validated)
 /core/init-template.tf
 /core/init-variables.tf
-### Region Providers
+### Region Providers (Validated)
 /core/region-providers-template.tf
 ### Organization module (Validated)
 /core/organization-template.tf
@@ -9,9 +9,9 @@
 ### Config (Validated)
 /core/config-template.tf
 /core/config-variables.tf
-### Guardduty 
+### Guardduty (Validated)
 /core/guardduty-template.tf
 /core/guardduty-variables.tf
 
 # Simple test for resources
-#resources-test-template.tf   
+#resources-test-template.tf
