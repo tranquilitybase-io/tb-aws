@@ -54,7 +54,7 @@ def get_content(absolut_path):
                         line = line.replace("REGION",region)
                     elif "providers = {aws = aws.alias}" in line:
                         line = line.replace("alias",region)
-                    if line != regions_line
+                    if line != regions_line:
                         output = output + line + '\n'
     return output
 
