@@ -38,7 +38,7 @@ def search_file_path(import_file):
             if name == import_file:
                 return(os.path.join(root, name))
 
-def write_to_file(absolut_path, file_name)
+def write_to_file(absolut_path, file_name):
     fout.write(f'\n ####### START FILE {file_name} #####  \n')
     with open(absolut_path) as finput:
         print("Printing file: " + absolut_path)
@@ -46,7 +46,7 @@ def write_to_file(absolut_path, file_name)
     fout.write(f'\n ####### END FILE {file_name} #####  \n')
     finput.close()
 
-def get_content(finput)
+def get_content(finput):
     lines = finput.readlines()
     first_line = lines[0]
     output = ""
