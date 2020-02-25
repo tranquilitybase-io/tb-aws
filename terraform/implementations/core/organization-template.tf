@@ -7,33 +7,33 @@ locals {
 }
 
 module "aws_lz_organization_main" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
   create_lz_organization = true 
 }
 
 module "aws_lz_ou_awsgftlz" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
 
   ou_name = "AWS-GFT-LZ"
   ou_parent_id = module.aws_lz_organization_main.roots[0].id
 }
 
 module "aws_lz_ou_company" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
 
   ou_name = "ACME"
   ou_parent_id = module.aws_lz_ou_awsgftlz.ou_id
 }
 
 module "aws_lz_ou_core" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
 
   ou_name = "Core OU"
   ou_parent_id = module.aws_lz_ou_company.ou_id
 }
 
 module "aws_lz_account_security" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
   
   org_account_name = var.aws_organizations_account_security_name
   org_account_email = var.aws_organizations_account_security_email
@@ -42,7 +42,7 @@ module "aws_lz_account_security" {
 }
 
 module "aws_lz_account_logarchive" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
   
   org_account_name = var.aws_organizations_account_logarchive_name
   org_account_email = var.aws_organizations_account_logarchive_email
@@ -51,7 +51,7 @@ module "aws_lz_account_logarchive" {
 }
 
 module "aws_lz_account_sharedservices" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
   
   org_account_name = var.aws_organizations_account_sharedservices_name
   org_account_email = var.aws_organizations_account_sharedservices_email
@@ -60,7 +60,7 @@ module "aws_lz_account_sharedservices" {
 }
 
 /*module "aws_lz_account_network" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
   
   org_account_name = var.aws_organizations_account_network_name
   org_account_email = var.aws_organizations_account_network_email
@@ -69,7 +69,7 @@ module "aws_lz_account_sharedservices" {
 }*/
 
 module "aws_lz_policy_tagging" {
-  source = "./templates/modules/organizations"
+  source = "./modules/organizations"
 
   policy_name = "Tagging"
   policy_description = "Tagging resources on AWS"
