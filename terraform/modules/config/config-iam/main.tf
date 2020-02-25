@@ -13,12 +13,6 @@ data "template_file" "aws_config_policy" {
         "Resource": "${var.log_bucket_arn}"
     },
     {
-        "Sid": "AWSConfigBucketExistenceCheck",
-        "Effect": "Allow",
-        "Action": "s3:ListBucket",
-        "Resource": "${var.log_bucket_arn}"
-    },
-    {
         "Sid": "AWSConfigBucketDelivery",
         "Effect": "Allow",
         "Action": "s3:PutObject",
@@ -45,7 +39,7 @@ data "aws_iam_policy_document" "aws_config_role_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com"]
+      identifiers = ["config.amazonaws.com"]
     }
 
     effect = "Allow"
