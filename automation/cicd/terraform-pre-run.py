@@ -75,7 +75,8 @@ def merge_files():
     for item in files_merged:
         item_index = files_merged.index(item)
         import_list = read_import_files(file_filter_names[item_index])
-        print("List of files to include: " + import_list)
+        print("List of files to include: ")
+        print(import_list)
         with open('./terraform/'+item, 'w') as fout:
             for line in iter(import_list):
                 file_name = line.rstrip() # This gets the filename from the list
