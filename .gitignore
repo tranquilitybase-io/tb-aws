@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-.terraform/*
-/**/*.tfstate
-/**/*.tfstate.*
-terraform/main.tf
-terraform/outputs.tf
-terraform/variables.tf
-=======
 .terraform/*
 /**/*.tfstate
 /**/*.tfstate.*
@@ -14,4 +6,3 @@ terraform/main.tf
 terraform/outputs.tf
 terraform/variables.tf
 .vscode/settings.json
->>>>>>> develop
