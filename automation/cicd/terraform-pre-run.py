@@ -19,7 +19,6 @@ def read_import_files(name_filter = 'template'):
                 for file_name in f.readlines():
                     if not str(file_name).startswith('#'):
                         if str(file_name).find(name_filter) != -1 :
-                            print(file_name)
                             items.append(file_name)
             return items
         else:
@@ -43,8 +42,8 @@ def search_file_path(import_file):
                 return(os.path.join(root, name))
 
 
-#This function returnsthe multiregion file processed
-#absolut_path is the file path
+# This function returnsthe multiregion file processed
+# absolut_path is the file path
 def get_content(absolut_path):
     output = ""
     with open(absolut_path) as finput:
