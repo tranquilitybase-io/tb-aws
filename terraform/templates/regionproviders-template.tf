@@ -102,7 +102,7 @@ provider "aws" {
   region = "eu-west-3"
 }
 
-# eu-nort-1
+# eu-north-1
 provider "aws" {
   alias  = "eu-north-1"
   region = "eu-north-1"
@@ -114,8 +114,8 @@ provider "aws" {
 
 # me-south-1
 provider "aws" {
-  alias  = "eu-south-1"
-  region = "eu-south-1"
+  alias  = "me-south-1"
+  region = "me-south-1"
 }
 
 ##############
