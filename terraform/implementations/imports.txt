@@ -9,7 +9,7 @@ organization-variables.tf
 ### Config (Validated)
 config-template.tf
 config-variables.tf
-### Guardduty
+### Guardduty(Validated)
 guardduty-template.tf
 guardduty-variables.tf
 
