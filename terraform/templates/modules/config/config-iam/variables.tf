@@ -1,3 +1,7 @@
+variable "config_logs_bucket" {  
+    default = ""
+}
+
 variable "config_name" {  
     default = ""
 }

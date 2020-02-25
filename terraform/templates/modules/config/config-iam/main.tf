@@ -34,13 +34,14 @@ data "template_file" "aws_config_policy" {
 JSON
 
   vars = {
-    /* bucket_arn = format("arn:aws:s3:::%s", var.config_logs_bucket)
+    /*bucket_arn = format("arn:aws:s3:::%s", var.config_logs_bucket)
     resource = format(
       "arn:aws:s3:::%s/%s/AWSLogs/%s/Config/*",
       var.config_logs_bucket,
       var.config_logs_prefix,
       var.bucket_account_id,     
-    ) */
+    )*/
+
     resource = format("%s/%s/AWSLogs/%s/Config/*",
                var.log_bucket_arn,
                var.config_logs_prefix,
@@ -50,7 +51,7 @@ JSON
 }
 
 # Allow IAM policy to assume the role for AWS Config
-data "aws_iam_policy_document" "aws_config_role_policy" {
+data "aws_iam_policy_document" "aws-config-role-policy" {
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -67,25 +68,26 @@ data "aws_iam_policy_document" "aws_config_role_policy" {
 # IAM
 #
 resource "aws_iam_role" "main" {
-  name               = "${var.config_name}_${var.iam_role_name}"
-  assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
+  name               = "${var.config_name}-role"
+  assume_role_policy = data.aws_iam_policy_document.aws-config-role-policy.json
   tags = var.config_tags
 }
 
-resource "aws_iam_policy_attachment" "managed_policy" {
-  name       = "${var.config_name}_${var.managed_policy_name}"
+resource "aws_iam_policy_attachment" "managed-policy" {
+  name       = "${var.config_name}-managed-policy"
   roles      = [aws_iam_role.main.name]
-  policy_arn = var.iam_role_policy_arn  
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"  
 }
 
-resource "aws_iam_policy" "aws_iam_config_policy" {
-  name   = "${var.config_name}_${var.iam_policy_name}"
+resource "aws_iam_policy" "aws-config-policy" {
+  name   = "${var.config_name}-policy"
   policy = data.template_file.aws_config_policy.rendered  
 }
 
-resource "aws_iam_policy_attachment" "aws_config_policy_attach" {
-  name       = "${var.config_name}_${var.iam_policy_attachment_name}"
+resource "aws_iam_policy_attachment" "aws-config-policy" {
+  name       = "${var.config_name}-policy"
   roles      = [aws_iam_role.main.name]
-  policy_arn = aws_iam_policy.aws_iam_config_policy.arn
+  policy_arn = aws_iam_policy.aws-config-policy.arn  
 }
+
 
