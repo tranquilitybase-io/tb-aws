@@ -1,15 +1,15 @@
 ### Init module (Validated)
-init-template.tf
-init-variables.tf
+/core/init-template.tf
+/core/init-variables.tf
 ### Organization module (Validated)
-organization-template.tf
-organization-variables.tf
+/core/organization-template.tf
+/core/organization-variables.tf
 ### Config (Validated)
-config-template.tf
-config-variables.tf
+/core/config-template.tf
+/core/config-variables.tf
 ### Guardduty
-guardduty-template.tf
-guardduty-variables.tf
+#/core/guardduty-template.tf
+#/core/guardduty-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
