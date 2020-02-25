@@ -1,15 +1,15 @@
-# Init module (Validated)
+### Init module (Validated)
 init-template.tf
 init-variables.tf
-#region Providers
+###Region Providers
 regionproviders-template.tf
-# Organization module (Validated)
+###Organization module (Validated)
 organization-template.tf
 organization-variables.tf
-# Config (Validated)
+### Config (Validated)
 config-template.tf
 config-variables.tf
-#guardduty 
+### Guardduty
 guardduty-template.tf
 guardduty-variables.tf
 
