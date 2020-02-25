@@ -76,7 +76,8 @@ def merge_files():
                     if file_name == "guardduty-template.tf":
                         fout.write(get_content(absolut_path))
                     else:
-                            fout.write(finput.read())
+                        with open(absolut_path) as finput:
+                            fout.write(finput.read())                            
                     fout.write(f'\n ####### END FILE {file_name} #####  \n')
                 else:
                     print(f'\n WARNING : File with name {file_name} does not exist in path {absolut_path}  \n')
