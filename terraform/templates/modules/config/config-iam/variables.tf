@@ -1,4 +1,6 @@
-
+/* variable "config_logs_bucket" {  
+    default = ""
+} */
 
 variable "config_name" {  
     default = ""
@@ -32,6 +34,6 @@ variable "iam_policy_name" {
     default = "iam_policy"
 }
 
-/* variable "iam_policy_attachment_name" { 
+variable "iam_policy_attachment_name" { 
     default = "iam_policy_attachment"
-} */
+}
