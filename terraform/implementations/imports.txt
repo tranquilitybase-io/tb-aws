@@ -8,8 +8,8 @@ organization-variables.tf
 config-template.tf
 config-variables.tf
 ### Guardduty
-guardduty-template.tf
-guardduty-variables.tf
+#guardduty-template.tf
+#guardduty-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
