@@ -33,11 +33,8 @@ data "template_file" "aws_config_policy" {
 }
 JSON
 
-  vars = {
-    resource = format("%s/%s/AWSLogs/%s/Config/*",
-               var.log_bucket_arn,
-               var.config_logs_prefix,
-               var.bucket_account_id,     
+  vars = { 
+    resource = format("%s/%s/AWSLogs/%s/Config/*",var.log_bucket_arn,var.config_logs_prefix,var.bucket_account_id)
   }
 }
 
