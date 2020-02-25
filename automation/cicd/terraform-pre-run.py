@@ -53,8 +53,8 @@ def merge_files():
         import_list = read_import_files(file_filter_names[item_index])
         with open('./terraform/'+item, 'w') as fout:
             for line in iter(import_list):
-                file_name = line.rstrip() # This gets the filename from the list
-                absolut_path = search_file_path(file_name) # This returns the path and the filename
+                file_name = line.rstrip()                                               # This gets the filename from the list
+                absolut_path = search_file_path(file_name)                              # This returns the path and the filename
                 if os.path.isfile(absolut_path):
                     fout.write(f'\n ####### START FILE {file_name} #####  \n')
                     with open(absolut_path) as finput:
