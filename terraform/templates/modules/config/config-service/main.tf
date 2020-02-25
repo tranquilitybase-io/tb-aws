@@ -8,6 +8,16 @@ resource "aws_config_configuration_recorder_status" "main" {
   depends_on = [aws_config_delivery_channel.main]
 }
 
+resource "aws_config_configuration_recorder" "main" {
+  name     = var.config_name
+  role_arn = var.role_arn
+
+  recording_group {
+    all_supported                 = true
+    include_global_resource_types = true
+  }
+}
+
 resource "aws_sns_topic" "config_sns_topic" {
   name              = var.sns_topic_name
   kms_master_key_id = var.kms_master_key_id
@@ -25,15 +35,5 @@ resource "aws_config_delivery_channel" "main" {
     delivery_frequency = var.config_delivery_frequency
   }
   depends_on = [aws_config_configuration_recorder.main]
-}
-
-resource "aws_config_configuration_recorder" "main" {
-  name     = var.config_name
-  role_arn = var.role_arn
-
-  recording_group {
-    all_supported                 = true
-    include_global_resource_types = true
-  }
 }
 

@@ -75,7 +75,7 @@ resource "aws_iam_role" "main" {
 resource "aws_iam_policy_attachment" "managed_policy" {
   name       = "${var.config_name}_${var.managed_policy_name}"
   roles      = [aws_iam_role.main.name]
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"  
+  policy_arn = var.iam_role_policy_arn  
 }
 
 resource "aws_iam_policy" "aws_iam_config_policy" {
