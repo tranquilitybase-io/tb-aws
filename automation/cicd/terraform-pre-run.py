@@ -38,6 +38,33 @@ def search_file_path(import_file):
             if name == import_file:
                 return(os.path.join(root, name))
 
+def write_to_file(absolut_path, file_name)
+    fout.write(f'\n ####### START FILE {file_name} #####  \n')
+    with open(absolut_path) as finput:       
+        fout.write(get_content(finput))
+    fout.write(f'\n ####### END FILE {file_name} #####  \n')
+    finput.close()
+
+def get_content(finput)
+    lines = finput.readlines()
+    first_line = lines[0]
+    output = ""
+    if "#multiregion" in first_line:
+        second_line = lines[1]
+        second_line_format = second_line.replace('#','')
+        regions = second_line_format.split(",")
+        for region in regions:
+            if len(region) > 1:
+                for line in lines:
+                    if line.startswith("module"):
+                        line = line.replace("REGION",region)
+                    elif "providers = {aws = aws.alias}" in line:
+                        line = line.replace("alias",region)
+                    if line != first_line and line != second_line:
+                        output = output + line + '\n'
+    else:
+        output = finput.read()
+    return output
 
 # This function lists the files to be generated: main, variables and output
 # It gets the file and the path from search_file_path(file)
@@ -52,28 +79,7 @@ def merge_files():
                 file_name = line.rstrip() # This gets the filename from the list
                 absolut_path = search_file_path(file_name) # This returns the path and the filename
                 if os.path.isfile(absolut_path):
-                    fout.write(f'\n ####### START FILE {file_name} #####  \n')
-                    with open(absolut_path) as finput:
-                        lines = finput.readlines()
-                        first_line = lines[0]
-                        if "#multiregion" in first_line:
-                            second_line = lines[1]
-                            second_line_format = second_line.replace('#','')
-                            regions = second_line_format.split(",")
-                            for region in regions:
-                                if len(region) > 1:
-                                    for line in lines:
-                                        if line.startswith("module"):
-                                            line = line.replace("REGION",region)
-                                        elif "providers = {aws = aws.alias}" in line:
-                                            line = line.replace("alias",region)
-                                        if line != first_line and line != second_line:
-                                            fout.write(line)
-                        else:
-                           for line in lines:
-                               fout.write(line)
-                    fout.write(f'\n ####### END FILE {file_name} #####  \n')
-                    finput.close()
+                    write_to_file(absolut_path, file_name)
                 else:
                     print(f'\n WARNING : File with name {file_name} does not exist in path {absolut_path}  \n')   
         fout.close()
