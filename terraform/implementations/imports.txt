@@ -9,7 +9,7 @@
 ### Config (Validated)
 /core/config-template.tf
 /core/config-variables.tf
-### Guardduty
+### Guardduty 
 /core/guardduty-template.tf
 /core/guardduty-variables.tf
 
