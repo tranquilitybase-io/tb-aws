@@ -40,7 +40,8 @@ def search_file_path(import_file):
 
 def write_to_file(absolut_path, file_name)
     fout.write(f'\n ####### START FILE {file_name} #####  \n')
-    with open(absolut_path) as finput:       
+    with open(absolut_path) as finput:
+        print("Printing file: " + absolut_path)
         fout.write(get_content(finput))
     fout.write(f'\n ####### END FILE {file_name} #####  \n')
     finput.close()
@@ -74,10 +75,12 @@ def merge_files():
     for item in files_merged:
         item_index = files_merged.index(item)
         import_list = read_import_files(file_filter_names[item_index])
+        print("List of files to include: " + import_list)
         with open('./terraform/'+item, 'w') as fout:
             for line in iter(import_list):
                 file_name = line.rstrip() # This gets the filename from the list
                 absolut_path = search_file_path(file_name) # This returns the path and the filename
+                print("file: " + absolut_path)
                 if os.path.isfile(absolut_path):
                     write_to_file(absolut_path, file_name)
                 else:
