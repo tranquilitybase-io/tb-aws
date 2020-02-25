@@ -17,7 +17,7 @@ module "aws_lz_config_bucket"{
 module "aws_lz_config_iam"{
     source = "./templates/modules/config/config-iam"
     config_name = var.config_name
-    config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
+    log_bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
     config_logs_prefix = module.aws_lz_config_bucket.config_logs_prefix  
     bucket_account_id = local.current_account_id
     config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }

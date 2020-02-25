@@ -10,13 +10,13 @@ data "template_file" "aws_config_policy" {
         "Sid": "AWSConfigBucketPermissionsCheck",
         "Effect": "Allow",
         "Action": "s3:GetBucketAcl",
-        "Resource": "$${bucket_arn}"
+        "Resource": "${var.log_bucket_arn}"
     },
     {
         "Sid": "AWSConfigBucketExistenceCheck",
         "Effect": "Allow",
         "Action": "s3:ListBucket",
-        "Resource": "$${bucket_arn}"
+        "Resource": "${var.log_bucket_arn}"
     },
     {
         "Sid": "AWSConfigBucketDelivery",
@@ -34,18 +34,17 @@ data "template_file" "aws_config_policy" {
 JSON
 
   vars = {
-    bucket_arn = format("arn:aws:s3:::%s", var.config_logs_bucket)
-    resource = format(
-      "arn:aws:s3:::%s/%s/AWSLogs/%s/Config/*",
-      var.config_logs_bucket,
-      var.config_logs_prefix,
-      var.bucket_account_id,     
+    #bucket_arn = format("arn:aws:s3:::%s", var.config_logs_bucket)
+    resource = format("%s/%s/AWSLogs/%s/Config/*",
+               var.log_bucket_arn,
+               var.config_logs_prefix,
+               var.bucket_account_id,     
     )
   }
 }
 
 # Allow IAM policy to assume the role for AWS Config
-data "aws_iam_policy_document" "aws-config-role-policy" {
+data "aws_iam_policy_document" "aws_config_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -62,24 +61,24 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
 # IAM
 #
 resource "aws_iam_role" "main" {
-  name               = "${var.config_name}_role"
-  assume_role_policy = data.aws_iam_policy_document.aws-config-role-policy.json
+  name               = "${var.config_name}_${var.iam_role_name}"
+  assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
   tags = var.config_tags
 }
 
 resource "aws_iam_policy_attachment" "managed_policy" {
-  name       = "${var.config_name}_managed_policy"
+  name       = "${var.config_name}_${var.managed_policy_name}"
   roles      = [aws_iam_role.main.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"  
 }
 
 resource "aws_iam_policy" "aws_iam_config_policy" {
-  name   = "${var.config_name}_policy"
+  name   = "${var.config_name}_${var.iam_policy_name}"
   policy = data.template_file.aws_config_policy.rendered  
 }
 
 resource "aws_iam_policy_attachment" "aws_config_policy_attach" {
-  name       = "${var.config_name}_policy"
+  name       = "${var.config_name}_${var.iam_policy_attachment_name}"
   roles      = [aws_iam_role.main.name]
   policy_arn = aws_iam_policy.aws_iam_config_policy.arn
 }
