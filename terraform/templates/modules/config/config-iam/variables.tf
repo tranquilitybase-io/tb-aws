@@ -32,6 +32,6 @@ variable "iam_policy_name" {
     default = "iam_policy"
 }
 
-variable "iam_policy_attachment_name" { 
+/* variable "iam_policy_attachment_name" { 
     default = "iam_policy_attachment"
-}
+} */
