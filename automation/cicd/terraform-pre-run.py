@@ -70,8 +70,8 @@ def merge_files():
                                         if line != first_line and line != second_line:
                                             fout.write(line)
                         else:
-                            print (finput.read())
-                            fout.write(finput.read())
+                           for line in lines:
+                               fout.write(line)
                     fout.write(f'\n ####### END FILE {file_name} #####  \n')
                     finput.close()
                 else:
