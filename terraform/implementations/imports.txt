@@ -14,4 +14,4 @@
 #/core/guardduty-variables.tf
 
 # Simple test for resources
-#resources-test-template.tf
+#resources-test-template.tf   
