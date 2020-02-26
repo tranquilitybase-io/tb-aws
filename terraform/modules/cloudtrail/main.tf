@@ -1,6 +1,7 @@
 resource "aws_cloudtrail" "cloudtrail_default" {
   name                       = var.cloudtrail_name
   is_multi_region_trail      = var.multi_region_trail
+  is_organization_trail      = var.organization_trail
   s3_bucket_name             = var.bucket_name
   s3_key_prefix              = var.s3_log_prefix
   enable_logging             = var.enable_logging
@@ -24,12 +25,6 @@ resource "aws_sns_topic" "sns_topic_default" {
   tags   = var.required_tags
 }
 
-/* resource "aws_iam_policy" "cloudtrail_bucket_policy" {
-  name   = "${var.cloudtrail_name}_bucket_policy"
-  policy = data.aws_iam_policy_document.cloudtrail_bucket.json
-} */
-
-
 resource "aws_iam_role" "cloudtrail_role" {
   name               = "${var.cloudtrail_name}_role"
   assume_role_policy = data.aws_iam_policy_document.cloudtrail_assume_policy.json
@@ -44,5 +39,16 @@ resource "aws_iam_policy" "cloudtrail_access_policy" {
 resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
   name       = "${var.cloudtrail_name}_policy_attachment"
   policy_arn = aws_iam_policy.cloudtrail_access_policy.arn
+  roles      = [aws_iam_role.cloudtrail_role.name]
+}
+
+resource "aws_iam_policy" "cloudtrail_bucket_policy" {
+  name   = "${var.cloudtrail_name}_bucket_policy"
+  policy = data.aws_iam_policy_document.cloudtrail_bucket.json
+} 
+
+resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
+  name       = "${var.cloudtrail_name}_bucket_policy_attachment"
+  policy_arn = aws_iam_policy.cloudtrail_bucket_policy.arn
   roles      = [aws_iam_role.cloudtrail_role.name]
 }

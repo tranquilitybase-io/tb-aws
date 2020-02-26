@@ -10,7 +10,7 @@ module "aws_lz_config_bucket" {
   source = "./modules/config/config-s3-bucket"
   bucket_name = local.bucket_name
   bucket_name_log = local.bucket_name_log
-  config_logs_prefix = "config"
+  config_logs_prefix = "awslz"
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
 }
 

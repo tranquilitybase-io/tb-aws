@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
     ]
 
     resources = ["arn:aws:sns:${var.region}:${data.aws_caller_identity.current_user.account_id}:${var.sns_topic}"]
-
+    
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
