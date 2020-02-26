@@ -47,7 +47,7 @@ resource "aws_iam_policy" "cloudtrail_bucket_policy" {
   policy = data.aws_iam_policy_document.cloudtrail_bucket.json
 } 
 
-resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
+resource "aws_iam_policy_attachment" "cloudtrail_bucket_policy_attachment" {
   name       = "${var.cloudtrail_name}_bucket_policy_attachment"
   policy_arn = aws_iam_policy.cloudtrail_bucket_policy.arn
   roles      = [aws_iam_role.cloudtrail_role.name]
