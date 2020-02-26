@@ -20,6 +20,10 @@ variable "s3_log_prefix" {
   default  = "cloudtrail"
 }
 
+variable "sns_topic" {
+  default = "cloudtrail_sns_topic" 
+}
+
 variable "cloudwatch_log_group" {
   description = "cloudwatch_log_group"
   default  = "cloudwatch_log_group"

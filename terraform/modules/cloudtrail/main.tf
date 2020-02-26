@@ -12,6 +12,8 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   tags                       = var.required_tags
 }
 
+Error: Cycle: module.aws_lz_cloudtrail.data.aws_iam_policy_document.cloudtrail_alarm_policy, module.aws_lz_cloudtrail.aws_sns_topic.sns_topic_default
+
 resource "aws_cloudwatch_log_group" "log_group_default" {
   name = "${var.cloudtrail_name}_${var.cloudwatch_log_group}"
   retention_in_days = var.logs_retencion_days
@@ -19,7 +21,7 @@ resource "aws_cloudwatch_log_group" "log_group_default" {
 }
 
 resource "aws_sns_topic" "sns_topic_default" {
-  name   = "${var.cloudtrail_name}_sns_topic"
+  name   = var.sns_topic
   policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
   tags   = var.required_tags
 }
