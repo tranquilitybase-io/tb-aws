@@ -29,7 +29,7 @@ variable "cloudwatch_log_group" {
   default  = "cloudwatch_log_group"
 }
 
-variable "is_multi_region_trail" {
+variable "multi_region_trail" {
     description = "is_multi_region_trail TRUE - FALSE"
     type = bool
     default = true

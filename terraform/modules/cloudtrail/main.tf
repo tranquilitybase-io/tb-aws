@@ -2,7 +2,7 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   name                       = var.cloudtrail_name
   is_multi_region_trail      = var.multi_region_trail
   s3_bucket_name             = var.bucket_name
-  s3_key_prefix              = var.s3_prefix_log
+  s3_key_prefix              = var.s3_log_prefix
   enable_logging             = var.enable_logging
   enable_log_file_validation = var.enable_log_file_validation
   cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default.arn
