@@ -13,7 +13,7 @@ variable "bucket_arn" {
 
 variable "s3_log_prefix" {
   description = "S3 prefix"
-  default  = ""
+  default  = "cloudtrail"
 }
 
 variable "cloudwatch_log_group" {

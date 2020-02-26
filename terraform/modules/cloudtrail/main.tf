@@ -1,7 +1,7 @@
 resource "aws_cloudtrail" "cloudtrail_default" {
   name                       = var.cloudtrail_name
   is_multi_region_trail      = var.multi_region_trail
-  s3_bucket_name             = aws_s3_bucket.cloudtrail_bucket.id
+  s3_bucket_name             = var.bucket_name
   s3_key_prefix              = var.s3_prefix_log
   enable_logging             = var.enable_logging
   enable_log_file_validation = var.enable_log_file_validation
@@ -24,10 +24,18 @@ resource "aws_sns_topic" "sns_topic_default" {
   tags   = var.required_tags
 }
 
-resource "aws_s3_bucket" "cloudtrail_bucket" {
+/*
+  resource "aws_s3_bucket" "cloudtrail_bucket" {
   bucket = var.bucket_name
   policy = data.aws_iam_policy_document.cloudtrail_bucket.json
 }
+*/
+
+resource "aws_iam_policy" "cloudtrail_bucket_policy" {
+  name   = "${var.cloudtrail_name}_bucket_policy"
+  policy = data.aws_iam_policy_document.cloudtrail_bucket.json
+}
+
 
 resource "aws_iam_role" "cloudtrail_role" {
   name               = "${var.cloudtrail_name}_role"
@@ -36,7 +44,7 @@ resource "aws_iam_role" "cloudtrail_role" {
 }
 
 resource "aws_iam_policy" "cloudtrail_access_policy" {
-  name   = "${var.cloudtrail_name}_policy"
+  name   = "${var.cloudtrail_name}_access_policy"
   policy = data.aws_iam_policy_document.cloudtrail_policy.json
 }
 
