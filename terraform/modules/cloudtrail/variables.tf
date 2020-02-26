@@ -55,6 +55,7 @@ variable "enable_log_file_validation" {
 
 variable "logs_retencion_days" {
     description = "Specifies the number of days you want to retain CloudTrail log events in the CloudWatch Logs."
+    type = number
     default = 14
     #AllowedValues: [1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653]
 }

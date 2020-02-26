@@ -49,7 +49,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
 
     resources = ["arn:aws:sns:${var.region}:${data.aws_caller_identity.current_user.account_id}:${var.sns_topic}"]
 
-    condition = {
+    condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
       values   = ["${data.aws_caller_identity.current_user.account_id}"]
@@ -83,14 +83,14 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
     actions   = ["s3:PutObject"]
     resources = ["$${resource}"]
 
-    condition = {
+    condition {
       test     = "StringEquals"
       variable = "s3:x-amz-acl"
       values   = ["bucket-owner-full-control"]
     }
   }
   
-  vars = { 
+  vars { 
     resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,data.aws_caller_identity.current_user.account_id)
   }
 }
