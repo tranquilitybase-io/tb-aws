@@ -3,6 +3,10 @@ variable "cloudtrail_name" {
   description = "The name of the AWS CloudTrail instance."  
 }
 
+variable "region" {
+  description = "The name of the Region"
+}
+
 variable "bucket_name" {
   description = "The name of the S3 Bucket Log"  
 }
