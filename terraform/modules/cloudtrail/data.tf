@@ -1,3 +1,10 @@
+
+
+locals {
+  resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,data.aws_caller_identity.current_user.account_id)
+}
+
+
 data "aws_caller_identity" "current_user" {}
 
 data "aws_iam_policy_document" "cloudtrail_assume_policy" {
@@ -81,18 +88,12 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
     }
 
     actions   = ["s3:PutObject"]
-    resources = ["$${resource}"]
+    resources = ["${local.resource}"]
 
     condition {
       test     = "StringEquals"
       variable = "s3:x-amz-acl"
       values   = ["bucket-owner-full-control"]
     }
-
-    vars = { 
-    resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,data.aws_caller_identity.current_user.account_id)
-  }
-  }
-  
-  
+  }  
 }
