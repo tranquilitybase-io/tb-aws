@@ -24,12 +24,12 @@ resource "aws_sns_topic" "sns_topic_default" {
   tags   = var.required_tags
 }
 
-/*
+
   resource "aws_s3_bucket" "cloudtrail_bucket" {
   bucket = var.bucket_name
   policy = data.aws_iam_policy_document.cloudtrail_bucket.json
 }
-*/
+
 
 /* resource "aws_iam_policy" "cloudtrail_bucket_policy" {
   name   = "${var.cloudtrail_name}_bucket_policy"
