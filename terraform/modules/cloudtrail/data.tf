@@ -69,10 +69,10 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
     sid    = "AWSCloudTrailPermissionsCheck"
     effect = "Allow"
 
-    principals {
+    /* principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
-    }
+    } */
 
     actions   = ["s3:GetBucketAcl"]
     resources = ["${var.bucket_arn}"]
@@ -82,10 +82,10 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
     sid    = "AWSCloudTrailWrite"
     effect = "Allow"
 
-    principals {
+    /* principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
-    }
+    } */
 
     actions   = ["s3:PutObject"]
     resources = ["${local.resource}"]
