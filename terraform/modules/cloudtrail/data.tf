@@ -88,8 +88,8 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
       variable = "s3:x-amz-acl"
       values   = ["bucket-owner-full-control"]
     }
-    
-    vars { 
+
+    vars = { 
     resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,data.aws_caller_identity.current_user.account_id)
   }
   }
