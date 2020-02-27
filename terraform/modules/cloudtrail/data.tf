@@ -51,7 +51,8 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
       "SNS:Receive",
     ]
 
-    resources = ["arn:aws:sns:${var.region}:${var.bucket_account_id}:${var.sns_topic_name}"]    
+    #resources = ["arn:aws:sns:${var.region}:${var.bucket_account_id}:${var.sns_topic_name}"]    
+    resources = ["${var.sns_topic_arn}"]
     
     condition {
       test     = "StringEquals"

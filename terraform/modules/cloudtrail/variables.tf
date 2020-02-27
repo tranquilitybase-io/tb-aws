@@ -24,8 +24,13 @@ variable "s3_log_prefix" {
 }
 
 variable "sns_topic_name" {
-  default = "aws_lz_cloudtrail_sns_topic" 
+  description = "Topic Name"
 }
+
+variable "sns_topic_arn" {
+  description = "Topic ARN"
+}
+
 
 variable "cloudwatch_log_group" {
   description = "cloudwatch_log_group"
@@ -71,9 +76,4 @@ variable "logs_retencion_days" {
 
 variable "required_tags" {
   default = {} 
-}
-
-variable "kms_master_key_id" {
-  description = "KMS by default for SNS topic"
-  default = "alias/aws/sns"
 }

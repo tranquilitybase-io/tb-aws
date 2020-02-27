@@ -19,18 +19,24 @@ resource "aws_cloudwatch_log_group" "log_group_default" {
   tags = var.required_tags
 }
 
-resource "aws_sns_topic" "sns_topic_default" {
+/* resource "aws_sns_topic" "sns_topic_default" {
   name              = var.sns_topic_name
   kms_master_key_id = var.kms_master_key_id
   policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
   tags   = var.required_tags
-}
+} */
 
 /* resource "aws_sns_topic" "sns_topic_default" {
   name   = var.sns_topic
   policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
   tags   = var.required_tags
 } */
+
+resource "aws_sns_topic_policy" "sns_default_policy" {
+  arn = var.sns_topic_arn  
+  policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
+}
+
 
 resource "aws_iam_role" "cloudtrail_role" {
   name               = "${var.cloudtrail_name}_role"
