@@ -22,3 +22,11 @@ output "path" {
   value = concat(aws_iam_role.aws_lz_iam_role.*.create_date, [""])[0]
   description = "ID of the role"
 }
+output "policy_arn" {
+  value = concat(aws_iam_policy.aws_lz_iam_policy.*.arn, [""])[0]
+  description = "ARN of the policy"
+}
+output "policy_id" {
+  value = concat(aws_iam_policy.aws_lz_iam_policy.*.id, [""])[0]
+  description = "ID of the policy"
+}

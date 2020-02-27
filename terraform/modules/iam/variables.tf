@@ -64,6 +64,7 @@ variable "policy_attach_groups" {
 }
 variable "role_tags" {
     type = map(string)
+     default = {}
 }
 
 
