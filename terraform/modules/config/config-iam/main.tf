@@ -16,7 +16,7 @@ data "template_file" "aws_config_policy" {
         "Sid": "AWSConfigBucketDelivery",
         "Effect": "Allow",
         "Action": "s3:PutObject",
-        "Resource": ["$${config_resource}",$${cloudtrail_resource}"],
+        "Resource": ["$${config_resource}","$${cloudtrail_resource}"],
         "Condition": {
           "StringLike": {
             "s3:x-amz-acl": "bucket-owner-full-control"
