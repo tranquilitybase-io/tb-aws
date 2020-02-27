@@ -2,6 +2,7 @@
 
 locals {
   resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,var.bucket_account_id)
+  topic_arn = aws_sns_topic_policy.default_policy.topic_arn
 }
 
 data "aws_iam_policy_document" "cloudtrail_assume_policy" {
@@ -52,7 +53,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
     ]
 
     #resources = ["arn:aws:sns:${var.region}:${var.bucket_account_id}:${var.sns_topic}"]
-    resources = [aws_sns_topic_policy.default_policy.topic_arn]
+    resources = [local.topic_arn]
     
     condition {
       test     = "StringEquals"
