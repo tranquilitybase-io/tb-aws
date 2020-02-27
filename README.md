@@ -29,13 +29,15 @@
 │       │    └── iam
 │       ├── config
 │       └── guard-duty
-└── automation
-    ├── cicd                                (CI/CD scripts)
-    │   ├── terraform-pre-run.py       
-    │   ├── prepare.sh
-    │   └── provision.sh      
-    ├── credentials                         (Credentials generated and used by scripts)
-    └── deploy                              (Deployment scripts)
+├── automation
+│    ├── cicd                                (CI/CD scripts)
+│    │   ├── terraform-pre-run.py       
+│    │   ├── prepare.sh
+│    │   └── provision.sh      
+│    ├── credentials                         (Credentials generated and used by scripts)
+│    └── deploy                              (Deployment scripts)
+└── config
+     └── main.config.yml                    Main configuration
 ```
 
 ## Local / Remote Execution sequence steps
