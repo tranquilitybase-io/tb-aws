@@ -13,8 +13,8 @@
 #/core/guardduty-template.tf
 #/core/guardduty-variables.tf
 ### CloudTrail
-#/core/cloudtrail-template.tf
-#/core/cloudtrail-variables.tf
+/core/cloudtrail-template.tf
+/core/cloudtrail-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
