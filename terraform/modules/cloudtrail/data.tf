@@ -51,7 +51,9 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
       "SNS:Receive",
     ]
 
-    resources = ["arn:aws:sns:${var.region}:${var.bucket_account_id}:${var.sns_topic}"]
+    #resources = ["arn:aws:sns:${var.region}:${var.bucket_account_id}:${var.sns_topic}"]
+    resources = [aws_sns_topic_policy.default_policy.topic_arn]
+    
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"

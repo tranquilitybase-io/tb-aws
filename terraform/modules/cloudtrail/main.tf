@@ -25,6 +25,12 @@ resource "aws_sns_topic" "sns_topic_default" {
   tags   = var.required_tags
 }
 
+resource "aws_sns_topic_policy" "default_policy" {
+  topic_arn = aws_sns_topic.sns_topic_default.arn
+  policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
+}
+
+
 /* resource "aws_sns_topic" "sns_topic_default" {
   name   = var.sns_topic
   policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
