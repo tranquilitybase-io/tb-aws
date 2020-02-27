@@ -18,18 +18,12 @@ resource "aws_config_configuration_recorder" "main" {
   }
 }
 
-resource "aws_sns_topic" "config_sns_topic" {
-  name              = "${var.config_name}_${var.sns_topic_name}"
-  kms_master_key_id = var.kms_master_key_id
-  tags = var.config_tags
-}
-
 resource "aws_config_delivery_channel" "main" {
   name           = var.aws_config_delivery_channel_name
   s3_bucket_name = var.config_logs_bucket
   s3_key_prefix  = var.s3_log_prefix
 
-  sns_topic_arn = aws_sns_topic.config_sns_topic.arn
+  sns_topic_arn = var.sns_topic_arn
 
   snapshot_delivery_properties {
     delivery_frequency = var.config_delivery_frequency
