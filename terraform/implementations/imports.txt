@@ -10,8 +10,8 @@
 /core/config-template.tf
 /core/config-variables.tf
 ### Guardduty (Validated)
-/core/guardduty-template.tf
-/core/guardduty-variables.tf
+#/core/guardduty-template.tf
+#/core/guardduty-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
