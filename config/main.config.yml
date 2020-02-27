@@ -1,0 +1,12 @@
+organization: 
+  name: ACME
+  default-zone: us-west-2
+  multizone-security: true          # default true
+  core-ou:
+    - security:
+        encription: AES256
+    - logarchive:
+    - shared-services:
+        issue-management: true
+        k8s-cluster: true
+    - network:
