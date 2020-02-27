@@ -23,10 +23,6 @@ variable "role_arn" {
   description = "The ARN of role."
 }
 
-variable "sns_topic_arn" {
-  description = "Topic ARN"  
-}
-
 variable "kms_master_key_id" {
   description = "KMS by default for SNS topic"
   default = "alias/aws/sns"
