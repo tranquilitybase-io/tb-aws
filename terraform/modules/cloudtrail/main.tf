@@ -9,7 +9,6 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default.arn
   cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role.arn
   include_global_service_events = var.include_global_events
-  #sns_topic_name             = aws_sns_topic.sns_topic_default.name
   tags                       = var.required_tags
 }
 
@@ -42,13 +41,14 @@ resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
   roles      = [aws_iam_role.cloudtrail_role.name]
 }
 
-resource "aws_iam_policy" "cloudtrail_bucket_policy" {
+/* resource "aws_iam_policy" "cloudtrail_bucket_policy" {
   name   = "${var.cloudtrail_name}_bucket_policy"
   policy = data.aws_iam_policy_document.cloudtrail_bucket.json
-} 
+}  */
 
 resource "aws_iam_policy_attachment" "cloudtrail_bucket_policy_attachment" {
   name       = "${var.cloudtrail_name}_bucket_policy_attachment"
-  policy_arn = aws_iam_policy.cloudtrail_bucket_policy.arn
+  #policy_arn = aws_iam_policy.cloudtrail_bucket_policy.arn
+  policy_arn = var.policy_arn
   roles      = [aws_iam_role.cloudtrail_role.name]
 }

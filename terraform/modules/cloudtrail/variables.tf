@@ -15,9 +15,13 @@ variable "bucket_arn" {
   description = "The name of the S3 Bucket Log"  
 }
 
+variable "policy_arn" {
+  description = "ARN of Policy created in Config module"
+}
+
 variable "s3_log_prefix" {
   description = "S3 prefix"
-  default  = "cloudtrail"
+  default  = ""
 }
 
 variable "sns_topic" {
