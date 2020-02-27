@@ -6,13 +6,10 @@ variable "bucket_name" {
 
 variable "bucket_name_log" {
   description = "The S3 Bucket Name for log."
-  type        = string
 }
 
-variable "config_logs_prefix" {
+variable "s3_log_prefix" {
   description = "The S3 prefix for AWS Config logs."
-  type        = string  
-  default = ""
 }
 
 variable "config_tags" {

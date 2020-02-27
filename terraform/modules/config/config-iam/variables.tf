@@ -2,16 +2,14 @@ variable "config_logs_bucket" {
     default = ""
 }
 
-variable "config_name" {  
-    default = ""
-}
+variable "config_name" {}
 
 variable "config_tags" {
   default = {} 
 }
 
-variable "config_logs_prefix" { 
-    default = ""
+variable "s3_log_prefix" { 
+    description = "The S3 prefix for AWS Config logs."
 }
 
 variable "bucket_account_id" { 

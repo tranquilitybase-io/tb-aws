@@ -4,6 +4,11 @@ variable "cloudtrail_name" {
   default = "aws_lz_cloudtrail"
 }
 
+variable "s3_log_prefix" {
+  description = "S3 prefix"
+  default  = "awslz"
+}
+
 variable "required_tags" {
   default = {} 
 }

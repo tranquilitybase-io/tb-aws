@@ -22,7 +22,7 @@ resource "aws_s3_bucket" "s3_log" {
 
   logging {
     target_bucket = aws_s3_bucket.s3_main.id
-    target_prefix = var.config_logs_prefix
+    target_prefix = var.s3_log_prefix
   }
   versioning {
     enabled = var.versioning_enabled
