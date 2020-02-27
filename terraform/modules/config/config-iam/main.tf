@@ -62,12 +62,6 @@ resource "aws_iam_policy_attachment" "managed_policy" {
   policy_arn = var.iam_role_policy_arn  
 }
 
-resource "aws_iam_policy_attachment" "managed_cloutrail_policy" {
-  name       = "cloudtrail_policy"
-  roles      = [aws_iam_role.main.name]
-  policy_arn = var.cloudtrail_role_policy_arn  
-}
-
 resource "aws_iam_policy" "aws_config_policy" {
   name   = "${var.config_name}_${var.iam_policy_name}"
   policy = data.template_file.aws_config_policy.rendered  
