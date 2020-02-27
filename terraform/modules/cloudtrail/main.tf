@@ -36,8 +36,8 @@ resource "aws_iam_policy" "cloudtrail_access_policy" {
 }
 
 resource "aws_iam_policy_attachment" "aws_policy" {
-  name       = "${var.config_name}_cloudtrail_full_access"
-  roles      = [aws_iam_role.main.name]
+  name       = "${var.cloudtrail_name}_cloudtrail_full_access"
+  roles      = [aws_iam_role.cloudtrail_role.name]
   policy_arn = var.aws_cloudtrail_policy_arn  
 }
 
