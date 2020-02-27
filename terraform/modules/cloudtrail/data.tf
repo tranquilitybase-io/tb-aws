@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "cloudtrail_assume_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["cloudtrail.amazonaws.com"]
+      identifiers = ["cloudtrail.amazonaws.com","config.amazonaws.com"]
     }
   }
 }
@@ -62,14 +62,14 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
 
 data "aws_iam_policy_document" "cloudtrail_bucket" {
   statement {
-    sid    = "AWSCloudTrailAclCheck"
+    sid    = "AWSConfigBucketPermissionsCheck"
     effect = "Allow"
     actions   = ["s3:GetBucketAcl"]
     resources = ["${var.bucket_arn}"]
   }
 
   statement {
-    sid    = "AWSCloudTrailWrite"
+    sid    = "AWSConfigBucketDelivery"
     effect = "Allow"
     actions   = ["s3:PutObject"]
     resources = ["${local.resource}"]
