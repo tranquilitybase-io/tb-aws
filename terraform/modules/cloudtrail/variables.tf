@@ -17,7 +17,6 @@ variable "bucket_arn" {
 
 variable "s3_log_prefix" {
   description = "S3 prefix"
-  default  = ""
 }
 
 variable "sns_topic" {
