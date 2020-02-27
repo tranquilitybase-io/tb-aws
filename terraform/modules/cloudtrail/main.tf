@@ -32,10 +32,10 @@ resource "aws_cloudwatch_log_group" "log_group_default" {
   tags   = var.required_tags
 } */
 
-/* resource "aws_sns_topic_policy" "sns_default_policy" {
+resource "aws_sns_topic_policy" "sns_default_policy" {
   arn = var.sns_topic_arn  
   policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
-} */
+}
 
 
 resource "aws_iam_role" "cloudtrail_role" {
