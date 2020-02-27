@@ -35,19 +35,13 @@ resource "aws_iam_policy" "cloudtrail_access_policy" {
   policy = data.aws_iam_policy_document.cloudtrail_policy.json
 }
 
-/* resource "aws_iam_policy_attachment" "aws_policy" {
-  name       = "${var.cloudtrail_name}_cloudtrail_full_access"
-  roles      = [aws_iam_role.cloudtrail_role.name]
-  policy_arn = var.aws_cloudtrail_policy_arn  
-} */
-
 resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
   name       = "${var.cloudtrail_name}_policy_attachment"
   policy_arn = aws_iam_policy.cloudtrail_access_policy.arn
   roles      = [aws_iam_role.cloudtrail_role.name]
 }
 
-/* resource "aws_iam_policy" "cloudtrail_bucket_policy" {
+resource "aws_iam_policy" "cloudtrail_bucket_policy" {
   name   = "${var.cloudtrail_name}_bucket_policy"
   policy = data.aws_iam_policy_document.cloudtrail_bucket.json
 } 
@@ -56,4 +50,4 @@ resource "aws_iam_policy_attachment" "cloudtrail_bucket_policy_attachment" {
   name       = "${var.cloudtrail_name}_bucket_policy_attachment"
   policy_arn = aws_iam_policy.cloudtrail_bucket_policy.arn
   roles      = [aws_iam_role.cloudtrail_role.name]
-} */
+}

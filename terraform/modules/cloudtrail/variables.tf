@@ -15,16 +15,16 @@ variable "bucket_arn" {
   description = "The name of the S3 Bucket Log"  
 }
 
+variable "bucket_account_id" {
+  description = "bucket_account_id"
+}
+
 variable "s3_log_prefix" {
   description = "S3 prefix"
 }
 
 variable "sns_topic" {
   default = "cloudtrail_sns_topic" 
-}
-
-variable "aws_cloudtrail_policy_arn" {
-  default = "arn:aws:iam::aws:policy/AWSCloudTrailFullAccess" 
 }
 
 variable "cloudwatch_log_group" {

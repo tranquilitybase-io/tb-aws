@@ -1,11 +1,8 @@
 
 
 locals {
-  resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,data.aws_caller_identity.current_user.account_id)
+  resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,var.bucket_account_id)
 }
-
-
-data "aws_caller_identity" "current_user" {}
 
 data "aws_iam_policy_document" "cloudtrail_assume_policy" {
   statement {
@@ -23,13 +20,13 @@ data "aws_iam_policy_document" "cloudtrail_policy" {
   statement {
     effect    = "Allow"
     actions   = ["logs:CreateLogStream"]
-    resources = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current_user.account_id}:log-group:*:log-stream:*"]
+    resources = ["arn:aws:logs:${var.region}:${var.bucket_account_id}:log-group:*:log-stream:*"]
   }
 
   statement {
     effect    = "Allow"
     actions   = ["logs:PutLogEvents"]
-    resources = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current_user.account_id}:log-group:*:log-stream:*"]
+    resources = ["arn:aws:logs:${var.region}:${var.bucket_account_id}:log-group:*:log-stream:*"]
   }
 }
 
@@ -54,11 +51,11 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
       "SNS:Receive",
     ]
 
-    resources = ["arn:aws:sns:${var.region}:${data.aws_caller_identity.current_user.account_id}:${var.sns_topic}"]
+    resources = ["arn:aws:sns:${var.region}:${var.bucket_account_id}:${var.sns_topic}"]
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
-      values   = ["${data.aws_caller_identity.current_user.account_id}"]
+      values   = ["${var.bucket_account_id}"]
     }
   }
 }
