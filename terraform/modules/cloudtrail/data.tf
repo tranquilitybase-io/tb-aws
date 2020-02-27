@@ -2,7 +2,6 @@
 
 locals {
   resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,data.aws_caller_identity.current_user.account_id)
-  sns_topic_arn = aws_sns_topic.sns_topic_default.arn
 }
 
 
@@ -55,8 +54,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
       "SNS:Receive",
     ]
 
-    #resources = ["arn:aws:sns:${var.region}:${data.aws_caller_identity.current_user.account_id}:${var.sns_topic}"]   
-    resources = [local.sns_topic_arn]
+    resources = ["arn:aws:sns:${var.region}:${data.aws_caller_identity.current_user.account_id}:${var.sns_topic}"]
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
