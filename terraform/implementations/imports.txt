@@ -7,14 +7,14 @@
 /core/organization-template.tf
 /core/organization-variables.tf
 ### Config (Validated)
-#/core/config-template.tf
-#/core/config-variables.tf
+/core/config-template.tf
+/core/config-variables.tf
 ### Guardduty (Validated)
 #/core/guardduty-template.tf
 #/core/guardduty-variables.tf
 ### CloudTrail
-#/core/cloudtrail-template.tf
-#/core/cloudtrail-variables.tf
+/core/cloudtrail-template.tf
+/core/cloudtrail-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
