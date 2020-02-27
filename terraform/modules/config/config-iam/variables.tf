@@ -32,10 +32,11 @@ variable "iam_policy_name" {
     default = "iam_policy"
 }
 
-/* variable "iam_policy_attachment_name" { 
-    default = "iam_policy_attachment"
-} */
-
 variable "iam_role_policy_arn" { 
     default = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
 }
+
+variable "cloudtrail_role_policy_arn" { 
+    default = "arn:aws:iam::aws:policy/aws-service-role/CloudTrailServiceRolePolicy"
+}
+

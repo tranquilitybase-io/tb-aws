@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "cloudtrail_assume_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["cloudtrail.amazonaws.com","config.amazonaws.com"]
+      identifiers = ["cloudtrail.amazonaws.com"]
     }
   }
 }
