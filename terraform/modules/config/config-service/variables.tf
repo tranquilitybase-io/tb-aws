@@ -15,7 +15,7 @@ variable "config_tags" {
   default = {} 
 }
 
-variable "config_logs_prefix" { 
+variable "s3_log_prefix" { 
     default = ""
 }
 

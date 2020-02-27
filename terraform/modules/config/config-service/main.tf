@@ -27,7 +27,7 @@ resource "aws_sns_topic" "config_sns_topic" {
 resource "aws_config_delivery_channel" "main" {
   name           = var.aws_config_delivery_channel_name
   s3_bucket_name = var.config_logs_bucket
-  s3_key_prefix  = var.config_logs_prefix
+  s3_key_prefix  = var.s3_log_prefix
 
   sns_topic_arn = aws_sns_topic.config_sns_topic.arn
 

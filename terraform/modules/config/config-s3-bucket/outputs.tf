@@ -14,6 +14,6 @@ output "bucket_log_arn" {
     value = aws_s3_bucket.s3_log.arn
 }
 
-output "config_logs_prefix" {
-    value = var.config_logs_prefix
+output "s3_log_prefix" {
+    value = var.s3_log_prefix
 }
