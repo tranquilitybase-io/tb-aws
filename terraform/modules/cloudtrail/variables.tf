@@ -73,3 +73,7 @@ variable "required_tags" {
   default = {} 
 }
 
+variable "kms_master_key_id" {
+  description = "KMS by default for SNS topic"
+  default = "alias/aws/sns"
+}

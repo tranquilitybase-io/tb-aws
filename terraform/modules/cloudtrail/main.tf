@@ -20,12 +20,18 @@ resource "aws_cloudwatch_log_group" "log_group_default" {
 }
 
 resource "aws_sns_topic" "sns_topic_default" {
-  name   = var.sns_topic
-  policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
+  name              = "${var.cloudtrail_name}_sns_topic"
+  kms_master_key_id = var.kms_master_key_id
   tags   = var.required_tags
 }
 
-resource "aws_iam_role" "cloudtrail_role" {
+/* resource "aws_sns_topic" "sns_topic_default" {
+  name   = var.sns_topic
+  policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
+  tags   = var.required_tags
+} */
+
+/* resource "aws_iam_role" "cloudtrail_role" {
   name               = "${var.cloudtrail_name}_role"
   assume_role_policy = data.aws_iam_policy_document.cloudtrail_assume_policy.json
   tags               = var.required_tags
@@ -40,7 +46,7 @@ resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
   name       = "${var.cloudtrail_name}_policy_attachment"
   policy_arn = aws_iam_policy.cloudtrail_access_policy.arn
   roles      = [aws_iam_role.cloudtrail_role.name]
-}
+} */
 
 /* resource "aws_iam_policy" "cloudtrail_bucket_policy" {
   name   = "${var.cloudtrail_name}_bucket_policy"
