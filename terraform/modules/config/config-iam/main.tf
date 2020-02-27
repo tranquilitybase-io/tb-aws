@@ -16,7 +16,7 @@ data "template_file" "aws_config_policy" {
         "Sid": "AWSConfigBucketDelivery",
         "Effect": "Allow",
         "Action": "s3:PutObject",
-        "Resource": ["$${config_resource}","$${cloudtrail_resource}"],
+        "Resource": "$${config_resource}",
         "Condition": {
           "StringLike": {
             "s3:x-amz-acl": "bucket-owner-full-control"
@@ -29,7 +29,6 @@ JSON
 
   vars = { 
     config_resource = format("%s/%s/AWSLogs/%s/Config/*",var.log_bucket_arn,var.s3_log_prefix,var.bucket_account_id)
-    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.log_bucket_arn,var.s3_log_prefix,var.bucket_account_id)
   }
 }
 
@@ -40,7 +39,7 @@ data "aws_iam_policy_document" "aws_config_role_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com"]
+      identifiers = ["config.amazonaws.com"]
     }
 
     effect = "Allow"
