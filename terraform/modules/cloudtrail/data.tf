@@ -62,7 +62,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
 
 data "aws_iam_policy_document" "cloudtrail_bucket" {
   statement {
-    sid    = "AWSCloudTrailPermissionsCheck"
+    sid    = "AWSCloudTrailAclCheck"
     effect = "Allow"
     actions   = ["s3:GetBucketAcl"]
     resources = ["${var.bucket_arn}"]
