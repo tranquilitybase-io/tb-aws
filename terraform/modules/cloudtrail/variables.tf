@@ -23,8 +23,8 @@ variable "s3_log_prefix" {
   description = "S3 prefix"
 }
 
-variable "sns_topic" {
-  default = "cloudtrail_sns_topic" 
+variable "sns_topic_name" {
+  default = "aws_lz_cloudtrail_sns_topic" 
 }
 
 variable "cloudwatch_log_group" {

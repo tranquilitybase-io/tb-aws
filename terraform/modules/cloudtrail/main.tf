@@ -20,16 +20,11 @@ resource "aws_cloudwatch_log_group" "log_group_default" {
 }
 
 resource "aws_sns_topic" "sns_topic_default" {
-  name              = "${var.cloudtrail_name}_sns_topic"
+  name              = var.sns_topic_name
   kms_master_key_id = var.kms_master_key_id
+  policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
   tags   = var.required_tags
 }
-
-resource "aws_sns_topic_policy" "default_policy" {
-  topic_arn = aws_sns_topic.sns_topic_default.arn
-  policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
-}
-
 
 /* resource "aws_sns_topic" "sns_topic_default" {
   name   = var.sns_topic
