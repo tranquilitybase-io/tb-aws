@@ -55,11 +55,11 @@ resource "aws_iam_role" "main" {
   tags = var.config_tags
 }
 
-resource "aws_iam_policy_attachment" "managed_policy" {
+/* resource "aws_iam_policy_attachment" "managed_policy" {
   name       = "${var.config_name}_${var.managed_policy_name}"
   roles      = [aws_iam_role.main.name]
   policy_arn = var.iam_role_policy_arn  
-}
+} */
 
 resource "aws_iam_policy" "aws_config_policy" {
   name   = "${var.config_name}_${var.iam_policy_name}"
