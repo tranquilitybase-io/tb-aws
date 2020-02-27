@@ -22,9 +22,4 @@ resource "aws_iam_policy_attachment" "aws_lz_iam_attach_policy" {
     roles      = var.policy_attach_roles
     groups     = var.policy_attach_groups
     policy_arn = var.policy_arn
-
-    depends_on = [
-        aws_iam_role.aws_lz_iam_role,
-        aws_iam_policy.aws_lz_iam_policy
-    ]
 }

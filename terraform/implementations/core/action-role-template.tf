@@ -160,27 +160,27 @@ module "aws_lz_iam_policy_network" {
 module "aws_lz_iam_attach_policy_security"{
     source = "./modules/iam"
     policy_attach_name = "Attach Security policy on security role"
-    policy_attach_roles = [var.security_role_name]
+    policy_attach_roles = [module.aws_lz_iam_role_security.role_name]
     policy_arn = module.aws_lz_iam_policy_security.policy_arn
 }
 
 module "aws_lz_iam_attach_policy_logarchive"{
     source = "./modules/iam"
     policy_attach_name = "Attach Logarchive policy on log-archive role"
-    policy_attach_roles = [var.logarchive_role_name]
+    policy_attach_roles = [module.aws_lz_iam_role_logarchive.role_name]
     policy_arn = module.aws_lz_iam_policy_logarchive.policy_arn
 }
 
 module "aws_lz_iam_attach_policy_sharedservices"{
     source = "./modules/iam"
     policy_attach_name = "Attach shared-services policy on shared-services role"
-    policy_attach_roles = [var.sharedservices_role_name]
+    policy_attach_roles = [module.aws_lz_iam_role_sharedservices.role_name]
     policy_arn = module.aws_lz_iam_policy_sharedservices.policy_arn
 }
 
 module "aws_lz_iam_attach_policy_network"{
     source = "./modules/iam"
     policy_attach_name = "Attach network policy on network role"
-    policy_attach_roles = [var.network_role_name]
+    policy_attach_roles = [module.aws_lz_iam_role_network.role_name]
     policy_arn = module.aws_lz_iam_policy_network.policy_arn
 }
