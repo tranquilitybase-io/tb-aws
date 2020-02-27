@@ -23,6 +23,10 @@ variable "sns_topic" {
   default = "cloudtrail_sns_topic" 
 }
 
+variable "aws_cloudtrail_policy_arn" {
+  default = "arn:aws:iam::aws:policy/AWSCloudTrailFullAccess" 
+}
+
 variable "cloudwatch_log_group" {
   description = "cloudwatch_log_group"
   default  = "cloudwatch_log_group"
