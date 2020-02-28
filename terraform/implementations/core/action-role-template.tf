@@ -203,12 +203,12 @@ module "aws_lz_iam_attach_policy_security"{
     policy_arn = module.aws_lz_iam_policy_security.policy_arn
 }
 
-module "aws_lz_iam_attach_policy_logarchive"{
+/*module "aws_lz_iam_attach_policy_logarchive"{
     source = "./modules/iam"
     policy_attach_name = "Attach Logarchive policy on log-archive role"
     policy_attach_roles = [module.aws_lz_iam_role_logarchive.role_name]
     policy_arn = module.aws_lz_iam_policy_logarchive.policy_arn
-}
+}*/
 
 module "aws_lz_iam_attach_policy_sharedservices"{
     source = "./modules/iam"
