@@ -4,6 +4,11 @@ variable "config_name" {
   default = "aws_lz_config"
 }
 
+variable "s3_log_prefix" {
+  description = "S3 prefix"
+  default  = "awslz"
+}
+
 variable "config_tags" {
   default = {} 
 }

@@ -10,7 +10,9 @@
 ### Config (Validated)
 #/core/config-template.tf
 #/core/config-variables.tf
-
+### CloudTrail
+/core/cloudtrail-template.tf
+/core/cloudtrail-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
