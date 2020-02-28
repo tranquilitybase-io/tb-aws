@@ -135,7 +135,7 @@ data "aws_iam_policy_document" "aws_lz_role_policy_network"{
     }
 }
 
-module "aws_lz_iam_role_security" {
+/*module "aws_lz_iam_role_security" {
     source = "./modules/iam"
     name = var.security_role_name
     assume_role_policy = data.aws_iam_policy_document.aws_lz_assume_role_security.json
@@ -203,12 +203,12 @@ module "aws_lz_iam_attach_policy_security"{
     policy_arn = module.aws_lz_iam_policy_security.policy_arn
 }
 
-/*module "aws_lz_iam_attach_policy_logarchive"{
+module "aws_lz_iam_attach_policy_logarchive"{
     source = "./modules/iam"
     policy_attach_name = "Attach Logarchive policy on log-archive role"
     policy_attach_roles = [module.aws_lz_iam_role_logarchive.role_name]
     policy_arn = module.aws_lz_iam_policy_logarchive.policy_arn
-}*/
+}
 
 module "aws_lz_iam_attach_policy_sharedservices"{
     source = "./modules/iam"
@@ -222,4 +222,4 @@ module "aws_lz_iam_attach_policy_network"{
     policy_attach_name = "Attach network policy on network role"
     policy_attach_roles = [module.aws_lz_iam_role_network.role_name]
     policy_arn = module.aws_lz_iam_policy_network.policy_arn
-}
+}*/
