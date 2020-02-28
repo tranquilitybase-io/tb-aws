@@ -15,7 +15,7 @@ class Account:
     def __repr__(self):
         return str(self)
         
-#Get accounts in organization
+#Get all accounts in organization
 def get_accounts_data():
     account_list = []
     client = boto3.client('organizations')
@@ -185,7 +185,7 @@ def deploy_guardduty():
         exit()
     invite_members(security[0],members,regions_list)
     accept_invite(security[0],members,regions_list)
-    #Create detector on members and accept invite
+
 
 if __name__== "__main__":
     print("***GUARDDUTY SCRIPT START***")
