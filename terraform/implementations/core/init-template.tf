@@ -6,7 +6,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "security-account"
   assume_role {
-    role_arn = "arn:aws:iam::971696596064:role/SecurityCrossAccountRole" 
+    role_arn = "arn:aws:iam::971696596064:role/OrganizationAccountAccessRole" 
   }
 }
 
@@ -14,7 +14,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "logarchive-account"
   assume_role {
-    role_arn = "arn:aws:iam::543433398002:role/LogarchiveCrossAccountRole"
+    role_arn = "arn:aws:iam::543433398002:role/OrganizationAccountAccessRole"
   }
 }
 
@@ -22,7 +22,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "sharedservices-account"
   assume_role {
-    role_arn = "arn:aws:iam::000516684594:role/SharedservicesCrossAccountRole"
+    role_arn = "arn:aws:iam::000516684594:role/OrganizationAccountAccessRole"
   }
 }
 
@@ -30,7 +30,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "network-account"
   assume_role {
-    role_arn = "arn:aws:iam::615513573213:role/NetworkCrossAccountRole"
+    role_arn = "arn:aws:iam::615513573213:role/OrganizationAccountAccessRole"
   }
 }
 
