@@ -16,4 +16,4 @@
 ## Output
 "bucket_name"
 "bucket_name_log"
-"config_logs_prefix"
+"s3_log_prefix"

@@ -13,16 +13,10 @@ data "template_file" "aws_config_policy" {
         "Resource": "${var.log_bucket_arn}"
     },
     {
-        "Sid": "AWSConfigBucketExistenceCheck",
-        "Effect": "Allow",
-        "Action": "s3:ListBucket",
-        "Resource": "${var.log_bucket_arn}"
-    },
-    {
         "Sid": "AWSConfigBucketDelivery",
         "Effect": "Allow",
         "Action": "s3:PutObject",
-        "Resource": "$${resource}",
+        "Resource": ["$${config_resource}","$${cloudtrail_resource}"],
         "Condition": {
           "StringLike": {
             "s3:x-amz-acl": "bucket-owner-full-control"
@@ -34,7 +28,8 @@ data "template_file" "aws_config_policy" {
 JSON
 
   vars = { 
-    resource = format("%s/%s/AWSLogs/%s/Config/*",var.log_bucket_arn,var.config_logs_prefix,var.bucket_account_id)
+    config_resource = format("%s/%s/AWSLogs/%s/Config/*",var.log_bucket_arn,var.s3_log_prefix,var.bucket_account_id)
+    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.log_bucket_arn,var.s3_log_prefix,var.bucket_account_id)
   }
 }
 
@@ -45,7 +40,7 @@ data "aws_iam_policy_document" "aws_config_role_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com"]
+      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com",]
     }
 
     effect = "Allow"
@@ -77,4 +72,3 @@ resource "aws_iam_policy_attachment" "aws_config_policy" {
   roles      = [aws_iam_role.main.name]
   policy_arn = aws_iam_policy.aws_config_policy.arn
 }
-

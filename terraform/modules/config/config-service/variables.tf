@@ -15,17 +15,12 @@ variable "config_tags" {
   default = {} 
 }
 
-variable "config_logs_prefix" { 
+variable "s3_log_prefix" { 
     default = ""
 }
 
 variable "role_arn" {
   description = "The ARN of role."
-}
-
-variable "sns_topic_name" {
-  description = "Topic Name"
-  default = "sns_topic"
 }
 
 variable "kms_master_key_id" {
