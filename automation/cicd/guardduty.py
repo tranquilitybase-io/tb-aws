@@ -1,16 +1,18 @@
 import boto3
 import json
+from datetime import datetime
+from boto3.session import Session
 
 class Account:
-    def __init__(self, name, id, email):
+    def __init__(self, name, id, email, guardduty_ids = []):
         self.name = name
         self.id = id
         self.email = email
+        self.guardduty_ids = guardduty_ids
     def __str__(self):
-        return "\n{Name: "  + self.name + " | Id: " + self.id + " | Email: " + self.email + "}"
+        return "\n{Name: "  + self.name + "\nId: " + self.id + "\nEmail: " + self.email + "\nDetectors: "+ str(self.guardduty_ids) +"\n}"
     def __repr__(self):
         return str(self)
-
         
 #Get accounts in organization
 def get_accounts_data():
@@ -32,25 +34,70 @@ def get_regions():
     regions_list = [region for region in regions['Regions'] if region['RegionName'][:2] in enable_regions_prefix]    
     return regions_list
 
-def create_master_guardduty(account, regions_list):
+def create_guardduty(account, regions_list):
+    print("Creating GuardDuty on account " + account.name)
+    for region in regions_list:
+        session = assume_role(account.name, account.id, region["RegionName"])       
+        if session != None:              
+            client = session.client('guardduty')
+            detector_id = 0000
+            try:
+                print("Checking GuardDuty on region " + region["RegionName"])
+                currentDetector = client.list_detectors()["DetectorIds"]#create_detector(Enable = True)
+                if currentDetector:       
+                    detector_id = currentDetector[0]
+                    print("Detector found with id " + detector_id)
+                else:
+                    print("Detector not found, creating")
+                    newDetector = client.create_detector(Enable=True)
+                    detector_id = newDetector["DetectorId"]
+                    print("Detector created with id " + detector_id)
+                account.guardduty_ids.append(detector_id)                
+            except Exception as ex:
+                template = "An exception of type {0} occurred while creating GuardDuty. Arguments:\n{1!r}"
+                message = template.format(type(ex).__name__, ex.args)
+                print (message)
+                return False
+        else:
+            print("Could't assume role for Account " + account.name + " Region: " + region["RegionName"] + ". Trying next region")
+    return True
 
-    return "a"
-
-def get_roles():
-    client = boto3.client("iam")
-    roles = client.list_roles()
-    print(json.dumps(roles,indent = 4, default = str))
-    return roles
+def assume_role(account_name, account_id, region):
+    now = datetime.now()   
+    client = boto3.client("sts")
+    if(account_name == "Master"):
+        session = Session(region_name = region)                 
+        return session
+    else:
+        try:
+            response = client.assume_role(
+                RoleArn="arn:aws:iam::" + account_id + ":role/OrganizationAccountAccessRole", #Role Name is case sensitive!
+                RoleSessionName= "Guardduty_Master_Creation_" + now.strftime("%Y%m%d_%H%M%S"),
+                DurationSeconds=900
+            )               
+            print("Role OrganizationAccountAccessRole assumed in account " + account_id + " in region " + region + ". Timestamp: " + now.strftime("%Y/%m/%d_%H:%M:%S"))
+            session = Session(aws_access_key_id=response['Credentials']['AccessKeyId'],
+                        aws_secret_access_key=response['Credentials']['SecretAccessKey'],
+                        aws_session_token=response['Credentials']['SessionToken'],
+                        region_name = region)    
+            print(session)    
+            return session
+        except Exception as ex:
+            template = "An exception of type {0} occurred while Assuming Role. Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            print (message)
+            return None
 
 #This function deploys GuardDuty in all regions in all accounts in the organization
 def deploy_guardduty():
     regions_list = get_regions()    
     accounts_list = get_accounts_data()
-    roles_list = get_roles()
-   # guardduty_members = {}
-  #  for account in accounts_list:
-   #     if account.name == "security":
-    #        create_master_guardduty(account, regions_list)
+    for account in accounts_list:        
+        if create_guardduty(account, regions_list):
+            print("GuardDuty succesfully created on account with Id: " + account.id)
+        else:
+            print("Couldn't create GuardDuty on account with Id: " + account.id + "\nGracefully stopping script")
+            exit()
     #    else:
       #      guardduty_members.append(account)
     #create members and invites
