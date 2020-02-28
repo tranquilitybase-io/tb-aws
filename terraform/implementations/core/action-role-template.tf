@@ -99,14 +99,34 @@ data "aws_iam_policy_document" "aws_lz_role_policy_network"{
 module "aws_lz_iam_role_security" {
     source = "./modules/iam"
     name = var.security_role_name
-    assume_role_policy = data.aws_iam_policy_document.aws_lz_assume_role.json
+    assume_role_policy = <<CONTENT
+{
+    "Version": "2012-10-17",
+    "Statement": {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Resource": "arn:aws:iam::${module.aws_lz_organization_main.master_account_id}:role/${var.security_role_name}"
+    }
+}
+CONTENT
+    #data.aws_iam_policy_document.aws_lz_assume_role.json
     role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "action-role" }
 }
 
 module "aws_lz_iam_role_logarchive" {
     source = "./modules/iam"
     name = var.logarchive_role_name
-    assume_role_policy = data.aws_iam_policy_document.aws_lz_assume_role.json
+    assume_role_policy = <<CONTENT
+{
+    "Version": "2012-10-17",
+    "Statement": {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Resource": "arn:aws:iam::${module.aws_lz_organization_main.master_account_id}:role/${var.logarchive_role_name}"
+    }
+}
+CONTENT
+    #data.aws_iam_policy_document.aws_lz_assume_role.json
     role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "action-role" }
 }
 
