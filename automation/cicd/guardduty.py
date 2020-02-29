@@ -44,7 +44,7 @@ def create_guardduty(account, regions_list):
             detector_id = 0000
             try:
                 print("Checking GuardDuty on region " + region["RegionName"])
-                currentDetector = client.list_detectors()["DetectorIds"]#create_detector(Enable = True)
+                currentDetector = client.list_detectors()["DetectorIds"]
                 if currentDetector:   
                     detector_id = currentDetector[0]
                     print("Detector found with id " + detector_id)
@@ -53,7 +53,7 @@ def create_guardduty(account, regions_list):
                     newDetector = client.create_detector(Enable=True)
                     detector_id = newDetector["DetectorId"]
                     print("Detector created with id " + detector_id)
-                account.guardduty_ids.append(detector_id)                
+                account.guardduty_ids.append(detector_id)
             except Exception as ex:
                 template = "An exception of type {0} occurred while creating GuardDuty. Arguments:\n{1!r}"
                 message = template.format(type(ex).__name__, ex.args)
@@ -72,7 +72,7 @@ def assume_role(account_name, account_id, region):
     else:
         try:
             response = client.assume_role(
-                RoleArn="arn:aws:iam::" + account_id + ":role/OrganizationAccountAccessRole", #Role Name is case sensitive!
+                RoleArn="arn:aws:iam::" + account_id + ":role/" + switch_role(account_name), #Role Name is case sensitive!
                 RoleSessionName= "Guardduty_Master_Creation_" + now.strftime("%Y%m%d_%H%M%S"),
                 DurationSeconds=900
             )               
@@ -81,7 +81,6 @@ def assume_role(account_name, account_id, region):
                         aws_secret_access_key=response['Credentials']['SecretAccessKey'],
                         aws_session_token=response['Credentials']['SessionToken'],
                         region_name = region)
-            print(session)
             return session
         except Exception as ex:
             template = "An exception of type {0} occurred while Assuming Role. Arguments:\n{1!r}"
@@ -150,7 +149,7 @@ def accept_invite(security,members,regions_list):
             if session != None:              
                 client = session.client('guardduty')
                 try:                 
-                    print(security.guardduty_ids[idx])                  
+                    print(security.guardduty_ids[idx])
                     invitations = client.list_invitations()['Invitations']
                     if invitations:
                         acceptance = client.accept_invitation(
@@ -158,7 +157,6 @@ def accept_invite(security,members,regions_list):
                             MasterId= security.id,
                             InvitationId=invitations[0]["InvitationId"]
                         )
-                        print(json.dumps(acceptance,indent=4,default=4))
                     else:
                         print("No invites found for account " + member.name + " in region " + region["RegionName"])
                 except Exception as ex:
@@ -186,6 +184,14 @@ def deploy_guardduty():
     invite_members(security[0],members,regions_list)
     accept_invite(security[0],members,regions_list)
 
+def switch_role(account_name):
+    switcher = {
+        "sharedservice": "SharedservicesCrossAccountRole",
+        "logarchive":"LogarchiveCrossAccountRole",
+        "security" : "SecurityCrossAccountRole",
+        "network" : "NetworkCrossAccountRole"
+    }
+    return switcher.get(account_name, "OrganizationAccountAccessRole")
 
 if __name__== "__main__":
     print("***GUARDDUTY SCRIPT START***")
