@@ -15,8 +15,8 @@ provider "aws" {
   version = "~> 2.48"
   alias = "logarchive-account"
   assume_role {
-    role_arn = "arn:aws:iam::${module.aws_lz_account_logarchive.account_id}:role/${var.org_admin_role}"
-    #role_arn = "arn:aws:iam::543433398002:role/OrganizationAccountAccessRole"
+    #role_arn = "arn:aws:iam::${module.aws_lz_account_logarchive.account_id}:role/${var.org_admin_role}"
+    role_arn = "arn:aws:iam::543433398002:role/OrganizationAccountAccessRole"
   }
 }
 
