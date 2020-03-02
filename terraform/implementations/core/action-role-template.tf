@@ -50,15 +50,6 @@ data "aws_iam_policy_document" "aws_lz_assume_role_network" {
   }
 }
 
-#"SNS:GetTopicAttributes",
-#"SNS:SetTopicAttributes",
-#"SNS:AddPermission",
-#"SNS:RemovePermission",
-#"SNS:DeleteTopic",
-#"SNS:Subscribe",
-#"SNS:ListSubscriptionsByTopic",
-#"SNS:Publish",
-#"SNS:Receive"
 data "aws_iam_policy_document" "aws_lz_role_policy_security"{
     statement {
         actions = [
