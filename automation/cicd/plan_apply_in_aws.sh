@@ -16,8 +16,8 @@ terraform init
 #terraform refresh
 terraform state rm module.aws_lz_account_security.aws_organizations_account.aws_lz_account
 terraform state rm module.aws_lz_account_sharedservices.aws_organizations_account.aws_lz_account
-terraform import module.aws_lz_account_security.aws_organizations_account.aws_lz_account 971696596064
-terraform import module.aws_lz_account_sharedservices.aws_organizations_account.aws_lz_account 000516684594 
+#terraform import module.aws_lz_account_security.aws_organizations_account.aws_lz_account 971696596064
+#terraform import module.aws_lz_account_sharedservices.aws_organizations_account.aws_lz_account 000516684594 
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
 terraform apply -refresh=true -auto-approve
