@@ -15,7 +15,7 @@ resource "aws_organizations_account" "aws_lz_account" {
   
   name  = var.org_account_name
   email = var.org_account_email
-  role_name = var.account_role_name
+  #role_name = var.account_role_name
   parent_id = var.account_parent_id
   tags = var.org_tags
 }
