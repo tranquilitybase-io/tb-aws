@@ -81,14 +81,6 @@ data "aws_iam_policy_document" "aws_lz_role_policy_security"{
     } 
 }
 
-#"s3:GetBucketAcl",
-#"s3:GetBucketPolicy",
-#"s3:GetBucketPolicyStatus",
-#"s3:PutBucketAcl",
-#"s3:PutBucketLogging",
-#"s3:PutEncryptionConfiguration",
-#"s3:ListAllMyBuckets",
-#"s3:GetBucketLocation" 
 data "aws_iam_policy_document" "aws_lz_role_policy_logarchive"{
     statement {
         actions = [
