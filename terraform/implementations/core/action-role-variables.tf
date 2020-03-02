@@ -14,5 +14,8 @@ variable "network_role_name" {
     description = "Role for network account"
     default = "NetworkCrossAccountRole"
 }
-
+variable "org_admin_role" {
+    description = "Role for network account"
+    default = "AWSLZCoreOUAdminRole"
+}
 
