@@ -12,6 +12,7 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 cd ${TERRAFORM_PATH}
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
+terraform state rm module.aws_lz_account_logarchive.aws_organizations_account.aws_lz_account 
 terraform refresh
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
