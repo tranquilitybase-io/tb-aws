@@ -4,7 +4,6 @@ data "aws_region" "current" {}
 
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
-  current_user_id = data.aws_caller_identity.current.user_id
 }
 
 module "aws_lz_organization_main" {
