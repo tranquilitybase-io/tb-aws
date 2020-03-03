@@ -18,6 +18,12 @@ resource "aws_organizations_account" "aws_lz_account" {
   role_name = var.account_role_name
   parent_id = var.account_parent_id
   tags = var.org_tags
+  lifecycle {
+    ignore_changes = [
+      role_name,
+      tags,
+    ]
+  }
 }
 
 resource "aws_organizations_organizational_unit" "aws_lz_ou" {
