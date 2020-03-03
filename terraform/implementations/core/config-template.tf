@@ -34,6 +34,17 @@ module "aws_lz_config_iam" {
     config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
 }
 
+module "aws_lz_config_sns_topic" {
+  source = "./modules/snstopic"
+
+  /* providers = {
+    aws = aws.logarchive-account
+  } */
+
+  sns_topic_name = "${var.config_name}_sns_topic"
+  required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
+}
+
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
 
@@ -45,7 +56,8 @@ module "aws_lz_config_service" {
   config_name = var.config_name
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   s3_log_prefix = var.s3_log_prefix
-  bucket_account_id = local.log_archive_account_id
+  topic_account_id = local.current_account_id
+  sns_topic_arn = module.aws_lz_config_sns_topic.topic_arn
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
 }
 

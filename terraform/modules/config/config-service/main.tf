@@ -31,14 +31,14 @@ resource "aws_config_configuration_recorder" "main" {
   }
 }
 
-resource "aws_sns_topic" "config_sns_topic" {
+/* resource "aws_sns_topic" "config_sns_topic" {
   name              = "${var.config_name}_sns_topic"
   kms_master_key_id = var.kms_master_key_id
   tags = var.config_tags
-}
+} */
 
 resource "aws_sns_topic_policy" "sns_default_policy" {
-  arn = aws_sns_topic.config_sns_topic.arn  
+  arn = var.sns_topic_arn  
   policy = data.aws_iam_policy_document.sns_topic_policy.json
 }
 
@@ -63,12 +63,12 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       "SNS:Receive",
     ]
     
-    resources = ["${aws_sns_topic_policy.sns_default_policy.arn}"]
+    resources = ["${var.sns_topic_arn}"]
 
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
-      values   = ["${var.bucket_account_id}"]
+      values   = ["${var.topic_account_id}"]
     }
   }
 }
