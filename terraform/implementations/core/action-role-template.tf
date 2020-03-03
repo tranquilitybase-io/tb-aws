@@ -130,6 +130,7 @@ module "aws_lz_iam_policy_security" {
 }
 */
 
+/*
 module "aws_lz_iam_policy_logarchive" {
     source = "./modules/iam"
     policy_name = "LogArchivePolicy"
@@ -137,7 +138,7 @@ module "aws_lz_iam_policy_logarchive" {
     policy = data.aws_iam_policy_document.aws_lz_role_policy_logarchive.json
     role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "action-role" }
 }
-
+*/
 /*
 module "aws_lz_iam_policy_sharedservices" {
     source = "./modules/iam"
@@ -161,13 +162,14 @@ module "aws_lz_iam_attach_policy_security"{
     policy_attach_roles = [module.aws_lz_iam_role_security.role_name]
     policy_arn = module.aws_lz_iam_policy_security.policy_arn
 }
-*/
+
 module "aws_lz_iam_attach_policy_logarchive"{
     source = "./modules/iam"
     policy_attach_name = "Attach Logarchive policy on log-archive role"
     policy_attach_roles = [module.aws_lz_iam_role_logarchive.role_name]
     policy_arn = module.aws_lz_iam_policy_logarchive.policy_arn
 }
+*/
 /*
 module "aws_lz_iam_attach_policy_sharedservices"{
     source = "./modules/iam"
