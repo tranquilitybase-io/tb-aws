@@ -23,9 +23,9 @@ variable "role_arn" {
   description = "The ARN of role."
 }
 
-variable "sns_topic_arn" {
+/* variable "sns_topic_arn" {
   description = "The ARN of topic."
-}
+} */
 
 variable "kms_master_key_id" {
   description = "KMS by default for SNS topic"
