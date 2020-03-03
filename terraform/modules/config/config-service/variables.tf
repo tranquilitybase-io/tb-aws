@@ -37,3 +37,7 @@ variable "config_delivery_frequency" {
   description = "The frequency with which AWS Config delivers configuration snapshots."
   default     = "Six_Hours"
 }
+
+variable "bucket_account_id" {
+  description = "bucket_account_id"
+}
