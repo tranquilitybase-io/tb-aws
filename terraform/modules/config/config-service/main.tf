@@ -5,7 +5,7 @@
 resource "aws_config_configuration_recorder_status" "main" {
   name       = "${var.config_name}_${var.recorder_name}"
   is_enabled = true
-  #depends_on = [aws_config_delivery_channel.main]
+  depends_on = [aws_config_delivery_channel.main]
 }
 
 resource "aws_config_delivery_channel" "main" {
