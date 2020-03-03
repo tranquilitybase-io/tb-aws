@@ -9,12 +9,12 @@ variable "aws_organizations_account_sharedservices_email" {
 
 variable "aws_organizations_account_logarchive_name" {
     description = "Log Archive accounts name"
-    default = "testing"
+    default = "logarchive"
 }
 
 variable "aws_organizations_account_logarchive_email" {
     description = "Log Archive accounts email"
-    default = "tb.test.logging.01@gmail.com"
+    default = "tl93373@gmail.com"
 }
 
 variable "aws_organizations_account_security_name" {
