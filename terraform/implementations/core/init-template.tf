@@ -2,6 +2,7 @@ provider "aws" {
   version = "~> 2.48"
 }
 
+/*
 provider "aws" {
   version = "~> 2.48"
   alias = "security-account"
@@ -10,6 +11,7 @@ provider "aws" {
     role_arn = "arn:aws:iam::${module.aws_lz_account_security.account_id}:role/${var.org_admin_role}" 
   }
 }
+*/
 
 provider "aws" {
   version = "~> 2.48"
@@ -20,6 +22,7 @@ provider "aws" {
   }
 }
 
+/*
 provider "aws" {
   version = "~> 2.48"
   alias = "sharedservices-account"
@@ -37,6 +40,7 @@ provider "aws" {
     #role_arn = "arn:aws:iam::${module.aws_lz_account_logarchive.account_id}:role/${var.org_admin_role}"
   }
 }
+*/
 
 terraform {
   required_version = ">= 0.12.20"
