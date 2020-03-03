@@ -2,8 +2,8 @@
 locals {
   #log_archive_account_id = module.aws_lz_account_logarchive.account_id
   region = data.aws_region.current.name
-  bucket_name = "aws-lz-s3-access-logs-${local.current_account_id}-${local.region}"
-  bucket_name_log = "aws-lz-s3-logs-${local.current_account_id}-${local.region}"  
+  bucket_name = "aws-lz-s3-access-logs-${local.current_user_id}-${local.region}"
+  bucket_name_log = "aws-lz-s3-logs-${local.current_user_id}-${local.region}"  
 }
 
 module "aws_lz_config_bucket" {
