@@ -22,6 +22,7 @@ resource "aws_organizations_account" "aws_lz_account" {
     ignore_changes = [
       role_name,
       tags,
+      name,
     ]
   }
 }
