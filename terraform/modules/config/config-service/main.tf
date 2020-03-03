@@ -35,7 +35,7 @@ resource "aws_sns_topic" "config_sns_topic" {
   name              = "${var.config_name}_sns_topic"
   kms_master_key_id = var.kms_master_key_id
   tags = var.config_tags
-
+}
 
 resource "aws_sns_topic_policy" "sns_default_policy" {
   arn = aws_sns_topic.config_sns_topic.arn  
