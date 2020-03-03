@@ -2,10 +2,6 @@
 # AWS Config Service
 #
 
-locals {
-  sns_topic_arn = aws_sns_topic.config_sns_topic.arn
-}
-
 resource "aws_config_configuration_recorder_status" "main" {
   name       = "${var.config_name}_${var.recorder_name}"
   is_enabled = true
@@ -39,13 +35,12 @@ resource "aws_sns_topic" "config_sns_topic" {
   name              = "${var.config_name}_sns_topic"
   kms_master_key_id = var.kms_master_key_id
   tags = var.config_tags
+
+
+resource "aws_sns_topic_policy" "sns_default_policy" {
+  arn = aws_sns_topic.config_sns_topic.arn  
   policy = data.aws_iam_policy_document.sns_topic_policy.json
 }
-/* 
-resource "aws_sns_topic_policy" "sns_default_policy" {
-  arn = var.sns_topic_arn  
-  policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
-} */
 
 data "aws_iam_policy_document" "sns_topic_policy" {
   statement {
@@ -68,7 +63,7 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       "SNS:Receive",
     ]
     
-    resources = ["${local.sns_topic_arn}"]
+    resources = ["${aws_sns_topic_policy.sns_default_policy.arn}"]
 
     condition {
       test     = "StringEquals"
