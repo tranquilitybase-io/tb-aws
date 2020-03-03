@@ -6,7 +6,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "security-account"
   assume_role {
-    role_arn = module.aws_lz_iam_role_security.role_arn
+    role_arn = "arn:aws:iam::${module.aws_lz_account_security.account_id}:role/${var.org_admin_role}" 
   }
 }
 
@@ -14,7 +14,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "logarchive-account"
   assume_role {
-    role_arn = module.aws_lz_iam_role_logarchive.role_arn
+    role_arn = "arn:aws:iam::${module.aws_lz_account_logarchive.account_id}:role/${var.org_admin_role}"
   }
 }
 
@@ -22,7 +22,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "sharedservices-account"
   assume_role {
-    role_arn = module.aws_lz_iam_role_sharedservices.role_arn
+    role_arn = "arn:aws:iam::${module.aws_lz_account_sharedservices.account_id}:role/${var.org_admin_role}"
   }
 }
 
@@ -30,7 +30,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "network-account"
   assume_role {
-    role_arn = module.aws_lz_iam_role_network.role_arn
+    role_arn = "arn:aws:iam::${module.aws_lz_account_network.account_id}:role/${var.org_admin_role}"
   }
 }
 

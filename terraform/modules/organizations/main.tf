@@ -15,17 +15,22 @@ resource "aws_organizations_account" "aws_lz_account" {
   
   name  = var.org_account_name
   email = var.org_account_email
+  role_name = var.account_role_name
   parent_id = var.account_parent_id
   tags = var.org_tags
+  lifecycle {
+    ignore_changes = [
+      role_name,
+      tags,
+      name,
+    ]
+  }
 }
 
 resource "aws_organizations_organizational_unit" "aws_lz_ou" {
   count = length(var.ou_name) > 0 ? 1 : 0
   name      = var.ou_name
   parent_id = var.ou_parent_id
-  #parent_id   = aws_organizations_organization.root.0.id
-  #parent_id   = data.aws_organizations_organization.aws_lz_organization.id
-  #parent_id   = module.
 }
 
 resource "aws_organizations_policy" "aws_lz_policy" {

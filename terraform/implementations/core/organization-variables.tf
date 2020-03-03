@@ -6,14 +6,17 @@ variable "aws_organizations_account_sharedservices_email" {
     description = "Shared Services email"
     default = "tl93372@gmail.com"
 }
+
 variable "aws_organizations_account_logarchive_name" {
     description = "Log Archive accounts name"
     default = "logarchive"
 }
+
 variable "aws_organizations_account_logarchive_email" {
     description = "Log Archive accounts email"
     default = "tl93373@gmail.com"
 }
+
 variable "aws_organizations_account_security_name" {
     description = "Security accounts name"
     default = "security"
