@@ -1,3 +1,4 @@
+/*
 data "aws_iam_policy_document" "aws_lz_assume_role_security" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -49,6 +50,7 @@ data "aws_iam_policy_document" "aws_lz_assume_role_network" {
     effect = "Allow"
   }
 }
+*/
 
 data "aws_iam_policy_document" "aws_lz_role_policy_security"{
     statement {
