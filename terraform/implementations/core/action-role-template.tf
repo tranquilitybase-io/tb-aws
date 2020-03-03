@@ -118,7 +118,7 @@ data "aws_iam_policy_document" "aws_lz_role_policy_network"{
     }
 }
 
-
+/*
 module "aws_lz_iam_policy_security" {
     source = "./modules/iam"
     policy_name = "SecurityPolicy"
@@ -178,3 +178,4 @@ module "aws_lz_iam_attach_policy_network"{
     policy_attach_roles = [module.aws_lz_iam_role_network.role_name]
     policy_arn = module.aws_lz_iam_policy_network.policy_arn
 }
+*/
