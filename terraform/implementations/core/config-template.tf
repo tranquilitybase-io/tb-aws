@@ -25,7 +25,7 @@ module "aws_lz_config_iam" {
     providers = {
     aws = aws.logarchive-account
     }
-    
+
     config_name = var.config_name
     config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
     log_bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
@@ -36,6 +36,10 @@ module "aws_lz_config_iam" {
 
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
+
+  providers = {
+    aws = aws.logarchive-account
+  }
 
   role_arn = module.aws_lz_config_iam.role_arn
   config_name = var.config_name
