@@ -7,6 +7,7 @@ export AWS_DEFAULT_REGION=${DEV_region}
  
 # Paths 
 MAIN_PATH=$(pwd)
+AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
 cd ${TERRAFORM_PATH}
