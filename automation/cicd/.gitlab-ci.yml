@@ -48,7 +48,8 @@ Plan and Apply in AWS:
       - terraform/*.tf
   script:
     - cd ${CICD_SCRIPTS_DIR}
-    - ls
+    - ls -la
+    - cat *
     - ./plan.sh
   only:
     changes:
