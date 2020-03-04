@@ -2,11 +2,11 @@
 /core/init-template.tf
 /core/init-variables.tf
 ### Assume Role 
-/core/action-role-template.tf
-/core/action-role-variables.tf
+#/core/action-role-template.tf
+#/core/action-role-variables.tf
 ### Organization module (Validated)
-/core/organization-template.tf
-/core/organization-variables.tf
+#/core/organization-template.tf
+#/core/organization-variables.tf
 ### Config (Validated)
 #/core/config-template.tf
 #/core/config-variables.tf
