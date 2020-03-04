@@ -49,6 +49,8 @@ Plan and Apply in AWS:
   script:
     - echo ${CICD_SCRIPTS_DIR}
     - pwd
+    - cd ${CICD_SCRIPTS_DIR}
+    - ls
     - ${CICD_SCRIPTS_DIR}/plan_apply_in_aws.sh
   only:
     changes:
