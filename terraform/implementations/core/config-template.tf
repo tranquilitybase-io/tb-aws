@@ -12,7 +12,7 @@ module "aws_lz_config_bucket" {
   providers = {
     aws = aws.logarchive-account
   }
-
+   
   bucket_name = local.bucket_name
   bucket_name_log = local.bucket_name_log
   s3_log_prefix = var.s3_log_prefix
