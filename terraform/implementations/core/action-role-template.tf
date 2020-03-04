@@ -78,10 +78,12 @@ data "aws_iam_policy_document" "aws_lz_role_policy_logarchive"{
     statement {
         actions = [
             "s3:CreateBucket",
-            "s3:PutBucketPolicy"
+            "s3:PutBucketPolicy",
+            "SNS:GetTopicAttributes",
         ]
         resources = [
             "arn:aws:s3:::*",
+            "arn:aws:sns:::*",
             ]
     }
 }
