@@ -49,7 +49,7 @@ Plan and Apply in AWS:
   script:
     - cd ${CICD_SCRIPTS_DIR}
     - ls
-    - ./plan_apply_in_aws-2.sh
+    - ./plan.sh
   only:
     changes:
       - terraform/**/*
