@@ -22,9 +22,9 @@ module "aws_lz_config_bucket" {
 module "aws_lz_config_iam" {
     source = "./modules/config/config-iam"
     
-    providers = {
+  /*   providers = {
     aws = aws.logarchive-account
-    }
+    } */
 
     config_name = var.config_name
     config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
