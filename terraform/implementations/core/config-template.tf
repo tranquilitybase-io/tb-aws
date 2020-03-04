@@ -47,11 +47,6 @@ module "aws_lz_config_iam" {
 
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
-
-  providers = {
-    aws = aws.logarchive-account
-  }
-
   role_arn = module.aws_lz_config_iam.role_arn
   config_name = var.config_name
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
@@ -63,6 +58,7 @@ module "aws_lz_config_service" {
 
 module "aws_lz_config_aggregator" {
   source = "./modules/config/config-aggregator"
+
   config_name = var.config_name
   region = local.region
   authorization_account_id = local.current_account_id
@@ -71,11 +67,6 @@ module "aws_lz_config_aggregator" {
 
 module "aws_lz_config_rules" {
   source = "./modules/config/config-rules"
-
-  providers = {
-    aws = aws.logarchive-account
-  }
-
   recorder_main = module.aws_lz_config_service.recorder_main
   delivery_channel = module.aws_lz_config_service.delivery_channel
 }
