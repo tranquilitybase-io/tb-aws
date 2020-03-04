@@ -35,9 +35,14 @@ module "aws_lz_config_iam" {
 }
 
 /* module "aws_lz_config_sns_topic" {
-  source = "./modules/snstopic
+  source = "./modules/snstopic"
+  
+  providers = {
+    aws = aws.security-account
+    }
+
   sns_topic_name = "${var.config_name}_sns_topic"
-  required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
+  required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_account_security.account_id, (var.tag_key_name) = "config" }
 } */
 
 module "aws_lz_config_service" {

@@ -65,7 +65,8 @@ data "aws_iam_policy_document" "aws_lz_role_policy_security"{
             actions = [
                 "sns:CreateTopic",
                 "sns:SetTopicAttributes",
-                "sns:Subscribe"
+                "sns:Subscribe",
+                "sns:GetTopicAttributes",
             ]
             resources = [
                 "arn:aws:sns:::*",
@@ -79,11 +80,10 @@ data "aws_iam_policy_document" "aws_lz_role_policy_logarchive"{
         actions = [
             "s3:CreateBucket",
             "s3:PutBucketPolicy",
-            "SNS:GetTopicAttributes",
+            
         ]
         resources = [
             "arn:aws:s3:::*",
-            "arn:aws:sns:::*",
             ]
     }
 }
