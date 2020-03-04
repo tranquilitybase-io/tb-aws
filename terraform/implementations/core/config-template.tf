@@ -8,13 +8,8 @@ locals {
 
 module "aws_lz_config_bucket" {
   source = "./modules/config/config-s3-bucket"
-<<<<<<< HEAD
   
   providers = {
-=======
-  */
-  /* providers = {
->>>>>>> 377e87cb13f473ffa1f7b4ea2483566f9b536d79
     aws = aws.logarchive-account
   }
 
@@ -30,7 +25,7 @@ module "aws_lz_config_iam" {
   /*   providers = {
     aws = aws.logarchive-account
     } */
-/
+    
     config_name = var.config_name
     config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
     log_bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
