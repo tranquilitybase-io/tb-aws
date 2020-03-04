@@ -18,6 +18,22 @@ stages:
       - /^((feature/.*))$/
       - /^((develop/.*))$/
 
+
+# Apply the Terraform files in AWS root account
+Plan and Apply in AWS:
+  extends: .docker_terraform
+  stage: Apply in AWS
+  tags:
+    - docker
+  script:
+    - ${CICD_SCRIPTS_DIR}/generate_validate_tf_files.sh
+    - ${CICD_SCRIPTS_DIR}/plan.sh
+  only:
+    changes:
+      - terraform/**/*
+      - automation/cicd/.gitlab-ci.yml
+      - automation/cicd/plan_apply_in_aws.sh
+
 # Jobs
 # Generates and Validates the Terraform files
 Validate Terraform files:
@@ -36,26 +52,6 @@ Validate Terraform files:
       - automation/cicd/.gitlab-ci.yml
       - automation/cicd/generate_validate_tf_files.sh
       - automation/cicd/terraform-pre-run.py
-
-# Apply the Terraform files in AWS root account
-Plan and Apply in AWS:
-  extends: .docker_terraform
-  stage: Apply in AWS
-  tags:
-    - docker
-  cache:
-    paths:
-      - terraform/*.tf
-  script:
-    - cd ${CICD_SCRIPTS_DIR}
-    - ls -la
-    - cat *
-    - ./plan.sh
-  only:
-    changes:
-      - terraform/**/*
-      - automation/cicd/.gitlab-ci.yml
-      - automation/cicd/plan_apply_in_aws.sh
 
 # Template job
 configure_aws_config:
