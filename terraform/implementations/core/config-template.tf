@@ -9,9 +9,9 @@ locals {
 module "aws_lz_config_bucket" {
   source = "./modules/config/config-s3-bucket"
   
-  /* providers = {
+  providers = {
     aws = aws.logarchive-account
-  } */
+  }
 
   bucket_name = local.bucket_name
   bucket_name_log = local.bucket_name_log
@@ -25,7 +25,7 @@ module "aws_lz_config_iam" {
   /*   providers = {
     aws = aws.logarchive-account
     } */
-
+    
     config_name = var.config_name
     config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
     log_bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
@@ -34,7 +34,7 @@ module "aws_lz_config_iam" {
     config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
 }
 
-/* module "aws_lz_config_sns_topic" {
+ module "aws_lz_config_sns_topic" {
   source = "./modules/snstopic"
   
    providers = {
@@ -43,7 +43,7 @@ module "aws_lz_config_iam" {
 
   sns_topic_name = "${var.config_name}_sns_topic"
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_account_security.account_id, (var.tag_key_name) = "config" }
-} */
+} 
 
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
