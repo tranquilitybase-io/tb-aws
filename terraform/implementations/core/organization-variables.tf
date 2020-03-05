@@ -33,3 +33,13 @@ variable "aws_organizations_account_network_email" {
     description = "Network accounts email"
     default = "test.gft.aws.04@gmail.com"
 }
+
+variable "aws_organizations_account_sandboxdev_name" {
+    description = "Sandbox DEV accounts name"
+    default = "sandboxdev"
+}
+variable "aws_organizations_account_sandboxdev_email" {
+    description = "Sandbox DEV accounts email"
+    default = "tb.test.logging.01@gmail.com"
+}
+
