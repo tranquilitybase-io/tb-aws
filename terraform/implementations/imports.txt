@@ -2,17 +2,20 @@
 /core/init-template.tf
 /core/init-variables.tf
 ### Assume Role 
-/core/action-role-template.tf
-/core/action-role-variables.tf
+#/core/action-role-template.tf
+#/core/action-role-variables.tf
 ### Organization module (Validated)
 /core/organization-template.tf
 /core/organization-variables.tf
 ### Config (Validated)
 #/core/config-template.tf
 #/core/config-variables.tf
+### Guardduty
+#/core/guardduty-template.tf
+#/core/guardduty-variables.tf
 ### CloudTrail
-/core/cloudtrail-template.tf
-/core/cloudtrail-variables.tf
+#/core/cloudtrail-template.tf
+#/core/cloudtrail-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
