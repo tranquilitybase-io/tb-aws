@@ -36,7 +36,7 @@ variable "aws_organizations_account_network_email" {
 
 variable "aws_organizations_account_sandboxdev_name" {
     description = "Sandbox DEV accounts name"
-    default = "sandboxdev"
+    default = "test-account"
 }
 variable "aws_organizations_account_sandboxdev_email" {
     description = "Sandbox DEV accounts email"

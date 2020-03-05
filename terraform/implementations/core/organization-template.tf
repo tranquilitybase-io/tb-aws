@@ -35,12 +35,12 @@ module "aws_lz_ou_core" {
 #Sandbox OU for testing purpose
 module "aws_lz_ou_sandbox" {
   source = "./modules/organizations"
-  
+
   ou_name = "SandBox OU"
   ou_parent_id = module.aws_lz_ou_company.ou_id
 }
 
-/* #Sandbox DEV account for testing purpose
+#Sandbox DEV account for testing purpose
 module "aws_lz_account_sandbox" {
   source = "./modules/organizations"
   
@@ -49,7 +49,7 @@ module "aws_lz_account_sandbox" {
   account_role_name = var.org_admin_role
   org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "organization" }
   account_parent_id = module.aws_lz_ou_core.ou_id
-} */
+}
 
 module "aws_lz_account_security" {
   source = "./modules/organizations"
