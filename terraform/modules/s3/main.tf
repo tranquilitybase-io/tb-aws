@@ -9,7 +9,8 @@ resource "aws_s3_bucket" "s3_findings" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = var.sse_aes256
+        sse_algorithm = var.sse_algorithm
+        kms_master_key_id = aws_lz_finding_bucket_key.kms_key.id
       }
     }
   }

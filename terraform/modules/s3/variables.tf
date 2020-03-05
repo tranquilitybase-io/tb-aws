@@ -19,7 +19,12 @@ variable "acl_access_bucket" {
   default = "log-delivery-write"
 }
 
-variable "sse_aes256" {
-  description = "Encryption AES256"
-  default = "AES256"
+variable "kms_key" {
+  description = "KMS Key"
+  default = ""
+}
+
+variable "sse_algorithm"{
+  description= "Encryption algorithm. Accepted values: AES256 and aws:kms"
+  default = "aws:kms"
 }
