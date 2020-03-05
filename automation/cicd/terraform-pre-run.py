@@ -41,27 +41,6 @@ def search_file_path(import_file):
                 #print(f'||| head {head} tail {tail} file-name {name}')
                 return(os.path.join(root, name))
 
-
-# This function returnsthe multiregion file processed
-# absolut_path is the file path
-def get_content(absolut_path):
-    output = ""
-    with open(absolut_path) as finput:
-        lines = finput.readlines()
-        regions_line = lines[0]
-        regions_line_format = regions_line.replace('#','')
-        regions = regions_line_format.split(",")
-        for region in regions:
-            if len(region) > 1:
-                for line in lines:
-                    if line.startswith("module"):
-                        line = line.replace("REGION",region)
-                    elif "providers = {aws = aws.alias}" in line:
-                        line = line.replace("alias",region)
-                    if line != regions_line:
-                        output = output + line + '\n'
-    return output
-
 # This function lists the files to be generated: main, variables and output
 # It gets the file and the path from search_file_path(file)
 def merge_files():
@@ -75,12 +54,9 @@ def merge_files():
                 file_name = line.rstrip()                                               # This gets the filename from the list
                 absolut_path = search_file_path(file_name)                              # This returns the path and the filename
                 if os.path.isfile(absolut_path):
-                    fout.write(f'\n ####### START FILE {file_name} #####  \n')
-                    if file_name == "/core/guardduty-template.tf":
-                        fout.write(get_content(absolut_path))
-                    else:
-                        with open(absolut_path) as finput:
-                            fout.write(finput.read())                            
+                    fout.write(f'\n ####### START FILE {file_name} #####  \n')                   
+                    with open(absolut_path) as finput:
+                        fout.write(finput.read())                            
                     fout.write(f'\n ####### END FILE {file_name} #####  \n')
                 else:
                     print(f'\n WARNING : File with name {file_name} does not exist in path {absolut_path}  \n')   
