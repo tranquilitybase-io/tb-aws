@@ -54,7 +54,7 @@ module "guardduty_s3_policy" {
   providers = {
     aws = aws.logarchive-account
   }
-  name        = var.s3_guardduty_policy_name
-  description = var.s3_guardduty_policy_description
+  policy_name        = var.s3_guardduty_policy_name
+  policy_description = var.s3_guardduty_policy_description
   policy = data.aws_iam_policy_document.guardduty_s3_policy.json
 }
