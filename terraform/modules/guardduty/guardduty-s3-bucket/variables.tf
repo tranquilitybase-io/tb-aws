@@ -4,10 +4,6 @@ variable "bucket_name" {
   type        = string
 }
 
-variable "bucket_name_log" {
-  description = "The S3 Bucket Name for findings."
-}
-
 variable "config_tags" {
   default = {} 
 }

@@ -18,4 +18,4 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 terraform apply -auto-approve 
 
 #This scripts generates the Guardduty instances in all accounts and all regions
-python3 ${AUTOMATION_SCRIPTS}/guardduty.py
+#python3 ${AUTOMATION_SCRIPTS}/guardduty.py
