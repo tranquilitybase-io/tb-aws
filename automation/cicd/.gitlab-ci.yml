@@ -27,6 +27,9 @@ Plan and Apply in AWS:
     - docker
   script:
     - ${CICD_SCRIPTS_DIR}/plan_apply_in_aws.sh
+  cache:
+    paths:
+      - terraform/*.tf
   only:
     changes:
       - terraform/**/*
