@@ -20,7 +20,6 @@ module "aws_lz_guardduty_bucket" {
   providers = {
     aws = aws.logarchive-account
   }
-  sse_algorithm = var.algorithm
   kms_key = module.aws_lz_finding_bucket_key.key_id
   bucket_name = local.bucket_name_findings
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
