@@ -35,6 +35,7 @@ module "aws_lz_ou_core" {
 #Sandbox OU for testing purpose
 module "aws_lz_ou_sandbox" {
   source = "./modules/organizations"
+  
   ou_name = "SandBox OU"
   ou_parent_id = module.aws_lz_ou_company.ou_id
 }
