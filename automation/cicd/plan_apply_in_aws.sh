@@ -14,4 +14,6 @@ echo "------------------------TERRAFORM INIT------------------------------------
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
-terraform apply -auto-approve
+#terraform apply -auto-approve
+
+terraform import test-account 705215869482
