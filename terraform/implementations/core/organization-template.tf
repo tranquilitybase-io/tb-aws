@@ -65,7 +65,7 @@ module "aws_lz_account_sharedservices" {
 module "aws_lz_account_network" {
   source = "./modules/organizations"
   
-  org_account_name = var.aws_organizations_account_network_name
+   org_account_name = var.aws_organizations_account_network_name
   org_account_email = var.aws_organizations_account_network_email
   account_role_name = var.org_admin_role
   org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "organization" }
