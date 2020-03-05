@@ -72,7 +72,7 @@ def assume_role(account_name, account_id, region):
     else:
         try:
             response = client.assume_role(
-                RoleArn="arn:aws:iam::" + account_id + ":role/" + switch_role(account_name), #Role Name is case sensitive!
+                RoleArn="arn:aws:iam::" + account_id + ":role/AWSLZCoreOUAdminRole", #Role Name is case sensitive!
                 RoleSessionName= "Guardduty_Master_Creation_" + now.strftime("%Y%m%d_%H%M%S"),
                 DurationSeconds=900
             )               
