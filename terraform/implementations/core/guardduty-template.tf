@@ -38,7 +38,7 @@ module "aws_lz_finding_bucket_key" {
 }
 
 module "aws_lz_guardduty_bucket" {
-  source = "./modules/guardduty/guardduty-iam"
+  source = "./modules/s3/"
   
   providers = {
     aws = aws.logarchive-account
