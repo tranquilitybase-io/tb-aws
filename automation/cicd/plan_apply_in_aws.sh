@@ -16,4 +16,5 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
 #terraform apply -auto-approve
 
+echo "Importing......"
 terraform import test-account 705215869482
