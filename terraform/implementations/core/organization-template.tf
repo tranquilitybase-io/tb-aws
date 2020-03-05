@@ -48,7 +48,7 @@ module "aws_lz_account_sandbox" {
   org_account_email = var.aws_organizations_account_sandboxdev_email
   account_role_name = var.org_admin_role
   org_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "organization" }
-  account_parent_id = module.aws_lz_ou_core.ou_id
+  account_parent_id = module.aws_lz_ou_sandbox.ou_id
 }
 
 module "aws_lz_account_security" {
