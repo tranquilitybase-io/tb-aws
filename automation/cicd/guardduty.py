@@ -72,7 +72,7 @@ def assume_role(account_name, account_id, region):
     else:
         try:
             response = client.assume_role(
-                RoleArn="arn:aws:iam::" + account_id + ":role/" + switch_role(account_name), #Role Name is case sensitive!
+                RoleArn="arn:aws:iam::" + account_id + ":role/AWSLZCoreOUAdminRole", #Role Name is case sensitive!
                 RoleSessionName= "Guardduty_Master_Creation_" + now.strftime("%Y%m%d_%H%M%S"),
                 DurationSeconds=900
             )               
@@ -183,15 +183,6 @@ def deploy_guardduty():
         exit()
     invite_members(security[0],members,regions_list)
     accept_invite(security[0],members,regions_list)
-
-def switch_role(account_name):
-    switcher = {
-        "sharedservice": "SharedservicesCrossAccountRole",
-        "logarchive":"LogarchiveCrossAccountRole",
-        "security" : "SecurityCrossAccountRole",
-        "network" : "NetworkCrossAccountRole"
-    }
-    return switcher.get(account_name, "OrganizationAccountAccessRole")
 
 if __name__== "__main__":
     print("***GUARDDUTY SCRIPT START***")
