@@ -107,6 +107,23 @@ def guardduty_members(account):
     else:
         return False
 
+def get_key_arn(logarchive): 
+    key_list = [] 
+    for account in logarchive:  
+        session = assume_role(account.name, account.id, 'us-west-2')
+        if session != None:              
+            client = session.client('kms')
+            try:                   
+                result = client.list_keys()
+                list = result['Keys']
+                for key in list:
+                    key_list.append(key['KeyArn'])
+            except Exception as ex:
+                template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+                message = template.format(type(ex).__name__, ex.args)
+                #print (message)
+            return key_list
+                    
 def get_findings_bucket_arn(logarchive):  
     for account in logarchive:  
         session = assume_role(account.name, account.id, 'us-west-2')
@@ -124,19 +141,21 @@ def get_findings_bucket_arn(logarchive):
                     message = template.format(type(ex).__name__, ex.args)
                     #print (message)
 
-
-def config_s3_findings(security, regions_list, bucket_arn):
-    for region in regions_list:
+def config_s3_findings(security, regions_list, bucket_arn, key_list):
+    print (regions_list)
+    for idx, region in enumerate(regions_list):
         session = assume_role(security.name, security.id, region["RegionName"])
+        print(key_list)
         if session != None:              
-            client = session.client('guardduty')   
-            for detector in security.guardduty_ids: 
+            client = session.client('guardduty')
+            for key in key_list:
+                print (key)
                 response = client.create_publishing_destination(
-                    DetectorId = detector,
+                    DetectorId = security.guardduty_ids[idx],
                     DestinationType='S3',
                     DestinationProperties={
                         'DestinationArn': bucket_arn,
-                        'KmsKeyArn': ''
+                        'KmsKeyArn': key 
                     }
                 )
                 print(json.dumps(response,indent = 4, default = str))
@@ -220,7 +239,8 @@ def deploy_guardduty():
     if security:
         if logarchive:
             bucket_arn = get_findings_bucket_arn(logarchive)
-            config_s3_findings(security[0], regions_list, bucket_arn)
+            key_arn = get_key_arn(logarchive)
+            config_s3_findings(security[0], regions_list, bucket_arn,key_arn)
         else:
             print("LogArchive account not found! Can't save findings on S3")
         for member in members:
