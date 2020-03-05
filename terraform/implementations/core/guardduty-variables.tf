@@ -6,10 +6,10 @@ variable "key"{
 
 variable "description"{
     description = "Key Description"
-    type= string
+    type = string
 }
 
 variable "algorithm"{
     description= "Encryption algorithm for Findings bucket"
-    type string
+    type = string
 }
