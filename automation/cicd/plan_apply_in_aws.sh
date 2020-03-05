@@ -11,8 +11,7 @@ AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
 cd ${TERRAFORM_PATH}
-echo "-----------------------PRINTING MAIN.TF-------------------------------------------"
-cat main.tf 
+ 
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
