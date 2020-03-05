@@ -14,8 +14,8 @@ echo "------------------------TERRAFORM INIT------------------------------------
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
-#terraform apply -auto-approve
+terraform apply -auto-approve
 
-echo "Importing......"
+#echo "Importing......"
 #terraform import aws_organizations_account.aws_lz_account 705215869482
-terraform import module.aws_lz_account_sandbox.aws_organizations_account.aws_lz_account 705215869482
+#terraform import module.aws_lz_account_sandbox.aws_organizations_account.aws_lz_account 705215869482
