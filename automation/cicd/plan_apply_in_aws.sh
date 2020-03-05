@@ -17,4 +17,4 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #terraform apply -auto-approve
 
 echo "Importing......"
-terraform import aws_organizations_account.test-account 705215869482
+terraform import aws_organizations_account.aws_lz_account 705215869482
