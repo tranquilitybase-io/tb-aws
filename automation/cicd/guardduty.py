@@ -27,7 +27,7 @@ def get_accounts_data():
             account_list.append(Account(member["Name"],member["Id"],member["Email"],[]))   
     return account_list
 #Get enabled regions
-def get_regions():
+def get_regions(): 
     regions_list = {}
     enable_regions_prefix = {"us","eu","ca","sa"}
     client = boto3.client('ec2')
