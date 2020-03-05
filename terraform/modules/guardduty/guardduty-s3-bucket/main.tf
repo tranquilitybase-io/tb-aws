@@ -1,17 +1,17 @@
 
 resource "aws_s3_bucket" "s3_findings" {
-  bucket = var.bucket_name
-  acl    = var.acl_access_bucket
+  bucket = var.findings_bucket_name
+  acl    = var.findings_acl_access_bucket
   versioning {
-    enabled = var.versioning_enabled
+    enabled = var.findings_versioning_enabled
   }
   
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = var.sse_aes256
+        sse_algorithm = var.findings_sse_aes256
       }
     }
   }
-  tags = var.config_tags
+  tags = var.findings_config_tags
 }
