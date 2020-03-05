@@ -21,7 +21,7 @@ module "aws_lz_finding_bucket_key" {
   providers = {
     aws = aws.logarchive-account
   }
-  
-  key_description = "aws-lz-s3-guardduty-key"
+  kms_key = var.key
+  key_description = var.description
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
 }
