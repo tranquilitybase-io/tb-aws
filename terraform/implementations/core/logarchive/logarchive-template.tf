@@ -18,7 +18,7 @@ data "template_file" "logarchive_bucket_policy" {
             "cloudtrail.amazonaws.com",
             "config.amazonaws.com"
           ]
-        }
+        },
         "Action": "s3:GetBucketAcl",
         "Resource": "${module.aws_lz_config_bucket.bucket_log_arn}"
     },
@@ -30,7 +30,7 @@ data "template_file" "logarchive_bucket_policy" {
             "cloudtrail.amazonaws.com",
             "config.amazonaws.com"
           ]
-        }
+        },
         "Action": "s3:PutObject",
         "Resource": ["$${config_resource}","$${cloudtrail_resource}"],
         "Condition": {
