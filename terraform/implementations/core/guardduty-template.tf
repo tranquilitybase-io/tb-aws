@@ -4,47 +4,28 @@ locals {
   bucket_name_findings = "aws-lz-s3-guardduty-findings-${local.current_account_id}-${local.region}"
 }
 
-data "template_file" "guardduty_s3_policy"{
-  template = <<JSON
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "Allow GuardDuty to use the getBucketLocation operation",
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "guardduty.amazonaws.com"
-            },
-            "Action": "s3:GetBucketLocation",
-            "Resource": "arn:aws:s3:::${local.bucket_name_findings}"
-        },
-        {
-            "Sid": "Allow GuardDuty to upload objects to the bucket",
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "guardduty.amazonaws.com"
-            },
-            "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*"
-        },
-        {
-            "Sid": "Deny unencrypted object uploads. This is optional",
-            "Effect": "Deny",
-            "Principal": {
-                "Service": "guardduty.amazonaws.com"
-            },
-            "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*",
-            "Condition": {
-                "StringNotEquals": {
-                    "s3:x-amz-server-side-encryption": "aws:kms"
-                }
-            }
-        }
-    ]
+data "aws_iam_policy_document" "guardduty_s3_policy"{      
+  statement: {    
+    sid: "Allow GuardDuty to use the getBucketLocation operation"
+    effect: "Allow"
+    principals {
+      type = "Service"
+      identifiers = ["guardduty.amazonaws.com"]
+    }
+    actions: ["s3:GetBucketLocation"]
+    resources: ["arn:aws:s3:::${local.bucket_name_findings}"]
+  }
+  statement:{
+    sid: "Allow GuardDuty to upload objects to the bucket"
+    effect: "Allow"
+    principals {
+      type = "Service"
+      identifiers = ["guardduty.amazonaws.com"]
+    }
+    actions: ["s3:PutObject"]
+    resources: ["arn:aws:s3:::${local.bucket_name_findings}/*"]
   }
 }
-JSON
 
 module "aws_lz_finding_bucket_key" {
   source = "./modules/kms"
