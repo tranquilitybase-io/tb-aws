@@ -184,15 +184,6 @@ def deploy_guardduty():
     invite_members(security[0],members,regions_list)
     accept_invite(security[0],members,regions_list)
 
-def switch_role(account_name):
-    switcher = {
-        "sharedservice": "SharedservicesCrossAccountRole",
-        "logarchive":"LogarchiveCrossAccountRole",
-        "security" : "SecurityCrossAccountRole",
-        "network" : "NetworkCrossAccountRole"
-    }
-    return switcher.get(account_name, "OrganizationAccountAccessRole")
-
 if __name__== "__main__":
     print("***GUARDDUTY SCRIPT START***")
     start_time = time.time()
