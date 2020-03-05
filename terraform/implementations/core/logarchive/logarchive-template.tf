@@ -13,12 +13,24 @@ data "template_file" "logarchive_bucket_policy" {
     {
         "Sid": "AWSConfigBucketPermissionsCheck",
         "Effect": "Allow",
+        "Principal" : {
+          "Service" : [
+            "cloudtrail.amazonaws.com",
+            "config.amazonaws.com"
+          ]
+        }
         "Action": "s3:GetBucketAcl",
         "Resource": "${module.aws_lz_config_bucket.bucket_log_arn}"
     },
     {
         "Sid": "AWSConfigBucketDelivery",
         "Effect": "Allow",
+        "Principal" : {
+          "Service" : [
+            "cloudtrail.amazonaws.com",
+            "config.amazonaws.com"
+          ]
+        }
         "Action": "s3:PutObject",
         "Resource": ["$${config_resource}","$${cloudtrail_resource}"],
         "Condition": {
@@ -41,10 +53,9 @@ module "aws_lz_config_bucket" {
   source = "./modules/config/config-s3-bucket"
    
   bucket_name = local.bucket_name
-  bucket_name_log = local.bucket_name_log
-  s3_log_prefix = var.s3_log_prefix
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
-   
+  bucket_name_log = local.bucket_name_log
+  s3_log_prefix = var.s3_log_prefix 
   providers = {
     aws = aws.logarchive-account
   }
@@ -53,12 +64,13 @@ module "aws_lz_config_bucket" {
 
 module "aws_s3_bucket_policy_logarchive"{
     source = "./modules/s3"
-
-    #bucket_id = module.aws_lz_config_bucket.bucket_name
-    bucket_id = "fsdafds"
+    
+    bucket_name = module.aws_lz_config_bucket.bucket_name_log
     s3_bucket_policy = data.template_file.logarchive_bucket_policy.rendered
 
     providers = {
       aws = aws.logarchive-account
     }
 }
+
+
