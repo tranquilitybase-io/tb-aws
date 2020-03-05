@@ -18,13 +18,13 @@ module "aws_lz_config_bucket" {
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
 }
 
-data "aws_iam_role" "AdminLogArchiveRole" {
+/* data "aws_iam_role" "AdminLogArchiveRole" {
   name = var.org_admin_role
 
   providers = {
       aws = aws.logarchive-account
   }
-}
+} */
 
 /*
 module "aws_lz_iam_attach_policy_logarchive"{
