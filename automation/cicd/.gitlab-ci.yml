@@ -36,7 +36,7 @@ Validate Terraform files:
       - automation/cicd/.gitlab-ci.yml
       - automation/cicd/generate_validate_tf_files.sh
       - automation/cicd/terraform-pre-run.py
-      - automation/cicd/guardduty.py
+ #     - automation/cicd/guardduty.py
 
 # Apply the Terraform files in AWS root account
 Plan and Apply in AWS:
@@ -54,7 +54,7 @@ Plan and Apply in AWS:
       - terraform/**/*
       - automation/cicd/.gitlab-ci.yml
       - automation/cicd/plan_apply_in_aws.sh
-      - automation/cicd/guardduty.py
+  #    - automation/cicd/guardduty.py
       
 # Template job
 configure_aws_config:
