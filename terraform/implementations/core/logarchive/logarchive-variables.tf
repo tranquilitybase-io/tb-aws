@@ -9,6 +9,3 @@ variable "s3_log_prefix" {
   default  = "awslz"
 }
 
-variable "config_tags" {
-  default = {} 
-}
