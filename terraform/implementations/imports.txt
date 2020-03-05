@@ -7,6 +7,8 @@
 ### Organization module (Validated)
 /core/organization-template.tf
 /core/organization-variables.tf
+### Log Archive Implementation
+/core/logarchive/logarchive-template.tf
 ### Config (Validated)
 #/core/config-template.tf
 #/core/config-variables.tf
