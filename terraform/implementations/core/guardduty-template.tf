@@ -5,7 +5,7 @@ locals {
 }
 
 data "aws_iam_policy_document" "guardduty_s3_policy"{      
-  statement: {    
+  statement {    
     sid: "Allow GuardDuty to use the getBucketLocation operation"
     effect: "Allow"
     principals {
@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "guardduty_s3_policy"{
     actions: ["s3:GetBucketLocation"]
     resources: ["arn:aws:s3:::${local.bucket_name_findings}"]
   }
-  statement:{
+  statement {
     sid: "Allow GuardDuty to upload objects to the bucket"
     effect: "Allow"
     principals {
