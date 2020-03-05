@@ -10,9 +10,12 @@
 ### Log Archive Implementation
 /core/logarchive/logarchive-template.tf
 /core/logarchive/logarchive-variables.tf
+### Security Account - SNS Topic
+/core/security/security-template.tf
+/core/security/security-variables.tf
 ### Config (Validated)
-/core/config-template.tf
-/core/config-variables.tf
+#/core/config-template.tf
+#/core/config-variables.tf
 ### Guardduty
 #/core/guardduty-template.tf
 #/core/guardduty-variables.tf

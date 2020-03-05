@@ -1,6 +1,6 @@
 variables:
   CICD_SCRIPTS_DIR: "automation/cicd"
-  # test line        
+  # test line  
 
 stages:
   - Generate+Validate Terraform
@@ -26,8 +26,10 @@ Plan and Apply in AWS:
   tags:
     - docker
   script:
-    - ${CICD_SCRIPTS_DIR}/generate_validate_tf_files.sh
-    - ${CICD_SCRIPTS_DIR}/plan.sh
+    - ${CICD_SCRIPTS_DIR}/plan_apply_in_aws.sh
+  cache:
+    paths:
+      - terraform/*.tf
   only:
     changes:
       - terraform/**/*

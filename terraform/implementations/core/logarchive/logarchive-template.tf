@@ -59,8 +59,7 @@ module "aws_lz_config_bucket" {
   providers = {
     aws = aws.logarchive-account
   }
-
-}
+} 
 
 module "aws_s3_bucket_policy_logarchive"{
     source = "./modules/s3"
