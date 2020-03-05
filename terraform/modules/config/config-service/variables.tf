@@ -23,6 +23,10 @@ variable "role_arn" {
   description = "The ARN of role."
 }
 
+/* variable "sns_topic_arn" {
+  description = "The ARN of topic."
+} */
+
 variable "kms_master_key_id" {
   description = "KMS by default for SNS topic"
   default = "alias/aws/sns"
@@ -36,4 +40,8 @@ variable "aws_config_delivery_channel_name" {
 variable "config_delivery_frequency" {
   description = "The frequency with which AWS Config delivers configuration snapshots."
   default     = "Six_Hours"
+}
+
+variable "topic_account_id" {
+  description = "topic_account_id"
 }

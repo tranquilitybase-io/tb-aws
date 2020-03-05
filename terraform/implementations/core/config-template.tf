@@ -1,6 +1,6 @@
 
 locals {
-  #log_archive_account_id = module.aws_lz_account_logarchive.account_id
+  log_archive_account_id = module.aws_lz_account_logarchive.account_id
   region = data.aws_region.current.name
 /*   bucket_name = "aws-lz-s3-access-logs-${local.current_account_id}-${local.region}"
   bucket_name_log = "aws-lz-s3-logs-${local.current_account_id}-${local.region}"   */
@@ -21,13 +21,29 @@ locals {
 
 module "aws_lz_config_iam" {
     source = "./modules/config/config-iam"
+    
+  /*   providers = {
+    aws = aws.logarchive-account
+    } */
+    
     config_name = var.config_name
     config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
     log_bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
     s3_log_prefix = var.s3_log_prefix
-    bucket_account_id = local.current_account_id
-    config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
+    bucket_account_id = local.log_archive_account_id
+    config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
 }
+
+ module "aws_lz_config_sns_topic" {
+  source = "./modules/snstopic"
+  
+   providers = {
+    aws = aws.security-account
+  } 
+
+  sns_topic_name = "${var.config_name}_sns_topic"
+  required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_account_security.account_id, (var.tag_key_name) = "config" }
+} 
 
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
@@ -35,11 +51,14 @@ module "aws_lz_config_service" {
   config_name = var.config_name
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   s3_log_prefix = var.s3_log_prefix
-  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
+  topic_account_id = local.current_account_id
+  #sns_topic_arn = module.aws_lz_config_sns_topic.topic_arn
+  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
 }
 
 module "aws_lz_config_aggregator" {
   source = "./modules/config/config-aggregator"
+
   config_name = var.config_name
   region = local.region
   authorization_account_id = local.current_account_id
