@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "s3_findings" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = var.sse_algorithm
+        sse_algorithm = var.enc_algorithm
         kms_master_key_id = var.kms_key
       }
     }

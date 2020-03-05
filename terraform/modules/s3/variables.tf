@@ -24,7 +24,6 @@ variable "kms_key" {
   default = ""
 }
 
-variable "sse_algorithm"{
-  description= "Encryption algorithm. Accepted values: AES256 and aws:kms"
+variable "enc_algorithm"{  
   default = "aws:kms"
 }
