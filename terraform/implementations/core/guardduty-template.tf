@@ -1,7 +1,7 @@
 locals {
   #log_archive_account_id = module.aws_lz_account_logarchive.account_id
   region_findings = data.aws_region.current.name
-  bucket_name_findings = "aws-lz-s3-guardduty-findings" 
+  bucket_name_findings = "aws-lz-s3-guardduty-findings-${local.current_account_id}-${local.region}"
 }
 
 module "aws_lz_guardduty_bucket" {
