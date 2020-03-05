@@ -29,5 +29,5 @@ resource "aws_s3_bucket" "s3_findings" {
       }
     }
   }
-  tags = var.config_tags
+ # tags = var.config_tags
 }
