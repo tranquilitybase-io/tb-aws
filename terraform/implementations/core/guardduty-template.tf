@@ -5,7 +5,7 @@ locals {
 }
 
 module "aws_lz_guardduty_bucket" {
-  source = "./modules/guardduty/guardduty-s3-bucket"
+  source = "./modules/s3"
   
   providers = {
     aws = aws.logarchive-account
