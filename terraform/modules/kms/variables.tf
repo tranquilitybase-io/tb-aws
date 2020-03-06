@@ -16,3 +16,7 @@ variable "key_permission_name"{
 variable "key_permission_principal"{
   default=""
 }
+
+variable "key_permission_operations"{
+  default=""
+}
