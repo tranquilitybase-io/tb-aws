@@ -143,13 +143,6 @@ def get_policy_text(account_id):
                         "Principal": {"Service": "guardduty.amazonaws.com"},
                         "Action": "kms:GenerateDataKey",
                         "Resource": "*"
-                    },
-                    {
-                        "Sid": "AllowRole",
-                        "Effect": "Allow",
-                        "Principal": {"AWS": "arn:aws:sts::[ACCOUNT_ID]:assumed-role/AWSLZCoreOUAdminRole"},
-                        "Action": "kms:*",
-                        "Resource": "*"
                     }
                 ]
             }
@@ -162,19 +155,19 @@ def guardduty_key_permission(key_data, logarchive):
     for account in logarchive:  
         policy_text = get_policy_text(account.id)       
         session = assume_role(account.name, account.id, 'us-west-2')
+        print(policy_text)
+        print(key_data)
         if session != None:              
             client = session.client('kms') 
             try:
-                print(key_data['KeyId'])
                 result = client.put_key_policy(
                     KeyId=key_data['KeyId'],
                     PolicyName='default',
                     Policy= policy_text,
                     BypassPolicyLockoutSafetyCheck=True
-                )
+                )                
             except Exception as ex:
                 print (ex)
-                exit()
 
 def get_findings_bucket(logarchive):  
     for account in logarchive:  
@@ -193,8 +186,7 @@ def get_findings_bucket(logarchive):
                     message = template.format(type(ex).__name__, ex.args)
                     print (message)
 
-def config_s3_findings(security, regions_list, bucket_arn, key):
-    print(key)
+def config_s3_findings(security, regions_list, bucket_arn, key):    
     for idx, region in enumerate(regions_list):
         session = assume_role(security.name, security.id, region["RegionName"])        
         if session != None:              
@@ -208,7 +200,6 @@ def config_s3_findings(security, regions_list, bucket_arn, key):
                         'KmsKeyArn': key 
                     }
                 )
-                print(json.dumps(response,indent = 4, default = str))
             except Exception as ex:
                 print (ex)
 

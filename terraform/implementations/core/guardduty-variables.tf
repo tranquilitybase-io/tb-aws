@@ -22,3 +22,7 @@ variable "s3_guardduty_policy_description"{
     type = string
     default= "Allows Guardduty to write in S3 bucket"
 }
+
+variable "config_tags" {
+  default = {}
+}
