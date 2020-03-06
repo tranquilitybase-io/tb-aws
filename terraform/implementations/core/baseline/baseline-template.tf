@@ -24,7 +24,7 @@ module "aws_lz_config_service" {
   s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
   topic_account_id = module.aws_lz_account_sandbox.account_id
   #sns_topic_arn = module.aws_lz_config_sns_topic.topic_arn
-  sns_topic_arn = "arn:aws:sns:us-west-2:705215869482:aws_lz_config_sns_topic"
+  sns_topic_arn = "arn:aws:sns:us-west-2:971696596064:aws_lz_config_sns_topic"
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_account_sandbox.account_id, (var.tag_key_name) = "config" }
 }
 
