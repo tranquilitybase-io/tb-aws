@@ -41,3 +41,8 @@ variable "config_delivery_frequency" {
 variable "topic_account_id" {
   description = "topic_account_id"
 }
+
+variable "var.org_admin_role" {
+  description = "topic_account_id"
+}
+
