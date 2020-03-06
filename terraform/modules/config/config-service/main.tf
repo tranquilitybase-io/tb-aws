@@ -24,7 +24,8 @@ resource "aws_config_delivery_channel" "main" {
 
 resource "aws_config_configuration_recorder" "main" {
   name     = "${var.config_name}_${var.recorder_name}"
-  role_arn = var.role_arn
+  #role_arn = var.role_arn
+  role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox.account_id}:role/${var.org_admin_role}"
 
   recording_group {
     all_supported                 = true

@@ -13,6 +13,9 @@
 ### Security Account - SNS Topic
 /core/security/security-template.tf
 /core/security/security-variables.tf
+### Baseline Accounts
+/core/baseline/baseline-template.tf
+/core/baseline/baseline-variables.tf
 ### Config (Validated)
 #/core/config-template.tf
 #/core/config-variables.tf

@@ -19,10 +19,6 @@ variable "s3_log_prefix" {
     default = ""
 }
 
-variable "role_arn" {
-  description = "The ARN of role."
-}
-
 variable "sns_topic_arn" {
   description = "The ARN of topic."
 }
