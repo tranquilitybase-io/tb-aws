@@ -1,6 +1,7 @@
 
 variable "config_name" {  
-    default = "aws_lz_config"
+    //default = "aws_lz_config"
+    default = "config"
     description = "Config Service name"
 }
 
