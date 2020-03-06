@@ -20,20 +20,3 @@ variable "s3_guardduty_policy_description"{
     description= "Policy description for guardduty access to S3"
     type = string
 }
-
-variable "key_permission"{
-    description ="Name for the key permission"
-    type = string
-}
-
-variable "key_principal"{
-    description = "Principals that will have access to the key"
-    default = "guardduty.amazonaws.com"
-    type = string
-}
-
-variable "key_operations"{
-    description = "Operations that will be allowed to the principal"
-    default = ["GenerateDataKey"]
-    type = list
-}
