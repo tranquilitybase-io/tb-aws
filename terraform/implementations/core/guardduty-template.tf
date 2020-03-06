@@ -4,29 +4,6 @@ locals {
   bucket_name_findings = "aws-lz-s3-guardduty-findings-${local.current_account_id}-${local.region}"
 }
 
-data "aws_iam_policy_document" "guardduty_s3_policy"{      
-  statement {    
-    sid= "1"
-    effect= "Allow"
-    principals {
-      type = "Service"
-      identifiers = ["guardduty.amazonaws.com"]
-    }
-    actions= ["s3:GetBucketLocation"]
-    resources= ["arn:aws:s3:::${local.bucket_name_findings}"]
-  }
-  statement {
-    sid= "2"
-    effect= "Allow"
-    principals {
-      type = "Service"
-      identifiers = ["guardduty.amazonaws.com"]
-    }
-    actions= ["s3:PutObject"]
-    resources= ["arn:aws:s3:::${local.bucket_name_findings}/*"]
-  }
-}
-
 module "aws_lz_finding_bucket_key" {
   source = "./modules/kms"
   
@@ -49,12 +26,26 @@ module "aws_lz_guardduty_bucket" {
 }
 
 module "guardduty_s3_policy" {
-  source = "./modules/guardduty/guardduty-iam"
+  source = "./modules/guardduty/bucket_policy"
   
   providers = {
     aws = aws.logarchive-account
   }
-  policy_name        = var.s3_guardduty_policy_name
-  policy_description = var.s3_guardduty_policy_description
-  policy = "${data.aws_iam_policy_document.guardduty_s3_policy.json}"
+  bucket_name = local.bucket_name_findings
+  policy = <<POLICY
+  {
+    "Version": "2012-10-17",
+    "Id": "Guardduty_bucket_policy"
+    "Statement": [
+        {
+            "Sid": "GuardDutyAllow",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:GetBucketLocation",
+            "Resource": "arn:aws:s3:::myBucketName"
+        }
+  }
+  POLICY
 }
