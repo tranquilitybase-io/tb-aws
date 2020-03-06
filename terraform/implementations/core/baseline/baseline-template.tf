@@ -6,7 +6,7 @@ module "aws_lz_config_service" {
     aws = aws.sandbox-account
   } 
 
-  role_arn = "arn:aws:iam::${module.aws_lz_account_logarchive.account_id}:role/${var.org_admin_role}"
+  role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox.account_id}:role/${var.org_admin_role}"
   config_name = var.config_name
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
