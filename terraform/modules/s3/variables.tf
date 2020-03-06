@@ -1,8 +1,9 @@
 
-variable "bucket_name" {
+/* variable "bucket_name" {
   description = "The S3 Bucket Name source for findings bucket"
   type        = string
 }
+*/
 
 variable "config_tags" {
   default = {} 
