@@ -35,7 +35,7 @@ module "guardduty_s3_policy" {
   policy = <<POLICY
   {
     "Version": "2012-10-17",
-    "Id": "Guardduty_bucket_policy"
+    "Id": "Guardduty_bucket_policy",
     "Statement": [
         {
             "Sid": "GuardDutyAllow",
