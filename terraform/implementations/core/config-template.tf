@@ -15,4 +15,17 @@
     config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
 } */
 
+/* module "aws_lz_config_aggregator" {
+  source = "./modules/config/config-aggregator"
 
+  config_name = var.config_name
+  region = local.region
+  authorization_account_id = local.current_account_id
+  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
+}
+
+module "aws_lz_config_rules" {
+  source = "./modules/config/config-rules"
+  recorder_main = module.aws_lz_config_service.recorder_main
+  delivery_channel = module.aws_lz_config_service.delivery_channel
+} */
