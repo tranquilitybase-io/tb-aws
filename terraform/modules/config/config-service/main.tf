@@ -1,33 +1,3 @@
-
-# Allow IAM policy to assume the role for AWS Config
-data "aws_iam_policy_document" "aws_config_role_policy" {
-  statement {
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com",]
-    }
-
-    effect = "Allow"
-  }
-}
-
-#
-# IAM
-#
-resource "aws_iam_role" "main" {
-  name               = "${var.config_name}_iam_role"
-  assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
-  tags = var.config_tags
-}
-
-resource "aws_iam_policy_attachment" "managed_policy" {
-  name       = "${var.config_name}_managed_policy"
-  roles      = [aws_iam_role.main.name]
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
-}
-
 #
 # AWS Config Service
 #
@@ -42,7 +12,6 @@ resource "aws_config_delivery_channel" "main" {
   s3_bucket_name = var.config_logs_bucket
   s3_key_prefix  = var.s3_log_prefix
 
-  #sns_topic_arn = aws_sns_topic.config_sns_topic.arn
   sns_topic_arn = var.sns_topic_arn
 
   snapshot_delivery_properties {
@@ -54,7 +23,6 @@ resource "aws_config_delivery_channel" "main" {
 resource "aws_config_configuration_recorder" "main" {
   name     = "${var.config_name}_recorder"
   role_arn = aws_iam_role.main.arn
-  #role_arn = "arn:aws:iam::${var.topic_account_id}:role/${var.org_admin_role}"
 
   recording_group {
     all_supported                 = true
@@ -62,38 +30,31 @@ resource "aws_config_configuration_recorder" "main" {
   }
 }
 
-/* resource "aws_sns_topic_policy" "sns_default_policy" {
+resource "aws_iam_role" "main" {
+  name               = "${var.config_name}_iam_role"
+  assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
+  tags = var.config_tags
+}
+
+resource "aws_iam_policy_attachment" "managed_policy" {
+  name       = "${var.config_name}_managed_policy"
+  roles      = [aws_iam_role.main.name]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
+}
+
+resource "aws_sns_topic_policy" "sns_default_policy" {
   arn = var.sns_topic_arn  
   policy = data.aws_iam_policy_document.sns_topic_policy.json
-}*/
+}
 
-/*data "aws_iam_policy_document" "sns_topic_policy" {
-  statement {
-    effect = "Allow"
+resource "aws_iam_policy" "aws_config_policy" {
+  name   = "${var.config_name}_iam_policy"
+  policy = data.template_file.aws_config_policy.rendered  
+}
 
-    principals {
-      type        = "AWS"
-      identifiers = ["*"]
-    }
+resource "aws_iam_policy_attachment" "aws_config_policy" {
+  name       = "${var.config_name}_iam_policy"
+  roles      = [aws_iam_role.main.name]
+  policy_arn = aws_iam_policy.aws_config_policy.arn
+}
 
-    actions = [
-      "SNS:GetTopicAttributes",
-      "SNS:SetTopicAttributes",
-      "SNS:AddPermission",
-      "SNS:RemovePermission",
-      "SNS:DeleteTopic",
-      "SNS:Subscribe",
-      "SNS:ListSubscriptionsByTopic",
-      "SNS:Publish",
-      "SNS:Receive",
-    ]
-    
-    resources = ["${var.sns_topic_arn}"]
-
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceOwner"
-      values   = ["${var.topic_account_id}"]
-    }
-  }
-}*/
