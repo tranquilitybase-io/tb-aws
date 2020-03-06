@@ -18,8 +18,8 @@ resource "aws_iam_policy_attachment" "managed_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
 }
 
-resource "aws_iam_policy_attachment" "managed_policy" {
-  name       = "${var.config_name}_managed_policy"
+resource "aws_iam_policy_attachment" "sns_managed_policy" {
+  name       = "${var.config_name}_sns_managed_policy"
   roles      = [aws_iam_role.main.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSNSRole"
 }
