@@ -10,7 +10,7 @@ data "template_file" "aws_config_policy" {
         "Sid": "AWSConfigBucketPermissionsCheck",
         "Effect": "Allow",
         "Action": "s3:GetBucketAcl",
-        "Resource": "${var.log_bucket_arn}"
+        "Resource": "${var.config_logs_bucket_arn}"
     },
     {
         "Sid": "AWSConfigBucketDelivery",
@@ -28,8 +28,8 @@ data "template_file" "aws_config_policy" {
 JSON
 
   vars = { 
-    config_resource = format("%s/%s/AWSLogs/%s/Config/*",var.log_bucket_arn,var.s3_log_prefix,var.bucket_account_id)
-    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.log_bucket_arn,var.s3_log_prefix,var.bucket_account_id)
+    config_resource = format("%s/%s/AWSLogs/%s/Config/*",var.config_logs_bucket_arn,var.s3_log_prefix,var.topic_account_id)
+    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.config_logs_bucket_arn,var.s3_log_prefix,var.topic_account_id)
   }
 }
 

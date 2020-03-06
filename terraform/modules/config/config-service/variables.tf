@@ -3,6 +3,10 @@ variable "config_logs_bucket" {
     default = ""
 }
 
+variable "config_logs_bucket_arn" { 
+    default = ""
+}
+
 variable "config_name" {  
     default = ""
 }

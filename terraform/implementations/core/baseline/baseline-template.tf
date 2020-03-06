@@ -9,6 +9,7 @@ module "aws_lz_config_service" {
   role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox.account_id}:role/${var.org_admin_role}"
   config_name = var.config_name
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
+  config_logs_bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
   s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
   topic_account_id = module.aws_lz_account_sandbox.account_id
   sns_topic_arn = module.aws_lz_config_sns_topic.topic_arn
