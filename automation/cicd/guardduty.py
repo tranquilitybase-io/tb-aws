@@ -108,14 +108,63 @@ def guardduty_members(account):
         return False
 
 def get_key_arn(bucket_name, logarchive): 
-    session = assume_role(logarchive.name, logarchive.id,"us-west-2")
-    if session != None:              
-        client = session.client('s3')
-        response = client.get_bucket_encryption(
-            Bucket=bucket_name
-        )
-        print (json.dumps(response,indent=4,default=str))
-                    
+    for account in logarchive:  
+        session = assume_role(account.name, account.id,"us-west-2")
+        if session != None:              
+            client = session.client('s3')
+            response = client.get_bucket_encryption(
+                Bucket=bucket_name
+            )
+            client_kms = session.client('kms')            
+            for rule in response["ServerSideEncryptionConfiguration"]["Rules"]:
+                key_id = rule["ApplyServerSideEncryptionByDefault"]["KMSMasterKeyID"]  
+                print(key_id)                              
+                response_kms = client_kms.describe_key(
+                    KeyId = key_id
+                )
+                return response_kms["KeyMetadata"]
+    
+def get_policy_text(account_id):
+    text =  ''' 
+            {   
+                "Id": "key-consolepolicy",
+                "Version": "2012-10-17",
+                "Statement": [
+                    {
+                        "Sid": "Enable IAM User Permissions",
+                        "Effect": "Allow",
+                        "Principal": {"AWS": "arn:aws:iam::[ACCOUNT_ID]:root"},
+                        "Action": "kms:*",
+                        "Resource": "*"
+                    },
+                    {
+                        "Sid": "Allow GuardDuty to use the key",
+                        "Effect": "Allow",
+                        "Principal": {"Service": "guardduty.amazonaws.com"},
+                        "Action": "kms:GenerateDataKey",
+                        "Resource": "*"
+                    }
+                ]
+            }
+            '''
+    text = text.replace("[ACCOUNT_ID]","971696596064")
+    return text
+    
+def guardduty_key_permission(key_data, logarchive):    
+
+    for account in logarchive:  
+        policy_text = get_policy_text(account.id)
+        print(policy_text)
+        session = assume_role(account.name, account.id, 'us-west-2')
+        if session != None:              
+            client = session.client('kms')                  
+            result = client.put_key_policy(
+                KeyId=key_data["Arn"],
+                PolicyName='default',
+                Policy= policy_text,
+                BypassPolicyLockoutSafetyCheck=True
+            )
+    
 def get_findings_bucket(logarchive):  
     for account in logarchive:  
         session = assume_role(account.name, account.id, 'us-west-2')
@@ -133,12 +182,13 @@ def get_findings_bucket(logarchive):
                     message = template.format(type(ex).__name__, ex.args)
                     print (message)
 
-def config_s3_findings(security, regions_list, bucket_arn, key_list):    
+def config_s3_findings(security, regions_list, bucket_arn, key):
+    print(key)
     for idx, region in enumerate(regions_list):
         session = assume_role(security.name, security.id, region["RegionName"])        
         if session != None:              
-            client = session.client('guardduty')
-            for key in key_list:
+            client = session.client('guardduty')            
+            try:
                 response = client.create_publishing_destination(
                     DetectorId = security.guardduty_ids[idx],
                     DestinationType='S3',
@@ -148,6 +198,8 @@ def config_s3_findings(security, regions_list, bucket_arn, key_list):
                     }
                 )
                 print(json.dumps(response,indent = 4, default = str))
+            except Exception as ex:
+                print (ex)
 
 def create_members(security, member,regions_list):
     #print("Member creation started " + member.name)
@@ -229,8 +281,9 @@ def deploy_guardduty():
         if logarchive:
             bucket_name = get_findings_bucket(logarchive)
             bucket_arn = "arn:aws:s3:::"+bucket_name
-            key_arn = get_key_arn(bucket_name, logarchive)
-            config_s3_findings(security[0], regions_list, bucket_arn,key_arn)
+            key_data = get_key_arn(bucket_name, logarchive)
+            guardduty_key_permission(key_data, logarchive)
+            config_s3_findings(security[0], regions_list, bucket_arn,key_data["Arn"])
         else:
             print("LogArchive account not found! Can't save findings on S3")
         for member in members:
@@ -241,8 +294,8 @@ def deploy_guardduty():
     invite_members(security[0],members,regions_list)
     accept_invite(security[0],members,regions_list)
 
-if __name__== "__main__":
+if __name__== "__main__":    
     print("***GUARDDUTY SCRIPT START***")
     start_time = time.time()
     deploy_guardduty()
-    #print("--- %s seconds ---" % (time.time() - start_time))
+    print("--- %s seconds ---" % (time.time() - start_time))
