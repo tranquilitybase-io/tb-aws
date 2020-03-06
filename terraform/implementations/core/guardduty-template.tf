@@ -26,10 +26,11 @@ module "aws_lz_guardduty_bucket" {
 
 module "guardduty_s3_policy" {
   source = "./modules/guardduty/bucket_policy"
-  
+ /* 
   providers = {
     aws = aws.logarchive-account
   }
+  */
   bucket_name = local.bucket_name_findings
   policy = <<POLICY
 {
