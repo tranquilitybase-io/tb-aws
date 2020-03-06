@@ -1,7 +1,36 @@
+
+# Allow IAM policy to assume the role for AWS Config
+data "aws_iam_policy_document" "aws_config_role_policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com",]
+    }
+
+    effect = "Allow"
+  }
+}
+
+#
+# IAM
+#
+resource "aws_iam_role" "main" {
+  name               = "${var.config_name}_iam_role"
+  assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
+  tags = var.config_tags
+}
+
+resource "aws_iam_policy_attachment" "managed_policy" {
+  name       = "${var.config_name}_managed_policy"
+  roles      = [aws_iam_role.main.name]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
+}
+
 #
 # AWS Config Service
 #
-
 resource "aws_config_configuration_recorder_status" "main" {
   name       = "${var.config_name}_recorder"
   is_enabled = true
@@ -24,7 +53,7 @@ resource "aws_config_delivery_channel" "main" {
 
 resource "aws_config_configuration_recorder" "main" {
   name     = "${var.config_name}_recorder"
-  #role_arn = var.role_arn
+  role_arn = aws_iam_role.main.arn
   #role_arn = "arn:aws:iam::${var.topic_account_id}:role/${var.org_admin_role}"
 
   recording_group {
