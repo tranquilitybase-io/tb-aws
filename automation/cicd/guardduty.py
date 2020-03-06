@@ -144,12 +144,10 @@ def get_findings_bucket_arn(logarchive):
 def config_s3_findings(security, regions_list, bucket_arn, key_list):
     print (regions_list)
     for idx, region in enumerate(regions_list):
-        session = assume_role(security.name, security.id, region["RegionName"])
-        print(key_list)
+        session = assume_role(security.name, security.id, region["RegionName"])        
         if session != None:              
             client = session.client('guardduty')
             for key in key_list:
-                print (key)
                 response = client.create_publishing_destination(
                     DetectorId = security.guardduty_ids[idx],
                     DestinationType='S3',
