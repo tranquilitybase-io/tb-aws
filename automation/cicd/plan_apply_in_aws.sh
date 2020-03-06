@@ -21,4 +21,4 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
 
-terraform state rm module module.aws_lz_cloudtrail_sns_topic.aws_sns_topic.sns_topic_default
+terraform state rm module.aws_lz_cloudtrail_sns_topic.aws_sns_topic.sns_topic_default
