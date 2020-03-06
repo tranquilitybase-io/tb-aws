@@ -1,3 +1,34 @@
+<<<<<<< terraform/implementations/imports.txt
+### Init module (Validated)
+/core/init-template.tf
+/core/init-variables.tf
+### Assume Role 
+/core/action-role-template.tf
+/core/action-role-variables.tf
+### Organization module (Validated)
+/core/organization-template.tf
+/core/organization-variables.tf
+### Log Archive Implementation
+/core/logarchive/logarchive-template.tf
+/core/logarchive/logarchive-variables.tf
+### Security Account - SNS Topic
+/core/security/security-template.tf
+/core/security/security-variables.tf
+### Baseline Accounts
+/core/baseline/baseline-template.tf
+/core/baseline/baseline-variables.tf
+### Config (Validated)
+#/core/config-template.tf
+#/core/config-variables.tf
+### Guardduty
+/core/guardduty-template.tf
+/core/guardduty-variables.tf
+### CloudTrail
+#/core/cloudtrail-template.tf
+#/core/cloudtrail-variables.tf
+
+# Simple test for resources
+=======
 ### Init module (Validated)
 /core/init-template.tf
 /core/init-variables.tf
@@ -18,4 +49,5 @@
 #/core/cloudtrail-variables.tf
 
 # Simple test for resources
+>>>>>>> terraform/implementations/imports.txt
 #resources-test-template.tf
