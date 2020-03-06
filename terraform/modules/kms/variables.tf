@@ -18,5 +18,5 @@ variable "key_permission_principal"{
 }
 
 variable "key_permission_operations"{
-  default=""
+  default=[]
 }
