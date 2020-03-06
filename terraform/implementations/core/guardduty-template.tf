@@ -44,7 +44,7 @@ module "guardduty_s3_policy" {
               "Service": "guardduty.amazonaws.com"
           },
           "Action": "s3:GetBucketLocation",
-          "Resource": "arn:aws:s3:::myBucketName"
+          "Resource": "arn:aws:s3:::${local.bucket_name_findings}"
       }
     ]
   }
