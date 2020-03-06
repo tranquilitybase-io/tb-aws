@@ -48,5 +48,5 @@ module "guardduty_s3_policy" {
       }
     ]
   }
-  POLICY
+  POLICY 
 }
