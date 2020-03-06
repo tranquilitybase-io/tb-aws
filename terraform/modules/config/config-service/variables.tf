@@ -11,6 +11,11 @@ variable "recorder_name" {
     default = "recorder"
 }
 
+variable "role_arn" {  
+    description = "Config role"
+}
+
+
 variable "config_tags" {
   default = {} 
 }
@@ -40,9 +45,5 @@ variable "config_delivery_frequency" {
 
 variable "topic_account_id" {
   description = "topic_account_id"
+  default = ""
 }
-
-variable "org_admin_role" {
-  description = "topic_account_id"
-}
-
