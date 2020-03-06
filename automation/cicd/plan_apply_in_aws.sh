@@ -16,7 +16,7 @@ echo "------------------------TERRAFORM INIT------------------------------------
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
-#terraform apply -auto-approve
+terraform apply -auto-approve
 
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
@@ -28,5 +28,5 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #terraform state rm module.aws_lz_guardduty_bucket.aws_s3_bucket.s3_findings
 #terraform state rm module.aws_s3_bucket_policy_logarchive.aws_s3_bucket.s3_findings
 
-terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder_status.main
-terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder.main
+#terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder_status.main
+#terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder.main
