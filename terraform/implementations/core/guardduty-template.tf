@@ -14,6 +14,17 @@ module "aws_lz_finding_bucket_key" {
   kms_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
 }
 
+module "key_guardduty_permission" {
+  source = "./modules/kms"
+  
+  providers = {
+    aws = aws.logarchive-account
+  }
+ key_permission_name = var.key_permission
+ key_permission_principal = var.key_principal
+ key_permission_operations = var.key_operations
+} 
+
 module "aws_lz_guardduty_bucket" {
   source = "./modules/s3/"
   
