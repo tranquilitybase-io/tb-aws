@@ -29,12 +29,13 @@ resource "aws_config_delivery_channel" "main" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
-/* resource "aws_iam_role" "main" {
+resource "aws_iam_role" "main" {
   name               = "${var.config_name}_iam_role"
   assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
   tags = var.config_tags
 }
 
+/*
 resource "aws_iam_policy_attachment" "managed_policy" {
   name       = "${var.config_name}_managed_policy"
   roles      = [aws_iam_role.main.name]
