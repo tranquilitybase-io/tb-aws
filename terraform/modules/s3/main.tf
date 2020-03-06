@@ -1,6 +1,6 @@
 
 resource "aws_s3_bucket" "s3_findings" {
-  bucket = var.bucket_name
+  bucket = "testing-s3-findings1122332020" #var.bucket_name
   acl    = var.acl_access_bucket
   versioning {
     enabled = var.versioning_enabled
