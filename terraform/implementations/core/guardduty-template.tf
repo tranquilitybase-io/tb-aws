@@ -32,8 +32,7 @@ module "guardduty_s3_policy" {
     aws = aws.logarchive-account
   }
   bucket_name = local.bucket_name_findings
-  policy = <<POLICY
-  {
+  policy = <<POLICY{
     "Version": "2012-10-17",
     "Id": "Guardduty_bucket_policy",
     "Statement": [
