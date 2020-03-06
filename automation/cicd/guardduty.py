@@ -131,40 +131,51 @@ def get_policy_text(account_id):
                 "Version": "2012-10-17",
                 "Statement": [
                     {
-                        "Sid": "Enable IAM User Permissions",
+                        "Sid": "IAMPermissions",
                         "Effect": "Allow",
                         "Principal": {"AWS": "arn:aws:iam::[ACCOUNT_ID]:root"},
                         "Action": "kms:*",
                         "Resource": "*"
                     },
                     {
-                        "Sid": "Allow GuardDuty to use the key",
+                        "Sid": "AllowGuardDuty",
                         "Effect": "Allow",
                         "Principal": {"Service": "guardduty.amazonaws.com"},
                         "Action": "kms:GenerateDataKey",
+                        "Resource": "*"
+                    },
+                    {
+                        "Sid": "AllowRole",
+                        "Effect": "Allow",
+                        "Principal": {"AWS": "arn:aws:sts::[ACCOUNT_ID]:assumed-role/AWSLZCoreOUAdminRole"},
+                        "Action": "kms:*",
                         "Resource": "*"
                     }
                 ]
             }
             '''
-    text = text.replace("[ACCOUNT_ID]","971696596064")
+    text = text.replace("[ACCOUNT_ID]",account_id)
     return text
     
 def guardduty_key_permission(key_data, logarchive):    
 
     for account in logarchive:  
-        policy_text = get_policy_text(account.id)
-        print(policy_text)
+        policy_text = get_policy_text(account.id)       
         session = assume_role(account.name, account.id, 'us-west-2')
         if session != None:              
-            client = session.client('kms')                  
-            result = client.put_key_policy(
-                KeyId=key_data["Arn"],
-                PolicyName='default',
-                Policy= policy_text,
-                BypassPolicyLockoutSafetyCheck=True
-            )
-    
+            client = session.client('kms') 
+            try:
+                print(key_data['KeyId'])
+                result = client.put_key_policy(
+                    KeyId=key_data['KeyId'],
+                    PolicyName='default',
+                    Policy= policy_text,
+                    BypassPolicyLockoutSafetyCheck=True
+                )
+            except Exception as ex:
+                print (ex)
+                exit()
+
 def get_findings_bucket(logarchive):  
     for account in logarchive:  
         session = assume_role(account.name, account.id, 'us-west-2')
