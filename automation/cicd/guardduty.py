@@ -107,24 +107,16 @@ def guardduty_members(account):
     else:
         return False
 
-def get_key_arn(logarchive): 
-    key_list = [] 
-    for account in logarchive:  
-        session = assume_role(account.name, account.id, 'us-west-2')
-        if session != None:              
-            client = session.client('kms')
-            try:                   
-                result = client.list_keys()
-                list = result['Keys']
-                for key in list:
-                    key_list.append(key['KeyArn'])
-            except Exception as ex:
-                template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-                message = template.format(type(ex).__name__, ex.args)
-                #print (message)
-            return key_list
+def get_key_arn(bucket_name, logarchive): 
+    session = assume_role(logarchive.name, logarchive.id,"us-west-2")
+    if session != None:              
+        client = session.client('s3')
+        response = client.get_bucket_encryption(
+            Bucket=bucket_name
+        )
+        print (json.dumps(response,indent=4,default=str))
                     
-def get_findings_bucket_arn(logarchive):  
+def get_findings_bucket(logarchive):  
     for account in logarchive:  
         session = assume_role(account.name, account.id, 'us-west-2')
         if session != None:              
@@ -133,16 +125,15 @@ def get_findings_bucket_arn(logarchive):
                     result = client.list_buckets()
                     bucket_list = result['Buckets']
                     for bucket in bucket_list:
+                        print(bucket)
                         if 'aws-lz-s3-guardduty-findings-' in bucket['Name']:
-                            return ("arn:aws:s3:::"+bucket['Name'])
-
+                            return bucket['Name']
                 except Exception as ex:
                     template = "An exception of type {0} occurred. Arguments:\n{1!r}"
                     message = template.format(type(ex).__name__, ex.args)
-                    #print (message)
+                    print (message)
 
-def config_s3_findings(security, regions_list, bucket_arn, key_list):
-    print (regions_list)
+def config_s3_findings(security, regions_list, bucket_arn, key_list):    
     for idx, region in enumerate(regions_list):
         session = assume_role(security.name, security.id, region["RegionName"])        
         if session != None:              
@@ -236,8 +227,9 @@ def deploy_guardduty():
     logarchive = list(filter(logarchive_account,accounts_list))
     if security:
         if logarchive:
-            bucket_arn = get_findings_bucket_arn(logarchive)
-            key_arn = get_key_arn(logarchive)
+            bucket_name = get_findings_bucket(logarchive)
+            bucket_arn = "arn:aws:s3:::"+bucket_name
+            key_arn = get_key_arn(bucket_name, logarchive)
             config_s3_findings(security[0], regions_list, bucket_arn,key_arn)
         else:
             print("LogArchive account not found! Can't save findings on S3")
