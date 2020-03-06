@@ -4,6 +4,14 @@ provider "aws" {
 
 provider "aws" {
   version = "~> 2.48"
+  alias = "sandbox-account"
+  assume_role {
+    role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox.account_id}:role/${var.org_admin_role}" 
+  }
+}
+
+provider "aws" {
+  version = "~> 2.48"
   alias = "security-account"
   assume_role {
     role_arn = "arn:aws:iam::${module.aws_lz_account_security.account_id}:role/${var.org_admin_role}" 

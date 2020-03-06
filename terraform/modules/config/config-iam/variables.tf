@@ -20,18 +20,6 @@ variable "log_bucket_arn" {
     default = ""
 }
 
-variable "iam_role_name" { 
-    default = "iam_role"
-}
-
-variable "managed_policy_name" { 
-    default = "managed_policy"
-}
-
-variable "iam_policy_name" { 
-    default = "iam_policy"
-}
-
-variable "iam_role_policy_arn" { 
+variable "config_role_arn" { 
     default = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
 }
