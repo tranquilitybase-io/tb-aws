@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "aws_config_role_policy" {
   }
 }
 
-/* data "aws_iam_policy_document" "sns_topic_policy" {
+data "aws_iam_policy_document" "sns_topic_policy" {
   statement {
     effect = "Allow"
 
@@ -76,4 +76,4 @@ data "aws_iam_policy_document" "aws_config_role_policy" {
       values   = ["${var.topic_account_id}"]
     }
   }
-} */
+}
