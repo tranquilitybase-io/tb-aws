@@ -24,3 +24,6 @@ terraform apply -auto-approve
 #terraform state rm module.aws_lz_config_service.aws_sns_topic_policy.sns_default_policy
 #terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_main
 #terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_log
+
+#terraform state rm module.aws_lz_guardduty_bucket.aws_s3_bucket.s3_findings
+#terraform state rm module.aws_s3_bucket_policy_logarchive.aws_s3_bucket.s3_findings

@@ -6,3 +6,4 @@ terraform/main.tf
 terraform/outputs.tf
 terraform/variables.tf
 .vscode/settings.json
+/.idea/
