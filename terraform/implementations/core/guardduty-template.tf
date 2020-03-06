@@ -56,5 +56,5 @@ module "guardduty_s3_policy" {
   }
   policy_name        = var.s3_guardduty_policy_name
   policy_description = var.s3_guardduty_policy_description
-  policy = data.aws_iam_policy_document.guardduty_s3_policy.json
+  policy = "${data.aws_iam_policy_document.guardduty_s3_policy.json}
 }
