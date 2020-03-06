@@ -1,7 +1,16 @@
-#us-east-1,us-east-2,us-west-1,us-west-2,ca-central-1,eu-central-1,eu-west-1,eu-west-2,eu-west-3,eu-north-1,sa-east-1,
+locals {
+  region = data.aws_region.current.name
+  region_findings = data.aws_region.current.name
+  bucket_name_findings = "aws-lz-s3-guardduty-findings-${local.current_account_id}-${local.region}"
+}
 
-module "aws_lz_guardduty_master_REGION" {
-  source = "./modules/guardduty"
-  cloudwatch_notify_frequency = var.finding_publishing_frequency
-  providers = {aws = aws.alias}
+module "aws_lz_guardduty_bucket" {
+  source = "./modules/s3"
+  
+  providers = {
+    aws = aws.logarchive-account
+  }
+  
+  bucket_name = local.bucket_name_findings
+  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
 }
