@@ -10,9 +10,6 @@ variable "config_logs_bucket_arn" {
 variable "config_name" {  
     default = ""
 }
-variable "role_arn" {  
-    description = "Config role"
-}
 
 variable "config_tags" {
   default = {} 
