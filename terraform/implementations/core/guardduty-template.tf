@@ -1,5 +1,4 @@
 locals {
-  region = data.aws_region.current.name
   region_findings = data.aws_region.current.name
   bucket_name_findings = "aws-lz-s3-guardduty-findings-${local.current_account_id}-${local.region}"
 }
