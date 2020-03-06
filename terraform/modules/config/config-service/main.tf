@@ -16,7 +16,7 @@ resource "aws_config_delivery_channel" "main" {
   snapshot_delivery_properties {
     delivery_frequency = var.config_delivery_frequency
   }
-  depends_on = [aws_config_configuration_recorder.main]
+  depends_on = [aws_config_configuration_recorder.main, aws_sns_topic_policy.sns_default_policy ]
 }
 
 resource "aws_config_configuration_recorder" "main" {
