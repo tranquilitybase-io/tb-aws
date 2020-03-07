@@ -50,7 +50,7 @@ JSON
 
 module "aws_lz_config_bucket" {
   source = "./modules/config/config-s3-bucket"
-   
+
   bucket_name = local.bucket_name
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
   bucket_name_log = local.bucket_name_log
@@ -60,7 +60,6 @@ module "aws_lz_config_bucket" {
   }
 }
 
-/*
 module "aws_s3_bucket_policy_logarchive"{
     source = "./modules/s3"
     
@@ -70,7 +69,7 @@ module "aws_s3_bucket_policy_logarchive"{
     providers = {
       aws = aws.logarchive-account
     }
-}*/
+}
 
 
 
