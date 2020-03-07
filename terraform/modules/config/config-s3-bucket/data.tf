@@ -14,7 +14,7 @@ data "template_file" "logarchive_bucket_policy" {
           ]
         },
         "Action": "s3:GetBucketAcl",
-        "Resource": "${module.aws_lz_config_bucket.bucket_log_arn}"
+        "Resource": "${aws_s3_bucket.s3_log.arn}"
     },
     {
         "Sid": "AWSConfigBucketDelivery",
@@ -38,7 +38,7 @@ data "template_file" "logarchive_bucket_policy" {
 JSON
 
   vars = {
-    config_resource = format("%s/%s/AWSLogs/%s/Config/*",module.aws_lz_config_bucket.bucket_log_arn,module.aws_lz_config_bucket.s3_log_prefix,local.sandbox_account_id)
-    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",module.aws_lz_config_bucket.bucket_log_arn,module.aws_lz_config_bucket.s3_log_prefix,local.sandbox_account_id)
+    config_resource = format("%s/%s/AWSLogs/%s/Config/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix,var.source_policy_account_id)
+    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix,var.source_policy_account_id)
   }
 }
