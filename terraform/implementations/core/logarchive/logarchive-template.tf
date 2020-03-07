@@ -78,7 +78,7 @@ module "aws_lz_config_service" {
     aws = aws.logarchive-account
   }
 
-  config_name = var.config_name
+  config_name = "aws_lz_config"
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   config_logs_bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
   s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
