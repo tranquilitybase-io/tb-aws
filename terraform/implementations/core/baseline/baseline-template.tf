@@ -27,9 +27,7 @@ module "aws_lz_config_service" {
 
 module "aws_lz_config_aggregator" {
   source = "./modules/config/config-aggregator"
-  providers = {
-    aws = aws.sandbox-account
-  }
+
   config_name              = var.config_name
   region                   = local.region
   authorization_account_id = local.sandbox_account_id
@@ -38,6 +36,11 @@ module "aws_lz_config_aggregator" {
 
 module "aws_lz_config_rules" {
   source           = "./modules/config/config-rules"
+
+  providers = {
+    aws = aws.sandbox-account
+  }
+
   recorder_main    = module.aws_lz_config_service.recorder_main
   delivery_channel = module.aws_lz_config_service.delivery_channel
 }
