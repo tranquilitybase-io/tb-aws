@@ -1,3 +1,8 @@
+locals {
+  current_account_id = data.aws_caller_identity.current.account_id
+  region = data.aws_region.current.name
+}
+
 provider "aws" {
   version = "~> 2.48"
 }
@@ -57,9 +62,4 @@ provider "local" {
 
 provider "null" {
   version = "~> 2.1"
-}
-
-locals {
-  current_account_id = data.aws_caller_identity.current.account_id
-  region = data.aws_region.current.name
 }
