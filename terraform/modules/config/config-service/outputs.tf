@@ -7,5 +7,5 @@ output "delivery_channel"{
 }
 
 output "aggregator_role_arn"{
-    value = aws_iam_role.aggregator_role.arn
+    value = concat(aws_iam_role.aggregator_role.*.arn, [""])[0]
 }
