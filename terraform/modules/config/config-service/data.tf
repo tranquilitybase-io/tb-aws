@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "aws_config_role_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com",]
+      identifiers = ["config.amazonaws.com"]
     }
 
     effect = "Allow"
@@ -65,7 +65,7 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       "SNS:Subscribe",
       "SNS:ListSubscriptionsByTopic",
       "SNS:Publish",
-      "SNS:Receive",
+      "SNS:Receive"
     ]
     
     resources = ["${var.sns_topic_arn}"]

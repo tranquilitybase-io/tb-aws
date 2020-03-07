@@ -1,7 +1,6 @@
 locals {
-  log_archive_account_id = module.aws_lz_account_logarchive.account_id
-  bucket_name = "aws-lz-s3-access-logs-${local.log_archive_account_id}-${local.region}"
-  bucket_name_log = "aws-lz-s3-logs-${local.log_archive_account_id}-${local.region}"  
+  bucket_name = "aws-lz-s3-access-logs-${local.logarchive_account_id}-${local.region}"
+  bucket_name_log = "aws-lz-s3-logs-${local.logarchive_account_id}-${local.region}"  
 }
 
 data "template_file" "logarchive_bucket_policy" {
@@ -43,8 +42,8 @@ data "template_file" "logarchive_bucket_policy" {
 JSON
 
   vars = { 
-    config_resource = format("%s/%s/AWSLogs/%s/Config/*",module.aws_lz_config_bucket.bucket_log_arn,module.aws_lz_config_bucket.s3_log_prefix,local.log_archive_account_id)
-    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",module.aws_lz_config_bucket.bucket_log_arn,module.aws_lz_config_bucket.s3_log_prefix,local.log_archive_account_id)
+    config_resource = format("%s/%s/AWSLogs/%s/Config/*",module.aws_lz_config_bucket.bucket_log_arn,module.aws_lz_config_bucket.s3_log_prefix,local.sandbox_account_id)
+    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",module.aws_lz_config_bucket.bucket_log_arn,module.aws_lz_config_bucket.s3_log_prefix,local.sandbox_account_id)
   }
 }
 
@@ -52,7 +51,7 @@ module "aws_lz_config_bucket" {
   source = "./modules/config/config-s3-bucket"
 
   bucket_name = local.bucket_name
-  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.log_archive_account_id, (var.tag_key_name) = "config" }
+  config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.logarchive_account_id, (var.tag_key_name) = "config" }
   bucket_name_log = local.bucket_name_log
   s3_log_prefix = var.s3_log_prefix 
   providers = {
