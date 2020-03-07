@@ -27,11 +27,9 @@ module "aws_lz_config_service" {
 
 module "aws_lz_config_aggregator" {
   source = "./modules/config/config-aggregator"
-
   providers = {
     aws = aws.sandbox-account
   }
-
   config_name              = var.config_name
   region                   = local.region
   authorization_account_id = local.sandbox_account_id
