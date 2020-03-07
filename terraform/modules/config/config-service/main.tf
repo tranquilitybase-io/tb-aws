@@ -41,6 +41,21 @@ resource "aws_iam_policy_attachment" "managed_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
 }
 
+###Aggregate Role
+resource "aws_iam_role" "aggregator_role" {
+  count              = var.aggregate_organization ? 1 : 0
+  name               = "${var.config_name}_aggregator_role"
+  assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
+  tags = var.config_tags
+}
+
+resource "aws_iam_role_policy_attachment" "aggregator" {
+  count      = var.aggregate_organization ? 1 : 0
+  role       = aws_iam_role.aggregator_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
+}
+###
+
 /* resource "aws_sns_topic_policy" "sns_default_policy" {
   arn = var.sns_topic_arn  
   policy = data.aws_iam_policy_document.sns_topic_policy.json

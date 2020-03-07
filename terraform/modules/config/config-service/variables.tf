@@ -28,3 +28,10 @@ variable "topic_account_id" {
   description = "topic_account_id"
   default = ""
 }
+
+variable "aggregate_organization" {
+  description = "Aggregate compliance data by organization"
+  type        = bool
+  default     = true
+}
+
