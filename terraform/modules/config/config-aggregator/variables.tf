@@ -23,15 +23,6 @@ variable "authorization_account_id" {
   description = "Authorization Account ID - Required"
 }
 
-
-variable "aggregator_name" {
-  default = "multi_account_aggregator"
-}
-
-variable "aggregator_role_name" {
-  default = "aggregator_role"
-}
-
 variable "policy_arn" {
   default = "arn:aws:iam::aws:policy/service-role/AWSConfigRoleForOrganizations"
 }
