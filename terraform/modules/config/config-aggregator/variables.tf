@@ -24,7 +24,3 @@ variable "aggregate_organization" {
   type        = bool
   default     = true
 }
-
-variable "aggregator_role_arn" {
-  description = "ARN of aggregator role"
-}
