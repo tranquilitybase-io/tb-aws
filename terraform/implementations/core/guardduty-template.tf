@@ -25,7 +25,7 @@ module "aws_lz_guardduty_bucket" {
   config_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
 }
 
-/*
+
 module "guardduty_s3_policy" {
   source = "./modules/guardduty/bucket_policy"
   
@@ -52,4 +52,3 @@ module "guardduty_s3_policy" {
   }
   POLICY
 }
-*/
