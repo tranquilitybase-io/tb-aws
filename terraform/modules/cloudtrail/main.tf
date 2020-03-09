@@ -23,7 +23,7 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   name               = "${var.cloudtrail_name}_role"
   assume_role_policy = data.aws_iam_policy_document.cloudtrail_assume_policy.json
   tags               = var.required_tags
-}
+}*/
 
 resource "aws_iam_policy" "cloudtrail_access_policy" {
   name   = "${var.cloudtrail_name}_cloudwatch_policy"
@@ -33,10 +33,11 @@ resource "aws_iam_policy" "cloudtrail_access_policy" {
 resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
   name       = "${var.cloudtrail_name}_policy_attachment"
   policy_arn = aws_iam_policy.cloudtrail_access_policy.arn
-  roles      = [aws_iam_role.cloudtrail_role.name]
-}*/
+  roles      = ["AWSLZCoreOUAdminRole"]
+}
 
 resource "aws_sns_topic_policy" "sns_default_policy" {
   arn = var.sns_topic_arn
   policy = data.aws_iam_policy_document.cloudtrail_alarm_policy.json
 }
+
