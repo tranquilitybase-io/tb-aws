@@ -32,7 +32,7 @@ module "guardduty_s3_policy" {
   providers = {
     aws = aws.logarchive-account
   }
-  bucket_arn = module.s3_findings.bucket_name_arn
+  bucket_arn = module.aws_lz_guardduty_bucket.bucket_name_arn
   bucket_name = local.bucket_name_findings
   policy = <<POLICY
 {
