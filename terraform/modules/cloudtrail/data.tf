@@ -32,23 +32,15 @@ data "aws_iam_policy_document" "cloudtrail_policy" {
 
 data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
   statement {
+
     effect = "Allow"
 
-    principals {
-      type        = "AWS"
-      identifiers = ["*"]
+    Principals {
+      Service = "cloudtrail.amazonaws.com"
     }
 
     actions = [
-      "SNS:GetTopicAttributes",
-      "SNS:SetTopicAttributes",
-      "SNS:AddPermission",
-      "SNS:RemovePermission",
-      "SNS:DeleteTopic",
-      "SNS:Subscribe",
-      "SNS:ListSubscriptionsByTopic",
       "SNS:Publish",
-      "SNS:Receive",
     ]
     
     resources = ["${var.sns_topic_arn}"]
@@ -59,26 +51,4 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
       values   = ["${var.bucket_account_id}"]
     }
   }
-}
-
-data "aws_iam_policy_document" "cloudtrail_bucket" {
-  statement {
-    sid    = "AWSConfigBucketPermissionsCheck"
-    effect = "Allow"
-    actions   = ["s3:GetBucketAcl"]
-    resources = ["${var.bucket_arn}"]
-  }
-
-  statement {
-    sid    = "AWSConfigBucketDelivery"
-    effect = "Allow"
-    actions   = ["s3:PutObject"]
-    resources = ["${local.resource}"]
-
-    condition {
-      test     = "StringEquals"
-      variable = "s3:x-amz-acl"
-      values   = ["bucket-owner-full-control"]
-    }
-  }  
 }
