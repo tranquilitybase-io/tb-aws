@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
 
     effect = "Allow"
 
-    Principals {
+    principals {
       Service = "cloudtrail.amazonaws.com"
     }
 
