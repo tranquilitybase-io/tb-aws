@@ -1,7 +1,7 @@
 
 
 locals {
-  resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,var.bucket_account_id)
+  resource = format("%s/%s/AWSLogs/*/CloudTrail/*",var.bucket_arn,var.s3_log_prefix,var.bucket_account_id)
 }
 
 data "aws_iam_policy_document" "cloudtrail_assume_policy" {

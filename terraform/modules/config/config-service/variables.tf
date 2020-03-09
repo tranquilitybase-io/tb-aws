@@ -17,6 +17,7 @@ variable "s3_log_prefix" {
 
 variable "sns_topic_arn" {
   description = "The ARN of topic."
+  default = ""
 }
 
 variable "config_delivery_frequency" {
