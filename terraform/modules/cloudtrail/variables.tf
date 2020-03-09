@@ -31,12 +31,6 @@ variable "sns_topic_arn" {
   description = "Topic ARN"
 }
 
-
-variable "cloudwatch_log_group" {
-  description = "cloudwatch_log_group"
-  default  = "cloudwatch_log_group"
-}
-
 variable "multi_region_trail" {
     description = "is_multi_region_trail TRUE - FALSE"
     type = bool
