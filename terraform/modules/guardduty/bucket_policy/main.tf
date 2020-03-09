@@ -1,3 +1,4 @@
+
 /* resource "aws_iam_policy" "s3_guardduty_iam_policy" {  
     name        = var.policy_name
     description = var.policy_description
@@ -17,4 +18,5 @@
 resource "aws_s3_bucket_policy" "guardduty_bucket_policy" {
   bucket = var.bucket_name
   policy = var.policy
+  depends_on = [var.bucket_arn]
 }
