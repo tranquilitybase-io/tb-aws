@@ -1,6 +1,6 @@
 locals {
   region_findings = data.aws_region.current.name
-  bucket_name_findings = "testing-s3-findings1122332020"#"aws-lz-s3-guardduty-findings-${local.logarchive_account_id}-${local.region}"
+  bucket_name_findings = "aws-lz-s3-guardduty-findings-${local.logarchive_account_id}-${local.region}"
 }
 
 module "aws_lz_finding_bucket_key" {
