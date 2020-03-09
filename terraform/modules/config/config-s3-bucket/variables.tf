@@ -37,6 +37,6 @@ variable "sse_aes256" {
   default = "AES256"
 }
 
-variable "source_policy_account_id" {
+/*variable "source_policy_account_id" {
   description = "Source Account ID for bucket policy"
-}
+}*/
