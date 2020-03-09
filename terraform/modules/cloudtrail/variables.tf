@@ -46,7 +46,7 @@ variable "multi_region_trail" {
 variable "organization_trail" {
     description = "organization_trail"
     type = bool
-    default = true
+    default = false
 }
 
 variable "enable_logging" {
