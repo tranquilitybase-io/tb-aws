@@ -1,3 +1,13 @@
+locals {
+  current_account_id = data.aws_caller_identity.current.account_id
+  logarchive_account_id = module.aws_lz_account_logarchive.account_id
+  sandbox_account_id = module.aws_lz_account_sandbox.account_id
+  security_account_id = module.aws_lz_account_security.account_id
+  network_account_id = module.aws_lz_account_network.account_id
+  sharedservices_account_id = module.aws_lz_account_sharedservices.account_id
+  region = data.aws_region.current.name
+}
+
 provider "aws" {
   version = "~> 2.48"
 }
@@ -57,9 +67,4 @@ provider "local" {
 
 provider "null" {
   version = "~> 2.1"
-}
-
-locals {
-  current_account_id = data.aws_caller_identity.current.account_id
-  region = data.aws_region.current.name
 }

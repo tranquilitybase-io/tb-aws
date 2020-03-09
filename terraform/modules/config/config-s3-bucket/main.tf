@@ -37,3 +37,10 @@ resource "aws_s3_bucket" "s3_log" {
   }
   tags = var.config_tags
 }
+
+resource "aws_s3_bucket_policy" "aws_lz_s3_bucket_policy" {
+  count   = length(var.bucket_name_log) > 0 ? 1 : 0
+
+  bucket   = aws_s3_bucket.s3_log.id
+  policy = data.template_file.logarchive_bucket_policy.rendered
+}

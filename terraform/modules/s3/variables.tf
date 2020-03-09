@@ -1,9 +1,8 @@
 
-/* variable "bucket_name" {
-  description = "The S3 Bucket Name source for findings bucket"
-  type        = string
+variable "bucket_name" {
+  type = string
+  default = ""
 }
-*/
 
 variable "config_tags" {
   default = {} 
@@ -27,14 +26,4 @@ variable "kms_key" {
 
 variable "enc_algorithm"{  
   default = "aws:kms"
-}
-
-variable "bucket_name" {
-    type = string
-    default = ""
-}
-
-variable "s3_bucket_policy" {
-    type = string
-    default = ""
 }
