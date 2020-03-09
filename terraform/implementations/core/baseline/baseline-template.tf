@@ -7,7 +7,7 @@ module "aws_lz_local_sns_topic" {
     aws = aws.sandbox-account
   }
 
-  sns_topic_name = var.config_topic_name
+  sns_topic_name = var.local_topic_name
   required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
 ### <---
