@@ -17,5 +17,5 @@
 resource "aws_s3_bucket_policy" "guardduty_bucket_policy" {
   bucket = var.bucket_name
   policy = var.policy
-  depends_on = [module.s3_findings.bucket_name_arn]
+  depends_on = [var.bucket_arn]
 }

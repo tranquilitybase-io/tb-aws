@@ -10,3 +10,7 @@ variable "policy_description" {
     type = string
     default = ""
 }
+
+variable "bucket_arn" {
+    type = string
+}
