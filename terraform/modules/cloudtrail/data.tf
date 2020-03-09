@@ -42,6 +42,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
 
     actions = [
       "SNS:Publish",
+      "SNS:GetTopicAttributes",
     ]
     
     resources = ["${var.sns_topic_arn}"]
