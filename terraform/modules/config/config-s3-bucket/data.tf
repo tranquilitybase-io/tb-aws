@@ -38,7 +38,7 @@ data "template_file" "logarchive_bucket_policy" {
 JSON
 
   vars = {
-    config_resource = format("%s/%s/AWSLogs/%s/Config/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix,var.source_policy_account_id)
-    cloudtrail_resource = format("%s/%s/AWSLogs/%s/CloudTrail/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix,var.source_policy_account_id)
+    config_resource = format("%s/%s/AWSLogs/*/Config/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix)
+    cloudtrail_resource = format("%s/%s/AWSLogs/*/CloudTrail/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix)
   }
 }
