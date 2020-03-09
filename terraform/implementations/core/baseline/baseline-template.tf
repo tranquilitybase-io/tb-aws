@@ -65,7 +65,6 @@ module "aws_lz_config_rules" {
 ### CONFIG SERVICE <--
 
 ### CLOUDTRAIL SERVICE -->
-/*
 module "aws_lz_cloudtrail" {
   source = "./modules/cloudtrail"
 
@@ -82,5 +81,5 @@ module "aws_lz_cloudtrail" {
   s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
   region = local.region
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
-}*/
+}
 ### CLOUDTRAIL SERVICE <--
