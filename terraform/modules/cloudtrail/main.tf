@@ -9,8 +9,10 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   #cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default.arn
   #cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role.arn
   include_global_service_events = var.include_global_events
-  sns_topic_name                = aws_sns_topic_policy.sns_default_policy.arn
+  sns_topic_name                = var.sns_topic_arn
   tags                       = var.required_tags
+
+  depends_on = [var.sns_topic_arn]
 }
 
 /*resource "aws_cloudwatch_log_group" "log_group_default" {
