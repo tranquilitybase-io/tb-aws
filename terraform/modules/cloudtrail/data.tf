@@ -28,6 +28,7 @@ data "aws_iam_policy_document" "cloudtrail_policy" {
 data "aws_iam_policy_document" "cloudtrail_sns_policy" {
   statement {
 
+    sid = "AWSLZCloudTrailSNSPolicy"
     effect = "Allow"
 
     principals {
@@ -41,10 +42,11 @@ data "aws_iam_policy_document" "cloudtrail_sns_policy" {
     
     resources = [var.sns_topic_arn]
 
-    condition {
+/*    condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
       values   = ["${var.bucket_account_id}"]
-    }
+    }*/
   }
 }
+
