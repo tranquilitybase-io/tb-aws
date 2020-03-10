@@ -46,7 +46,7 @@ resource "aws_sns_topic" "cloudtrail" {
   name = "${var.cloudtrail_name}_logging_sns_topic"
 }
 
-resource "aws_sns_topic_policy" "cloudtrail" {
+resource "aws_sns_topic_policy" "cloudtrail_topic_policy" {
   arn    = aws_sns_topic.cloudtrail.arn
   policy = data.aws_iam_policy_document.cloudtrail_sns.json
 }

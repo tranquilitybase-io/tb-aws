@@ -13,33 +13,20 @@ data "aws_iam_policy_document" "aws_config_role_policy" {
   }
 }
 
-data "aws_iam_policy_document" "sns_topic_policy" {
+data "aws_iam_policy_document" "config_sns" {
   statement {
-    effect = "Allow"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["*"]
-    }
-
     actions = [
-      "SNS:GetTopicAttributes",
-      "SNS:SetTopicAttributes",
-      "SNS:AddPermission",
-      "SNS:RemovePermission",
-      "SNS:DeleteTopic",
-      "SNS:Subscribe",
-      "SNS:ListSubscriptionsByTopic",
-      "SNS:Publish",
-      "SNS:Receive"
+      "sns:Publish",
     ]
-    
-    resources = ["${var.sns_topic_arn}"]
-
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceOwner"
-      values   = ["${var.topic_account_id}"]
+    principals {
+      identifiers = [
+        "config.amazonaws.com",
+      ]
+      type = "Service"
     }
+    resources = [
+      var.sns_topic_arn,
+    ]
+    sid = "CloudTrail SNS Policy"
   }
 }
