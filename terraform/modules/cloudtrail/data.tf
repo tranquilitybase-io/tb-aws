@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "cloudtrail_assume_policy" {
   }
 }
 
-data "aws_iam_policy_document" "cloudtrail_policy" {
+data "aws_iam_policy_document" "cloudtrail_cloudwatch_policy" {
   statement {
     effect    = "Allow"
     actions   = ["logs:CreateLogStream"]
