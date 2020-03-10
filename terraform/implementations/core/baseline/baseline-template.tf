@@ -31,7 +31,6 @@ module "aws_lz_config_service" {
 }
 
 /*
-
 ###Activate Config Service for Master Account
 module "aws_lz_config_service_master" {
   source = "./modules/config/config-service"
