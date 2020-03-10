@@ -92,7 +92,7 @@ module "aws_lz_cloudtrail" {
   s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
   bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
   bucket_account_id = local.sandbox_account_id
-  sns_topic_arn = module.aws_lz_cloudtrail_sns_topic.topic_arn[0]
+  sns_topic_arn = module.aws_lz_cloudtrail_sns_topic.topic_arn
   region = local.region
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
