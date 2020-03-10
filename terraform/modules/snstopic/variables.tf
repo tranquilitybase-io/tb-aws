@@ -10,7 +10,3 @@ variable "kms_master_key_id" {
 variable "required_tags" {
   default = {} 
 }
-
-variable "topic_account_id" {
-
-}
