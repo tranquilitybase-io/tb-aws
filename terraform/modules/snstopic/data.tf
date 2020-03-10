@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       "SNS:Publish",
     ]
 
-    resources = ["${topic_arn}"]
+    resources = ["${local.topic_arn}"]
 
     condition {
       test     = "StringEquals"
