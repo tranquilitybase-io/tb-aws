@@ -41,8 +41,8 @@ resource "aws_iam_policy_attachment" "managed_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
 }
 
-/* resource "aws_sns_topic_policy" "sns_default_policy" {
+resource "aws_sns_topic_policy" "sns_config_default_policy" {
   arn = var.sns_topic_arn  
-  policy = data.aws_iam_policy_document.sns_topic_policy.json
-} */
+  policy = data.aws_iam_policy_document.config_sns.json
+}
 

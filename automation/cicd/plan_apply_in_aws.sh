@@ -1,6 +1,6 @@
-#!/bin/bash 
-# Variables 
+#!/bin/bash
 
+# Variables
 export AWS_ACCESS_KEY_ID=${access_key}
 export AWS_SECRET_ACCESS_KEY=${secret_key}
 export AWS_DEFAULT_REGION=${DEV_region}
@@ -21,7 +21,8 @@ terraform apply -auto-approve
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
 
-#terraform state rm module.aws_lz_config_service.aws_sns_topic_policy.sns_default_policy
+#terraform state rm module.aws_lz_config_sns_topic
+
 #terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_main
 #terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_log
 

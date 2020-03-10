@@ -23,18 +23,9 @@ variable "s3_log_prefix" {
   description = "S3 prefix"
 }
 
-variable "sns_topic_name" {
-  description = "Topic Name"
-}
-
 variable "sns_topic_arn" {
   description = "Topic ARN"
-}
-
-
-variable "cloudwatch_log_group" {
-  description = "cloudwatch_log_group"
-  default  = "cloudwatch_log_group"
+  default = ""
 }
 
 variable "multi_region_trail" {
@@ -46,7 +37,7 @@ variable "multi_region_trail" {
 variable "organization_trail" {
     description = "organization_trail"
     type = bool
-    default = true
+    default = false
 }
 
 variable "enable_logging" {
