@@ -1,4 +1,8 @@
 
+locals {
+  topic_arn = aws_sns_topic.sns_topic_default.arn
+}
+
 data "aws_iam_policy_document" "sns_topic_policy" {
   statement {
     effect = "Allow"
@@ -12,7 +16,7 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       "SNS:Publish",
     ]
 
-    resources = ["${aws_sns_topic.sns_topic_default.arn}"]
+    resources = ["${aws_sns_topic_policy.default.arn}"]
 
     condition {
       test     = "StringEquals"
