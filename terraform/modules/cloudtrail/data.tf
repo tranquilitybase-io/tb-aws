@@ -1,9 +1,4 @@
 
-
-locals {
-  resource = format("%s/%s/AWSLogs/*/CloudTrail/*",var.bucket_arn,var.s3_log_prefix)
-}
-
 data "aws_iam_policy_document" "cloudtrail_assume_policy" {
   statement {
     effect  = "Allow"

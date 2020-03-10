@@ -23,11 +23,6 @@ variable "s3_log_prefix" {
   description = "S3 prefix"
 }
 
-variable "sns_topic_name" {
-  description = "Topic Name"
-  default = ""
-}
-
 variable "sns_topic_arn" {
   description = "Topic ARN"
   default = ""
