@@ -43,7 +43,7 @@ resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
 
 
 resource "aws_sns_topic" "cloudtrail" {
-  name = "${var.cloudtrail_name}_sns_topic"
+  name = "${var.cloudtrail_name}_logging_sns_topic"
 }
 
 resource "aws_sns_topic_policy" "cloudtrail" {
