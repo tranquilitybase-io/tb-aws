@@ -25,10 +25,12 @@ variable "s3_log_prefix" {
 
 variable "sns_topic_name" {
   description = "Topic Name"
+  default = ""
 }
 
 variable "sns_topic_arn" {
   description = "Topic ARN"
+  default = ""
 }
 
 variable "multi_region_trail" {
