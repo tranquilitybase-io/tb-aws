@@ -15,6 +15,6 @@ variable "config_topic_name" {
 }
 
 variable "cloudtrail_topic_name" {
-  default = "aws_lz_local_sns_topic"
+  default = "aws_lz_cloudtrail_sns_topic"
   description = "Name of topic for CloudTrail service"
 }
