@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
                "SNS:Publish",
                "SNS:Receive",
               ]
-    resources = [var.sns_topic_arn]
+    resources = [var.sns_alarm_topic_arn]
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "cloudtrail_sns" {
       type = "Service"
     }
     resources = [
-      aws_sns_topic.cloudtrail.arn,
+      var.sns_topic_arn,
     ]
     sid = "CloudTrail SNS Policy"
   }

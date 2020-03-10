@@ -15,6 +15,11 @@ variable "config_topic_name" {
 }
 
 variable "cloudtrail_topic_name" {
+  default = "aws_lz_cloudtrail_logging_sns_topic"
+  description = "Name of topic for CloudTrail service"
+}
+
+variable "cloudtrail_alarm_topic_name" {
   default = "aws_lz_cloudtrail_alarm_sns_topic"
   description = "Name of topic for CloudTrail service"
 }
