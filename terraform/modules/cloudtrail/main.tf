@@ -9,7 +9,7 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   #cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default.arn
   #cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role.arn
   include_global_service_events = var.include_global_events
-  sns_topic_name                = var.sns_topic_arn
+  sns_topic_name                = "arn:aws:sns:us-west-2:705215869482:aws_lz_cloudtrail_sns_topic"
   tags                       = var.required_tags
 }
 
