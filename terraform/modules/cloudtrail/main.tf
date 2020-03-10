@@ -7,8 +7,8 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   enable_logging             = var.enable_logging
   enable_log_file_validation = var.enable_log_file_validation
   sns_topic_name             = var.sns_topic_arn
-  cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default.arn
-  cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role.arn
+  #cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default.arn
+  #cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role.arn
   include_global_service_events = var.include_global_events
   tags                       = var.required_tags
 }
@@ -18,7 +18,7 @@ resource "aws_sns_topic_policy" "sns_default_policy" {
   policy = data.aws_iam_policy_document.cloudtrail_sns_policy.json
 }
 
-resource "aws_cloudwatch_log_group" "log_group_default" {
+/*resource "aws_cloudwatch_log_group" "log_group_default" {
   name = "${var.cloudtrail_name}_cloudwatch_log_group"
   retention_in_days = var.logs_retencion_days
   tags = var.required_tags
@@ -33,7 +33,7 @@ resource "aws_iam_role" "cloudtrail_role" {
 resource "aws_iam_policy" "cloudtrail_access_policy" {
   name   = "${var.cloudtrail_name}_cloudwatch_policy"
   policy = data.aws_iam_policy_document.cloudtrail_cloudwatch_policy.json
-}
+}*/
 
 
 
