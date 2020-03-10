@@ -1,9 +1,11 @@
 variable "recorder_main" {
   description = "Recorder"
+  default = ""
 }
 
 variable "delivery_channel" {
   description = "Delivery Channel"
+  default = ""
 }
 
 variable "config_max_execution_frequency" {
