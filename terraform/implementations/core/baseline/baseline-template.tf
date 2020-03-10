@@ -54,7 +54,7 @@ module "aws_lz_config_aggregator" {
 */
 
 module "aws_lz_config_rules" {
-  source           = "./modules/config/config-rules"
+  source  = "./modules/config/config-rules"
 
   providers = {
     aws = aws.sandbox-account

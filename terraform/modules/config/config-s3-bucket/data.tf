@@ -39,6 +39,5 @@ JSON
 
   vars = {
     config_resource = format("%s/%s/AWSLogs/*/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix)
-    #cloudtrail_resource = format("%s/%s/AWSLogs/*/CloudTrail/*",aws_s3_bucket.s3_log.arn,var.s3_log_prefix)
   }
 }

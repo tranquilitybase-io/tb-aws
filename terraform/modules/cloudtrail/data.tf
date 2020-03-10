@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "cloudtrail_policy" {
   }
 }
 
-data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
+data "aws_iam_policy_document" "cloudtrail_sns_policy" {
   statement {
 
     effect = "Allow"
@@ -37,10 +37,9 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
 
     actions = [
       "SNS:Publish",
-      "SNS:GetTopicAttributes",
     ]
     
-    resources = ["${var.sns_topic_arn}"]
+    resources = [var.sns_topic_arn]
 
     condition {
       test     = "StringEquals"
