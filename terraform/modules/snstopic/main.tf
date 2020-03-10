@@ -9,8 +9,9 @@ resource "aws_sns_topic" "sns_topic_default" {
 }
 
 resource "aws_sns_topic_policy" "default" {
-  arn = aws_sns_topic.sns_topic_default.arn
+  count = length(var.sns_topic_name) > 0 ? 1 : 0
 
+  arn = aws_sns_topic.sns_topic_default.arn
   policy = data.aws_iam_policy_document.sns_topic_policy.json
 }
 
