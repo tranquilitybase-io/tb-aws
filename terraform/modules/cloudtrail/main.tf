@@ -30,8 +30,8 @@ resource "aws_iam_policy" "cloudtrail_access_policy" {
   policy = data.aws_iam_policy_document.cloudtrail_policy.json
 }*/
 
-/*resource "aws_sns_topic_policy" "sns_default_policy" {
+resource "aws_sns_topic_policy" "sns_default_policy" {
   arn = var.sns_topic_arn
   policy = data.aws_iam_policy_document.cloudtrail_sns_policy.json
-}*/
+}
 

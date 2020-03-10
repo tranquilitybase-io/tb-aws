@@ -36,17 +36,15 @@ data "aws_iam_policy_document" "cloudtrail_sns_policy" {
       identifiers = ["cloudtrail.amazonaws.com"]
     }
 
-    actions = [
-      "SNS:Publish",
-    ]
+    actions = ["SNS:Publish","SNS:SetTopicAttributes"]
     
     resources = [var.sns_topic_arn]
 
-/*    condition {
+    condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
       values   = ["${var.bucket_account_id}"]
-    }*/
+    }
   }
 }
 
