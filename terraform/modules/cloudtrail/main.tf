@@ -7,7 +7,7 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   s3_key_prefix              = var.s3_log_prefix
   enable_logging             = var.enable_logging
   enable_log_file_validation = var.enable_log_file_validation
-  sns_topic_name             = var.sns_topic_name
+  sns_topic_name             = aws_sns_topic.cloudtrail.name
   cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default.arn
   cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role.arn
   tags                       = var.required_tags
@@ -42,11 +42,11 @@ resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
 }
 
 
-/*resource "aws_sns_topic" "cloudtrail" {
+resource "aws_sns_topic" "cloudtrail" {
   name = "${var.cloudtrail_name}_logging_sns_topic"
-}*/
+}
 
 resource "aws_sns_topic_policy" "cloudtrail_topic_policy" {
-  arn    = var.sns_topic_arn
+  arn    = aws_sns_topic.cloudtrail.arn
   policy = data.aws_iam_policy_document.cloudtrail_sns.json
 }
