@@ -13,4 +13,5 @@ variable "policy_description" {
 
 variable "bucket_arn" {
     type = string
+    default = ""
 }

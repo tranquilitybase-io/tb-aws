@@ -1,5 +1,6 @@
 
-variable "sns_topic_name" {  
+variable "sns_topic_name" {
+  default = ""
 }
 
 variable "kms_master_key_id" {

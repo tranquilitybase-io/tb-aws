@@ -13,10 +13,12 @@ variable "config_name" {
 
 variable "region" {
   description = "Region to be attached to Authorization"
+  default = ""
 }
 
 variable "authorization_account_id" {
   description = "Authorization Account ID - Required"
+  default = ""
 }
 
 variable "aggregate_organization" {

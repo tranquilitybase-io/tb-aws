@@ -2,10 +2,12 @@
 variable "bucket_name" {
   description = "The S3 Bucket Name source for log bucket"
   type        = string
+  default = ""
 }
 
 variable "bucket_name_log" {
   description = "The S3 Bucket Name for log."
+  default = ""
 }
 
 variable "s3_log_prefix" {
@@ -36,7 +38,3 @@ variable "sse_aes256" {
   description = "Encryption AES256"
   default = "AES256"
 }
-
-/*variable "source_policy_account_id" {
-  description = "Source Account ID for bucket policy"
-}*/
