@@ -6,8 +6,6 @@ module "tgw" {
     aws = aws.network-account
   }
 
-  depends_on = ["module.vpc1", "module.vpc2"]
-
   name            = "aws_lz_tgw"
   description     = "AWS Landing Zone TGW shared with several other AWS accounts"
   amazon_side_asn = 64532
@@ -29,11 +27,11 @@ module "tgw" {
         },
         {
           blackhole              = true
-          destination_cidr_block = "0.0.0.0/0"
+          destination_cidr_block = "40.0.0.0/0"
         }
       ]
     },
-    vpc2 = {
+    /*vpc2 = {
       vpc_id     = module.vpc2.vpc_id
       subnet_ids = module.vpc2.private_subnets
 
@@ -46,7 +44,7 @@ module "tgw" {
           destination_cidr_block = "10.10.10.10/32"
         }
       ]
-    },
+    },*/
   }
 
   ram_allow_external_principals = true
