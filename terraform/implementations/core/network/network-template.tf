@@ -48,8 +48,7 @@ module "tgw" {
   }*/
 
   ram_allow_external_principals = true
-  ram_principals                = ["arn:aws:organizations::372937028188:root/o-8lg1h3pzea/r-royk"]
-  #"arn:aws:organizations::372937028188:ou/o-8lg1h3pzea/ou-royk-0xu6yv0o",
+  ram_principals                = [372937028188]
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
