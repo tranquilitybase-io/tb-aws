@@ -1,3 +1,4 @@
+# Main config
 organization:
   name: company_name
   default-zone: us-west-2
