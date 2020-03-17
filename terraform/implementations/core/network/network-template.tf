@@ -86,7 +86,7 @@ module "vpc2" {
 
   cidr = "10.20.0.0/16"
 
-  azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  azs             = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
   private_subnets = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
 
   enable_ipv6 = false
