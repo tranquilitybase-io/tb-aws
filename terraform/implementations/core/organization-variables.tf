@@ -44,7 +44,7 @@ variable "aws_organizations_account_sandboxdev_email" {
 }
 variable "aws_organizations_account_sandboxprod_name" {
     description = "Sandbox PROD accounts name"
-    default = "test-account"
+    default = "test-account-2"
 }
 variable "aws_organizations_account_sandboxprod_email" {
     description = "Sandbox PROD accounts email"
