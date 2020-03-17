@@ -94,7 +94,7 @@ terraform apply ./terraform
     * **AccountID**    Account ID
     * **Key Name**     Key name to identify that item in the cloud 
 
-    _Make sure to respect names and case_   
+    _Make sure to respect names and case_    
 
      
 
