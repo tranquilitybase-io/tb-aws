@@ -1,17 +1,8 @@
 
-// See Notes in README.md for explanation regarding using data-sources and computed values
-/*data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnet_ids" "this" {
-  vpc_id = data.aws_vpc.default.id
-}*/
-
 module "tgw" {
   #source = "../../"
   source  = "terraform-aws-modules/transit-gateway/aws"
-  #version = "~> 1.1.0"
+  version = "~> 1.1.0"
 
   providers = {
     aws = aws.network-account
@@ -25,8 +16,8 @@ module "tgw" {
 
   vpc_attachments = {
     vpc1 = {
-      vpc_id                                          = module.vpc1.vpc_id # data.aws_vpc.default.id
-      subnet_ids                                      = module.vpc1.private_subnets # data.aws_subnet_ids.this.ids
+      vpc_id                                          = module.vpc1.vpc_id
+      subnet_ids                                      = module.vpc1.private_subnets
       dns_support                                     = true
       ipv6_support                                    = true
       transit_gateway_default_route_table_association = false
@@ -69,7 +60,7 @@ module "tgw" {
 
 module "vpc1" {
   source  = "terraform-aws-modules/vpc/aws"
-  #version = "~> 2.0"
+  version = "~> 2.0"
 
   providers = {
     aws = aws.network-account
@@ -89,7 +80,7 @@ module "vpc1" {
 
 module "vpc2" {
   source  = "terraform-aws-modules/vpc/aws"
-  #version = "~> 2.0"
+  version = "~> 2.0"
 
   providers = {
     aws = aws.network-account
