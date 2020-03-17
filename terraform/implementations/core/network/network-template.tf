@@ -22,7 +22,6 @@ module "tgw" {
       ipv6_support                                    = true
       transit_gateway_default_route_table_association = false
       transit_gateway_default_route_table_propagation = false
-      //      transit_gateway_route_table_id = "tgw-rtb-073a181ee589b360f"
 
       tgw_routes = [
         {
@@ -35,8 +34,8 @@ module "tgw" {
       ]
     },
     vpc2 = {
-      vpc_id     = module.vpc2.vpc_id #data.aws_vpc.default.id
-      subnet_ids = module.vpc2.private_subnets #data.aws_subnet_ids.this.ids
+      vpc_id     = module.vpc2.vpc_id
+      subnet_ids = module.vpc2.private_subnets
 
       tgw_routes = [
         {
