@@ -12,7 +12,7 @@ module "tgw" {
 
   enable_auto_accept_shared_attachments = true // When "true" there is no need for RAM resources if using multiple AWS accounts
 
-  /*vpc_attachments = {
+  vpc_attachments = {
     vpc1 = {
       vpc_id                                          = module.vpc1.vpc_id
       subnet_ids                                      = module.vpc1.private_subnets
@@ -45,7 +45,7 @@ module "tgw" {
         }
       ]
     },
-  }*/
+  }
 
   ram_allow_external_principals = true
   ram_principals                = [local.sandbox_account_id]
@@ -53,21 +53,20 @@ module "tgw" {
 }
 
 
-/*
 module "vpc1" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
 
   providers = {
-    aws = aws.network-account
+    aws = aws.sandbox-account
   }
 
-  name = "vpc1"
+  name = format("aws_lz_vpc1_%s",local.sandbox_account_id)
 
-  cidr = "10.10.0.0/16"
+  cidr = "10.1.0.0/16"
 
   azs             = ["us-west-2a", "us-west-2b", "us-west-2c"]
-  private_subnets = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
+  private_subnets = ["10.1.1.0/22", "10.1.2.0/22", "10.1.3.0/22"]
 
   enable_ipv6                                    = true
   private_subnet_assign_ipv6_address_on_creation = true
@@ -79,17 +78,15 @@ module "vpc2" {
   version = "~> 2.0"
 
   providers = {
-    aws = aws.network-account
+    aws = aws.sandbox-account
   }
 
-  name = "vpc2"
+  name = format("aws_lz_vpc2_%s",local.sandbox_account_id)
 
-  cidr = "10.20.0.0/16"
+  cidr = "10.2.0.0/16"
 
   azs             = ["us-west-2a", "us-west-2b", "us-west-2c"]
-  private_subnets = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
+  private_subnets = ["10.2.1.0/22", "10.2.2.0/22", "10.2.3.0/22"]
 
   enable_ipv6 = false
 }
-*/
-
