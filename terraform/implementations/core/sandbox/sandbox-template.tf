@@ -8,7 +8,7 @@ module "vpc" {
 
   cidr = "10.0.0.0/16"
 
-  azs             = ["eu-west-1a"]
+  azs             = ["us-west-2a"]
   private_subnets = []
   public_subnets  = ["10.0.101.0/24"]
 
