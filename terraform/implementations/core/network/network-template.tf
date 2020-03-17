@@ -62,9 +62,9 @@ module "tgw" {
     Purpose = "tgw-complete-example"
   }
 
-  providers = {
+  /*providers = {
     aws = aws.network-account
-  }
+  }*/
 }
 
 module "vpc1" {
@@ -82,9 +82,9 @@ module "vpc1" {
   private_subnet_assign_ipv6_address_on_creation = true
   private_subnet_ipv6_prefixes                   = [0, 1, 2]
 
-  providers = {
+  /*providers = {
     aws = aws.network-account
-  }
+  }*/
 }
 
 module "vpc2" {
@@ -100,8 +100,8 @@ module "vpc2" {
 
   enable_ipv6 = false
 
-  providers = {
+  /*providers = {
     aws = aws.network-account
-  }
+  }*/
 }
 
