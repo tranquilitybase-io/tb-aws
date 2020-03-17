@@ -1,8 +1,6 @@
 
 module "tgw" {
-  #source = "../../"
-  source  = "terraform-aws-modules/transit-gateway/aws"
-  version = "~> 1.1.0"
+  source  = "./modules/transit-gateway"
 
   providers = {
     aws = aws.network-account
