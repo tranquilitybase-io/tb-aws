@@ -7,9 +7,9 @@
 # docker push deiverk/ubuntu_terraform_python3:latest
 
 FROM ubuntu:18.04
-LABEL maintainer Deiver Kiel "deikiel@gmail.com"
+Label MAINTAINER Deiver Kiel "deikiel@gmail.com"
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl wget unzip python3 ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends graphviz curl wget unzip python3 python3-pip ca-certificates && pip3 install boto3 && rm -rf /var/lib/apt/lists/*
 RUN wget --no-check-certificate https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_linux_amd64.zip && \
         unzip terraform_0.12.20_linux_amd64.zip && mv terraform /usr/bin && rm terraform_0.12.20_linux_amd64.zip
-RUN cd /usr/local/bin && ln -s /usr/bin/python3 python
+#RUN cd /usr/local/bin && ln -s /usr/bin/python3 python
