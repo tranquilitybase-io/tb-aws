@@ -1,3 +1,6 @@
+providers = {
+    aws = aws.network-account
+}
 
 // See Notes in README.md for explanation regarding using data-sources and computed values
 data "aws_vpc" "default" {
