@@ -1,20 +1,27 @@
-providers = {
-    aws = aws.network-account
-}
 
 // See Notes in README.md for explanation regarding using data-sources and computed values
 data "aws_vpc" "default" {
   default = true
+  providers = {
+    aws = aws.network-account
+  }
 }
 
 data "aws_subnet_ids" "this" {
   vpc_id = data.aws_vpc.default.id
+  providers = {
+    aws = aws.network-account
+  }
 }
 
 module "tgw" {
   #source = "../../"
   source  = "terraform-aws-modules/transit-gateway/aws"
   version = "~> 1.1.0"
+
+  providers = {
+    aws = aws.network-account
+  }
 
   name            = "my-tgw"
   description     = "My TGW shared with several other AWS accounts"
@@ -64,15 +71,15 @@ module "tgw" {
   tags = {
     Purpose = "tgw-complete-example"
   }
-
-  /*providers = {
-    aws = aws.network-account
-  }*/
 }
 
 module "vpc1" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
+
+  providers = {
+    aws = aws.network-account
+  }
 
   name = "vpc1"
 
@@ -84,15 +91,15 @@ module "vpc1" {
   enable_ipv6                                    = true
   private_subnet_assign_ipv6_address_on_creation = true
   private_subnet_ipv6_prefixes                   = [0, 1, 2]
-
-  /*providers = {
-    aws = aws.network-account
-  }*/
 }
 
 module "vpc2" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
+
+  providers = {
+    aws = aws.network-account
+  }
 
   name = "vpc2"
 
@@ -102,9 +109,5 @@ module "vpc2" {
   private_subnets = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
 
   enable_ipv6 = false
-
-  /*providers = {
-    aws = aws.network-account
-  }*/
 }
 
