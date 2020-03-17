@@ -2,16 +2,10 @@
 // See Notes in README.md for explanation regarding using data-sources and computed values
 data "aws_vpc" "default" {
   default = true
-  providers = {
-    aws = aws.network-account
-  }
 }
 
 data "aws_subnet_ids" "this" {
   vpc_id = data.aws_vpc.default.id
-  providers = {
-    aws = aws.network-account
-  }
 }
 
 module "tgw" {
