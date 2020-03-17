@@ -1,3 +1,4 @@
+
 // See Notes in README.md for explanation regarding using data-sources and computed values
 data "aws_vpc" "default" {
   default = true
@@ -60,6 +61,10 @@ module "tgw" {
   tags = {
     Purpose = "tgw-complete-example"
   }
+
+  providers = {
+    aws = aws.network-account
+  }
 }
 
 module "vpc1" {
@@ -76,6 +81,10 @@ module "vpc1" {
   enable_ipv6                                    = true
   private_subnet_assign_ipv6_address_on_creation = true
   private_subnet_ipv6_prefixes                   = [0, 1, 2]
+
+  providers = {
+    aws = aws.network-account
+  }
 }
 
 module "vpc2" {
@@ -90,5 +99,9 @@ module "vpc2" {
   private_subnets = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
 
   enable_ipv6 = false
+
+  providers = {
+    aws = aws.network-account
+  }
 }
 
