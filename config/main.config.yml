@@ -1,12 +1,17 @@
-organization: 
-  name: ACME
+# Main config
+organization:
+  name: company_name
   default-zone: us-west-2
   multizone-security: true          # default true
   core-ou:
     - security:
+        email: sec_email
         encription: AES256
     - logarchive:
+        email: log_email
     - shared-services:
+        email: shared_email
         issue-management: true
         k8s-cluster: true
     - network:
+        email: net_email
