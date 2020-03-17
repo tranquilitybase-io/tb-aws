@@ -6,8 +6,8 @@ module "tgw" {
     aws = aws.network-account
   }
 
-  name            = "my-tgw"
-  description     = "My TGW shared with several other AWS accounts"
+  name            = "aws_lz_tgw"
+  description     = "AWS Landing Zone TGW shared with several other AWS accounts"
   amazon_side_asn = 64532
 
   enable_auto_accept_shared_attachments = true // When "true" there is no need for RAM resources if using multiple AWS accounts
@@ -48,11 +48,9 @@ module "tgw" {
   }*/
 
   ram_allow_external_principals = true
-  ram_principals                = [307990089504]
-
-  tags = {
-    Purpose = "tgw-complete-example"
-  }
+  ram_principals                = ["arn:aws:organizations::372937028188:root/o-8lg1h3pzea/r-royk"]
+  #"arn:aws:organizations::372937028188:ou/o-8lg1h3pzea/ou-royk-0xu6yv0o",
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
 
