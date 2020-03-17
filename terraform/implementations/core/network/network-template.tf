@@ -6,6 +6,8 @@ module "tgw" {
     aws = aws.network-account
   }
 
+  depends_on = ["module.vpc1", "module.vpc2"]
+
   name            = "aws_lz_tgw"
   description     = "AWS Landing Zone TGW shared with several other AWS accounts"
   amazon_side_asn = 64532
@@ -61,7 +63,7 @@ module "vpc1" {
     aws = aws.sandbox-account
   }
 
-  name = format("aws_lz_vpc1_%s",local.sandbox_account_id)
+  name = "aws_lz_vpc1"
 
   cidr = "10.1.0.0/16"
 
@@ -81,7 +83,7 @@ module "vpc2" {
     aws = aws.sandbox-account
   }
 
-  name = format("aws_lz_vpc2_%s",local.sandbox_account_id)
+  name = "aws_lz_vpc2"
 
   cidr = "10.2.0.0/16"
 
