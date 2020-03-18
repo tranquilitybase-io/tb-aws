@@ -1,4 +1,4 @@
-/*Using terraform VPC module, see https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.29.0 */
+
 module "vpc-sandbox" {
   source  = "terraform-aws-modules/vpc/aws"
   providers = {
