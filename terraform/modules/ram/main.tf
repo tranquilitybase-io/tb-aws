@@ -7,12 +7,12 @@ resource "aws_ram_resource_share" "aws_lz_ram_shared" {
   tags = var.ram_tags
 }
 
-resource "aws_ram_resource_association" "aws_lz_ram_association" {
+/*resource "aws_ram_resource_association" "aws_lz_ram_association" {
   count = var.ram_create && var.ram_share ? 1 : 0
 
   resource_arn       = var.ram_resource_arn
   resource_share_arn = var.ram_resource_shared_arn
-}
+}*/
 
 resource "aws_ram_principal_association" "aws_lz_ram_principal_association" {
   count = var.ram_create && var.ram_share ? length(var.ram_principals) : 0
