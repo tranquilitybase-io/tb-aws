@@ -26,7 +26,7 @@ variable "vpc_sandbox_2_public_subnets_cidr"{
     default = []
 }
 
-variables "vpc_azs"{
+variable "vpc_azs"{
     description = "Availability zones where the VPC will span"
     default = ["us-west-2a","us-west-2b"]
 }
