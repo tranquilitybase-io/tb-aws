@@ -1,5 +1,5 @@
 variable "ram_tags" {
-  default = ""
+  default = {}
 }
 variable "ram_create" {
   type        = bool
