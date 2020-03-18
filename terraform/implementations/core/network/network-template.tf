@@ -58,7 +58,7 @@ module "vpc1" {
   version = "~> 2.0"
 
   providers = {
-    aws = aws.sandbox-account
+    aws = aws.network-account
   }
 
   name = "aws_lz_vpc1"
@@ -78,7 +78,7 @@ module "vpc2" {
   version = "~> 2.0"
 
   providers = {
-    aws = aws.sandbox-account
+    aws = aws.network-account
   }
 
   name = "aws_lz_vpc2"
