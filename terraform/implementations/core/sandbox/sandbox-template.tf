@@ -33,3 +33,24 @@ module "vpc-sandbox-2" {
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "sandbox" }
 }
+
+
+module "vpc-sandbox-twg-attachment" {
+  source  = "./modules/transit-gateway-vpc-attachment"
+  providers = {
+    aws = aws.sandbox-account
+  }
+  subnets_ids = module.vpc-sandbox.public_subnets
+  vpc_id = module.vpc-sandbox.vpc_id
+  transit_gateway_id = module.tgw.id
+}
+
+module "vpc-sandbox-2-twg-attachment" {
+  source  = "./modules/transit-gateway-vpc-attachment"
+  providers = {
+    aws = aws.sandbox-account-2
+  }
+  subnets_ids = module.vpc-sandbox-2.public_subnets
+  vpc_id = module.vpc-sandbox-2.vpc_id
+  transit_gateway_id = module.tgw.id
+}
