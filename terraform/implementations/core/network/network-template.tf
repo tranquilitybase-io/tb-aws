@@ -27,7 +27,7 @@ module "tgw" {
         },
         {
           blackhole              = true
-          destination_cidr_block = "40.0.0.0/0"
+          destination_cidr_block = "0.0.0.0/0"
         }
       ]
     },
@@ -63,10 +63,10 @@ module "vpc1" {
 
   name = "aws_lz_vpc1"
 
-  cidr = "10.1.0.0/16"
+  cidr = "10.10.0.0/16"
 
   azs             = ["us-west-2a", "us-west-2b", "us-west-2c"]
-  private_subnets = ["10.1.1.0/22", "10.1.2.0/22", "10.1.3.0/22"]
+  private_subnets = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
 
   enable_ipv6                                    = true
   private_subnet_assign_ipv6_address_on_creation = true
@@ -83,10 +83,10 @@ module "vpc2" {
 
   name = "aws_lz_vpc2"
 
-  cidr = "10.2.0.0/16"
+  cidr = "10.20.0.0/16"
 
   azs             = ["us-west-2a", "us-west-2b", "us-west-2c"]
-  private_subnets = ["10.2.1.0/22", "10.2.2.0/22", "10.2.3.0/22"]
+  private_subnets = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
 
   enable_ipv6 = false
 }
