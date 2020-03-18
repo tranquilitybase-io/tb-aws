@@ -5,7 +5,6 @@ module "vpc" {
   }
   source  = "terraform-aws-modules/vpc/aws"
   
-
   cidr = "10.0.0.0/16"
 
   azs             = ["us-west-2a"]
