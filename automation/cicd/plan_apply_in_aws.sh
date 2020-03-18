@@ -12,24 +12,10 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
 cd ${TERRAFORM_PATH}
 
-echo "Before replacement---------------------"
-cat implementations/core/organization-variables.tf
-
-sed -i "s;sharedservice_email;tl93372@gmail.com;" implementations/core/organization-variables.tf
-sed -i "s;logarchive_email;tl93373@gmail.com;" implementations/core/organization-variables.tf
-sed -i "s;security_email;test.gft.aws.03@gmail.com;" implementations/core/organization-variables.tf
-sed -i "s;network_email;test.gft.aws.04@gmail.com;" implementations/core/organization-variables.tf
-sed -i "s;test-account_email;tb.test.logging.01@gmail.com;" implementations/core/organization-variables.tf
-sed -i "s;test-account-2_email;tb.test.logging.02@gmail.com;" implementations/core/organization-variables.tf
-
-echo "After replacement---------------------"
-cat implementations/core/organization-variables.tf
-
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
-cat main.tf 
 terraform apply -auto-approve
 
 
