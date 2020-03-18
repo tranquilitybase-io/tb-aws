@@ -54,8 +54,11 @@ module "aws_lz_aws_ram_resource_association" {
   source = "./modules/ram"
 
   ram_name = "AWS_LZ_TG"
+
+  ram_resource_arn = module.aws_lz_tgw.tgw_arn
   ram_principals = module.aws_lz_organization_main.org_arn
-  ram_resource_shared_arn = module.aws_lz_tgw.tgw_id
+  ram_resource_shared_associtaion_arn = module.aws_lz_aws_ram_share_tg.ram_resource_share_id
+  ram_resource_shared_principal_arn = module.aws_lz_aws_ram_share_tg.ram_resource_share_id
 
   providers = {
     aws = aws.network-account

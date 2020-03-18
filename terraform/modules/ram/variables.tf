@@ -29,3 +29,11 @@ variable "ram_name" {
   type = string
   default = ""
 }
+
+
+variable "ram_resource_shared_associtaion_arn" {
+  default = ""
+}
+variable "ram_resource_shared_principal_arn" {
+  default = ""
+}
