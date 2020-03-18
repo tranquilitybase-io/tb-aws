@@ -31,7 +31,7 @@ module "tgw" {
         }
       ]
     },
-    /*vpc2 = {
+    vpc2 = {
       vpc_id     = module.vpc2.vpc_id
       subnet_ids = module.vpc2.private_subnets
 
@@ -44,7 +44,7 @@ module "tgw" {
           destination_cidr_block = "10.10.10.10/32"
         }
       ]
-    },*/
+    },
   }
 
   ram_allow_external_principals = true
