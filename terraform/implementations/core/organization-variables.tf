@@ -4,7 +4,7 @@ variable "aws_organizations_account_sharedservices_name" {
 }
 variable "aws_organizations_account_sharedservices_email" {
     description = "Shared Services email"
-    default = "sharedservice_email"
+    default = "tl93372@gmail.com"
 }
 
 variable "aws_organizations_account_logarchive_name" {
@@ -14,7 +14,7 @@ variable "aws_organizations_account_logarchive_name" {
 
 variable "aws_organizations_account_logarchive_email" {
     description = "Log Archive accounts email"
-    default = "logarchive_email"
+    default = "tl93373@gmail.com"
 }
 
 variable "aws_organizations_account_security_name" {
@@ -23,7 +23,7 @@ variable "aws_organizations_account_security_name" {
 }
 variable "aws_organizations_account_security_email" {
     description = "Security accounts email"
-    default = "security_email"
+    default = "test.gft.aws.03@gmail.com"
 }
 variable "aws_organizations_account_network_name" {
     description = "Network accounts name"
@@ -31,7 +31,7 @@ variable "aws_organizations_account_network_name" {
 }
 variable "aws_organizations_account_network_email" {
     description = "Network accounts email"
-    default = "network_email"
+    default = "test.gft.aws.04@gmail.com"
 }
 
 variable "aws_organizations_account_sandboxdev_name" {
@@ -40,7 +40,7 @@ variable "aws_organizations_account_sandboxdev_name" {
 }
 variable "aws_organizations_account_sandboxdev_email" {
     description = "Sandbox DEV accounts email"
-    default = "test-account_email"
+    default = "tb.test.logging.01@gmail.com"
 }
 variable "aws_organizations_account_sandboxprod_name" {
     description = "Sandbox PROD accounts name"
@@ -48,5 +48,5 @@ variable "aws_organizations_account_sandboxprod_name" {
 }
 variable "aws_organizations_account_sandboxprod_email" {
     description = "Sandbox PROD accounts email"
-    default = "test-account-2_email"
+    default = "tb.test.logging.02@gmail.com"
 }
