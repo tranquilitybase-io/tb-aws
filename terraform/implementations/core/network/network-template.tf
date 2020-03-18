@@ -17,6 +17,7 @@ module "aws_lz_tgw" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+/*
 
 module "aws_lz_egress_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -31,8 +32,8 @@ module "aws_lz_egress_vpc" {
   cidr = var.egress_vpc_cidr
 
   azs             = ["us-west-2a", "us-west-2b"]
-  public_subnets  = ["10.99.0.1/24", "10.99.0.2/24"]
-  private_subnets = ["10.99.0.3/24", "10.99.0.4/24"]
+  public_subnets  = ["10.99.0.0/24", "10.99.1.0/24"]
+  private_subnets = ["10.99.2.0/24", "10.99.3.0/24"]
 
   enable_nat_gateway = true
   single_nat_gateway = false
@@ -41,3 +42,4 @@ module "aws_lz_egress_vpc" {
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
+*/
