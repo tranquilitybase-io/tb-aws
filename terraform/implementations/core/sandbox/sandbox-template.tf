@@ -9,8 +9,8 @@ module "vpc" {
   cidr = "10.0.0.0/16"
 
   azs             = ["us-west-2a"]
-  private_subnets = []
-  public_subnets  = ["10.0.101.0/24"]
+  private_subnets = ["10.0.101.0/24"]
+  public_subnets  = []
 
   enable_nat_gateway = false
   enable_vpn_gateway = false
