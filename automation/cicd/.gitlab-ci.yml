@@ -13,10 +13,11 @@ stages:
   image:
     name: deiverk/ubuntu_terraform_python3:latest
     entrypoint: [""]
-  #only:
-  #  refs:
-  #    - /^((feature/.*))$/
-  #    - /^((develop/.*))$/
+  only:
+    refs:
+      - /^((feature/.*))$/
+      - /^((poc/.*))$/
+      - /^((develop/.*))$/
 
 
 # Apply the Terraform files in AWS root account
