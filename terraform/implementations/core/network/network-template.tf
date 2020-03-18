@@ -31,8 +31,8 @@ module "aws_lz_egress_vpc" {
   cidr = var.egress_vpc_cidr
 
   azs             = ["us-west-2a", "us-west-2b"]
-  public_subnets  = ["10.99.0.0/24", "10.99.1.0/24"]
-  private_subnets = ["10.99.2.0/24", "10.99.3.0/24"]
+  public_subnets  = ["10.99.0.1/24", "10.99.0.2/24"]
+  private_subnets = ["10.99.0.3/24", "10.99.0.4/24"]
 
   enable_nat_gateway = true
   single_nat_gateway = false
