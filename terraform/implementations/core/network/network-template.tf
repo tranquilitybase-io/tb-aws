@@ -8,11 +8,11 @@ module "tgw" {
 
   name            = "aws_lz_tgw"
   description     = "AWS Landing Zone TGW shared with several other AWS accounts"
-  amazon_side_asn = 64532
+  amazon_side_asn = 64599
 
   enable_auto_accept_shared_attachments = true // When "true" there is no need for RAM resources if using multiple AWS accounts
 
-  vpc_attachments = {
+  /*vpc_attachments = {
     vpc1 = {
       vpc_id                                          = module.vpc1.vpc_id
       subnet_ids                                      = module.vpc1.private_subnets
@@ -45,14 +45,15 @@ module "tgw" {
         }
       ]
     },
-  }
+  }*/
 
   ram_allow_external_principals = true
-  ram_principals                = [local.sandbox_account_id]
+  ram_principals                = [local.sandbox_account_id,957746367829]
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
 
+/*
 module "vpc1" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
@@ -89,4 +90,4 @@ module "vpc2" {
   private_subnets = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
 
   enable_ipv6 = false
-}
+}*/
