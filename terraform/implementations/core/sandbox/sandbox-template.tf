@@ -22,7 +22,7 @@ module "vpc-sandbox-2" {
     aws = aws.sandbox-account-2
   }
   
-  name = vR.vpc_sandbox_2_cidr
+  name = var.vpc_sandbox_2_cidr
   cidr = var.vpc_sandbox_2_cidr
   azs             = var.vpc_azs
   private_subnets = var.vpc_sandbox_2_private_subnets_cidr
