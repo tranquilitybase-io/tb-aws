@@ -11,7 +11,7 @@ locals {
 provider "aws" {
   version = "~> 2.48"
 }
-
+/*
 provider "aws" {
   version = "~> 2.48"
   alias = "sandbox-account-2"
@@ -19,7 +19,7 @@ provider "aws" {
     role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox_prod.account_id}:role/${var.org_admin_role}" 
   }
 }
-
+*/
 provider "aws" {
   version = "~> 2.48"
   alias = "sandbox-account"
