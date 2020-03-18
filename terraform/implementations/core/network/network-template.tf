@@ -1,5 +1,5 @@
 
-module "tgw" {
+module "aws_lz_tgw" {
   source = "./modules/transit-gateway"
 
   providers = {
@@ -18,7 +18,7 @@ module "tgw" {
 }
 
 
-module "vpc-network-account" {
+module "aws_lz_egress_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
 
