@@ -1,6 +1,6 @@
 variable "vpc_sandbox_1_cidr"{
     description = "Sandbox account 1 VPC CIDR range"
-    default = "10.100.0.0/22"
+    default = "10.100.0.0/22"    
 }
 
 variable "vpc_sandbox_1_private_subnets_cidr"{

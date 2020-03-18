@@ -27,8 +27,8 @@ module "vpc-sandbox-2" {
 
 
   azs             = var.vpc_azs
-  private_subnets = var.vpc_sandbox_1_private_subnets_cidr
-  public_subnets  = var.vpc_sandbox_1_public_subnets_cidr
+  private_subnets = var.vpc_sandbox_2_private_subnets_cidr
+  public_subnets  = var.vpc_sandbox_2_public_subnets_cidr
 
   enable_nat_gateway = var.enable_nat_gateway
   enable_vpn_gateway = var.enable_vpn_gateway
