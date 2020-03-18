@@ -19,9 +19,14 @@
 ### Guardduty
 /core/guardduty-template.tf
 /core/guardduty-variables.tf
+
 ### Network Accounts
 /core/network/network-template.tf
 /core/network/network-variables.tf
+
+###Sandbox Accounts
+/core/sandbox-template.tf
+/core/sandbox-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
