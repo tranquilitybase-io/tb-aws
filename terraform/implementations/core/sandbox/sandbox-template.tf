@@ -40,11 +40,11 @@ module "vpc-sandbox-twg-attachment" {
   providers = {
     aws = aws.sandbox-account
   }
-  subnets_ids = "${list("${module.vpc-sandbox.public_subnets}")}"
+  subnets_ids = "${module.vpc-sandbox.public_subnets}"
   vpc_id = module.vpc-sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
 }
-
+/*
 module "vpc-sandbox-2-twg-attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
@@ -53,4 +53,4 @@ module "vpc-sandbox-2-twg-attachment" {
   subnets_ids = "${list("${module.vpc-sandbox-2.public_subnets}")}"
   vpc_id = module.vpc-sandbox-2.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-}
+}*/
