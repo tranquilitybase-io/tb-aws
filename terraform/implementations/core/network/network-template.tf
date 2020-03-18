@@ -20,7 +20,7 @@ module "aws_lz_tgw" {
 
 module "aws_lz_egress_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = var.vpc_module_version
+  version = "~> 2.0"
 
   providers = {
     aws = aws.network-account

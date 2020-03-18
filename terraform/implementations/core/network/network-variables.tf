@@ -1,10 +1,4 @@
 
-variable "vpc_module_version" {
-  default = "~> 2.0"
-  description = "vpc_module_version"
-}
-
-
 variable "egress_vpc_name" {
   default = "aws_lz_egress_vpc"
   description = "Egress VPC Name"
