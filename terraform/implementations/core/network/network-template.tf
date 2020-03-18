@@ -26,7 +26,7 @@ module "vpc-network-account" {
     aws = aws.network-account
   }
 
-  name = "aws_lz_vpc_network_account"
+  name = var.egress_vpc_name
 
   cidr = "10.99.0.0/22"
 
