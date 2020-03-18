@@ -9,14 +9,3 @@ variable "egress_vpc_cidr"{
   default = "10.99.0.0/22"
 }
 
-variable "egress_vpc_public_subnets_cidr"{
-  description = "Public subnet CIDR range"
-  default = ["10.99.1.0/24", "10.99.2.0/24"]
-}
-
-variable "egress_vpc_azs"{
-  description = "Availability Zone List"
-  default = ["us-west-2a", "us-west-2b"]
-}
-
-
