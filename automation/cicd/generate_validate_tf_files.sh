@@ -15,7 +15,7 @@ TERRAFORM_PATH="${MAIN_PATH}/terraform"
 python3 ${AUTOMATION_SCRIPTS}/terraform-pre-run.py
 
 cd ${TERRAFORM_PATH}
-
+cat implementations/core/organization-variables.tf
 echo "-----------------------PRINTING MAIN.TF-------------------------------------------"
 cat main.tf 
 echo "------------------------TERRAFORM INIT--------------------------------------------"
