@@ -13,7 +13,7 @@ module "aws_lz_tgw" {
   enable_auto_accept_shared_attachments = true
 
   ram_allow_external_principals = true
-  #ram_principals                = [local.sandbox_account_id,local.sandbox2_account_id]
+  ram_principals                = [local.sandbox_account_id,local.sandbox2_account_id]
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 

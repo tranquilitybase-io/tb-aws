@@ -43,7 +43,6 @@ resource "aws_ram_resource_association" "aws_lz_ram_association" {
 
   resource_arn       = aws_ec2_transit_gateway.aws_lz_tgw[0].arn
   resource_share_arn = aws_ram_resource_share.aws_lz_ram_share[0].id
-  depends_on = [aws_ram_resource_share.aws_lz_ram_share.id]
 }
 
 resource "aws_ram_principal_association" "aws_lz_ram_principal" {
