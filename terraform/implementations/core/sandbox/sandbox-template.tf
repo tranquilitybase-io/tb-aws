@@ -42,7 +42,7 @@ module "vpc-sandbox-twg-attachment" {
   }
   subnets_ids = module.vpc-sandbox.public_subnets
   vpc_id = module.vpc-sandbox.vpc_id
-  transit_gateway_id = module.tgw.id
+  transit_gateway_id = module.tgw.tgw_id
 }
 
 module "vpc-sandbox-2-twg-attachment" {
@@ -52,5 +52,5 @@ module "vpc-sandbox-2-twg-attachment" {
   }
   subnets_ids = module.vpc-sandbox-2.public_subnets
   vpc_id = module.vpc-sandbox-2.vpc_id
-  transit_gateway_id = module.tgw.id
+  transit_gateway_id = module.tgw.tgw_id
 }
