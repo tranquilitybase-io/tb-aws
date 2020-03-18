@@ -32,4 +32,7 @@ module "vpc-network-account" {
 
   azs             = ["us-west-2a", "us-west-2b"]
   public_subnets  = ["10.99.1.0/24", "10.99.2.0/24"]
+
+  enable_nat_gateway = true
+  enable_vpn_gateway = true
 }
