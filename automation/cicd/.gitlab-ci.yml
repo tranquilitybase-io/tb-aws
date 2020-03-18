@@ -1,6 +1,6 @@
 variables:
   CICD_SCRIPTS_DIR: "automation/cicd"
-  # test line    
+  # test line   
 
 stages:
   - Generate+Validate Terraform
@@ -16,6 +16,7 @@ stages:
   only:
     refs:
       - /^((feature/.*))$/
+      - /^((poc/.*))$/
       - /^((develop/.*))$/
 
 

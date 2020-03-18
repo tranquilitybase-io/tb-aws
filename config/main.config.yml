@@ -5,13 +5,21 @@ organization:
   multizone-security: true          # default true
   core-ou:
     - security:
-        email: sec_email
+        email: security_email
         encription: AES256
     - logarchive:
-        email: log_email
+        email: logarchive_email
     - shared-services:
-        email: shared_email
+        email: sharedservice_email
         issue-management: true
         k8s-cluster: true
     - network:
-        email: net_email
+        email: network_email
+  sandbox-ou:
+    - test1:
+        email: test-account_email
+    - test2:
+        email: test-account-2_email
+terraform:
+  state_type: s3
+  s3_bucket: control-terraform-states-aws-lz-v01
