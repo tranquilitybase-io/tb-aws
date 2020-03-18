@@ -13,7 +13,7 @@
   ]), 2)
 }*/
 
-resource "aws_ec2_transit_gateway" "this" {
+resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
   count = var.create_tgw ? 1 : 0
 
   description                     = coalesce(var.description, var.name)
@@ -64,7 +64,7 @@ resource "aws_ec2_transit_gateway_route" "this" {
 ##########################
 # Resource Access Manager
 ##########################
-resource "aws_ram_resource_share" "this" {
+resource "aws_ram_resource_share" "aws_lz_ram_share" {
   count = var.create_tgw && var.share_tgw ? 1 : 0
 
   name                      = coalesce(var.ram_name, var.name)
@@ -79,16 +79,16 @@ resource "aws_ram_resource_share" "this" {
   )
 }
 
-resource "aws_ram_resource_association" "this" {
+resource "aws_ram_resource_association" "aws_lz_ram_association" {
   count = var.create_tgw && var.share_tgw ? 1 : 0
 
-  resource_arn       = aws_ec2_transit_gateway.this[0].arn
-  resource_share_arn = aws_ram_resource_share.this[0].id
+  resource_arn       = aws_ec2_transit_gateway.aws_lz_tgw[0].arn
+  resource_share_arn = aws_ram_resource_share.aws_lz_ram_share[0].id
 }
 
-resource "aws_ram_principal_association" "this" {
+resource "aws_ram_principal_association" "aws_lz_ram_principal" {
   count = var.create_tgw && var.share_tgw ? length(var.ram_principals) : 0
 
   principal          = var.ram_principals[count.index]
-  resource_share_arn = aws_ram_resource_share.this[0].arn
+  resource_share_arn = aws_ram_resource_share.aws_lz_ram_share[0].arn
 }

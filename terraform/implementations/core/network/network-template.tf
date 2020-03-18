@@ -13,7 +13,7 @@ module "tgw" {
   enable_auto_accept_shared_attachments = true
 
   ram_allow_external_principals = true
-  ram_principals                = [local.sandbox_account_id,957746367829]
+  ram_principals                = [local.sandbox_account_id,local.sandbox2_account_id]
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
@@ -28,8 +28,8 @@ module "vpc-network-account" {
 
   name = "aws_lz_vpc_network_account"
 
-  cidr = "100.64.0.0/16"
+  cidr = "10.99.0.0/22"
 
   azs             = ["us-west-2a", "us-west-2b"]
-  public_subnets  = ["100.64.1.0/24", "100.64.2.0/24"]
+  public_subnets  = ["10.99.1.0/24", "10.99.2.0/24"]
 }
