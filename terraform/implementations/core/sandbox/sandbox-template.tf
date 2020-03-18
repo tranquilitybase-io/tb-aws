@@ -4,7 +4,7 @@ module "vpc-sandbox" {
   providers = {
     aws = aws.sandbox-account
   }
-  
+  name = var.vpc_sandbox_1_cidr
   cidr = var.vpc_sandbox_1_cidr
   azs             = var.vpc_azs
   private_subnets = var.vpc_sandbox_1_private_subnets_cidr
@@ -22,6 +22,7 @@ module "vpc-sandbox-2" {
     aws = aws.sandbox-account-2
   }
   
+  name = vR.vpc_sandbox_2_cidr
   cidr = var.vpc_sandbox_2_cidr
   azs             = var.vpc_azs
   private_subnets = var.vpc_sandbox_2_private_subnets_cidr

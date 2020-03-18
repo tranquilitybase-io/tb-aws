@@ -3,6 +3,11 @@ variable "vpc_sandbox_1_cidr"{
     default = "10.100.0.0/22"    
 }
 
+variable "vpc_sandbox_1_name"{
+    description = "Sandbox account 1 VPC name"
+    default = "AWS_LZ_VPC_Sandbox"    
+}
+
 variable "vpc_sandbox_1_private_subnets_cidr"{
     description = "Sandbox account 1 VPC private subnet CIDR range"
     default = ["10.100.1.0/24","10.100.2.0/24"]
@@ -16,6 +21,11 @@ variable "vpc_sandbox_2_cidr"{
     description = "Sandbox account 2 VPC CIDR range"
     default = "10.101.0.0/22"
 }
+variable "vpc_sandbox_2_name"{
+    description = "Sandbox account 2 VPC name"
+    default = "AWS_LZ_VPC_Sandbox_2"    
+}
+
 variable "vpc_sandbox_2_private_subnets_cidr"{
     description = "Sandbox account 2 VPC private subnet CIDR range"
     default = ["10.101.1.0/24", "10.101.2.0/24"]
