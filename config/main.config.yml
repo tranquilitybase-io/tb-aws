@@ -20,3 +20,6 @@ organization:
         email: test-account_email
     - test2:
         email: test-account-2_email
+terraform:
+  state_type: s3
+  s3_bucket: control-terraform-states-aws-lz-v01
