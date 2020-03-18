@@ -16,7 +16,7 @@ provider "aws" {
   version = "~> 2.48"
   alias = "sandbox-account-2"
   assume_role {
-    role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox.account_id}:role/${var.org_admin_role}" 
+    role_arn = "arn:aws:iam::${module.aws_lz_account_sandbox_prod.account_id}:role/${var.org_admin_role}" 
   }
 }
 
