@@ -1,12 +1,11 @@
-/*Using terraform VPC module, see https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.29.0*/
+/*Using terraform VPC module, see https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.29.0 */
 module "vpc-sandbox" {
+  source  = "terraform-aws-modules/vpc/aws"
   providers = {
     aws = aws.sandbox-account
   }
-  source  = "terraform-aws-modules/vpc/aws"
   
   cidr = var.vpc_sandbox_1_cidr
-
   azs             = var.vpc_azs
   private_subnets = var.vpc_sandbox_1_private_subnets_cidr
   public_subnets  =  var.vpc_sandbox_1_public_subnets_cidr
@@ -18,14 +17,12 @@ module "vpc-sandbox" {
 }
 
 module "vpc-sandbox-2" {
+  source  = "terraform-aws-modules/vpc/aws"
   providers = {
     aws = aws.sandbox-account-2
   }
-  source  = "terraform-aws-modules/vpc/aws"
   
   cidr = var.vpc_sandbox_2_cidr
-
-
   azs             = var.vpc_azs
   private_subnets = var.vpc_sandbox_2_private_subnets_cidr
   public_subnets  = var.vpc_sandbox_2_public_subnets_cidr
