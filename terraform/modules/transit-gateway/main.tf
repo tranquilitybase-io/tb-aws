@@ -1,17 +1,3 @@
-/*locals {
-  vpc_attachments_without_default_route_table_association = {
-  for k, v in var.vpc_attachments : k => v if lookup(v, "transit_gateway_default_route_table_association", true) != true
-  }
-
-  vpc_attachments_without_default_route_table_propagation = {
-  for k, v in var.vpc_attachments : k => v if lookup(v, "transit_gateway_default_route_table_propagation", true) != true
-  }
-
-  // List of maps with key and route values
-  vpc_attachments_with_routes = chunklist(flatten([
-  for k, v in var.vpc_attachments : setproduct([map("key", k)], v["tgw_routes"]) if length(lookup(v, "tgw_routes", {})) > 0
-  ]), 2)
-}*/
 
 resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
   count = var.create_tgw ? 1 : 0
@@ -32,34 +18,6 @@ resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
   var.tgw_tags,
   )
 }
-
-/*#########################
-# Route table and routes
-#########################
-resource "aws_ec2_transit_gateway_route_table" "this" {
-  count = var.create_tgw ? 1 : 0
-
-  transit_gateway_id = aws_ec2_transit_gateway.this[0].id
-
-  tags = merge(
-  {
-    "Name" = format("%s", var.name)
-  },
-  var.tags,
-  var.tgw_route_table_tags,
-  )
-}
-
-// VPC attachment routes
-resource "aws_ec2_transit_gateway_route" "this" {
-  count = length(local.vpc_attachments_with_routes)
-
-  destination_cidr_block = local.vpc_attachments_with_routes[count.index][1]["destination_cidr_block"]
-  blackhole              = lookup(local.vpc_attachments_with_routes[count.index][1], "blackhole", null)
-
-  transit_gateway_route_table_id = var.create_tgw ? aws_ec2_transit_gateway_route_table.this[0].id : var.transit_gateway_route_table_id
-  transit_gateway_attachment_id  = tobool(lookup(local.vpc_attachments_with_routes[count.index][1], "blackhole", false)) == false ? aws_ec2_transit_gateway_vpc_attachment.this[local.vpc_attachments_with_routes[count.index][0]["key"]].id : null
-}*/
 
 ##########################
 # Resource Access Manager
