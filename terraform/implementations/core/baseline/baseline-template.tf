@@ -26,8 +26,6 @@ module "aws_lz_config_sns_topic-2" {
 }
 ### <---
 
-/*
-
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
 
@@ -42,8 +40,7 @@ module "aws_lz_config_service" {
   sns_topic_arn      = module.aws_lz_config_sns_topic.topic_arn
   config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
-*/
-/*
+
 module "aws_lz_config_service-2" {
   source = "./modules/config/config-service"
 
@@ -58,8 +55,7 @@ module "aws_lz_config_service-2" {
   sns_topic_arn      = module.aws_lz_config_sns_topic.topic_arn
   config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
-*/
-/*
+
 ###Activate Config Service for Master Account
 module "aws_lz_config_service_master" {
   source = "./modules/config/config-service"
@@ -69,7 +65,7 @@ module "aws_lz_config_service_master" {
   s3_log_prefix      = module.aws_lz_config_bucket.s3_log_prefix
   config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "config" }
 }
-###
+
 ###Activate Config Aggregator for Master Account
 module "aws_lz_config_aggregator" {
   source = "./modules/config/config-aggregator"
@@ -80,8 +76,7 @@ module "aws_lz_config_aggregator" {
   config_tags              = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
 ###
-*/
-/*
+
 module "aws_lz_config_rules" {
   source  = "./modules/config/config-rules"
 
@@ -91,8 +86,8 @@ module "aws_lz_config_rules" {
 
   recorder_main    = module.aws_lz_config_service.recorder_main_name
   delivery_channel = module.aws_lz_config_service.delivery_channel_name
-}*/
-/*
+}
+
 module "aws_lz_config_rules-2" {
   source  = "./modules/config/config-rules"
 
@@ -168,7 +163,7 @@ module "aws_lz_cloudtrail-2" {
 
 ### VPC --->
 /*Using terraform VPC module, see https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.29.0 */
-/*
+
 module "vpc-sandbox" {
   source  = "terraform-aws-modules/vpc/aws"
   providers = {
@@ -185,8 +180,7 @@ module "vpc-sandbox" {
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "sandbox" }
 }
-*/
-/*
+
 module "vpc-sandbox-2" {
   source  = "terraform-aws-modules/vpc/aws"
   providers = {
@@ -205,8 +199,8 @@ module "vpc-sandbox-2" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "sandbox" }
 }
 ### <---
-*/
-### Accept Share --->
+
+## Accept Share --->
 /*
 module "vpc-sandbox-accept-share"{
   source  = "./modules/ram-share-accepter"
