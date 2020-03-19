@@ -14,7 +14,6 @@ module "aws_lz_config_sns_topic" {
 }
 ### <---
 
-
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
 
@@ -60,13 +59,12 @@ module "aws_lz_config_rules" {
     aws = aws.sandbox-account
   }
 
-  recorder_main    = module.aws_lz_config_service.recorder_main
-  delivery_channel = module.aws_lz_config_service.delivery_channel
+  recorder_main    = module.aws_lz_config_service.recorder_name
+  delivery_channel = module.aws_lz_config_service.delivery_channel_name
 }
 ### CONFIG SERVICE <--
 
 ### CLOUDTRAIL SERVICE -->
-
 ### Topic for CloudTrail --->
 module "aws_lz_cloudtrail_sns_topic" {
   source = "./modules/snstopic"
