@@ -63,6 +63,6 @@ resource "aws_sns_topic" "cloudtrail" {
 resource "aws_sns_topic_policy" "cloudtrail_topic_policy" {
   count = length(var.cloudtrail_name) > 0 ? 1 : 0
 
-  arn    = aws_sns_topic.cloudtrail.arn
+  arn    = aws_sns_topic.cloudtrail[count.index].arn
   policy = data.aws_iam_policy_document.cloudtrail_sns.json
 }

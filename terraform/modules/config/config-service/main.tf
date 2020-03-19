@@ -17,7 +17,7 @@ resource "aws_config_configuration_recorder" "main" {
 resource "aws_config_delivery_channel" "main" {
   count = length(var.config_name) > 0 ? 1 : 0
 
-  name           = aws_config_configuration_recorder.main.name
+  name           = aws_config_configuration_recorder.main[count.index].name
   s3_bucket_name = var.config_logs_bucket
   s3_key_prefix  = var.s3_log_prefix
 
