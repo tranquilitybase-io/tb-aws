@@ -11,13 +11,12 @@ resource "aws_ram_resource_association" "aws_lz_ram_association" {
   count = var.ram_create && var.ram_share ? 1 : 0
 
   resource_arn       = var.ram_resource_arn
-  resource_share_arn = var.ram_resource_shared_associtaion_arn
+  resource_share_arn = aws_ram_resource_share.aws_lz_ram_shared[0].id
 }
 
 resource "aws_ram_principal_association" "aws_lz_ram_principal_association" {
   count = var.ram_create && var.ram_share ? length(var.ram_principals) : 0
 
   principal = var.ram_principals
-  resource_share_arn = var.ram_resource_shared_principal_arn
-  depends_on = [aws_ram_resource_share.aws_lz_ram_shared,aws_ram_resource_association.aws_lz_ram_association]
+  resource_share_arn = aws_ram_resource_share.aws_lz_ram_shared[0].arn
 }
