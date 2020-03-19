@@ -38,7 +38,7 @@ module "aws_lz_config_service" {
   sns_topic_arn      = module.aws_lz_config_sns_topic.topic_arn
   config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
-
+/*
 module "aws_lz_config_service-2" {
   source = "./modules/config/config-service"
 
@@ -53,7 +53,10 @@ module "aws_lz_config_service-2" {
   sns_topic_arn      = module.aws_lz_config_sns_topic.topic_arn
   config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
+*/
 
+
+############################
 /*
 ###Activate Config Service for Master Account
 module "aws_lz_config_service_master" {
@@ -76,7 +79,7 @@ module "aws_lz_config_aggregator" {
 }
 ###
 */
-
+############################################
 module "aws_lz_config_rules" {
   source  = "./modules/config/config-rules"
 
@@ -87,7 +90,7 @@ module "aws_lz_config_rules" {
   recorder_main    = module.aws_lz_config_service.recorder_name
   delivery_channel = module.aws_lz_config_service.delivery_channel_name
 }
-
+/*
 module "aws_lz_config_rules-2" {
   source  = "./modules/config/config-rules"
 
@@ -98,6 +101,7 @@ module "aws_lz_config_rules-2" {
   recorder_main    = module.aws_lz_config_service.recorder_name
   delivery_channel = module.aws_lz_config_service.delivery_channel_name
 }
+*/
 ### CONFIG SERVICE <--
 
 ### CLOUDTRAIL SERVICE -->
@@ -112,7 +116,7 @@ module "aws_lz_cloudtrail_sns_topic" {
   sns_topic_name = var.cloudtrail_topic_name
   required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
-
+/*
 module "aws_lz_cloudtrail_sns_topic-2" {
   source = "./modules/snstopic"
 
@@ -123,6 +127,7 @@ module "aws_lz_cloudtrail_sns_topic-2" {
   sns_topic_name = var.cloudtrail_topic_name
   required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
+*/
 ### <---
 
 module "aws_lz_cloudtrail" {
@@ -141,7 +146,7 @@ module "aws_lz_cloudtrail" {
   region = local.region
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
-
+/*
 module "aws_lz_cloudtrail-2" {
   source = "./modules/cloudtrail"
 
@@ -158,6 +163,7 @@ module "aws_lz_cloudtrail-2" {
   region = local.region
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
+*/
 ### CLOUDTRAIL SERVICE <--
 
 ### VPC --->
