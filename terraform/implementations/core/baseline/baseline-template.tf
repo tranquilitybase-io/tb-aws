@@ -14,7 +14,6 @@ module "aws_lz_config_sns_topic" {
 }
 ### <---
 
-
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
 
