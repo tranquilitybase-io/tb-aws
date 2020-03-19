@@ -236,7 +236,7 @@ module "vpc-sandbox-2-twg-attachment" {
   providers = {
     aws = aws.sandbox-account-2
   }
-  subnets_ids = "${list("${module.vpc-sandbox-2.public_subnets}")}"
+  subnets_ids =  module.vpc-sandbox.private_subnets
   vpc_id = module.vpc-sandbox-2.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
 }
