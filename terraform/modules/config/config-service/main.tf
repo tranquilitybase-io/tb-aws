@@ -31,7 +31,7 @@ resource "aws_config_delivery_channel" "main" {
 resource "aws_config_configuration_recorder_status" "main" {
   count = length(var.config_name) > 0 ? 1 : 0
 
-  name       = aws_config_delivery_channel.main.name
+  name       = aws_config_delivery_channel.main[count.index].name
   is_enabled = true
 }
 
