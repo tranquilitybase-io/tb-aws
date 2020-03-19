@@ -16,11 +16,13 @@ module "aws_lz_tgw" {
   ram_principals                = [local.sandbox_account_id,local.sandbox2_account_id]
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
+/*
 
 ### Resource to reutilize the Elastic IP
 resource "aws_eip" "nat" {
   count = 2
   vpc = true
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
 module "aws_lz_egress_vpc" {
@@ -48,3 +50,4 @@ module "aws_lz_egress_vpc" {
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
+*/
