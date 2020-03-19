@@ -47,8 +47,8 @@ module "aws_lz_aws_ram_share_tg" {
 
   ram_name = "AWS_LZ_TG"
   ram_resource_arn = module.aws_lz_tgw.tgw_arn
-  #ram_principals = module.aws_lz_organization_main.roots[0].id
-  ram_principals = "arn:aws:organizations::372937028188:root/o-8lg1h3pzea"
+  #ram_principals = module.aws_lz_organization_main.roots[0].arn
+  ram_principals = "arn:aws:organizations::372937028188:ou/o-8lg1h3pzea/ou-royk-0xu6yv0o"
   ram_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "aws-ram-tg" }
 
   providers = {
