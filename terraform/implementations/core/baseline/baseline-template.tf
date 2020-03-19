@@ -11,6 +11,17 @@ module "aws_lz_config_sns_topic" {
   sns_topic_name = var.config_topic_name
   required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
+
+module "aws_lz_config_sns_topic-2" {
+  source = "./modules/snstopic"
+
+  providers = {
+    aws = aws.sandbox-account-2
+  }
+
+  sns_topic_name = var.config_topic_name
+  required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
+}
 ### <---
 
 module "aws_lz_config_service" {
@@ -24,6 +35,21 @@ module "aws_lz_config_service" {
   config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
   s3_log_prefix      = module.aws_lz_config_bucket.s3_log_prefix
   topic_account_id   = local.sandbox_account_id
+  sns_topic_arn      = module.aws_lz_config_sns_topic.topic_arn
+  config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
+}
+
+module "aws_lz_config_service-2" {
+  source = "./modules/config/config-service"
+
+  providers = {
+    aws = aws.sandbox-account-2
+  }
+
+  config_name        = var.config_name
+  config_logs_bucket = module.aws_lz_config_bucket.bucket_name_log
+  s3_log_prefix      = module.aws_lz_config_bucket.s3_log_prefix
+  topic_account_id   = local.sandbox2_account_id
   sns_topic_arn      = module.aws_lz_config_sns_topic.topic_arn
   config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
@@ -61,6 +87,17 @@ module "aws_lz_config_rules" {
   recorder_main    = module.aws_lz_config_service.recorder_name
   delivery_channel = module.aws_lz_config_service.delivery_channel_name
 }
+
+module "aws_lz_config_rules-2" {
+  source  = "./modules/config/config-rules"
+
+  providers = {
+    aws = aws.sandbox-account-2
+  }
+
+  recorder_main    = module.aws_lz_config_service.recorder_name
+  delivery_channel = module.aws_lz_config_service.delivery_channel_name
+}
 ### CONFIG SERVICE <--
 
 ### CLOUDTRAIL SERVICE -->
@@ -70,6 +107,17 @@ module "aws_lz_cloudtrail_sns_topic" {
 
   providers = {
     aws = aws.sandbox-account
+  }
+
+  sns_topic_name = var.cloudtrail_topic_name
+  required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
+}
+
+module "aws_lz_cloudtrail_sns_topic-2" {
+  source = "./modules/snstopic"
+
+  providers = {
+    aws = aws.sandbox-account-2
   }
 
   sns_topic_name = var.cloudtrail_topic_name
@@ -89,6 +137,23 @@ module "aws_lz_cloudtrail" {
   s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
   bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
   bucket_account_id = local.sandbox_account_id
+  sns_topic_arn = module.aws_lz_cloudtrail_sns_topic.topic_arn
+  region = local.region
+  required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
+}
+
+module "aws_lz_cloudtrail-2" {
+  source = "./modules/cloudtrail"
+
+  providers = {
+    aws = aws.sandbox-account-2
+  }
+
+  cloudtrail_name = var.cloudtrail_name
+  bucket_name = module.aws_lz_config_bucket.bucket_name_log
+  s3_log_prefix = module.aws_lz_config_bucket.s3_log_prefix
+  bucket_arn = module.aws_lz_config_bucket.bucket_log_arn
+  bucket_account_id = local.sandbox2_account_id
   sns_topic_arn = module.aws_lz_cloudtrail_sns_topic.topic_arn
   region = local.region
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
