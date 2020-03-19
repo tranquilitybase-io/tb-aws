@@ -9,9 +9,9 @@ resource "aws_cloudtrail" "cloudtrail_default" {
   s3_key_prefix              = var.s3_log_prefix
   enable_logging             = var.enable_logging
   enable_log_file_validation = var.enable_log_file_validation
-  sns_topic_name             = aws_sns_topic.cloudtrail.name
-  cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default.arn
-  cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role.arn
+  sns_topic_name             = aws_sns_topic.cloudtrail[count.index].name
+  cloud_watch_logs_group_arn = aws_cloudwatch_log_group.log_group_default[count.index].arn
+  cloud_watch_logs_role_arn  = aws_iam_role.cloudtrail_role[count.index].arn
   tags                       = var.required_tags
 }
 
@@ -49,8 +49,8 @@ resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
   count = length(var.cloudtrail_name) > 0 ? 1 : 0
 
   name       = "${var.cloudtrail_name}_policy_attachment"
-  policy_arn = aws_iam_policy.cloudtrail_access_policy.arn
-  roles      = [aws_iam_role.cloudtrail_role.name]
+  policy_arn = aws_iam_policy.cloudtrail_access_policy[count.index].arn
+  roles      = [aws_iam_role.cloudtrail_role[count.index].name]
 }
 
 
