@@ -23,6 +23,7 @@ resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
 ##########################
 # Resource Access Manager
 ##########################
+/*
 resource "aws_ram_resource_share" "aws_lz_ram_share" {
   count = var.create_tgw && var.share_tgw ? 1 : 0
 
@@ -51,3 +52,4 @@ resource "aws_ram_principal_association" "aws_lz_ram_principal" {
   principal          = var.ram_principals[count.index]
   resource_share_arn = aws_ram_resource_share.aws_lz_ram_share[0].id
 }
+*/
