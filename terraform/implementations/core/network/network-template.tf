@@ -17,7 +17,7 @@ module "aws_lz_tgw" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
-### Resource to reutilized the Elastic IP
+### Resource to reutilize the Elastic IP
 resource "aws_eip" "nat" {
   count = 2
   vpc = true
