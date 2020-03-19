@@ -210,7 +210,7 @@ module "vpc-sandbox-accept-share"{
   share-arn = module.aws_lz_tgw.ram_resource_share_id
 }
 
-module "vpc-sandbox-accept-share"{
+module "vpc-sandbox-accept-share-2"{
   source  = "./modules/ram-share-accepter"
   providers = {
     aws = aws.sandbox-account-2
