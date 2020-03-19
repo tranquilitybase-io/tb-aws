@@ -1,13 +1,13 @@
 variable "ram_tags" {
-  default = ""
+  default = {}
 }
 variable "ram_create" {
-  type = string
-  default = ""
+  type        = bool
+  default     = true
 }
 variable "ram_share" {
-  type = string
-  default = ""
+  type        = bool
+  default     = true
 }
 variable "ram_resource_arn" {
   type = string
@@ -24,4 +24,16 @@ variable "ram_principals" {
 variable "ram_allow_external_principals" {
   type = bool
   default = true
+}
+variable "ram_name" {
+  type = string
+  default = ""
+}
+
+
+variable "ram_resource_shared_associtaion_arn" {
+  default = ""
+}
+variable "ram_resource_shared_principal_arn" {
+  default = ""
 }
