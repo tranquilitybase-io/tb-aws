@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "cloudtrail_sns" {
       type = "Service"
     }
     resources = [
-      aws_sns_topic.cloudtrail.arn,
+      concat(aws_sns_topic.cloudtrail.*.arn, [""])[0],
     ]
     sid = "CloudTrail SNS Policy"
   }

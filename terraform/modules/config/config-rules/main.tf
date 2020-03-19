@@ -48,10 +48,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    var.recorder_main,
-    var.delivery_channel,
-  ]
+  depends_on = [var.recorder_main,var.delivery_channel]
 }
 
 resource "aws_config_config_rule" "cloudtrail-enabled" {
