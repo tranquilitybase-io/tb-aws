@@ -27,7 +27,7 @@ module "aws_lz_config_sns_topic-2" {
 }
 ### <---
 */
-
+/*
 module "aws_lz_config_service" {
   source = "./modules/config/config-service"
 
@@ -42,6 +42,7 @@ module "aws_lz_config_service" {
   sns_topic_arn      = module.aws_lz_config_sns_topic.topic_arn
   config_tags        = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
+*/
 /*
 module "aws_lz_config_service-2" {
   source = "./modules/config/config-service"
@@ -80,7 +81,7 @@ module "aws_lz_config_aggregator" {
 }
 ###
 */
-
+/*
 module "aws_lz_config_rules" {
   source  = "./modules/config/config-rules"
 
@@ -90,7 +91,7 @@ module "aws_lz_config_rules" {
 
   recorder_main    = module.aws_lz_config_service.recorder_main
   delivery_channel = module.aws_lz_config_service.delivery_channel
-}
+}*/
 /*
 module "aws_lz_config_rules-2" {
   source  = "./modules/config/config-rules"
@@ -167,6 +168,7 @@ module "aws_lz_cloudtrail-2" {
 
 ### VPC --->
 /*Using terraform VPC module, see https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.29.0 */
+/*
 module "vpc-sandbox" {
   source  = "terraform-aws-modules/vpc/aws"
   providers = {
@@ -183,6 +185,7 @@ module "vpc-sandbox" {
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "sandbox" }
 }
+*/
 /*
 module "vpc-sandbox-2" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -204,6 +207,7 @@ module "vpc-sandbox-2" {
 ### <---
 */
 ### Accept Share --->
+/*
 module "vpc-sandbox-accept-share"{
   source  = "./modules/ram-share-accepter"
   providers = {
@@ -211,6 +215,7 @@ module "vpc-sandbox-accept-share"{
   }
   share-arn = module.aws_lz_tgw.ram_resource_share_id
 }
+*/
 /*
 module "vpc-sandbox-accept-share-2"{
   source  = "./modules/ram-share-accepter"
@@ -222,7 +227,7 @@ module "vpc-sandbox-accept-share-2"{
 ###<---
 */
 ### VPC-TGW attachment
-
+/*
 module "vpc-sandbox-twg-attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
@@ -232,6 +237,7 @@ module "vpc-sandbox-twg-attachment" {
   vpc_id = module.vpc-sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
 } 
+*/
 /*
 module "vpc-sandbox-2-twg-attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
