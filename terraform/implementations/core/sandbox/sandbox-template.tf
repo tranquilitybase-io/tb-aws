@@ -39,7 +39,7 @@ module "vpc-sandbox-accept-share"{
   providers = {
     aws = aws.sandbox-account
   }
-  share-arn = module.aws_lz_tgw.tgw_arn
+  share-arn = module.aws_lz_tgw.ram_resource_share_id
 }
 
 module "vpc-sandbox-twg-attachment" {
