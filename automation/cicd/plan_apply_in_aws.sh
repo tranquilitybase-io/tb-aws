@@ -23,8 +23,8 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
 
 #terraform state rm module.vpc-network-account
-terraform state rm module.aws_lz_config_sns_topic.aws_sns_topic.sns_topic_default
-terraform state rm module.aws_lz_cloudtrail_sns_topic.aws_sns_topic.sns_topic_default
+terraform state rm module.aws_lz_config_sns_topic-2.aws_sns_topic.sns_topic_default
+terraform state rm module.aws_lz_cloudtrail_sns_topic-2.aws_sns_topic.sns_topic_default
 
 #terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_main
 #terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_log
