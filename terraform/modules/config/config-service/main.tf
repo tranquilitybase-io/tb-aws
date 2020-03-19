@@ -6,7 +6,7 @@ resource "aws_config_configuration_recorder" "main" {
   count = length(var.config_name) > 0 ? 1 : 0
 
   name     = "${var.config_name}_recorder"
-  role_arn = aws_iam_role.main.arn
+  role_arn = aws_iam_role.main[count.index].arn
 
   recording_group {
     all_supported                 = true
@@ -47,7 +47,7 @@ resource "aws_iam_policy_attachment" "managed_policy" {
   count = length(var.config_name) > 0 ? 1 : 0
 
   name       = "${var.config_name}_managed_policy"
-  roles      = [aws_iam_role.main.name]
+  roles      = [aws_iam_role.main[count.index].name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
 }
 
