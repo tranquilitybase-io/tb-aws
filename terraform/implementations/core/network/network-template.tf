@@ -16,7 +16,6 @@ module "aws_lz_tgw" {
   ram_principals                = [local.sandbox_account_id,local.sandbox2_account_id]
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
-/*
 
 ### Resource to reutilize the Elastic IP
 resource "aws_eip" "nat" {
@@ -45,9 +44,8 @@ module "aws_lz_egress_vpc" {
   single_nat_gateway = false
   one_nat_gateway_per_az = true
   enable_vpn_gateway = true
-  reuse_nat_ips       = true
+  reuse_nat_igit ps       = true
   external_nat_ip_ids = aws_eip.nat.*.id
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
-*/
