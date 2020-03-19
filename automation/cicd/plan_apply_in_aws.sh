@@ -23,7 +23,8 @@ terraform apply -auto-approve
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
 
 #terraform state rm module.vpc-network-account
-#terraform state rm module.aws_lz_config_sns_topic
+#terraform state rm module.aws_lz_config_service-2
+#terraform state rm module.aws_lz_cloudtrail-2
 
 #terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_main
 #terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_log
