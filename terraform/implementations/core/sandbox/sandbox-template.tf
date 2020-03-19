@@ -41,7 +41,7 @@ module "vpc-sandbox-accept-share"{
   }
   share-arn = module.aws_lz_tgw.ram_resource_share_id
 }
-/*
+
 module "vpc-sandbox-twg-attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
@@ -50,7 +50,7 @@ module "vpc-sandbox-twg-attachment" {
   subnets_ids = module.vpc-sandbox.private_subnets
   vpc_id = module.vpc-sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-} */
+} 
 /*
 module "vpc-sandbox-2-twg-attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
