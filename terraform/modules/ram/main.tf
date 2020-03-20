@@ -19,6 +19,8 @@ resource "aws_ram_resource_share" "aws_lz_ram_shared" {
   name   = var.ram_name
   allow_external_principals = var.ram_allow_external_principals
   tags = var.ram_tags
+
+  depends_on = [null_resource.enable_aws_ram_organization]
 }
 
 resource "aws_ram_resource_association" "aws_lz_ram_association" {
