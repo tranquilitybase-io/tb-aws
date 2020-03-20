@@ -1,6 +1,6 @@
 locals {
   ram_command = [
-    "python",
+    "python3",
     "\"${path.module}/aws_ram.py\"",
   ]
 }
