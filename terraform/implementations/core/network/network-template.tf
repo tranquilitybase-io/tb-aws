@@ -55,4 +55,4 @@ module "aws_lz_aws_ram_share_tg" {
   providers = {
     aws = aws.network-account
   }
-}
+}    
