@@ -11,6 +11,8 @@ resource "null_resource" "enable_aws_ram_organization" {
   provisioner "local-exec" {
     command = join(" ",local.ram_command)
   }
+
+  lifecycle {prevent_destroy = true}
 }
 
 
