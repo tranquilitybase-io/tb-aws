@@ -99,11 +99,11 @@ module "aws_lz_account_network" {
 }
 
 
-module "enable_aws_ram_for_organization" {
+/*module "enable_aws_ram_for_organization" {
   source = "./modules/extensions/ram"
 
   enable_ram_org = true
-}
+}*/
 
 module "aws_lz_policy_tagging" {
   source = "./modules/organizations"
