@@ -99,7 +99,7 @@ module "aws_lz_account_network" {
 }
 
 module "enable_aws_ram_for_organization" {
-  source = "./modules/ram"
+  source = "./modules/extensions/ram"
 
   enable_ram_org = true
 }

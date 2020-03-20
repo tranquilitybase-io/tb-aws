@@ -1,18 +1,3 @@
-locals {
-  ram_command = [
-    "python3",
-    "\"${path.module}/aws_ram.py\"",
-  ]
-}
-
-resource "null_resource" "enable_aws_ram_organization" {
-  count = var.enable_ram_org ? 1 : 0
-
-  provisioner "local-exec" {
-    command = join(" ",local.ram_command)
-  }
-}
-
 resource "aws_ram_resource_share" "aws_lz_ram_shared" {
   count = length(var.ram_name) > 0 ? 1 : 0
 
@@ -20,7 +5,6 @@ resource "aws_ram_resource_share" "aws_lz_ram_shared" {
   allow_external_principals = var.ram_allow_external_principals
   tags = var.ram_tags
 
-  depends_on = [null_resource.enable_aws_ram_organization]
 }
 
 resource "aws_ram_resource_association" "aws_lz_ram_association" {
@@ -35,7 +19,6 @@ resource "aws_ram_principal_association" "aws_lz_ram_principal_association" {
 
   principal = var.ram_principals
   resource_share_arn = aws_ram_resource_share.aws_lz_ram_shared[0].arn
-  depends_on = [aws_ram_resource_share.aws_lz_ram_shared,aws_ram_resource_association.aws_lz_ram_association]
 }
 
 
