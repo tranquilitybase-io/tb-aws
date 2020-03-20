@@ -99,7 +99,7 @@ module "aws_lz_account_network" {
 }
 
 module "enable_aws_ram_for_organization" {
-  source = "./mofules/ram"
+  source = "./modules/ram"
 
   enable_ram_org = true
 }
