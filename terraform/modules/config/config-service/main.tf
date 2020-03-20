@@ -44,7 +44,7 @@ resource "aws_iam_policy_attachment" "managed_policy" {
 }
 
 resource "aws_sns_topic_policy" "sns_config_default_policy" {
-  count = length(var.sns_topic_arn) > 0 ? 1 : 0
+  count = length(var.config_name) > 0 ? 1 : 0
 
   arn = var.sns_topic_arn
   policy = data.aws_iam_policy_document.config_sns.json
