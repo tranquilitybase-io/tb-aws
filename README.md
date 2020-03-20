@@ -24,7 +24,7 @@
 │   |         └── *-outputs.tf             Files to be used as modules outputs
 │   └── modules                            Module dirctory where you can have modules and submodules
 │       ├── organizations
-│       ├── common                         Services modules use by other services
+│       ├── common                          Services modules use by other services
 │       │    ├── s3
 │       │    └── iam
 │       ├── config
