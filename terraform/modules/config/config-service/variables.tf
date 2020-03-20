@@ -25,7 +25,13 @@ variable "config_delivery_frequency" {
   default     = "Six_Hours"
 }
 
-variable "topic_account_id" {
-  description = "topic_account_id"
+variable "account_role_name" {
+  description = "Role for network account"
+  default = "AWSLZCoreOUAdminRole"
+}
+
+
+variable "account_id" {
+  description = "Account ID"
   default = ""
 }

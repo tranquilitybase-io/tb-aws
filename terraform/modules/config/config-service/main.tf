@@ -6,7 +6,7 @@ resource "aws_config_configuration_recorder" "main" {
   count = length(var.config_name) > 0 ? 1 : 0
 
   name     = "${var.config_name}_recorder"
-  role_arn = aws_iam_role.main.arn
+  role_arn = "arn:aws:iam::${var.account_id}:role/${var.account_role_name}"
 
   recording_group {
     all_supported                 = true
@@ -35,19 +35,19 @@ resource "aws_config_configuration_recorder_status" "main" {
   is_enabled = true
 }
 
-resource "aws_iam_role" "main" {
- /* count = length(var.config_name) > 0 ? 1 : 0 */
+/*resource "aws_iam_role" "main" {
+ *//* count = length(var.config_name) > 0 ? 1 : 0 *//*
 
   name               = "${var.config_name}_iam_role"
   assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
   tags = var.config_tags
-}
+}*/
 
 resource "aws_iam_policy_attachment" "managed_policy" {
   count = length(var.config_name) > 0 ? 1 : 0
 
   name       = "${var.config_name}_managed_policy"
-  roles      = [aws_iam_role.main.name]
+  roles      = [var.account_role_name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
 }
 
