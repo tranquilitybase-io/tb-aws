@@ -45,6 +45,7 @@ module "aws_lz_egress_vpc" {
 module "aws_lz_aws_ram_share_tg" {
   source = "./modules/ram"
 
+  enable_ram_org = false
   ram_name = "AWS_LZ_TG"
   ram_allow_external_principals = false
   ram_resource_arn = module.aws_lz_tgw.tgw_arn
