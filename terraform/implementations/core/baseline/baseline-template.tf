@@ -90,7 +90,7 @@ module "aws_lz_config_rules" {
   recorder_main    = module.aws_lz_config_service.recorder_name
   delivery_channel = module.aws_lz_config_service.delivery_channel_name
 }
-/*
+
 module "aws_lz_config_rules-2" {
   source  = "./modules/config/config-rules"
 
@@ -98,10 +98,10 @@ module "aws_lz_config_rules-2" {
     aws = aws.sandbox-account-2
   }
 
-  recorder_main    = module.aws_lz_config_service.recorder_name
-  delivery_channel = module.aws_lz_config_service.delivery_channel_name
+  recorder_main    = module.aws_lz_config_service_2.recorder_name
+  delivery_channel = module.aws_lz_config_service_2.delivery_channel_name
 }
-*/
+
 ### CONFIG SERVICE <--
 
 ### CLOUDTRAIL SERVICE -->
