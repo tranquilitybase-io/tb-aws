@@ -12,7 +12,7 @@ resource "null_resource" "enable_aws_ram_organization" {
     command = join(" ",local.ram_command)
   }
 
-  #lifecycle {prevent_destroy = true}
+  lifecycle {prevent_destroy = true}
 }
 
 
