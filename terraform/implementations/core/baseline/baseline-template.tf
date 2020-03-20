@@ -12,7 +12,7 @@ module "aws_lz_config_sns_topic" {
   required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "config" }
 }
 
-module "aws_lz_config_sns_topic-2" {
+module "aws_lz_config_sns_topic_2" {
   source = "./modules/snstopic"
 
   providers = {
