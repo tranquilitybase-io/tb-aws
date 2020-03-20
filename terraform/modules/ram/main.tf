@@ -35,6 +35,7 @@ resource "aws_ram_principal_association" "aws_lz_ram_principal_association" {
 
   principal = var.ram_principals
   resource_share_arn = aws_ram_resource_share.aws_lz_ram_shared[0].arn
+  depends_on = [aws_ram_resource_share.aws_lz_ram_shared,aws_ram_resource_association.aws_lz_ram_association]
 }
 
 
