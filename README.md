@@ -1,6 +1,6 @@
 # AWS Landing Zone - Tranquility Base
   
-## Overview         
+## Overview      
  
 ## Folder Structure
 ```  
