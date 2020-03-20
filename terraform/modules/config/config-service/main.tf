@@ -43,7 +43,7 @@ resource "aws_iam_role" "main" {
 }
 
 resource "aws_iam_policy_attachment" "managed_policy" {
-  count = length(var.account_role_name) > 0 ? 1 : 0
+  count = length(var.config_name) > 0 ? 1 : 0
 
   name       = "${var.config_name}_managed_policy"
   roles      = [aws_iam_role.main[count.index].name]
