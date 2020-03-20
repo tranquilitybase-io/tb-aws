@@ -35,16 +35,8 @@ resource "aws_config_configuration_recorder_status" "main" {
   is_enabled = true
 }
 
-/*resource "aws_iam_role" "main" {
- *//* count = length(var.config_name) > 0 ? 1 : 0 *//*
-
-  name               = "${var.config_name}_iam_role"
-  assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
-  tags = var.config_tags
-}*/
-
 resource "aws_iam_policy_attachment" "managed_policy" {
-  count = length(var.config_name) > 0 ? 1 : 0
+  count = length(var.account_role_name) > 0 ? 1 : 0
 
   name       = "${var.config_name}_managed_policy"
   roles      = [var.account_role_name]
@@ -52,9 +44,9 @@ resource "aws_iam_policy_attachment" "managed_policy" {
 }
 
 resource "aws_sns_topic_policy" "sns_config_default_policy" {
-  count = length(var.config_name) > 0 ? 1 : 0
+  count = length(var.sns_topic_arn) > 0 ? 1 : 0
 
-  arn = var.sns_topic_arn  
+  arn = var.sns_topic_arn
   policy = data.aws_iam_policy_document.config_sns.json
 }
 
