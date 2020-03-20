@@ -12,10 +12,10 @@ resource "null_resource" "enable_aws_ram_organization" {
     command = join(" ",local.ram_command)
   }
 
-  /*lifecycle {
+  lifecycle {
     ignore_changes = [
       enable_ram_org,
-  ]}*/
+  ]}
 }
 
 
