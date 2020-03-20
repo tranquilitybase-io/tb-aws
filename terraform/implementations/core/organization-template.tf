@@ -98,6 +98,12 @@ module "aws_lz_account_network" {
   account_parent_id = module.aws_lz_ou_core.ou_id
 }
 
+module "enable_aws_ram_for_organization" {
+  source = "./mofules/ram"
+
+  enable_ram_org = true
+}
+
 module "aws_lz_policy_tagging" {
   source = "./modules/organizations"
 
