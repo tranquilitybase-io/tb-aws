@@ -16,6 +16,7 @@ echo "------------------------TERRAFORM INIT------------------------------------
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
+python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 terraform apply -auto-approve
 
 
