@@ -6,7 +6,7 @@ resource "aws_config_configuration_recorder" "main" {
   count = length(var.config_name) > 0 ? 1 : 0
 
   name     = "${var.config_name}_recorder"
-  role_arn = "arn:aws:iam::${var.account_id}:role/${var.account_role_name}"
+  role_arn = format("arn:aws:iam::%s:role/%s",var.account_id,var.account_role_name)
 
   recording_group {
     all_supported                 = true
