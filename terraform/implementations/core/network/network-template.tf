@@ -53,6 +53,7 @@ module "aws_lz_aws_ram_share_tg" {
   source = "./modules/ram"
 
   ram_name = "AWS_LZ_TG"
+  ram_allow_external_principals = false
   ram_resource_arn = module.aws_lz_tgw.tgw_arn
   ram_principals =  module.aws_lz_organization_main.org_arn
   #ram_principals = "arn:aws:organizations::372937028188:ou/o-8lg1h3pzea/ou-royk-0xu6yv0o"
