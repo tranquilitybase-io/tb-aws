@@ -16,7 +16,7 @@ echo "------------------------TERRAFORM INIT------------------------------------
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
-terraform apply -auto-approve
+#terraform apply -auto-approve
 
 
 #This scripts generates the Guardduty instances in all accounts and all regions
@@ -34,3 +34,6 @@ terraform apply -auto-approve
 
 #terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder_status.main
 #terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder.main
+
+terraform state rm module.aws_lz_config_service_2.aws_iam_role
+terraform state rm module.aws_lz_config_service.aws_iam_role
