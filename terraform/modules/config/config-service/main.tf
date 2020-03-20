@@ -36,7 +36,7 @@ resource "aws_config_configuration_recorder_status" "main" {
 }
 
 resource "aws_iam_role" "main" {
-  count = length(var.config_name) > 0 ? 1 : 0
+ /* count = length(var.config_name) > 0 ? 1 : 0 */
 
   name               = "${var.config_name}_iam_role"
   assume_role_policy = data.aws_iam_policy_document.aws_config_role_policy.json
