@@ -28,6 +28,7 @@ module "aws_lz_tgw" {
           destination_cidr_block = "10.98.0.0/8"
         }
       ]
+
     }
   }
 
