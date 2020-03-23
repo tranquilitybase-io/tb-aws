@@ -11,30 +11,6 @@ module "aws_lz_tgw" {
   amazon_side_asn = 64599
 
   enable_auto_accept_shared_attachments = true
-
-  vpc_attachments = {
-    vpc = {
-      vpc_id       = module.aws_lz_egress_vpc.vpc_id
-      subnet_ids   = module.aws_lz_egress_vpc.private_subnets
-      dns_support  = true
-      ipv6_support = true
-
-      tgw_routes = [
-        {
-          destination_cidr_block = "10.99.0.0/22"
-        }
-/*        {
-          blackhole = true
-          destination_cidr_block = "10.0.0.0/8"
-        }
-*/
-      ]
-
-    }
-  }
-
-  ram_allow_external_principals = true
-  ram_principals                = [local.sandbox_account_id,local.sandbox2_account_id]
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
@@ -58,6 +34,20 @@ module "aws_lz_egress_vpc" {
   single_nat_gateway = false
   one_nat_gateway_per_az = true
   #enable_vpn_gateway = true
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+}
+
+module "egress-vpc-twg-attachment" {
+  source  = "./modules/transit-gateway-vpc-attachment"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  transit_gateway_id = module.aws_lz_tgw.tgw_id
+  vpc_id = module.aws_lz_egress_vpc.vpc_id
+  subnets_ids =  module.aws_lz_egress_vpc.private_subnets
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
