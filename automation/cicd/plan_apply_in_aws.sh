@@ -38,6 +38,6 @@ terraform apply -auto-approve
 #terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder_status.main
 #terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder.main
 
-terraform state rm module.aws_lz_config_service_2.aws_iam_role
-terraform state rm module.aws_lz_config_service.aws_iam_role
+#terraform state rm module.aws_lz_config_service_2.aws_iam_role
+#terraform state rm module.aws_lz_config_service.aws_iam_role
  

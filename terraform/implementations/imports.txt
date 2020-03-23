@@ -14,8 +14,8 @@
 /core/security/security-template.tf
 /core/security/security-variables.tf
 ### Baseline Accounts
-/core/baseline/baseline-template.tf
-/core/baseline/baseline-variables.tf
+#/core/baseline/baseline-template.tf
+#/core/baseline/baseline-variables.tf
 ### Guardduty
 /core/guardduty-template.tf
 /core/guardduty-variables.tf

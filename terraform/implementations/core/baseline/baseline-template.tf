@@ -91,7 +91,7 @@ module "aws_lz_config_rules" {
   delivery_channel = module.aws_lz_config_service.delivery_channel_name
 }
 
-module "aws_lz_config_rules-2" {
+module "aws_lz_config_rules_2" {
   source  = "./modules/config/config-rules"
 
   providers = {
@@ -117,7 +117,7 @@ module "aws_lz_cloudtrail_sns_topic" {
   required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
 
-module "aws_lz_cloudtrail_sns_topic-2" {
+module "aws_lz_cloudtrail_sns_topic_2" {
   source = "./modules/snstopic"
 
   providers = {
@@ -147,7 +147,7 @@ module "aws_lz_cloudtrail" {
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
 /*
-module "aws_lz_cloudtrail-2" {
+module "aws_lz_cloudtrail_2" {
   source = "./modules/cloudtrail"
 
   providers = {
