@@ -226,7 +226,7 @@ module "vpc-sandbox-accept-share-2"{
 ###<---
 */
 ### VPC-TGW attachment
-/*
+
 module "vpc-sandbox-twg-attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
@@ -236,7 +236,7 @@ module "vpc-sandbox-twg-attachment" {
   vpc_id = module.vpc-sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
 } 
-*/
+
 /*
 module "vpc-sandbox-2-twg-attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
