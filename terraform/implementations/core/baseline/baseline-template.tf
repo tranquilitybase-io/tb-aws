@@ -183,7 +183,7 @@ module "vpc-sandbox" {
   enable_nat_gateway = var.enable_nat_gateway
   enable_vpn_gateway = var.enable_vpn_gateway
 
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "sandbox" }
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
 }
 
 module "vpc-sandbox-2" {
@@ -201,7 +201,7 @@ module "vpc-sandbox-2" {
   enable_nat_gateway = var.enable_nat_gateway
   enable_vpn_gateway = var.enable_vpn_gateway
 
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.current_account_id, (var.tag_key_name) = "sandbox" }
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id, (var.tag_key_name) = "sandbox" }
 }
 ### <---
 
@@ -235,9 +235,10 @@ module "vpc-sandbox-twg-attachment" {
   subnets_ids = module.vpc-sandbox.private_subnets
   vpc_id = module.vpc-sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
+  account_id = local.sandbox_account_id
 } 
 
-/*
 module "vpc-sandbox-2-twg-attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
@@ -246,7 +247,7 @@ module "vpc-sandbox-2-twg-attachment" {
   subnets_ids =  module.vpc-sandbox.private_subnets
   vpc_id = module.vpc-sandbox-2.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
+  account_id = local.sandbox2_account_id
 }
-
 #<---
-*/

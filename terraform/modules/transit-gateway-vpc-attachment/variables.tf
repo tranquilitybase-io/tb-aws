@@ -13,3 +13,11 @@ variable "vpc_id"{
     description= "vpc_id"
     type = string
 }
+
+variable "tags" {
+  default = {} 
+}
+
+variable "account_id"{
+    default = ""
+}
