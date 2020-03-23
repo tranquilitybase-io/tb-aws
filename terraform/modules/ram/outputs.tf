@@ -1,4 +1,4 @@
-output "ram_resource_share_arn" {
+output "ram_resource_share_id" {
   description = "The Amazon Resource Name (ARN) of the resource share"
   value       = element(concat(aws_ram_resource_share.aws_lz_ram_shared.*.id, [""]), 0)
 }

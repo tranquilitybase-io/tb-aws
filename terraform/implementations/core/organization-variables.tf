@@ -50,3 +50,7 @@ variable "aws_organizations_account_sandboxprod_email" {
     description = "Sandbox PROD accounts email"
     default = "tb.test.logging.02@gmail.com"
 }
+variable "org_admin_role" {
+    description = "AsssumeRole for LZ setup"
+    default = "AWSLZCoreOUAdminRole"
+}
