@@ -12,15 +12,24 @@ module "aws_lz_tgw" {
 
   enable_auto_accept_shared_attachments = true
 
-  tgw_routes = [
-    {
-      destination_cidr_block = "10.99.0.0/22"
-    },
-    {
-      blackhole = true
-      destination_cidr_block = "10.98.0.0/8"
+  vpc_attachments = {
+    vpc = {
+      vpc_id       = module.aws_lz_egress_vpc.vpc_id
+      subnet_ids   = module.aws_lz_egress_vpc.private_subnets
+      dns_support  = true
+      ipv6_support = true
+
+      tgw_routes = [
+        {
+          destination_cidr_block = "10.99.0.0/22"
+        },
+        {
+          blackhole = true
+          destination_cidr_block = "10.98.0.0/8"
+        }
+      ]
     }
-  ]
+  }
 
   ram_allow_external_principals = true
   ram_principals                = [local.sandbox_account_id,local.sandbox2_account_id]
