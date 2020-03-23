@@ -169,7 +169,7 @@ module "aws_lz_cloudtrail_2" {
 ### VPC --->
 /*Using terraform VPC module, see https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.29.0 */
 
-module "vpc-sandbox" {
+module "vpc_sandbox" {
   source  = "terraform-aws-modules/vpc/aws"
   providers = {
     aws = aws.sandbox-account
@@ -186,7 +186,7 @@ module "vpc-sandbox" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
 }
 
-module "vpc-sandbox-2" {
+module "vpc_sandbox_2" {
   source  = "terraform-aws-modules/vpc/aws"
   providers = {
     aws = aws.sandbox-account-2
@@ -232,8 +232,8 @@ module "vpc-sandbox-twg-attachment" {
   providers = {
     aws = aws.sandbox-account
   }
-  subnets_ids = module.vpc-sandbox.private_subnets
-  vpc_id = module.vpc-sandbox.vpc_id
+  subnets_ids = module.vpc_sandbox.private_subnets
+  vpc_id = module.vpc_sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
   account_id = local.sandbox_account_id
@@ -244,8 +244,8 @@ module "vpc-sandbox-2-twg-attachment" {
   providers = {
     aws = aws.sandbox-account-2
   }
-  subnets_ids =  module.vpc-sandbox.private_subnets
-  vpc_id = module.vpc-sandbox-2.vpc_id
+  subnets_ids =  module.vpc_sandbox_2.private_subnets
+  vpc_id = module.vpc_sandbox_2.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
   account_id = local.sandbox2_account_id
