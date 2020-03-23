@@ -203,28 +203,7 @@ module "vpc_sandbox_2" {
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id, (var.tag_key_name) = "sandbox" }
 }
-### <---
 
-## Accept Share --->
-/*
-module "vpc-sandbox-accept-share"{
-  source  = "./modules/ram-share-accepter"
-  providers = {
-    aws = aws.sandbox-account
-  }
-  share-arn = module.aws_lz_tgw.ram_resource_share_id
-}
-*/
-/*
-module "vpc-sandbox-accept-share-2"{
-  source  = "./modules/ram-share-accepter"
-  providers = {
-    aws = aws.sandbox-account-2
-  }
-  share-arn = module.aws_lz_tgw.ram_resource_share_id
-}
-###<---
-*/
 ### VPC-TGW attachment
 
 module "vpc-sandbox-twg-attachment" {
@@ -235,7 +214,7 @@ module "vpc-sandbox-twg-attachment" {
   subnets_ids = module.vpc_sandbox.private_subnets
   vpc_id = module.vpc_sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id}
   account_id = local.sandbox_account_id
 } 
 
@@ -247,7 +226,7 @@ module "vpc-sandbox-2-twg-attachment" {
   subnets_ids =  module.vpc_sandbox_2.private_subnets
   vpc_id = module.vpc_sandbox_2.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id}
   account_id = local.sandbox2_account_id
 }
 #<---
