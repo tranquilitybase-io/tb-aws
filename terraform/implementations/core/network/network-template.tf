@@ -22,11 +22,12 @@ module "aws_lz_tgw" {
       tgw_routes = [
         {
           destination_cidr_block = "10.99.0.0/22"
-        },
-        {
-          blackhole = true
-          destination_cidr_block = "10.98.0.0/8"
         }
+/*        {
+          blackhole = true
+          destination_cidr_block = "10.0.0.0/8"
+        }
+*/
       ]
 
     }
@@ -56,7 +57,7 @@ module "aws_lz_egress_vpc" {
   enable_nat_gateway = true
   single_nat_gateway = false
   one_nat_gateway_per_az = true
-  enable_vpn_gateway = true
+  #enable_vpn_gateway = true
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
