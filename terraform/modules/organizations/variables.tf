@@ -5,7 +5,7 @@ variable "aws_organizations_account_tags" {
 
 variable "aws_organizations_service_access_principals" {
     type = list(string)
-    default = ["cloudtrail.amazonaws.com","config.amazonaws.com"]
+    default = ["cloudtrail.amazonaws.com","config.amazonaws.com","ram.amazonaws.com"]
 }
 
 variable "aws_organizations_enable_policy_types" {
