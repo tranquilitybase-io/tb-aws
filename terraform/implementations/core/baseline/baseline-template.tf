@@ -146,7 +146,7 @@ module "aws_lz_cloudtrail" {
   region = local.region
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "cloudtrail" }
 }
-
+/*
 module "aws_lz_cloudtrail-2" {
   source = "./modules/cloudtrail"
 
@@ -163,7 +163,7 @@ module "aws_lz_cloudtrail-2" {
   region = local.region
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id, (var.tag_key_name) = "cloudtrail" }
 }
-
+*/
 ### CLOUDTRAIL SERVICE <--
 
 ### VPC --->
