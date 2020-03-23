@@ -18,4 +18,3 @@ resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
   var.tgw_tags,
   )
 }
-

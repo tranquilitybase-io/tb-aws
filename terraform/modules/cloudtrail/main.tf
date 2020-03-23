@@ -25,7 +25,7 @@ resource "aws_sns_topic_policy" "sns_default_policy" {
 resource "aws_cloudwatch_log_group" "log_group_default" {
   count = length(var.cloudtrail_name) > 0 ? 1 : 0
 
-  name = "${var.cloudtrail_name}_default_log_group"
+  name = "${var.cloudtrail_name}_default_log_group_${var.bucket_account_id}"
   retention_in_days = var.logs_retencion_days
   tags = var.required_tags
 }
@@ -41,7 +41,7 @@ resource "aws_iam_role" "cloudtrail_role" {
 resource "aws_iam_policy" "cloudtrail_access_policy" {
   count = length(var.cloudtrail_name) > 0 ? 1 : 0
 
-  name   = "${var.cloudtrail_name}_policy"
+  name   = "${var.cloudtrail_name}_policy_${var.bucket_account_id}"
   policy = data.aws_iam_policy_document.cloudtrail_cloudwatch_policy.json
 }
 
