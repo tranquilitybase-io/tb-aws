@@ -6,7 +6,7 @@ module "aws_lz_tgw" {
     aws = aws.network-account
   }
 
-  name            = "aws_lz_tgw"
+  name            = format("aws_lz_tgw_%s",local.network_account_id)
   description     = "AWS Landing Zone TGW shared with several other AWS accounts"
   amazon_side_asn = 64599
 
@@ -52,8 +52,8 @@ module "aws_lz_egress_vpc" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
-module "egress-vpc-twg-attachment" {
-  source  = "./modules/transit-gateway-vpc-attachment"
+module "aws_lz_egress_vpc_twg_attachment" {
+  source  = "./modules/transit-gateway/tgw-vpc-attachment"
 
   providers = {
     aws = aws.network-account
@@ -74,5 +74,5 @@ module "aws_lz_tgw_route" {
   }
 
   tgw_id = module.aws_lz_tgw.tgw_id
-  attach_id = module.egress-vpc-twg-attachment.tgw_attach_id
+  attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }
