@@ -18,29 +18,3 @@ resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
   var.tgw_tags,
   )
 }
-
-data "aws_ec2_transit_gateway_route_table" "aws_lz_tgw_route_table" {
-  filter {
-    name   = "default-association-route-table"
-    values = ["true"]
-  }
-
-  filter {
-    name   = "transit-gateway-id"
-    values = [aws_ec2_transit_gateway.aws_lz_tgw.id]
-  }
-}
-
-resource "aws_ec2_transit_gateway_route" "aws_lz_tgw_route" {
-  destination_cidr_block         = "0.0.0.0/0"
-  transit_gateway_attachment_id  = module.egress-vpc-twg-attachment.tgw_attach_id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.aws_lz_tgw_route_table.id
-
-  tags = merge(
-  {
-    "Name" = "aws_lz_tgw_egress_route"
-  },
-  var.tags,
-  var.tgw_tags,
-  )
-}

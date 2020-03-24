@@ -14,6 +14,20 @@ module "aws_lz_tgw" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+module "aws_lz_aws_ram_share_tg" {
+  source = "./modules/ram"
+
+  ram_name = "AWS_LZ_TG"
+  ram_allow_external_principals = false
+  ram_resource_arn = module.aws_lz_tgw.tgw_arn
+  ram_principals =  module.aws_lz_organization_main.org_arn
+  ram_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "aws-ram-tg" }
+
+  providers = {
+    aws = aws.network-account
+  }
+}
+
 module "aws_lz_egress_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
@@ -52,17 +66,15 @@ module "egress-vpc-twg-attachment" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
-
-module "aws_lz_aws_ram_share_tg" {
-  source = "./modules/ram"
-
-  ram_name = "AWS_LZ_TG"
-  ram_allow_external_principals = false
-  ram_resource_arn = module.aws_lz_tgw.tgw_arn
-  ram_principals =  module.aws_lz_organization_main.org_arn
-  ram_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_organization_main.master_account_id, (var.tag_key_name) = "aws-ram-tg" }
+module "aws_lz_tgw_route" {
+  source = "./modules/transit-gateway/tgw-route-table"
 
   providers = {
     aws = aws.network-account
   }
+
+  tgw_id = module.aws_lz_tgw.tgw_id
+  attach_id = module.egress-vpc-twg-attachment.tgw_attach_id
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
