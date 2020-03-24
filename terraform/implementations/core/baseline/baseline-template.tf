@@ -206,7 +206,7 @@ module "vpc_sandbox_2" {
 
 ### VPC-TGW attachment
 
-module "vpc-sandbox-twg-attachment" {
+module "vpc_sandbox_twg_attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
     aws = aws.sandbox-account
@@ -218,7 +218,7 @@ module "vpc-sandbox-twg-attachment" {
   account_id = local.sandbox_account_id
 } 
 
-module "vpc-sandbox-2-twg-attachment" {
+module "vpc_sandbox_2_twg_attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
     aws = aws.sandbox-account-2
@@ -230,3 +230,47 @@ module "vpc-sandbox-2-twg-attachment" {
   account_id = local.sandbox2_account_id
 }
 #<---
+
+#Routes
+module "internet_route_sandbox"{
+  source  = "./modules/route"
+  providers = {
+    aws = aws.sandbox-account
+  }
+  route_table = module.vpc_sandbox.private_route_table_ids
+  destination = var.internet_cidr
+  transit_gateway = module.aws_lz_tgw.tgw_id
+}
+
+module "internal_route_sandbox"{
+  source  = "./modules/route"
+  providers = {
+    aws = aws.sandbox-account
+  }
+  route_table = module.vpc_sandbox.private_route_table_ids
+  destination = var.internal_traffic_cidr
+  transit_gateway = module.aws_lz_tgw.tgw_id
+}
+
+module "internet_route_sandbox_2"{
+  source  = "./modules/route"
+  providers = {
+    aws = aws.sandbox-account-2
+  }
+  route_table = module.vpc_sandbox_2.private_route_table_ids
+  destination = var.internet_cidr
+  transit_gateway = module.aws_lz_tgw.tgw_id
+}
+
+module "internal_route_sandbox_2"{
+  source  = "./modules/route"
+  providers = {
+    aws = aws.sandbox-account-2
+  }
+  route_table = module.vpc_sandbox_2.private_route_table_ids
+  destination = var.internal_traffic_cidr
+  transit_gateway = module.aws_lz_tgw.tgw_id
+}
+
+
+#<----
