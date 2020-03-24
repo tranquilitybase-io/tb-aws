@@ -207,7 +207,7 @@ module "vpc_sandbox_2" {
 ### VPC-TGW attachment
 
 module "vpc-sandbox-twg-attachment" {
-  source  = "./modules/transit-gateway-vpc-attachment"
+  source  = "./modules/transit-gateway/tgw-vpc-attachment"
   providers = {
     aws = aws.sandbox-account
   }
@@ -219,7 +219,7 @@ module "vpc-sandbox-twg-attachment" {
 } 
 
 module "vpc-sandbox-2-twg-attachment" {
-  source  = "./modules/transit-gateway-vpc-attachment"
+  source  = "./modules/transit-gateway/tgw-vpc-attachment"
   providers = {
     aws = aws.sandbox-account-2
   }
