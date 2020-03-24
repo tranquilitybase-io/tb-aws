@@ -212,11 +212,12 @@ module "vpc_sandbox_twg_attachment" {
   providers = {
     aws = aws.sandbox-account
   }
+
+  attach_name = format("aws_lz_sandbox_vpc_attach_%s",local.sandbox_account_id)
   subnets_ids = module.vpc_sandbox.private_subnets
   vpc_id = module.vpc_sandbox.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id}
-  account_id = local.sandbox_account_id
 } 
 
 module "vpc_sandbox_2_twg_attachment" {
@@ -224,11 +225,12 @@ module "vpc_sandbox_2_twg_attachment" {
   providers = {
     aws = aws.sandbox-account-2
   }
+
+  attach_name = format("aws_lz_sandbox2_vpc_attach_%s",local.sandbox2_account_id)
   subnets_ids =  module.vpc_sandbox_2.private_subnets
   vpc_id = module.vpc_sandbox_2.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id}
-  account_id = local.sandbox2_account_id
 }
 #<---
 

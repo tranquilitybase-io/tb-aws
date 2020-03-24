@@ -18,6 +18,7 @@ variable "tags" {
   default = {} 
 }
 
-variable "account_id"{
+variable "attach_name"{
+    description = "Attachment Name"
     default = ""
 }
