@@ -1,6 +1,6 @@
 
 module "aws_lz_tgw" {
-  source = "./modules/transit-gateway"
+  source = "./modules/transit-gateway/tgw-main"
 
   providers = {
     aws = aws.network-account
