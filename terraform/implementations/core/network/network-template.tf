@@ -74,6 +74,7 @@ module "aws_lz_tgw_route" {
     aws = aws.network-account
   }
 
+  destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
   attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }
