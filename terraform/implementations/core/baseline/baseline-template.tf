@@ -206,7 +206,7 @@ module "vpc_sandbox_2" {
 
 ### VPC-TGW attachment
 
-module "vpc-sandbox-twg-attachment" {
+module "vpc_sandbox_twg_attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
     aws = aws.sandbox-account
@@ -218,7 +218,7 @@ module "vpc-sandbox-twg-attachment" {
   account_id = local.sandbox_account_id
 } 
 
-module "vpc-sandbox-2-twg-attachment" {
+module "vpc_sandbox_2_twg_attachment" {
   source  = "./modules/transit-gateway-vpc-attachment"
   providers = {
     aws = aws.sandbox-account-2
