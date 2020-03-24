@@ -242,5 +242,15 @@ module "internet_route_sandbox"{
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 
+module "internal_route_sandbox"{
+  source  = "./modules/route"
+  providers = {
+    aws = aws.sandbox-account
+  }
+  route_table = module.vpc_sandbox.private_route_table_ids
+  destination = var.internal_traffic_cidr
+  transit_gateway = module.aws_lz_tgw.tgw_id
+}
+
 
 #<----
