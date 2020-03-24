@@ -71,3 +71,11 @@ variable "enable_vpn_gateway"{
     description = "Enable VPN gateway"
     default = false
 }
+
+variable "internet_cidr"{
+    default = "0.0.0.0/0"
+}
+
+variable "internal_traffic_cidr"{
+    default = 10.0.0.0/8
+}

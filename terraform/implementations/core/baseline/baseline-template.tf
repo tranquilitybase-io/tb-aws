@@ -230,3 +230,17 @@ module "vpc-sandbox-2-twg-attachment" {
   account_id = local.sandbox2_account_id
 }
 #<---
+
+#Routes
+module "internet_route_sandbox"{
+  source  = "./modules/route"
+  providers = {
+    aws = aws.sandbox-account
+  }
+  route_table = module.vpc_sandbox.private_route_table_ids
+  destination = var.internet_cidr
+  transit_gateway = module.aws_lz_tgw.tgw_id
+}
+
+
+#<----
