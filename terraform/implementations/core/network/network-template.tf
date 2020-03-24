@@ -1,4 +1,5 @@
 
+#Create TGW
 module "aws_lz_tgw" {
   source = "./modules/transit-gateway/tgw-main"
 
