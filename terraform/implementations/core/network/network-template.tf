@@ -75,6 +75,4 @@ module "aws_lz_tgw_route" {
 
   tgw_id = module.aws_lz_tgw.tgw_id
   attach_id = module.egress-vpc-twg-attachment.tgw_attach_id
-
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
