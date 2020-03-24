@@ -77,5 +77,5 @@ variable "internet_cidr"{
 }
 
 variable "internal_traffic_cidr"{
-    default = 10.0.0.0/8
+    default = "10.0.0.0/8"
 }
