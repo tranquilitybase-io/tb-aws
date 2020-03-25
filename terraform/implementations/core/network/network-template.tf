@@ -87,7 +87,7 @@ module "aws_lz_tgw_route" {
     aws = aws.network-account
   }
   route_table = module.aws_lz_egress_vpc.public_route_table_ids
-  destination = var.internal_traffic_cidr
+  destination = var.tgw_vpc_internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }*/
 ### Egress VPC />
@@ -138,7 +138,7 @@ module "aws_lz_tgw_ingress_vpc_route"{
     aws = aws.network-account
   }
   route_table = module.aws_lz_ingress_vpc.private_route_table_ids
-  destination = var.internal_traffic_cidr
+  destination = var.tgw_vpc_internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 ### Ingress VPC />
