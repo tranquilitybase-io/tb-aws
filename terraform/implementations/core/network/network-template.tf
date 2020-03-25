@@ -115,8 +115,8 @@ module "aws_lz_ingress_vpc_twg_attachment" {
 
   attach_name = format("aws_lz_ingress_vpc_attach_%s",local.network_account_id)
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-  vpc_id = module.aws_lz_egress_vpc.vpc_id
-  subnets_ids =  module.aws_lz_egress_vpc.private_subnets
+  vpc_id = module.aws_lz_ingress_vpc.vpc_id
+  subnets_ids =  module.aws_lz_ingress_vpc.private_subnets
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 ### Ingress VPC />
