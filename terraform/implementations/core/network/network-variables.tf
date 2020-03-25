@@ -19,3 +19,10 @@ variable "egress_vpc_cidr"{
   default = "10.99.0.0/22"
 }
 
+variable "internet_cidr"{
+  default = "0.0.0.0/0"
+}
+
+variable "internal_traffic_cidr"{
+  default = "10.0.0.0/8"
+}
