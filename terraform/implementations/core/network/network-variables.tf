@@ -6,7 +6,7 @@ variable "ingress_vpc_name" {
 
 variable "ingress_vpc_cidr"{
   description = "Egress VPC CIDR"
-  default = "10.98.0.0/22"
+  default = "10.99.4.0/22"
 }
 
 variable "egress_vpc_name" {
