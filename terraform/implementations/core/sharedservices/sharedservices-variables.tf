@@ -17,25 +17,25 @@ variable "vpc_sharedservices_public_subnets_cidr"{
     default = []
 }
 
-variable "vpc_azs"{
+variable "vpc_azs_sharedservices"{
     description = "Availability zones where the VPC will span"
     default = ["us-west-2a","us-west-2b"]
 }
 
-variable "enable_nat_gateway"{
+variable "enable_nat_gateway_sharedservices"{
     description = "Enable NAT gateway"
     default = false
 }
 
-variable "enable_vpn_gateway"{
+variable "enable_vpn_gateway_sharedservices"{
     description = "Enable VPN gateway"
     default = false
 }
 
-variable "internet_cidr"{
+variable "internet_cidr_sharedservices"{
     default = "0.0.0.0/0"
 }
 
-variable "internal_traffic_cidr"{
+variable "internal_traffic_cidr_sharedservices"{
     default = "10.0.0.0/8"
 }

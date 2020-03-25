@@ -12,8 +12,8 @@ module "vpc_shared_services" {
   private_subnets = var.vpc_sharedservices_private_subnets_cidr
   public_subnets  =  vasandbox_accountr.vpc_sharedservices_public_subnets_cidr
 
-  enable_nat_gateway = var.enable_nat_gateway
-  enable_vpn_gateway = var.enable_vpn_gateway
+  enable_nat_gateway = var.enable_nat_gateway_sharedservices
+  enable_vpn_gateway = var.enable_vpn_gateway_sharedservices
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sharedservices_account_id, (var.tag_key_name) = "sharedservices" }
 }
@@ -38,7 +38,7 @@ module "internet_route_sharedservices"{
     aws = aws.sharedservices-account
   }
   route_table = module.vpc_shared_services.private_route_table_ids
-  destination = var.internet_cidr
+  destination = var.internet_cidr_sharedservices
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 
@@ -48,6 +48,6 @@ module "internal_route_sharedservices"{
     aws = aws.sharedservices-account
   }
   route_table = module.vpc_shared_services.private_route_table_ids
-  destination = var.internal_traffic_cidr
+  destination = var.internal_traffic_cidr_sharedservices
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
