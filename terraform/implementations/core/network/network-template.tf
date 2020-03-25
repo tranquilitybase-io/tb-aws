@@ -81,7 +81,7 @@ module "aws_lz_tgw_route" {
 }
 
 ##Routes
-/*module "aws_lz_tgw_egress_vpc_route"{
+module "aws_lz_tgw_egress_vpc_route"{
   source  = "./modules/route"
   providers = {
     aws = aws.network-account
@@ -89,7 +89,7 @@ module "aws_lz_tgw_route" {
   route_table = module.aws_lz_egress_vpc.public_route_table_ids
   destination = var.tgw_vpc_internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
-}*/
+}
 ### Egress VPC />
 
 ### </ Ingress VPC
