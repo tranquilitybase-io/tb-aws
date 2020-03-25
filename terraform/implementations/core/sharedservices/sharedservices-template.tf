@@ -8,9 +8,9 @@ module "vpc_shared_services" {
   }
   name = var.vpc_sharedservices_name
   cidr = var.vpc_sharedservices_cidr
-  azs             = var.vpc_azs
+  azs             = var.vpc_azs_sharedservices
   private_subnets = var.vpc_sharedservices_private_subnets_cidr
-  public_subnets  =  vasandbox_accountr.vpc_sharedservices_public_subnets_cidr
+  public_subnets  =  var.vpc_sharedservices_public_subnets_cidr
 
   enable_nat_gateway = var.enable_nat_gateway_sharedservices
   enable_vpn_gateway = var.enable_vpn_gateway_sharedservices
