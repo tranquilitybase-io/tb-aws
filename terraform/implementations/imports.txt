@@ -20,6 +20,10 @@
 /core/guardduty-template.tf
 /core/guardduty-variables.tf
 
+### Shared Services
+/core/network/sharedservices-template.tf
+/core/network/sharedservices-variables.tf
+
 ### Network Accounts
 /core/network/network-template.tf
 /core/network/network-variables.tf
