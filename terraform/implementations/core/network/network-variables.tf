@@ -4,11 +4,6 @@ variable "ingress_vpc_name" {
   description = "Ingress VPC Name"
 }
 
-variable "ingress_egress_vpc_azs"{
-  description = "Availability zones where the VPC will span"
-  default = [local.primary_az, local.secondary_az]
-}
-
 variable "ingress_vpc_cidr"{
   description = "Egress VPC CIDR"
   default = "10.99.4.0/22"

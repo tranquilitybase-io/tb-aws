@@ -57,12 +57,6 @@ variable "vpc_sandbox_2_public_subnets_cidr"{
     default = []
 }
 
-variable "vpc_azs"{
-    description = "Availability zones where the VPC will span"
-    type = list(string)
-    default = ["${local.primary_az}", "${local.secondary_az}"]
-}
-
 variable "enable_nat_gateway"{
     description = "Enable NAT gateway"
     default = false

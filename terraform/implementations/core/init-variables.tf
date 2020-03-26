@@ -26,3 +26,9 @@ variable "awslz_account_id" {
   type = string
   default = "22222"
 }
+
+variable "vpc_azs"{
+  description = "Availability zones where the VPC will span"
+  type = list(string)
+  default = [data.aws_availability_zones.available.names[0],data.aws_availability_zones.available.names[1]]
+}
