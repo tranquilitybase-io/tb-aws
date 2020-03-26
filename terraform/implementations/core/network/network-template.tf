@@ -18,7 +18,7 @@ module "aws_lz_tgw" {
 module "aws_lz_aws_ram_share_tg" {
   source = "./modules/ram"
 
-  ram_name = "AWS_LZ_TG"
+  ram_name = "aws_lz_ram_tgw"
   ram_allow_external_principals = false
   ram_resource_arn = module.aws_lz_tgw.tgw_arn
   ram_principals =  module.aws_lz_organization_main.org_arn
@@ -42,9 +42,9 @@ module "aws_lz_egress_vpc" {
 
   cidr = var.egress_vpc_cidr
 
-  azs             = ["us-west-2a", "us-west-2b"]
-  public_subnets  = ["10.99.0.0/24", "10.99.1.0/24"]
-  private_subnets = ["10.99.2.0/24", "10.99.3.0/24"]
+  azs             = [local.primary_az,local.secondary_az]
+  public_subnets  = var.egress_vpc_public_subnets
+  private_subnets = var.egress_vpc_private_subnets
 
   enable_nat_gateway = true
   single_nat_gateway = false
@@ -105,14 +105,13 @@ module "aws_lz_ingress_vpc" {
 
   cidr = var.ingress_vpc_cidr
 
-  azs             = ["us-west-2a", "us-west-2b"]
-  public_subnets  = ["10.99.4.0/24", "10.99.5.0/24"]
-  private_subnets = ["10.99.6.0/24", "10.99.7.0/24"]
+  azs             = [local.primary_az,local.secondary_az]
+  public_subnets  = var.ingress_vpc_public_subnets
+  private_subnets = var.ingress_vpc_private_subnets
 
   enable_nat_gateway = false
   single_nat_gateway = false
   one_nat_gateway_per_az = false
-  #enable_vpn_gateway = true
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }

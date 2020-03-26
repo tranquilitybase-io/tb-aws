@@ -57,11 +57,6 @@ variable "vpc_sandbox_2_public_subnets_cidr"{
     default = []
 }
 
-variable "vpc_azs"{
-    description = "Availability zones where the VPC will span"
-    default = ["us-west-2a","us-west-2b"]
-}
-
 variable "enable_nat_gateway"{
     description = "Enable NAT gateway"
     default = false

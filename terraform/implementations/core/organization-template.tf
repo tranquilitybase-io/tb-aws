@@ -1,6 +1,4 @@
 # Get the access to the effective Account ID in which Terraform is working.
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 module "aws_lz_organization_main" {
   source = "./modules/organizations"
