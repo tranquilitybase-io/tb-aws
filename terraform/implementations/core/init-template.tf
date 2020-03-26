@@ -12,6 +12,8 @@ locals {
   network_account_id = module.aws_lz_account_network.account_id
   sharedservices_account_id = module.aws_lz_account_sharedservices.account_id
   region = data.aws_region.current.name
+  primary_az = data.aws_availability_zones.available.names[0]
+  secondary_az = data.aws_availability_zones.available.names[1]
 }
 
 provider "aws" {

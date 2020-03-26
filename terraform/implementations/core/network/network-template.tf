@@ -42,7 +42,7 @@ module "aws_lz_egress_vpc" {
 
   cidr = var.egress_vpc_cidr
 
-  azs             = var.vpc_azs
+  azs             = [local.primary_az,local.secondary_az,var.vpc_azs]
   public_subnets  = var.egress_vpc_public_subnets
   private_subnets = var.egress_vpc_private_subnets
 
@@ -105,7 +105,7 @@ module "aws_lz_ingress_vpc" {
 
   cidr = var.ingress_vpc_cidr
 
-  azs             = var.vpc_azs
+  azs             = [local.primary_az,local.secondary_az,var.vpc_azs]
   public_subnets  = var.ingress_vpc_public_subnets
   private_subnets = var.ingress_vpc_private_subnets
 

@@ -28,7 +28,7 @@ variable "awslz_account_id" {
 }
 
 variable "vpc_azs"{
-  description = "Availability zones where the VPC will span"
+  description = "Third or more Az's where the VPC will span, by default 2 AZ's will be attached to the VPC."
   type = list(string)
-  default = [data.aws_availability_zones.available.names[0],data.aws_availability_zones.available.names[1]]
+  default = []
 }
