@@ -26,8 +26,3 @@ variable "awslz_account_id" {
   type = string
   default = "22222"
 }
-
-variable "vpc_azs"{
-  description = "Third or more Az's where the VPC will span, by default 2 AZ's will be attached to the VPC."
-  default = ""
-}

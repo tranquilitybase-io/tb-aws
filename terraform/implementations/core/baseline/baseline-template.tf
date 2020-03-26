@@ -176,7 +176,7 @@ module "vpc_sandbox" {
   }
   name = var.vpc_sandbox_1_name
   cidr = var.vpc_sandbox_1_cidr
-  azs             = [local.primary_az,local.secondary_az,var.vpc_azs]
+  azs             = [local.primary_az,local.secondary_az]
   private_subnets = var.vpc_sandbox_1_private_subnets_cidr
   public_subnets  =  var.vpc_sandbox_1_public_subnets_cidr
 
@@ -194,7 +194,7 @@ module "vpc_sandbox_2" {
   
   name = var.vpc_sandbox_2_name
   cidr = var.vpc_sandbox_2_cidr
-  azs             = [local.primary_az,local.secondary_az,var.vpc_azs]
+  azs             = [local.primary_az,local.secondary_az]
   private_subnets = var.vpc_sandbox_2_private_subnets_cidr
   public_subnets  = var.vpc_sandbox_2_public_subnets_cidr
 
