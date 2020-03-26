@@ -17,11 +17,6 @@ variable "vpc_sharedservices_public_subnets_cidr"{
     default = []
 }
 
-variable "vpc_azs_sharedservices"{
-    description = "Availability zones where the VPC will span"
-    default = ["us-west-2a","us-west-2b"]
-}
-
 variable "enable_nat_gateway_sharedservices"{
     description = "Enable NAT gateway"
     default = false
