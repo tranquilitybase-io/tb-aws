@@ -1,3 +1,10 @@
+#Data source declarations
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
   logarchive_account_id = module.aws_lz_account_logarchive.account_id
@@ -7,6 +14,9 @@ locals {
   network_account_id = module.aws_lz_account_network.account_id
   sharedservices_account_id = module.aws_lz_account_sharedservices.account_id
   region = data.aws_region.current.name
+  primary_az = data.aws_availability_zones.available.names[0]
+  secondary_az = data.aws_availability_zones.available.names[1]
+  all_azs = [data.aws_availability_zones.available.names]
 }
 
 provider "aws" {
