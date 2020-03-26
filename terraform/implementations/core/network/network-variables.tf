@@ -4,7 +4,7 @@ variable "ingress_vpc_name" {
   description = "Ingress VPC Name"
 }
 
-variable "vpc_azs"{
+variable "ingress_egress_vpc_azs"{
   description = "Availability zones where the VPC will span"
   default = [local.primary_az, local.secondary_az]
 }
