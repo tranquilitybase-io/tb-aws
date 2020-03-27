@@ -300,6 +300,7 @@ module "ec2-instance" {
   providers = {
     aws = aws.sandbox-account
   }
+  name = var.instance_name
   ami = var.ami_version
   instance_type = var.instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"

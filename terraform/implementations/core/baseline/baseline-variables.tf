@@ -75,6 +75,11 @@ variable "internal_traffic_cidr"{
     default = "10.0.0.0/8"
 }
 
+variable "instance_name" {
+  description = "Instance name"
+  default = "awslz_ubuntu"
+}
+
 variable "ami_version" {
   description = "AMI version to deploy"
   default = "ami-0d1cd67c26f5fca19"
