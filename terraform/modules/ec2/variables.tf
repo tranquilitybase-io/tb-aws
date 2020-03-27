@@ -10,5 +10,4 @@ variable "instance_type" {
 variable "subnet_id" {
     description = "Subnet id to deploy instance"
     #default     = ""
-    type        = set(string)
 }
