@@ -1,3 +1,6 @@
+locals {
+  nginx_install = "codename=$(lsb_release -c | awk '{print $2}'); echo \"deb http://nginx.org/packages/mainline/ubuntu/ ${codename} nginx \" >> /etc/apt/sources.list; wget http://nginx.org/keys/nginx_signing.key; apt-key add nginx_signing.key; apt-get update; apt install nginx; systemctl start nginx"
+}
 
 #Create TGW
 module "aws_lz_tgw" {
@@ -181,6 +184,6 @@ module "ec2_instance_nginx" {
   instance_type = var.nginx_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
   vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
-  user_data = var.nginx_user_data
+  user_data = local.nginx_install
 }
 #<----
