@@ -102,5 +102,5 @@ variable "cidr_blocks" {
 
 variable "ingress_rules" {
   description = "Ingress rules"
-  default = ["https-443-tcp", "http-80-tcp", "ssh-22-tcp"]
+  default = ["https-443-tcp","http-80-tcp","ssh-22-tcp"]
 }
