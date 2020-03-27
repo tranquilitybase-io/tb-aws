@@ -274,6 +274,37 @@ module "internal_route_sandbox_2"{
   destination = var.internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
+#<----
 
+#Security Group
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.sandbox-account
+  }
+  name = var.security_group_name
+  description = var.security_group_description
+  vpc_id = module.vpc_sandbox.vpc_id
 
+  ingress_cidr_blocks = var.cidr_blocks
+  ingress_rules       = var.ingressrules
+}
+#<----
+
+#EC2 Instances
+module "ec2_instance" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "2.13.0"
+  providers = {
+    aws = aws.sandbox-account
+  }
+  name = var.instance_name
+  ami = var.ami_version
+  instance_type = var.instance_type
+  subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0)
+  vpc_security_group_ids = list(module.security_group.this_security_group_id)
+  user_data = var.user_data
+}
 #<----
