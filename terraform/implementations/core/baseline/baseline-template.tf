@@ -276,6 +276,22 @@ module "internal_route_sandbox_2"{
 }
 #<----
 
+#Security Group
+module "security-group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.sandbox-account
+  }
+  name = var.security_group_name
+  description = var.security_group_description
+  vpc_id = module.vpc_sandbox.vpc_id
+
+  ingress_cidr_blocks = var.cidr_blocks
+}
+#<----
+
 #EC2 Instances
 module "instances_sandbox_1" {
   source = "./modules/ec2"
@@ -286,3 +302,4 @@ module "instances_sandbox_1" {
   instance_type = var.instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"
 }
+#<----

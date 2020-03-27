@@ -85,5 +85,17 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
+variable "security_group_name" {
+  description = "Security group name"
+  default = "internal_webserver"
+}
 
+variable "security_group_description" {
+  description = "Security group description"
+  default = "Internal server: http, ssh and icmp"
+}
 
+variable "cidr_blocks" {
+  description = "Ingress cidr block"
+  default = ["10.0.0.0/8"]
+}
