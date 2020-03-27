@@ -74,7 +74,7 @@ variable "nginx_instance_type" {
 
 variable "nginx_user_data" {
   description = "User data for the instance"
-  default = 
+  default = local.nginx_install
 }
 
 # Security Groups variables
