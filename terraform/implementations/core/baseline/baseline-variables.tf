@@ -92,7 +92,7 @@ variable "instance_type" {
 
 variable "user_data" {
   description = "User data for the instance"
-  default = "yum update; yum install httpd; systemctl start httpd; systemctl status httpd"
+  default = "apt-get update; apt-get install apache2; systemctl start apache2.service; systemctl enable apache2"
 }
 
 
