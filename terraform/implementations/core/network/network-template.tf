@@ -1,5 +1,5 @@
 locals {
-  nginx_install = "codename=$(lsb_release -c | awk '{print $2}'); echo \"deb http://nginx.org/packages/mainline/ubuntu/ ${codename} nginx \" >> /etc/apt/sources.list; wget http://nginx.org/keys/nginx_signing.key; apt-key add nginx_signing.key; apt-get update; apt install nginx; systemctl start nginx"
+  nginx_install = "codename=$(lsb_release -c | awk '{print $2}'); echo \"deb http://nginx.org/packages/mainline/ubuntu/ \$\{codename\} nginx \" >> /etc/apt/sources.list; wget http://nginx.org/keys/nginx_signing.key; apt-key add nginx_signing.key; apt-get update; apt install nginx; systemctl start nginx"
 }
 
 #Create TGW
