@@ -1,19 +1,27 @@
-## Usage
+# GFT AWS LZ S3 Bucket Terraform module
 
-**Module to create a S3 bucket to store logs files from Config and Cloudtrail, the bucket is encrypted at rest using "AES256" as algorithm. The module create 2 buckets one for access and another with logging activated**
-
+Usage: Module to create a S3 bucket to store logs files from Config and CloudTrail, the bucket is encrypted at rest using "AES256" as algorithm. The module create 2 buckets one for access and another with logging activated.
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| config\_name | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
-| config\_tags | Required TAGS used by all the resources. | `string` | `"config_tags"` | no |
-| config\_logs\_bucket | The S3 bucket for AWS Config Access logs. | `string` | n/a | yes |
-| config\_logs\_bucket_logs | The S3 bucket for AWS Config logs. | `string` | n/a | yes |
-| config\_logs\_prefix | The S3 prefix for AWS Config logs. | `string` | `"config"` | no |
+|------|-------------|------|---------|:-----:|
+| acl\_access\_bucket | ACL value for Access Bucket | `string` | `"log-delivery-write"` | no |
+| acl\_logs\_bucket | ACL value for Logs Bucket | `string` | `"private"` | no |
+| bucket\_name | The S3 Bucket Name source for log bucket | `string` | `""` | no |
+| bucket\_name\_log | The S3 Bucket Name for log. | `string` | `""` | no |
+| config\_tags | Required Tags | `map` | `{}` | no |
+| s3\_log\_prefix | The S3 prefix for AWS Config logs. | `string` | `""` | no |
+| sse\_aes256 | Encryption AES256 | `string` | `"AES256"` | no |
+| versioning\_enabled | Set versioning in S3 bucket | `bool` | `true` | no |
 
-## Output
-"bucket_name"
-"bucket_name_log"
-"s3_log_prefix"
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| bucket\_log\_arn | Logging Bucket ARN |
+| bucket\_name | Bucket Name |
+| bucket\_name\_arn | Bucket ARN |
+| bucket\_name\_log | Logging Bucket Name |
+| s3\_log\_prefix | S3 Log Prefix |
+

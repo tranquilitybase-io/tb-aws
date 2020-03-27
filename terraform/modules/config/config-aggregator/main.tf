@@ -1,6 +1,9 @@
-#
-# Configuration Aggregator
-#
+/*
+* # GFT AWS LZ Config Aggregator Terraform module
+*
+* Usage: Module to create an aggregator to set Config in a Multi Account environment. The aggregator will be set to all regions even futures region, also it will be attched to an Organization, so all the members of that Organization will be checked by the Config rules.
+*/
+
 resource "aws_config_configuration_aggregator" "organization" {
   count      = var.aggregate_organization ? 1 : 0
   name       = "${var.config_name}_organization_aggregator"

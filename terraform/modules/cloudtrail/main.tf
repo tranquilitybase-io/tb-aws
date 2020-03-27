@@ -1,3 +1,9 @@
+/*
+* # GFT AWS LZ CloudTrail Service Terraform module
+*
+* Usage: Terraform module which activates CloudTrail Service for each SandBox Account.
+*/
+
 resource "aws_cloudtrail" "cloudtrail_default" {
   count = length(var.cloudtrail_name) > 0 ? 1 : 0
 

@@ -1,6 +1,4 @@
 
-
-
 variable "config_tags" {
   description = "Required TAGS"
   default = {} 

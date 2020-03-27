@@ -1,24 +1,25 @@
-variable "subnets_ids"{
+variable "subnets_ids" {
     description= "Identifiers of subnets"
-    type = list
+    type = list(string)
 }
 
-variable "transit_gateway_id"{
+variable "transit_gateway_id" {
     description= "Transit gateway Id"
     type = string
 }
 
 
-variable "vpc_id"{
-    description= "vpc_id"
+variable "vpc_id" {
+    description= "VPC ID"
     type = string
 }
 
 variable "tags" {
+    description = "Tags for attachment VPC"
   default = {} 
 }
 
-variable "attach_name"{
+variable "attach_name" {
     description = "Attachment Name"
     default = ""
 }

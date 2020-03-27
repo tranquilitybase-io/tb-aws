@@ -12,10 +12,12 @@ variable "bucket_name_log" {
 
 variable "s3_log_prefix" {
   description = "The S3 prefix for AWS Config logs."
+  default = ""
 }
 
 variable "config_tags" {
-  default = {} 
+  default = {}
+  description = "Required Tags"
 }
 
 variable "versioning_enabled"{

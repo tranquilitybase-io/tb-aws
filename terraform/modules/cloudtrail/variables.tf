@@ -66,5 +66,6 @@ variable "logs_retencion_days" {
 }
 
 variable "required_tags" {
+  description = "Required tags"
   default = {} 
 }

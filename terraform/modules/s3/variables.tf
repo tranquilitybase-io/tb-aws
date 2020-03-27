@@ -1,10 +1,12 @@
 
 variable "bucket_name" {
+  description = "Bucket Name"
   type = string
   default = ""
 }
 
 variable "config_tags" {
+  description = "Required TAGS"
   default = {} 
 }
 
@@ -24,6 +26,7 @@ variable "kms_key" {
   default = ""
 }
 
-variable "enc_algorithm"{  
+variable "enc_algorithm"{
+  description = "SSE Algorithm"
   default = "aws:kms"
 }

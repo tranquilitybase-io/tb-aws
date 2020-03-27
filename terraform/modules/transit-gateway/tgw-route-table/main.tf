@@ -1,3 +1,11 @@
+/*
+* # GFT AWS LZ Transit Gateway Route Terraform module
+*
+* Usage: Terraform module which creates Transit Gateway route in Network Account.
+*
+* ## Terraform versions
+* Only Terraform 0.12 is supported.
+*/
 
 resource "aws_ec2_transit_gateway_route" "aws_lz_tgw_route" {
   count = length(var.tgw_id) > 0 ? 1 : 0
