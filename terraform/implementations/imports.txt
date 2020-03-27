@@ -18,8 +18,8 @@
 /core/baseline/baseline-variables.tf
 
 ### Shared Services
-/core/network/sharedservices-template.tf
-/core/network/sharedservices-variables.tf
+/core/sharedservices/sharedservices-template.tf
+/core/sharedservices/sharedservices-variables.tf
 
 ### Network Accounts
 /core/network/network-template.tf

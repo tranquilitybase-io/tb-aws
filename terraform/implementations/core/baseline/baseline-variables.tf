@@ -74,3 +74,44 @@ variable "internet_cidr"{
 variable "internal_traffic_cidr"{
     default = "10.0.0.0/8"
 }
+
+variable "instance_name" {
+  description = "Instance name"
+  default = "awslz_ubuntu"
+}
+
+variable "ami_version" {
+  description = "AMI version to deploy"
+  default = "ami-0d1cd67c26f5fca19"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  default = "t2.micro"
+}
+
+variable "user_data" {
+  description = "User data for the instance"
+  default = "apt-get update; apt-get install apache2; systemctl start apache2.service; systemctl enable apache2"
+}
+
+
+variable "security_group_name" {
+  description = "Security group name"
+  default = "internal_webserver"
+}
+
+variable "security_group_description" {
+  description = "Security group description"
+  default = "Internal server: http, ssh and icmp"
+}
+
+variable "cidr_blocks" {
+  description = "Ingress cidr block"
+  default = ["10.0.0.0/8"]
+}
+
+variable "ingressrules" {
+  description = "Ingress rules"
+  default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
+}

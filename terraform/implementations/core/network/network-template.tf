@@ -1,4 +1,3 @@
-
 #Create TGW
 module "aws_lz_tgw" {
   source = "./modules/transit-gateway/tgw-main"
@@ -152,4 +151,35 @@ module "aws_lz_tgw_ingress_vpc_route"{
 }
 ### Ingress VPC />
 
+#Security Group
+module "nginx_security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.network-account
+  }
+  name = var.nginx_security_group_name
+  description = var.nginx_security_group_description
+  vpc_id = module.aws_lz_ingress_vpc.vpc_id
 
+  ingress_cidr_blocks = var.nginx_ingress_cidr_blocks
+  ingress_rules       = var.nginx_ingress_rules
+}
+#<----
+
+#EC2 Instances
+module "ec2_instance_nginx" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "2.13.0"
+  providers = {
+    aws = aws.network-account
+  }
+  name = var.nginx_instance_name
+  ami = var.nginx_ami_version
+  instance_type = var.nginx_instance_type
+  subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
+  vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
+  user_data = file("../automation/user_data_scripts/ubuntu_nginx.sh")
+}
+#<----
