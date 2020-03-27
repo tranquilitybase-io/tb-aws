@@ -90,6 +90,15 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
+variable "user_data" {
+  description = "User data for the instance"
+  default = "yum update
+yum install httpd
+systemctl start httpd
+systemctl status httpd"
+}
+
+
 variable "security_group_name" {
   description = "Security group name"
   default = "internal_webserver"

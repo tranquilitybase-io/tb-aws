@@ -305,6 +305,7 @@ module "ec2_instance" {
   instance_type = var.instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"
   vpc_security_group_ids = list(module.security_group.this_security_group_id)
+  user_data = << EOF var.user_data EOF
 }
 /*
 module "instances_sandbox_1" {
