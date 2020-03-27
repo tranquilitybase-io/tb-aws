@@ -1,7 +1,3 @@
-locals {
-  nginx_install = "automation/user_data_scripts/ubuntu_nginx.sh"
-}
-
 #Create TGW
 module "aws_lz_tgw" {
   source = "./modules/transit-gateway/tgw-main"
