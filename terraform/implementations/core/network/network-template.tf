@@ -1,7 +1,3 @@
-locals {
-  nginx_install = "automation/user_data_scripts/ubuntu_nginx.sh"
-}
-
 #Create TGW
 module "aws_lz_tgw" {
   source = "./modules/transit-gateway/tgw-main"
@@ -184,6 +180,6 @@ module "ec2_instance_nginx" {
   instance_type = var.nginx_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),1)
   vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
-  user_data = file("../automation/user_data_scripts/ubuntu_nginx.sh") #local.nginx_install
+  user_data = file("../automation/user_data_scripts/ubuntu_nginx.sh")
 }
 #<----

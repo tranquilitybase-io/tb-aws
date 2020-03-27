@@ -289,8 +289,7 @@ module "security_group" {
   vpc_id = module.vpc_sandbox.vpc_id
 
   ingress_cidr_blocks = var.cidr_blocks
-  ingress_rules       = var.ingressrules #["https-443-tcp","http-80-tcp","ssh-tcp","icmp"]
-}
+  ingress_rules       = var.ingressrules
 #<----
 
 #EC2 Instances
@@ -303,7 +302,7 @@ module "ec2_instance" {
   name = var.instance_name
   ami = var.ami_version
   instance_type = var.instance_type
-  subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"
+  subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) 
   vpc_security_group_ids = list(module.security_group.this_security_group_id)
   user_data = var.user_data
 }
