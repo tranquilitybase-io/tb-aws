@@ -277,7 +277,7 @@ module "internal_route_sandbox_2"{
 #<----
 
 #Security Group
-module "security-group" {
+module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "3.4.0"
   
@@ -294,7 +294,7 @@ module "security-group" {
 #<----
 
 #EC2 Instances
-module "ec2-instance" {
+module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.13.0"
   providers = {
@@ -304,7 +304,7 @@ module "ec2-instance" {
   ami = var.ami_version
   instance_type = var.instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"
-  vpc_security_group_ids = module.security-group.this_security_group_id
+  vpc_security_group_ids = module.security_group.this_security_group_id
 }
 /*
 module "instances_sandbox_1" {
