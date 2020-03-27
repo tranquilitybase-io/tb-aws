@@ -152,4 +152,35 @@ module "aws_lz_tgw_ingress_vpc_route"{
 }
 ### Ingress VPC />
 
+#Security Group
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.network-account
+  }
+  name = var.security_group_name
+  description = var.security_group_description
+  vpc_id = module.vpc_sandbox.vpc_id
 
+  ingress_cidr_blocks = var.cidr_blocks
+  ingress_rules       = var.ingressrules
+}
+#<----
+
+#EC2 Instances
+module "ec2_instance_nginx" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "2.13.0"
+  providers = {
+    aws = aws.network-account
+  }
+  name = var.instance_name
+  ami = var.ami_version
+  instance_type = var.instance_type
+  subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
+  vpc_security_group_ids = list(module.security_group.this_security_group_id)
+  user_data = var.user_data
+}
+#<----

@@ -307,14 +307,4 @@ module "ec2_instance" {
   vpc_security_group_ids = list(module.security_group.this_security_group_id)
   user_data = var.user_data
 }
-/*
-module "instances_sandbox_1" {
-  source = "./modules/ec2"
-  providers = {
-    aws = aws.sandbox-account
-  }
-  ami_version = var.ami_version
-  instance_type = var.instance_type
-  subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"
-}*/
 #<----
