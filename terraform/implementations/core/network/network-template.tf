@@ -180,7 +180,7 @@ module "ec2_instance_nginx" {
   ami = var.nginx_ami_version
   instance_type = var.nginx_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
-  vpc_security_group_ids = list(module.security_group.this_security_group_id)
+  vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
   user_data = var.nginx_user_data
 }
 #<----
