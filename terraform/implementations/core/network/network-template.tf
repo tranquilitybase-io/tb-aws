@@ -184,6 +184,6 @@ module "ec2_instance_nginx" {
   instance_type = var.nginx_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
   vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
-  user_data = local.nginx_install
+  #user_data = local.nginx_install
 }
 #<----
