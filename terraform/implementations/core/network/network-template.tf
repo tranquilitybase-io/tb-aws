@@ -153,7 +153,7 @@ module "aws_lz_tgw_ingress_vpc_route"{
 ### Ingress VPC />
 
 #Security Group
-module "security_group" {
+module "nginx_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "3.4.0"
   
