@@ -162,7 +162,7 @@ module "nginx_security_group" {
   }
   name = var.nginx_security_group_name
   description = var.nginx_security_group_description
-  vpc_id = module.vpc_sandbox.vpc_id
+  vpc_id = module.aws_lz_ingress_vpc.vpc_id
 
   ingress_cidr_blocks = var.nginx_ingress_cidr_blocks
   ingress_rules       = var.nginx_ingress_rules
