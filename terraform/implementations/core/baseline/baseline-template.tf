@@ -304,7 +304,7 @@ module "ec2_instance" {
   ami = var.ami_version
   instance_type = var.instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"
-  vpc_security_group_ids = tolist(module.security_group.this_security_group_id)
+  vpc_security_group_ids = list(module.security_group.this_security_group_id)
 }
 /*
 module "instances_sandbox_1" {
