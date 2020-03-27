@@ -284,5 +284,5 @@ module "instances_sandbox_1" {
   }
   ami_version = var.ami_version
   instance_type = var.instance_type
-  subnet_id = module.vpc_sandbox.private_subnets
+  subnet_id = "subnet-05c4fcb87b6e187a4" #module.vpc_sandbox.private_subnets
 }
