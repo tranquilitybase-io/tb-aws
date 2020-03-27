@@ -16,9 +16,6 @@
 ### Baseline Accounts
 /core/baseline/baseline-template.tf
 /core/baseline/baseline-variables.tf
-### Guardduty
-/core/guardduty-template.tf
-/core/guardduty-variables.tf
 
 ### Shared Services
 /core/network/sharedservices-template.tf
