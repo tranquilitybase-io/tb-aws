@@ -99,3 +99,8 @@ variable "cidr_blocks" {
   description = "Ingress cidr block"
   default = ["10.0.0.0/8"]
 }
+
+variable "ingress_rules" {
+  description = "Ingress rules"
+  default = ["https-443-tcp"]
+}
