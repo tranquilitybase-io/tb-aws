@@ -289,7 +289,7 @@ module "security-group" {
   vpc_id = module.vpc_sandbox.vpc_id
 
   ingress_cidr_blocks = var.cidr_blocks
-  ingress_rules       = list(var.ingress_rules)
+  ingress_rules       = [https-443-tcp,http-80-tcp] #list(var.ingress_rules)
 }
 #<----
 
