@@ -77,7 +77,7 @@ variable "internal_traffic_cidr"{
 
 variable "ami_version" {
   description = "AMI version to deploy"
-  default "ami-0d1cd67c26f5fca19"
+  default = "ami-0d1cd67c26f5fca19"
 }
 
 variable "instance_type" {
