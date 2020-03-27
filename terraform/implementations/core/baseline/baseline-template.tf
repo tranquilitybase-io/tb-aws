@@ -294,6 +294,18 @@ module "security-group" {
 #<----
 
 #EC2 Instances
+module "ec2-instance" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "2.13.0"
+  providers = {
+    aws = aws.sandbox-account
+  }
+  ami = var.ami_version
+  instance_type = var.instance_type
+  subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"
+  vpc_security_group_ids = module.security-group.this_security_group_id
+}
+/*
 module "instances_sandbox_1" {
   source = "./modules/ec2"
   providers = {
@@ -302,5 +314,5 @@ module "instances_sandbox_1" {
   ami_version = var.ami_version
   instance_type = var.instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0) #"subnet-05c4fcb87b6e187a4"
-}
+}*/
 #<----
