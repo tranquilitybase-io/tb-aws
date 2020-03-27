@@ -26,7 +26,7 @@ variable "_s3_guardduty_policy_description"{
     description= "Policy description for guardduty access to S3"
     type = string
     default= "Allows Guardduty to write in S3 bucket"
-}
+} 
 
 variable "_config_tags" {
   default = {}
