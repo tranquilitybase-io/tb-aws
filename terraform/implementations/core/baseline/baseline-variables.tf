@@ -74,3 +74,16 @@ variable "internet_cidr"{
 variable "internal_traffic_cidr"{
     default = "10.0.0.0/8"
 }
+
+variable "ami_version" {
+  description = "AMI version to deploy"
+  default "ami-0d1cd67c26f5fca19"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  default = "t2.micro"
+}
+
+
+

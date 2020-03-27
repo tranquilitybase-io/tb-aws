@@ -274,6 +274,14 @@ module "internal_route_sandbox_2"{
   destination = var.internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
-
-
 #<----
+
+#EC2 Instances
+module "instances_sandbox_1" {
+  source = "./modules/ec2"
+  providers = {
+    aws = aws.sandbox-account
+  }
+  ami_version = var.ami_version
+  instance_type = var.instance_type
+}
