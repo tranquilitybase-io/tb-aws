@@ -1,6 +1,5 @@
 locals {
-  nginx_install = "echo deb http://nginx.org/packages/mainline/ubuntu/ bionic nginx >> /etc/apt/sources.list; wget http://nginx.org/keys/nginx_signing.key; apt-key add nginx_signing.key; apt-get update -y; apt install nginx -y; systemctl start nginx \n
-  cd /var/www"
+  nginx_install = "automation/user_data_scripts/ubuntu_nginx.sh"
 }
 
 #Create TGW
@@ -185,6 +184,6 @@ module "ec2_instance_nginx" {
   instance_type = var.nginx_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
   vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
-  user_data = local.nginx_install
+  user_data = file("automation/user_data_scripts/ubuntu_nginx.sh") #local.nginx_install
 }
 #<----
