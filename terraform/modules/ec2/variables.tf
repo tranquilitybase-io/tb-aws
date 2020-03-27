@@ -1,8 +1,13 @@
 variable "ami_version" {
     description = "Amazon Machine Image"
-    default = ""
+    default     = ""
 }
 variable "instance_type" {
     description = "Instance type"
-    default = ""
+    default     = ""
+}
+
+variable "subnet_id" {
+    description = "Subnet id to deploy instance"
+    default     = ""
 }
