@@ -160,12 +160,12 @@ module "security_group" {
   providers = {
     aws = aws.network-account
   }
-  name = var.security_group_name
-  description = var.security_group_description
+  name = var.nginx_security_group_name
+  description = var.nginx_security_group_description
   vpc_id = module.vpc_sandbox.vpc_id
 
-  ingress_cidr_blocks = var.cidr_blocks
-  ingress_rules       = var.ingressrules
+  ingress_cidr_blocks = var.nginx_ingress_cidr_blocks
+  ingress_rules       = var.nginx_ingress_rules
 }
 #<----
 
@@ -176,11 +176,11 @@ module "ec2_instance_nginx" {
   providers = {
     aws = aws.network-account
   }
-  name = var.instance_name
-  ami = var.ami_version
-  instance_type = var.instance_type
+  name = var.nginx_instance_name
+  ami = var.nginx_ami_version
+  instance_type = var.nginx_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
   vpc_security_group_ids = list(module.security_group.this_security_group_id)
-  user_data = var.user_data
+  user_data = var.nginx_user_data
 }
 #<----
