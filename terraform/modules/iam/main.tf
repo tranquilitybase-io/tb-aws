@@ -1,5 +1,11 @@
+/*
+* # GFT AWS LZ IAM role and policy Service Terraform module
+*
+* Usage: Generic Terraform module which handles IAM roles, policies and their attachment.
+*/
+
 resource "aws_iam_role" "aws_lz_iam_role" {
-    count   = length(var.name) > 0 ? 1 : 0
+    count   = length(var.role_name) > 0 ? 1 : 0
     
     name    = var.role_name
     assume_role_policy = var.assume_role_policy

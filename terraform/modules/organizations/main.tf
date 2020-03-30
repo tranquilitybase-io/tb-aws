@@ -1,3 +1,9 @@
+/*
+* # GFT AWS LZ Organization Terraform module
+*
+* Usage: Terraform module which creates Organization and some admin accounts.
+*/
+
 locals {
   policy_id = coalescelist(aws_organizations_policy.aws_lz_policy.*.id, [var.policy_id])
 }
