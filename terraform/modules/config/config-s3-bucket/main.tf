@@ -1,3 +1,8 @@
+/*
+* # GFT AWS LZ S3 Bucket Terraform module
+*
+* Usage: Module to create a S3 bucket to store logs files from Config and CloudTrail, the bucket is encrypted at rest using "AES256" as algorithm. The module create 2 buckets one for access and another with logging activated.
+*/
 
 resource "aws_s3_bucket" "s3_main" {
   bucket = var.bucket_name

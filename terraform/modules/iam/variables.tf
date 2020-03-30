@@ -1,68 +1,56 @@
-variable "name" {
-    type = string
+variable "role_name" {
+    description = "Role Name"
     default = ""
 }
+
 variable "policy" {
+    description = "Policy text"
     type = string
     default = ""
 }
+
 variable "policy_arn" {
+    description = "Policy ARN"
     type = string
     default = ""
 }
-variable "description" {
-    type = string
-    default = ""
-}
-variable "users" {
-    type = list(string)
-    default = []
-}
-variable "roles" {
-    type = list(string)
-    default = []
-}
-variable "groups" {
-    type = list(string)
-    default = []
-}
+
 variable "policy_attach_name" {
-    description = ""
+    description = "Policy Attachment Name"
     default = ""
 }
 variable "policy_name" {
-    description = ""
+    description = "Policy Name"
     default = ""
 }
-variable "role_name" {
-    description = ""
-    default = ""
-}
+
 variable "assume_role_policy" {
-    description = ""
+    description = "Assume Role Policy"
     default = ""
 }
-variable "aws_iam_role" {
-    description = ""
-    default = ""
-}
+
 variable "policy_description" {
-    description = ""
+    description = "Policy Description"
     default = ""
 }
+
 variable "policy_attach_users" {
-    description = ""
+    description = "Policy attach users"
     default = []
 }
+
 variable "policy_attach_roles" {
-    description = ""
+    description = "Policy attach roles"
     default = []
 }
+
 variable "policy_attach_groups" {
-    description = ""
+    description = "Policy attach groups"
     default = []
 }
+
 variable "role_tags" {
+    description = "Required Tags"
     type = map(string)
      default = {}
 }

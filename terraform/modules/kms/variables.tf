@@ -1,22 +1,10 @@
-variable "config_tags" {
-  default = {} 
-}
+
  variable "key_description"{
    default = ""
+   description = "KMS key Description"
  }
  
 variable "kms_tags" {
-  default = {} 
-}
-
-variable "key_permission_name"{
-  default=""
-}
-
-variable "key_permission_principal"{
-  default=""
-}
-
-variable "key_permission_operations"{
-  default=[]
+  default = {}
+  description = "Required Tags"
 }

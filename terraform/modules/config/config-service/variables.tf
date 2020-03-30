@@ -1,22 +1,26 @@
 
-variable "config_logs_bucket" {    
+variable "config_logs_bucket" {
+  description = "Logging Bucket Name"
     default = ""
 }
 
-variable "config_name" {  
+variable "config_name" {
+  description = "Config Service Name"
     default = ""
 }
 
 variable "config_tags" {
+  description = "Required tags"
   default = {} 
 }
 
-variable "s3_log_prefix" { 
+variable "s3_log_prefix" {
+  description = "S3 logging bucket prefix"
     default = ""
 }
 
 variable "sns_topic_arn" {
-  description = "The ARN of topic."
+  description = "SNS topic ARN"
   default = ""
 }
 
@@ -24,14 +28,3 @@ variable "config_delivery_frequency" {
   description = "The frequency with which AWS Config delivers configuration snapshots."
   default     = "Six_Hours"
 }
-/*
-variable "account_role_name" {
-  description = "Role for network account"
-  default = "AWSLZCoreOUAdminRole"
-}
-
-
-variable "account_id" {
-  description = "Account ID"
-  default = ""
-}*/

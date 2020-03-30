@@ -1,5 +1,6 @@
 
 variable "sns_topic_name" {
+  description = "SNS Topic Name"
   default = ""
 }
 
@@ -9,5 +10,6 @@ variable "kms_master_key_id" {
 }
 
 variable "required_tags" {
+  description = "Required Tags"
   default = {} 
 }

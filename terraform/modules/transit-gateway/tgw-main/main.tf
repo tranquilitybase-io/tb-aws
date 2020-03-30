@@ -1,3 +1,11 @@
+/*
+* # GFT AWS LZ Transit Gateway Terraform module
+*
+* Usage: Terraform module which creates Transit Gateway resources in Network Account.
+*
+* ## Terraform versions
+* Only Terraform 0.12 is supported.
+*/
 
 resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
   count = var.create_tgw ? 1 : 0
@@ -11,10 +19,5 @@ resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
   dns_support                     = var.enable_dns_support ? "enable" : "disable"
 
   tags = merge(
-  {
-    "Name" = format("%s", var.name)
-  },
-  var.tags,
-  var.tgw_tags,
-  )
+  {"Name" = format("%s", var.name)}, var.tags, var.tgw_tags,)
 }

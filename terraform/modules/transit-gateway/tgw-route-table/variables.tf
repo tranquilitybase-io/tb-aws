@@ -1,16 +1,16 @@
 
 
 variable "tgw_id" {
-  description = "TGW ID"
+  description = "Transit Gateway ID"
   default = ""
 }
 
 variable "attach_id" {
-  description = "VPC Attach with TGW ID"
+  description = "TGW-VPC Attachment ID"
   default = ""
 }
 
 variable "destination_cidr_block" {
-  description = "destination_cidr_block"
+  description = "Destination CIDR Block"
   default = ""
 }

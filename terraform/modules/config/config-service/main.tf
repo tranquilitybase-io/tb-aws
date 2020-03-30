@@ -1,6 +1,8 @@
-#
-# AWS Config Service
-#
+/*
+* # GFT AWS LZ Config Service Terraform module
+*
+* Usage: Terraform module which activates Config Service for each SandBox Account.
+*/
 
 resource "aws_config_configuration_recorder" "main" {
   count = length(var.config_name) > 0 ? 1 : 0

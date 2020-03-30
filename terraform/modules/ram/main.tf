@@ -1,3 +1,9 @@
+/*
+* # GFT AWS LZ RAM Service Terraform module
+*
+* Usage: Terraform module which activates RAM resource share service.
+*/
+
 resource "aws_ram_resource_share" "aws_lz_ram_shared" {
   count = length(var.ram_name) > 0 ? 1 : 0
 

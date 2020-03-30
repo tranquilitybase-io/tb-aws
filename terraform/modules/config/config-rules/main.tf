@@ -1,3 +1,9 @@
+/*
+* # GFT AWS LZ Config Rules Terraform module
+*
+* Usage: Terraform module which activates Config Rules.
+*/
+
 data "template_file" "aws_config_iam_password_policy" {
   template = file("${path.module}/config-policies/iam-password-policy.tpl")
 
@@ -304,7 +310,7 @@ resource "aws_config_config_rule" "eip_attached" {
   
 }
 
-resource "aws_config_config_rule" "required-tags" {
+resource "aws_config_config_rule" "required_tags" {
   count       = var.check_required_tags ? 1 : 0
   name        = "required-tags"
   description = "Checks if resources are deployed with configured tags."
