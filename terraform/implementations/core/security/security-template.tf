@@ -1,4 +1,3 @@
-
 module "aws_lz_aggregate_security_sns_topic" {
   source = "./modules/snstopic"
   
