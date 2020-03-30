@@ -19,10 +19,5 @@ resource "aws_ec2_transit_gateway" "aws_lz_tgw" {
   dns_support                     = var.enable_dns_support ? "enable" : "disable"
 
   tags = merge(
-  {
-    "Name" = format("%s", var.name)
-  },
-  var.tags,
-  var.tgw_tags,
-  )
+  {"Name" = format("%s", var.name)}, var.tags, var.tgw_tags,)
 }
