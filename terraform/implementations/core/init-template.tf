@@ -14,6 +14,10 @@ locals {
   region = data.aws_region.current.name
   primary_az = data.aws_availability_zones.available.names[0]
   secondary_az = data.aws_availability_zones.available.names[1]
+  bucket_name = "aws-lz-s3-access-logs-${local.logarchive_account_id}-${local.region}"
+  bucket_name_log = "aws-lz-s3-logs-${local.logarchive_account_id}-${local.region}"  
+  region_findings = data.aws_region.current.name
+  bucket_name_findings = "aws-lz-s3-guardduty-findings-${local.logarchive_account_id}-${local.region}"
 }
 
 provider "aws" {
