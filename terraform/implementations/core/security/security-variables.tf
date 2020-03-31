@@ -20,7 +20,7 @@ variable "policy_attach_security_admin"{
   default = "Security_role_attachment_"
 }
 
-variable "policy_attach_security_admin"{
+variable "policy_attach_security_audit"{
   default = "Security_role_attachment_audit"
 }
 
