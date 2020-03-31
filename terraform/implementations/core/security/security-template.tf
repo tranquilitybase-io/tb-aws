@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "aws_lz_assume_role_security" {
 
    #attachment
    policy_attach_name = "${var.policy_attach_security_admin}"
-   policy_attach_roles = ["${var.security_role_name}"]
+   policy_attach_roles = ["${var.security_role_name}","AWSLZCoreOUAdminRole"]
    policy_arn = var.administrator_access_arn
  }
 
