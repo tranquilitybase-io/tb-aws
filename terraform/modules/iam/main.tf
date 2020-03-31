@@ -19,7 +19,7 @@ resource "aws_iam_policy" "aws_lz_iam_policy" {
     description = var.policy_description
     policy =  var.policy
 }
-
+ 
 resource "aws_iam_policy_attachment" "aws_lz_iam_attach_policy" {
     count      = length(var.policy_attach_name) > 0 ? 1 : 0
     
