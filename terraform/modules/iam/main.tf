@@ -29,3 +29,9 @@ resource "aws_iam_policy_attachment" "aws_lz_iam_attach_policy" {
     groups     = var.policy_attach_groups
     policy_arn = var.policy_arn
 }
+
+resource "aws_iam_role_policy_attachment" "role_policy_attach" {
+  count      = length(var.role_policy_attach) > 0 ? 1 : 0
+  role       = var.role_name
+  policy_arn = var.policy_arn
+}

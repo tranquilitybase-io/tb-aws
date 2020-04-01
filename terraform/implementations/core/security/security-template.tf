@@ -36,9 +36,12 @@ data "aws_iam_policy_document" "aws_lz_assume_role_security" {
    role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.logarchive_account_id }
 
    #attachment
-   policy_attach_name = "${var.policy_attach_security_admin}"
-   policy_attach_roles = ["${var.security_role_name}","AWSLZCoreOUAdminRole"]
-   policy_arn = var.administrator_access_arn
+  #  policy_attach_name = "${var.policy_attach_security_admin}"
+  #  policy_attach_roles = ["${var.security_role_name}","AWSLZCoreOUAdminRole"]
+  #  policy_arn = var.administrator_access_arn
+
+  role_policy_attach = true
+  policy_arn = var.administrator_access_arn
  }
 
   module "aws_lz_iam_security_audit_logarchive" {
@@ -57,34 +60,34 @@ data "aws_iam_policy_document" "aws_lz_assume_role_security" {
   }
 
 
-  module "aws_lz_iam_security_admin_sandbox" {
-   source = "./modules/iam"
+#   module "aws_lz_iam_security_admin_sandbox" {
+#    source = "./modules/iam"
  
-   providers = {
-     aws = aws.sandbox-account
-   }
+#    providers = {
+#      aws = aws.sandbox-account
+#    }
 
-   role_name = "${var.security_role_name}"
-   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
-   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id }
+#    role_name = "${var.security_role_name}"
+#    assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+#    role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id }
 
-   #attachment
-   policy_attach_name = "${var.policy_attach_security_admin}"
-   policy_attach_roles = ["${var.security_role_name}","AWSLZCoreOUAdminRole"]
-   policy_arn = var.administrator_access_arn
- }
+#    #attachment
+#    policy_attach_name = "${var.policy_attach_security_admin}"
+#    policy_attach_roles = ["${var.security_role_name}","AWSLZCoreOUAdminRole"]
+#    policy_arn = var.administrator_access_arn
+#  }
 
-  module "aws_lz_iam_security_audit_sandbox" {
-   source = "./modules/iam"
-   providers = {
-     aws = aws.sandbox-account
-   }
+#   module "aws_lz_iam_security_audit_sandbox" {
+#    source = "./modules/iam"
+#    providers = {
+#      aws = aws.sandbox-account
+#    }
 
-   role_name = "${var.security_role_name_audit}"
-   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
-   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id }
-   #attachment
-   policy_attach_name = "${var.policy_attach_security_audit}"
-   policy_attach_roles = ["${var.security_role_name_audit}"]
-   policy_arn = var.read_only_access_arn
-  }
+#    role_name = "${var.security_role_name_audit}"
+#    assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+#    role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id }
+#    #attachment
+#    policy_attach_name = "${var.policy_attach_security_audit}"
+#    policy_attach_roles = ["${var.security_role_name_audit}"]
+#    policy_arn = var.read_only_access_arn
+#   }

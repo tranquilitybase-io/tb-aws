@@ -54,3 +54,7 @@ variable "role_tags" {
     type = map(string)
      default = {}
 }
+
+variable "role_policy_attach"{
+    type = boolean
+}
