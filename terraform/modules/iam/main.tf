@@ -33,6 +33,6 @@ resource "aws_iam_policy_attachment" "aws_lz_iam_attach_policy" {
 resource "aws_iam_role_policy_attachment" "role_policy_attach" {
   count      = var.role_policy_attach == true ? 1 : 0
 
-  role       = aws_iam_role.aws_lz_iam_role.name
+  role       = aws_iam_role.aws_lz_iam_role[count.index].name
   policy_arn = var.policy_arn
 }
