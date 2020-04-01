@@ -56,5 +56,5 @@ variable "role_tags" {
 }
 
 variable "role_policy_attach"{
-    type = boolean
+    type = bool
 }
