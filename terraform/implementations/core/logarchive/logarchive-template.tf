@@ -63,7 +63,7 @@ module "guardduty_s3_policy" {
   POLICY
 }
 
-  #SECURITY ROLES
+ #SECURITY ROLES
  module "aws_lz_iam_security_admin_logarchive" {
    source = "./modules/iam"
  

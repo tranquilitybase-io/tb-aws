@@ -230,7 +230,7 @@ module "vpc_sandbox_2_twg_attachment" {
   subnets_ids =  module.vpc_sandbox_2.private_subnets
   vpc_id = module.vpc_sandbox_2.vpc_id
   transit_gateway_id = module.aws_lz_tgw.tgw_id
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id}
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id}
 }
 #<---
 
@@ -308,3 +308,64 @@ module "ec2_instance" {
   user_data = var.user_data
 }
 #<----
+
+#SECURITY ROLES
+ module "aws_lz_iam_security_admin_sandbox" {
+   source = "./modules/iam"
+ 
+   providers = {
+     aws = aws.sandbox-account
+   }
+
+   role_name = "${local.security_role_name}"
+   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id }
+
+   #attachment
+  role_policy_attach = true
+  policy_arn = local.administrator_access_arn
+ }
+
+  module "aws_lz_iam_security_audit_sandbox" {
+   source = "./modules/iam"
+   providers = {
+     aws = aws.sandbox-account
+   }
+
+   role_name = "${local.security_role_name_audit}"
+   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id }
+   #attachment
+   role_policy_attach = true
+   policy_arn = local.read_only_access_arn
+  }
+
+  module "aws_lz_iam_security_admin_sandbox_2" {
+   source = "./modules/iam"
+ 
+   providers = {
+     aws = aws.sandbox-account-2
+   }
+
+   role_name = "${local.security_role_name}"
+   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id }
+
+   #attachment
+  role_policy_attach = true
+  policy_arn = local.administrator_access_arn
+ }
+
+  module "aws_lz_iam_security_audit_sandbox_2" {
+   source = "./modules/iam"
+   providers = {
+     aws = aws.sandbox-account-2
+   }
+
+   role_name = "${local.security_role_name_audit}"
+   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id }
+   #attachment
+   role_policy_attach = true
+   policy_arn = local.read_only_access_arn
+  }
