@@ -185,7 +185,7 @@ module "ec2_instance_nginx" {
 #<----
 
 #SECURITY ROLES
- module "aws_lz_iam_security_admin_logarchive" {
+ module "aws_lz_iam_security_admin_network" {
    source = "./modules/iam"
  
    providers = {
@@ -201,7 +201,7 @@ module "ec2_instance_nginx" {
   policy_arn = local.administrator_access_arn
  }
 
-  module "aws_lz_iam_security_audit_logarchive" {
+  module "aws_lz_iam_security_audit_network" {
    source = "./modules/iam"
    providers = {
      aws = aws.network-account
