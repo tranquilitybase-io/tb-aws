@@ -21,7 +21,17 @@ resource "aws_iam_policy" "aws_lz_iam_policy" {
 }
 
 resource "aws_iam_policy_attachment" "aws_lz_iam_attach_policy" {
-    count      = length(var.policy_attach_name) > 0 ? 1 : 0
+    count      = length(var.policy_attach_security) > 0 ? 0 : 1
+    
+    name       = var.policy_attach_name
+    users      = var.policy_attach_users
+    roles      = var.policy_attach_roles
+    groups     = var.policy_attach_groups
+    policy_arn = var.policy_arn
+}
+
+resource "aws_iam_policy_attachment" "aws_lz_iam_attach_policy_security" {
+    count      = length(var.policy_attach_security) > 0 ? 1 : 0
     
     name       = var.policy_attach_name
     users      = var.policy_attach_users

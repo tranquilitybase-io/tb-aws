@@ -56,3 +56,6 @@ variable "role_tags" {
 }
 
 
+variable "policy_attach_security"{
+    type = string
+}
