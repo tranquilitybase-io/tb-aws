@@ -3,6 +3,19 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 data "aws_availability_zones" "available" {state = "available"}
 
+data "aws_iam_policy_document" "aws_lz_assume_role_security" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${local.security_account_id}:root"]
+    }
+
+    effect = "Allow"
+  }
+}
+
 locals {
   current_account_id = data.aws_caller_identity.current.account_id
   logarchive_account_id = module.aws_lz_account_logarchive.account_id
@@ -18,6 +31,11 @@ locals {
   bucket_name_log = "aws-lz-s3-logs-${local.logarchive_account_id}-${local.region}"  
   region_findings = data.aws_region.current.name
   bucket_name_findings = "aws-lz-s3-guardduty-findings-${local.logarchive_account_id}-${local.region}"
+  ### SECURITY ROLES VALUES
+  security_role_name = "SecurityAdminRole"
+  security_role_name_audit = "SecurityAuditRole"
+  administrator_access_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  read_only_access_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
 
 provider "aws" {

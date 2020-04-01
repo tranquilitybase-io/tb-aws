@@ -17,7 +17,7 @@ Usage: Generic Terraform module which handles IAM roles, policies and their atta
 | policy\_name | Policy Name | `string` | `""` | no |
 | role\_name | Role Name | `string` | `""` | no |
 | role\_tags | Required Tags | `map(string)` | `{}` | no |
-| role\_policy\_attach | Attach Policy to Role | `bool` | false | no
+
 ## Outputs
 
 | Name | Description |
