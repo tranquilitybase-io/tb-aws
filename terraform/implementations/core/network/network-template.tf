@@ -183,3 +183,34 @@ module "ec2_instance_nginx" {
   user_data = file("../automation/user_data_scripts/ubuntu_nginx.sh")
 }
 #<----
+
+#SECURITY ROLES
+ module "aws_lz_iam_security_admin_logarchive" {
+   source = "./modules/iam"
+ 
+   providers = {
+     aws = aws.network-account
+   }
+
+   role_name = "${local.security_role_name}"
+   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
+
+   #attachment
+  role_policy_attach = true
+  policy_arn = local.administrator_access_arn
+ }
+
+  module "aws_lz_iam_security_audit_logarchive" {
+   source = "./modules/iam"
+   providers = {
+     aws = aws.network-account
+   }
+
+   role_name = "${local.security_role_name_audit}"
+   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
+   #attachment
+   role_policy_attach = true
+   policy_arn = local.read_only_access_arn
+  }
