@@ -72,7 +72,6 @@ data "aws_iam_policy_document" "aws_lz_assume_role_security" {
    policy_attach_name = "${var.policy_attach_security_admin}"
    policy_attach_roles = ["${var.security_role_name}","AWSLZCoreOUAdminRole"]
    policy_arn = var.administrator_access_arn
-   policy_attach_security = "attach"
  }
 
   module "aws_lz_iam_security_audit_sandbox" {

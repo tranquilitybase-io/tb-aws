@@ -54,8 +54,3 @@ variable "role_tags" {
     type = map(string)
      default = {}
 }
-
-
-variable "policy_attach_security"{
-    type = string
-}
