@@ -15,10 +15,6 @@ variable "policy_arn" {
     default = ""
 }
 
-variable "policy_attach_name" {
-    description = "Policy Attachment Name"
-    default = ""
-}
 variable "policy_name" {
     description = "Policy Name"
     default = ""
@@ -34,25 +30,12 @@ variable "policy_description" {
     default = ""
 }
 
-variable "policy_attach_users" {
-    description = "Policy attach users"
-    default = []
-}
-
-variable "policy_attach_roles" {
-    description = "Policy attach roles"
-    default = []
-}
-
-variable "policy_attach_groups" {
-    description = "Policy attach groups"
-    default = []
-}
-
 variable "role_tags" {
     description = "Required Tags"
     type = map(string)
      default = {}
 }
 
-
+variable "role_policy_attach"{
+    type = bool
+}
