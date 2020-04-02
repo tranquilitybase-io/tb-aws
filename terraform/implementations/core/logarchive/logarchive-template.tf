@@ -44,10 +44,13 @@ module "guardduty_s3_policy" {
   }
   bucket_arn = module.aws_lz_guardduty_bucket.bucket_name_arn
   bucket_name = local.bucket_name_findings
+  #note, the first "{" in the policy is not indented because the indentaiton would be assumed by terraform
+  # as the first character of the policy
   policy = <<POLICY
 {
     "Version": "2012-10-17",
     "Id": "Guardduty_bucket_policy",
+    "Statement": [
     {
             "Sid": "Deny non-HTTPS access",
             "Effect": "Deny",
