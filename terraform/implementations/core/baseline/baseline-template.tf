@@ -277,7 +277,7 @@ module "internal_route_sandbox_2"{
 #<----
 
 #Security Group
-module "security_group" {
+module "web_internal_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "3.4.0"
   
@@ -289,7 +289,8 @@ module "security_group" {
   vpc_id = module.vpc_sandbox.vpc_id
 
   ingress_cidr_blocks = var.cidr_blocks
-  ingress_rules       = var.ingressrules
+  ingress_rules       = var.web_internal_ingress_rules
+  egress_rules        = var.web_internal_egress_rules
 }
 #<----
 
@@ -304,8 +305,9 @@ module "ec2_instance" {
   ami = var.ami_version
   instance_type = var.instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0)
-  vpc_security_group_ids = list(module.security_group.this_security_group_id)
-  user_data = var.user_data
+  vpc_security_group_ids = list(module.web_internal_security_group.this_security_group_id)
+  user_data = file("../automation/user_data_scripts/ubuntu_apache.sh") 
+  key_name = var.sandbox_2_account_key_name 
 }
 #<----
 
