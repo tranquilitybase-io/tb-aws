@@ -108,11 +108,6 @@ variable "create_vpn" {
   default = true
 }
 
-variable "cgw_name" {
-  description = "Name of Customer Gateway"
-  default = "aws_lz_cgw"
-}
-
 variable "cgw_bgn_asn" {
   description = "BGN ASN number"
   type = number
@@ -127,11 +122,6 @@ variable "cgw_ip_address" {
 variable "cgw_type" {
   description = "Type of customer gateway"
   default = "ipsec.1"
-}
-
-variable "vpn_attach_name" {
-  description = "VPN Attachment Name"
-  default = "aws_lz_vpn_connection"
 }
 
 variable "cgw_static_route" {

@@ -7,7 +7,6 @@ variable "create_cgw" {
 
 variable "cgw_name" {
   description = "Name of Customer Gateway"
-  default = "aws_lz_cgw"
 }
 
 variable "bgn_asn" {
@@ -18,7 +17,6 @@ variable "bgn_asn" {
 
 variable "customer_ip_address" {
   description = "Customer IP address"
-  default = ""
 }
 
 variable "cgw_type" {

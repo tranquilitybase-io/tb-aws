@@ -7,17 +7,14 @@ variable "create_vpn_connection" {
 
 variable "vpn_attach_name" {
   description = "VPN Attachment Name"
-  default = ""
 }
 
 variable "cgw_id" {
   description = "Customer Gateway ID"
-  default = ""
 }
 
 variable "tgw_id" {
   description = "Transit Gateway ID"
-  default = ""
 }
 
 variable "cgw_type" {

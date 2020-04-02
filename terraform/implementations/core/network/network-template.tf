@@ -224,10 +224,12 @@ module "ec2_instance_nginx" {
       aws = aws.network-account
     }
 
+    cgw_name = format("aws_lz_cgw_%s",local.network_account_id)
     create_cgw = var.create_vpn
     bgn_asn = var.cgw_bgn_asn
     customer_ip_address = var.cgw_ip_address
     cgw_type = var.cgw_type
+
     tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
   }
 
@@ -238,11 +240,14 @@ module "ec2_instance_nginx" {
       aws = aws.network-account
     }
 
+    vpn_attach_name = format("aws_lz_vpn_tgw_attachment_%s",local.network_account_id)
     create_vpn_connection = var.create_vpn
     cgw_id = module.aws_lz_customer_gateway.cgw_id
     tgw_id = module.aws_lz_tgw.tgw_id
     cgw_type = module.aws_lz_customer_gateway.cgw_type
     cgw_static_route = var.cgw_static_route
+
+    tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
   }
 ### END VPN Connection <--
 
