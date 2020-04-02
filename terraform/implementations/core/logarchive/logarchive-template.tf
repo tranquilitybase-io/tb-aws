@@ -58,27 +58,13 @@ module "guardduty_s3_policy" {
                 "Service": "guardduty.amazonaws.com"
             },
             "Action": "s3:*",
-            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2/*",
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*",
             "Condition": {
                 "Bool": {
                     "aws:SecureTransport": "false"
                 }
             }
-        },
-        {
-            "Sid": "Deny incorrect encryption header",
-            "Effect": "Deny",
-            "Principal": {
-                "Service": "guardduty.amazonaws.com"
-            },
-            "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2/*",
-            "Condition": {
-                "StringNotEquals": {
-                    "s3:x-amz-server-side-encryption-aws-kms-key-id": "arn:aws:kms:us-west-2:543433398002:key/72a6c06a-a474-46b7-a07c-abeff93b8b61"
-                }
-            }
-        },
+        },       
         {
             "Sid": "Deny unencrypted object uploads",
             "Effect": "Deny",
@@ -86,7 +72,7 @@ module "guardduty_s3_policy" {
                 "Service": "guardduty.amazonaws.com"
             },
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2/*",
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*",
             "Condition": {
                 "StringNotEquals": {
                     "s3:x-amz-server-side-encryption": "aws:kms"
@@ -100,7 +86,7 @@ module "guardduty_s3_policy" {
                 "Service": "guardduty.amazonaws.com"
             },
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2/*"
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*"
         },
         {
             "Sid": "Allow GetBucketLocation",
@@ -109,7 +95,7 @@ module "guardduty_s3_policy" {
                 "Service": "guardduty.amazonaws.com"
             },
             "Action": "s3:GetBucketLocation",
-            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2"
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}"
         }
     ]
   }
