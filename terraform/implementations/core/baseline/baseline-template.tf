@@ -307,6 +307,7 @@ module "ec2_instance" {
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0)
   vpc_security_group_ids = list(module.web_internal_security_group.this_security_group_id)
   user_data = file("../automation/user_data_scripts/ubuntu_apache.sh") 
+  key_name = "aws-lz"
 }
 #<----
 
