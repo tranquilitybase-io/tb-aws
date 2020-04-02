@@ -92,29 +92,12 @@ variable "nginx_ingress_rules" {
   default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
 }
 
-variable "create_cgw" {
-  description = "Boolean to decide if create customer gateway or not"
-  type = bool
-  default = false
+variable "nginx_egress_rules" {
+  description = "Egress rules"
+  default = ["all-all"]
 }
 
-variable "cgw_name" {
-  description = "Name of Customer Gateway"
-  default = "aws_lz_cgw"
-}
-
-variable "cgw_bgn_asn" {
-  description = "BGN ASN number"
-  type = number
-  default = 65000
-}
-
-variable "cgw_ip_address" {
-  description = "Customer IP address"
-  default = "35.230.88.205"
-}
-
-variable "cgw_type" {
-  description = "Type of customer gateway"
-  default = "ipsec.1"
+variable "network_account_key_name" {
+  description = "Key pair name of the Network Account"
+  default = "linux-servers-network-aac"
 }
