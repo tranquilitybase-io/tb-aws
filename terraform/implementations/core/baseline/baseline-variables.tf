@@ -111,7 +111,12 @@ variable "cidr_blocks" {
   default = ["10.0.0.0/8"]
 }
 
-variable "ingressrules" {
+variable "web_internal_ingress_rules" {
   description = "Ingress rules"
   default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
+}
+
+variable "web_internal_egress_rules" {
+  description = "Egress rules"
+  default = ["all-all"]
 }

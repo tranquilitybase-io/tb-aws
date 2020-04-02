@@ -23,4 +23,7 @@ server {
 }
 EOF
 
+EIP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+sed -i "s;EIP;${EIP};g" app1.conf
+
 systemctl start nginx
