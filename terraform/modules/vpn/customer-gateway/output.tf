@@ -1,19 +1,19 @@
 output "cgw_id" {
-  value = aws_customer_gateway.main.id
+  value = element(concat(aws_customer_gateway.main.*.id, [""]), 0)
   description = "Customer Gateway ID"
 }
 
 output "cgw_bgp_asn" {
-  value = aws_customer_gateway.main.bgp_asn
+  value = element(concat(aws_customer_gateway.main.*.bgp_asn, [""]), 0)
   description = "Customer Gateway BGP ASN"
 }
 
 output "cgw_customer_ip" {
-  value = aws_customer_gateway.main.ip_address
+  value = element(concat(aws_customer_gateway.main.*.ip_address, [""]), 0)
   description = "Customer IP Address"
 }
 
 output "cgw_type" {
-  value = aws_customer_gateway.main.type
+  value = element(concat(aws_customer_gateway.main.*.type, [""]), 0)
   description = "Customer Gateway type"
 }
