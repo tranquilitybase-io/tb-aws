@@ -64,7 +64,21 @@ module "guardduty_s3_policy" {
                     "aws:SecureTransport": "false"
                 }
             }
-        },       
+        },
+        {
+            "Sid": "Deny incorrect encryption header",
+            "Effect": "Deny",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption-aws-kms-key-id": "${module.aws_lz_finding_bucket_key.key_arn}"
+                }
+            }
+        },
         {
             "Sid": "Deny unencrypted object uploads",
             "Effect": "Deny",
