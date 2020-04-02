@@ -219,7 +219,7 @@ module "ec2_instance_nginx" {
 ### BEGIN VPN Connection modules -->
 # Create Customer Gateway
   module "aws_lz_customer_gateway" {
-    source = "./module/vpn/customer-gateway"
+    source = "./modules/vpn/customer-gateway"
     providers = {
       aws = aws.network-account
     }
@@ -233,7 +233,7 @@ module "ec2_instance_nginx" {
 
 #Create VPN Connection
   module "aws_lz_vpn_connection" {
-    source = "./module/transit-gateway/tgw-vpn-attachment"
+    source = "./modules/transit-gateway/tgw-vpn-attachment"
     providers = {
       aws = aws.network-account
     }
