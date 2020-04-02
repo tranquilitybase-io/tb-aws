@@ -8,7 +8,7 @@ module "aws_lz_tgw" {
 
   name            = format("aws_lz_tgw_%s",local.network_account_id)
   description     = "AWS Landing Zone TGW shared with several other AWS accounts"
-  amazon_side_asn = 65000
+  amazon_side_asn = 64599
 
   enable_auto_accept_shared_attachments = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
