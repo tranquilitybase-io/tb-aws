@@ -120,3 +120,8 @@ variable "web_internal_egress_rules" {
   description = "Egress rules"
   default = ["all-all"]
 }
+
+variable "sandbox_2_account_key_name" {
+  description = "Key pair name of the Sandbox 2 Account"
+  default = "aws-lz"
+}
