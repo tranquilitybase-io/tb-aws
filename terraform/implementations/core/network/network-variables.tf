@@ -91,3 +91,8 @@ variable "nginx_ingress_rules" {
   description = "Ingress rules"
   default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
 }
+
+variable "nginx_egress_rules" {
+  description = "Egress rules"
+  default = ["all-all"]
+}
