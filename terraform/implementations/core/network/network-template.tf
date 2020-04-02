@@ -165,6 +165,7 @@ module "nginx_security_group" {
 
   ingress_cidr_blocks = var.nginx_ingress_cidr_blocks
   ingress_rules       = var.nginx_ingress_rules
+  egress_rules        = var.nginx_egress_rules
 }
 #<----
 
