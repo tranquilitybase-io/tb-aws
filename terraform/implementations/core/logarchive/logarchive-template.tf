@@ -48,16 +48,66 @@ module "guardduty_s3_policy" {
 {
     "Version": "2012-10-17",
     "Id": "Guardduty_bucket_policy",
-    "Statement": [
-      {
-          "Sid": "GuardDutyAllow",
-          "Effect": "Allow",
-          "Principal": {
-              "Service": "guardduty.amazonaws.com"
-          },
-          "Action": "s3:GetBucketLocation",
-          "Resource": "arn:aws:s3:::${local.bucket_name_findings}"
-      }
+    {
+            "Sid": "Deny non-HTTPS access",
+            "Effect": "Deny",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2/*",
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        },
+        {
+            "Sid": "Deny incorrect encryption header",
+            "Effect": "Deny",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption-aws-kms-key-id": "arn:aws:kms:us-west-2:543433398002:key/72a6c06a-a474-46b7-a07c-abeff93b8b61"
+                }
+            }
+        },
+        {
+            "Sid": "Deny unencrypted object uploads",
+            "Effect": "Deny",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "aws:kms"
+                }
+            }
+        },
+        {
+            "Sid": "Allow PutObject",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2/*"
+        },
+        {
+            "Sid": "Allow GetBucketLocation",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:GetBucketLocation",
+            "Resource": "arn:aws:s3:::aws-lz-s3-guardduty-findings-543433398002-us-west-2"
+        }
     ]
   }
   POLICY
