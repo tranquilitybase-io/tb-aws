@@ -306,7 +306,7 @@ module "ec2_instance" {
   instance_type = var.instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0)
   vpc_security_group_ids = list(module.web_internal_security_group.this_security_group_id)
-  user_data = file("../automation/user_data_scripts/ubuntu_apache.sh")
+  user_data = file("${working_path}/automation/user_data_scripts/ubuntu_apache.sh")
 }
 #<----
 
