@@ -7,6 +7,7 @@ apt update -y
 apt install apache2 -y
 
 cd /var/www/html/
+cat /dev/null > index.html
 cat <<EOF>>index.html
 <HTML>
         <HEAD>
