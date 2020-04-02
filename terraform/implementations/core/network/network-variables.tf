@@ -91,3 +91,13 @@ variable "nginx_ingress_rules" {
   description = "Ingress rules"
   default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
 }
+
+variable "nginx_egress_rules" {
+  description = "Egress rules"
+  default = ["all-all"]
+}
+
+variable "network_account_key_name" {
+  description = "Key pair name of the Network Account"
+  default = "linux-servers-network-aac"
+}
