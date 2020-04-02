@@ -1,6 +1,6 @@
 
 variable "create_cgw" {
-  description = "Boolean to decide if create customer gateway or not"
+  description = "Boolean to decide if customer gateway is created or not"
   type = bool
   default = false
 }

@@ -101,3 +101,41 @@ variable "network_account_key_name" {
   description = "Key pair name of the Network Account"
   default = "linux-servers-network-aac"
 }
+
+variable "create_vpn" {
+  description = "Boolean to decide if the VPN is created or not"
+  type = bool
+  default = true
+}
+
+variable "cgw_name" {
+  description = "Name of Customer Gateway"
+  default = "aws_lz_cgw"
+}
+
+variable "cgw_bgn_asn" {
+  description = "BGN ASN number"
+  type = number
+  default = 65000
+}
+
+variable "cgw_ip_address" {
+  description = "Customer IP address"
+  default = "35.212.246.175"
+}
+
+variable "cgw_type" {
+  description = "Type of customer gateway"
+  default = "ipsec.1"
+}
+
+variable "vpn_attach_name" {
+  description = "VPN Attachment Name"
+  default = "aws_lz_vpn_connection"
+}
+
+variable "cgw_static_route" {
+  description = "Static Route ?"
+  type = bool
+  default = true
+}

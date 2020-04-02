@@ -216,15 +216,33 @@ module "ec2_instance_nginx" {
    policy_arn = local.read_only_access_arn
   }
 
-  module "aws_lz_cgw" {
-    source = "./module/vpn"
+### BEGIN VPN Connection modules -->
+# Create Customer Gateway
+  module "aws_lz_customer_gateway" {
+    source = "./module/vpn/customer-gateway"
     providers = {
       aws = aws.network-account
     }
 
-    create_cgw = var.create_cgw
+    create_cgw = var.create_vpn
     bgn_asn = var.cgw_bgn_asn
     customer_ip_address = var.cgw_ip_address
     cgw_type = var.cgw_type
     tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
   }
+
+#Create VPN Connection
+  module "aws_lz_vpn_connection" {
+    source = "./module/transit-gateway/tgw-vpn-attachment"
+    providers = {
+      aws = aws.network-account
+    }
+
+    create_vpn_connection = var.create_vpn
+    cgw_id = module.aws_lz_customer_gateway.cgw_id
+    tgw_id = module.aws_lz_tgw.tgw_id
+    cgw_type = module.aws_lz_customer_gateway.cgw_type
+    cgw_static_route = var.cgw_static_route
+  }
+### END VPN Connection <--
+
