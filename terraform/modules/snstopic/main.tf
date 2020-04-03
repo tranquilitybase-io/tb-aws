@@ -13,7 +13,7 @@ resource "aws_sns_topic" "sns_topic_default" {
 }
 
 resource "aws_sns_topic_policy" "default_access_policy" {
-  count = var.attach_policy == true 1 : 0
+  count = var.attach_policy == true ? 1 : 0
   arn = aws_sns_topic.sns_topic_default[count.index].arn
   policy = var.policy
 }
