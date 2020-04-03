@@ -105,7 +105,7 @@ variable "network_account_key_name" {
 variable "create_vpn" {
   description = "Boolean to decide if the VPN is created or not"
   type = bool
-  default = true
+  default = false
 }
 
 variable "cgw_bgn_asn" {
