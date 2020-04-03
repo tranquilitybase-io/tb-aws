@@ -48,7 +48,7 @@ module "aws_lz_lambda_guarduty_findings" {
   file_name = "${data.archive_file.lambda_guardduty_findings.output_path}"
   code_hash = "${data.archive_file.lambda_guardduty_findings.output_base64sha256}"
   function_name = var.function_name
-  function_handler = var.function_handler
+  function_handler = "${var.file_name}.${var.function_handler}"
   function_role = module.aws_lz_lambda_role.role_arn
   function_description = var.function_description
   function_runtime = var.function_runtime
@@ -86,9 +86,8 @@ def lambda_handler(event, context):
         Message = text,
         Subject = 'Guardduty finding'
     )
-};
 EOF
-    filename = "guarduty_findings.py"
+    filename = "${var.file_name}.py"
   }
 }
 

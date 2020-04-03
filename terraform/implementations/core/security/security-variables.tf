@@ -16,7 +16,7 @@ variable "function_name"{
 }
 
 variable "function_handler"{
-  default = "guarduty_findings"
+  default = "lambda_handler"
   description = "Function entrypoint in the code"
 }
 
@@ -33,4 +33,9 @@ variable "function_description"{
 variable "function_runtime"{
   default = "python3.8"
   description = "Runtime for lambda execution"
+}
+
+variable "file_name"{
+  default = "guarduty_findings"
+  description = "Lambda file name (with no extension)"
 }
