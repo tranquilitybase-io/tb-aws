@@ -18,7 +18,7 @@ variable "function_role"{
     description = " IAM role attached to the Lambda Function"
 }
 
-variable "function_desctription"{
+variable "function_description"{
     description = "Description of the function"
 }
 
