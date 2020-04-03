@@ -127,5 +127,5 @@ variable "cgw_type" {
 variable "cgw_static_route" {
   description = "Static Route ?"
   type = bool
-  default = true
+  default = false
 }
