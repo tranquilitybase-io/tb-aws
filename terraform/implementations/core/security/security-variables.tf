@@ -16,7 +16,7 @@ variable "function_name"{
 }
 
 variable "function_handler"{
-  default = "lambda_handler"
+  default = "guarduty_findings"
   description = "Function entrypoint in the code"
 }
 
