@@ -48,7 +48,6 @@ module "aws_lz_egress_vpc" {
   enable_nat_gateway = true
   single_nat_gateway = false
   one_nat_gateway_per_az = true
-  #enable_vpn_gateway = true
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
@@ -165,7 +164,9 @@ module "nginx_security_group" {
 
   ingress_cidr_blocks = var.nginx_ingress_cidr_blocks
   ingress_rules       = var.nginx_ingress_rules
-  egress_rules        = var.nginx_egress_rules 
+  egress_rules        = var.nginx_egress_rules
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 #<----
 
@@ -183,6 +184,8 @@ module "ec2_instance_nginx" {
   vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
   user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
   key_name = var.network_account_key_name
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 #<----
 
@@ -216,3 +219,39 @@ module "ec2_instance_nginx" {
    role_policy_attach = true
    policy_arn = local.read_only_access_arn
   }
+
+### BEGIN VPN Connection modules -->
+# Create Customer Gateway
+  module "aws_lz_customer_gateway" {
+    source = "./modules/vpn/customer-gateway"
+    providers = {
+      aws = aws.network-account
+    }
+
+    cgw_name = format("aws_lz_cgw_%s",local.network_account_id)
+    create_cgw = var.create_vpn
+    bgn_asn = var.cgw_bgn_asn
+    customer_ip_address = var.cgw_ip_address
+    cgw_type = var.cgw_type
+
+    tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+  }
+
+#Create VPN Connection
+  module "aws_lz_vpn_connection" {
+    source = "./modules/transit-gateway/tgw-vpn-attachment"
+    providers = {
+      aws = aws.network-account
+    }
+
+    vpn_attach_name = format("aws_lz_vpn_tgw_attachment_%s",local.network_account_id)
+    create_vpn_connection = var.create_vpn
+    cgw_id = module.aws_lz_customer_gateway.cgw_id
+    tgw_id = module.aws_lz_tgw.tgw_id
+    cgw_type = module.aws_lz_customer_gateway.cgw_type
+    cgw_static_route = var.cgw_static_route
+
+    tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+  }
+### END VPN Connection <--
+
