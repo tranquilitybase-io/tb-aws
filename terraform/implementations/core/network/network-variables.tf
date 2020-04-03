@@ -101,3 +101,31 @@ variable "network_account_key_name" {
   description = "Key pair name of the Network Account"
   default = "linux-servers-network-aac"
 }
+
+variable "create_vpn" {
+  description = "Boolean to decide if the VPN is created or not"
+  type = bool
+  default = false
+}
+
+variable "cgw_bgn_asn" {
+  description = "BGN ASN number"
+  type = number
+  default = 64998
+}
+
+variable "cgw_ip_address" {
+  description = "Customer IP address"
+  default = "34.82.155.58"
+}
+
+variable "cgw_type" {
+  description = "Type of customer gateway"
+  default = "ipsec.1"
+}
+
+variable "cgw_static_route" {
+  description = "Static Route ?"
+  type = bool
+  default = false
+}
