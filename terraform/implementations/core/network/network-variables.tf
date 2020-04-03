@@ -116,7 +116,7 @@ variable "cgw_bgn_asn" {
 
 variable "cgw_ip_address" {
   description = "Customer IP address"
-  default = "35.212.246.175"
+  default = "34.82.155.58"
 }
 
 variable "cgw_type" {
