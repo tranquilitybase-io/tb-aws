@@ -44,20 +44,73 @@ module "guardduty_s3_policy" {
   }
   bucket_arn = module.aws_lz_guardduty_bucket.bucket_name_arn
   bucket_name = local.bucket_name_findings
+  #note, the first "{" in the policy is not indented because the indentaiton would be assumed by terraform
+  # as the first character of the policy
   policy = <<POLICY
 {
     "Version": "2012-10-17",
     "Id": "Guardduty_bucket_policy",
     "Statement": [
-      {
-          "Sid": "GuardDutyAllow",
-          "Effect": "Allow",
-          "Principal": {
-              "Service": "guardduty.amazonaws.com"
-          },
-          "Action": "s3:GetBucketLocation",
-          "Resource": "arn:aws:s3:::${local.bucket_name_findings}"
-      }
+    {
+            "Sid": "Deny non-HTTPS access",
+            "Effect": "Deny",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*",
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        },
+        {
+            "Sid": "Deny incorrect encryption header",
+            "Effect": "Deny",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption-aws-kms-key-id": "${module.aws_lz_finding_bucket_key.key_arn}"
+                }
+            }
+        },
+        {
+            "Sid": "Deny unencrypted object uploads",
+            "Effect": "Deny",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "aws:kms"
+                }
+            }
+        },
+        {
+            "Sid": "Allow PutObject",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}/*"
+        },
+        {
+            "Sid": "Allow GetBucketLocation",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:GetBucketLocation",
+            "Resource": "arn:aws:s3:::${local.bucket_name_findings}"
+        }
     ]
   }
   POLICY
