@@ -111,7 +111,7 @@ variable "create_vpn" {
 variable "cgw_bgn_asn" {
   description = "BGN ASN number"
   type = number
-  default = 65000
+  default = 64998
 }
 
 variable "cgw_ip_address" {
