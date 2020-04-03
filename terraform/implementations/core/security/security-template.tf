@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       variable = "AWS:SourceOwner"
 
       values = [
-        "${local.seccurity_account_id}",
+        "${local.security_account_id}",
       ]
     }
 
