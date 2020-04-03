@@ -30,7 +30,7 @@ module "aws_lz_guardduty_sns_topic" {
      aws = aws.security-account
    }
 
-   role_name = "${local.lambda_role_name}"
+   role_name = ${var.lambda_role_name}
    assume_role_policy = "${data.aws_iam_policy_document.aws_lz_lambda_policy.json}"
    role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.security_account_id }
 
