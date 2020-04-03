@@ -46,7 +46,7 @@ module "aws_lz_lambda_guarduty_findings" {
   }
 
   file_name = "${data.archive_file.lambda_guardduty_findings.output_path}"
-  code_hash = "${data.archive_file.lambda_zip_inline.output_base64sha256}"
+  code_hash = "${data.archive_file.lambda_guardduty_findings.output_base64sha256}"
   function_name = var.function_name
   function_handler = var.function_handler
   function_role = module.aws_lz_lambda_role.role_arn
