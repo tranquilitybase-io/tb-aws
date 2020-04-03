@@ -13,3 +13,13 @@ variable "required_tags" {
   description = "Required Tags"
   default = {} 
 }
+
+variable "attach_policy"{
+  description = "Attach a custom policy to the SNS"
+  default = false
+}
+
+variable "policy"{
+  description = "SNS Policy"
+  default = ""
+}
