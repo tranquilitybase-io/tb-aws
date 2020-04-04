@@ -13,7 +13,7 @@ Usage: Terraform module which moves the notifications from member account to Sha
 | function\_name | Lambda function name | `string` | n/a | yes |
 | function\_role | IAM role attached to the Lambda Function | `string` | n/a | yes |
 | function\_runtime | Function runtime image | `string` | n/a | yes |
-| tags | Function tags | `string` | n/a | yes |
+| tags | Function tags | `map(string)` | n/a | yes |
 
 ## Outputs
 

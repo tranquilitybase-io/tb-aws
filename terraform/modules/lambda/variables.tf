@@ -35,5 +35,5 @@ variable "function_runtime"{
 
 variable "tags"{
     description = "Function tags"
-    type = string
+    type = map(string)
 }
