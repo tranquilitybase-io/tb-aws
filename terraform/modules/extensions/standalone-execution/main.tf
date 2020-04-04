@@ -1,3 +1,9 @@
+/*
+* # GFT AWS LZ RAM Service Terraform module
+*
+* Usage: Terraform module which enable RAM Service for the organization.
+*/
+
 locals {
   ram_command = [
     "python3",
@@ -13,9 +19,8 @@ resource "null_resource" "enable_aws_ram_organization" {
   }
 
   lifecycle {
-    ignore_changes = [
-      enable_ram_org,
-  ]}
+    ignore_changes = [enable_ram_org, ]
+  }
 }
 
 
