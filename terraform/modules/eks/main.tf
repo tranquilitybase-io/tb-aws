@@ -4,12 +4,12 @@ resource "aws_iam_role" "aws_lz_gft_eks_iam_role" {
   assume_role_policy = var.eks_user_policy
 }
 
-resource "aws_iam_role_policy_attachment" "aws_lz_gft_AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.aws_lz_gft_eks_iam_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "aws_lz_gft_AmazonEKSServicePolicy" {
+resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSServicePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
   role       = aws_iam_role.aws_lz_gft_eks_iam_role.name
 }
@@ -24,8 +24,8 @@ resource "aws_eks_cluster" "eks_ingress_cluster" {
   }
 
   depends_on = [
-    aws_iam_role_policy_attachment.aws_lz_gft_AmazonEKSClusterPolicy,
-    aws_iam_role_policy_attachment.aws_lz_gft_AmazonEKSServicePolicy,
+    aws_iam_role_policy_attachment.awslz_AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.awslz_AmazonEKSServicePolicy,
   ]
 }
 
@@ -67,4 +67,19 @@ resource "aws_iam_role" "awslz_eks_node_group_role" {
     }]
     Version = "2012-10-17"
   })
+}
+
+resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSWorkerNodePolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  role       = aws_iam_role.awslz_eks_node_group_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "awslz_AmazonEKS_CNI_Policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  role       = aws_iam_role.awslz_eks_node_group_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "awslz_AmazonEC2ContainerRegistryReadOnly" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.awslz_eks_node_group_role.name
 }
