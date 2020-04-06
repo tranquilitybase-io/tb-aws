@@ -12,6 +12,6 @@ resource "aws_cloudwatch_event_rule" "event_rule" {
 }
 
 resource "aws_cloudwatch_event_target" "event_target" {
-  rule      = aws_cloudwatch_event_rule.event_rule.event_id
+  rule      = aws_cloudwatch_event_rule.event_rule.id
   arn       = var.target_arn
 }

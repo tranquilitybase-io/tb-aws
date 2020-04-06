@@ -5,6 +5,6 @@ output "event_id" {
 }
 
 output "event_arn" {
-  value = aws_cloudwatch_event_rule.event_rule.qualified_arn
+  value = aws_cloudwatch_event_rule.event_rule.arn
   description = "The Amazon Resource Name (ARN) identifying your event"
 }
