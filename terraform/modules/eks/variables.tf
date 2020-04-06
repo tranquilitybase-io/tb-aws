@@ -1,7 +1,7 @@
-variable "eks_cluster_name" {
-  description = "EKS name"
-  type = string
-}
+#variable "eks_cluster_name" {
+#  description = "EKS name"
+#  type = string
+#}
 
 #variable "eks_role_arn" {
 #  description = "EKS role ARN"
@@ -13,10 +13,10 @@ variable "eks_cluster_name" {
 #  type = list(string)
 #}
 
-variable "eks_role_name" {
-  type = string
-  description = "EKS role name"
-}
+#variable "eks_role_name" {
+#  type = string
+#  description = "EKS role name"
+#}
  
 variable "eks_user_policy" {
   type = string
