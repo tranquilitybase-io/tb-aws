@@ -149,3 +149,8 @@ variable "nodes_group_name" {
   description = "Name of the node group for the cluster"
   default     = "eks_node_group_ingress_cluster"
 }
+
+variable "ingress_cluster_node_group_role_name" {
+  description = "Ingress Cluster node group name"
+  description = "awslz_eks_ingress_node_group"
+}

@@ -54,8 +54,8 @@ resource "aws_eks_cluster" "eks_ingress_cluster" {
 
 ###### IAM Role for EKS Node Group
 
-resource "aws_iam_role" "aws_lz_gft_rkd_node_role" {
-  name = "aws_lz_gft_eks_node_group"
+resource "aws_iam_role" "awslz_eks_node_group_role" {
+  name = var.node_group_role_name
 
   assume_role_policy = jsonencode({
     Statement = [{

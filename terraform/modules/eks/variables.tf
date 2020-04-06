@@ -52,3 +52,8 @@ variable "subnets" {
   description = "List of subnets"
   default     = ""
 }
+
+variable "node_group_role_name" {
+  description = "Node group role name"
+  default     = ""
+}
