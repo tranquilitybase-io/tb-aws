@@ -129,3 +129,8 @@ variable "cgw_static_route" {
   type = bool
   default = false
 }
+
+variable "eks_cluster_name" {
+  description = "Ingress VPC EKS cluster name"
+  default = ""
+}
