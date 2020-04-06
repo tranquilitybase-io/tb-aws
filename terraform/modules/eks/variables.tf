@@ -3,10 +3,10 @@ variable "eks_cluster_name" {
   type = string
 }
 
-variable "eks_role_arn" {
-  description = "EKS role ARN"
-  type = string
-}
+#variable "eks_role_arn" {
+#  description = "EKS role ARN"
+#  type = string
+#}
 
 #variable "eks_vpc_subnet_list" {
 #  description = "List of subnets in the VPC to be used by EKS"
