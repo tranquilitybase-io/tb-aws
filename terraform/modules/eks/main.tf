@@ -23,7 +23,7 @@ resource "aws_eks_cluster" "eks_ingress_cluster" {
   }
 
   depends_on = [
-    "aws_iam_role_policy_attachment.aws_lz_gft_AmazonEKSClusterPolicy",
-    "aws_iam_role_policy_attachment.aws_lz_gft_AmazonEKSServicePolicy",
+    aws_iam_role_policy_attachment.aws_lz_gft_AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.aws_lz_gft_AmazonEKSServicePolicy,
   ]
 }
