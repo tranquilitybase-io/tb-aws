@@ -62,8 +62,8 @@ module "aws_lz_lambda_cloudwatch_finding_event"{
     aws = aws.security-account
   }
 
-  name = var.event_name
-  description = var.event_description
+  event_name = var.event_name
+  event_description = var.event_description
   event_pattern = <<PATTERN
   {
     "source": [
