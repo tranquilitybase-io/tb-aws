@@ -139,3 +139,8 @@ variable "eks_role_name" {
   description = "EKS role name"
   default = ""
 }
+
+variable "subnets_list" {
+  description = "Subnets for the EKS cluster"
+  default     = ""
+}

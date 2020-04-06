@@ -1,6 +1,6 @@
 variable "eks_iam_role_name" {
   description = "Role name for cluster administration"
-  default = ""
+  default     = ""
 }
 
 #variable "eks_cluster_name" {
@@ -42,3 +42,7 @@ variable "eks_user_policy" {
 POLICY
 }
 
+variable "subnets" {
+  description = "List of subnets"
+  default     = ""
+}
