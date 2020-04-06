@@ -255,3 +255,12 @@ module "ec2_instance_nginx" {
   }
 ### END VPN Connection <--
 
+# Create EKS cluster
+  module "ingress_eks_cluster" {
+    source = "./modules/eks"
+    providers = {
+      aws = aws.network-account
+    }
+
+    tags = { (var.tag_key_project_id) = var.awslz_proj_id }
+  }
