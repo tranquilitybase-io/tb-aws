@@ -9,13 +9,10 @@ Usage: Generic Terraform module which handles IAM roles, policies and their atta
 | assume\_role\_policy | Assume Role Policy | `string` | `""` | no |
 | policy | Policy text | `string` | `""` | no |
 | policy\_arn | Policy ARN | `string` | `""` | no |
-| policy\_attach\_groups | Policy attach groups | `list` | `[]` | no |
-| policy\_attach\_name | Policy Attachment Name | `string` | `""` | no |
-| policy\_attach\_roles | Policy attach roles | `list` | `[]` | no |
-| policy\_attach\_users | Policy attach users | `list` | `[]` | no |
 | policy\_description | Policy Description | `string` | `""` | no |
 | policy\_name | Policy Name | `string` | `""` | no |
 | role\_name | Role Name | `string` | `""` | no |
+| role\_policy\_attach | n/a | `bool` | n/a | yes |
 | role\_tags | Required Tags | `map(string)` | `{}` | no |
 
 ## Outputs
