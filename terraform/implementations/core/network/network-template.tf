@@ -262,7 +262,7 @@ module "ec2_instance_nginx" {
       aws = aws.network-account
     }
 
-    eks_iam_role_name     = "eks_role_ingress_cluster"
+    eks_iam_role_name     = var.ingress_eks_role_name
     subnets               = module.aws_lz_ingress_vpc.public_subnets
     eks_cluster_name      = var.ingress_eks_cluster_name
 

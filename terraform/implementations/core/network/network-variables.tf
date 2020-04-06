@@ -135,9 +135,14 @@ variable "ingress_eks_cluster_name" {
   default = "eks_ingress_cluster"
 }
 
-variable "eks_role_name" {
+#variable "eks_role_name" {
+#  description = "EKS role name"
+#  default = ""
+#}
+
+variable "ingress_eks_role_name" {
   description = "EKS role name"
-  default = ""
+  default = "eks_role_ingress_cluster"
 }
 
 variable "subnets_list" {
