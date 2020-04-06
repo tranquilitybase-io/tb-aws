@@ -55,6 +55,30 @@ module "aws_lz_lambda_guarduty_findings" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.security_account_id }
 }
 
+module "aws_lz_lambda_cloudwatch_finding_event"{
+  module "aws_lz_lambda_guarduty_findings" {
+  source = "./modules/cloudwatch"
+
+  providers = {
+    aws = aws.security-account
+  }
+
+  name = var.event_name
+  description = var.event_description
+  event_pattern = <<PATTERN
+  {
+    "source": [
+      "aws.guardduty"
+    ],
+    "detail-type": [
+      "GuardDuty Finding"
+    ]
+  }
+  PATTERN
+
+  target_arn = module.aws_lz_lambda_guarduty_findings.lambda_zip_inline_arn
+}
+
 data "aws_iam_policy_document" "aws_lz_lambda_policy" {
   statement {
     actions = ["sts:AssumeRole"]
