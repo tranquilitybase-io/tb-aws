@@ -16,7 +16,7 @@ resource "aws_iam_role_policy_attachment" "aws_lz_gft_AmazonEKSServicePolicy" {
 
 resource "aws_eks_cluster" "eks_ingress_cluster" {
   name     = "eks_ingress_cluster"
-  role_arn = aws_iam_role.aws_lz_gft_.arn
+  role_arn = aws_iam_role.aws_lz_gft_eks_iam_role.arn
 
   vpc_config {
     subnet_ids = ["${aws_subnet.example1.id}", "${aws_subnet.example2.id}"]
