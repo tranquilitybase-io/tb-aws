@@ -55,7 +55,6 @@ resource "aws_eks_node_group" "awslz_eks_node_group" {
 ###### IAM Role for EKS Node Group
 resource "aws_iam_role" "awslz_eks_node_group_role" {
   name = var.node_group_role_name
-
   assume_role_policy = var.node_group_role_policy 
 }
 

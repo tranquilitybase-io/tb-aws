@@ -70,12 +70,12 @@ POLICY
 
 variable "subnets" {
   description = "List of subnets"
-  default     = ""
+  type        = list(string)
 }
 
 variable "node_group_subnets" {
   description = "List subnets for node group"
-  default     = ""
+  type        = list(string)
 }
 
 
