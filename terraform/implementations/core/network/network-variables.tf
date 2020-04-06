@@ -132,7 +132,7 @@ variable "cgw_static_route" {
 
 variable "ingress_eks_cluster_name" {
   description = "Ingress VPC EKS cluster name"
-  default = "eks_ingress_cluster"
+  default = "awslz_eks_ingress_cluster"
 }
 
 #variable "eks_role_name" {
@@ -142,17 +142,17 @@ variable "ingress_eks_cluster_name" {
 
 variable "ingress_eks_role_name" {
   description = "EKS role name"
-  default = "eks_role_ingress_cluster"
+  default = "awslz_eks_ingress_cluster"
 }
 
-variable "subnets_list" {
+variable "ingress_subnets_list" {
   description = "Subnets for the EKS cluster"
   default     = ""
 }
 
 variable "ingress_node_group_name" {
   description = "Name of the node group for the cluster"
-  default     = "eks_node_group_ingress_cluster"
+  default     = "awslz_eks_node_group_ingress_cluster"
 }
 
 variable "ingress_cluster_node_group_role_name" {
