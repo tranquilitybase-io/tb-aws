@@ -13,10 +13,10 @@ variable "eks_role_arn" {
 #  type = list(string)
 #}
 
-variable "eks_role_name" {
-  type = string
-  description = "EKS role name"
-}
+#variable "eks_role_name" {
+#  type = string
+#  description = "EKS role name"
+#}
  
 variable "eks_user_policy" {
   type = string
