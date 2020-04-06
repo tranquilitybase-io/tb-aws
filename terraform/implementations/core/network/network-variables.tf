@@ -134,3 +134,8 @@ variable "eks_cluster_name" {
   description = "Ingress VPC EKS cluster name"
   default = ""
 }
+
+variable "eks_role_name" {
+  description = "EKS role name"
+  default = ""
+}
