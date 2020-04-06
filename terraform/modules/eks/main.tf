@@ -51,7 +51,7 @@ resource "aws_eks_cluster" "aws_lz_gft_k8s_cluster" {
   role_arn = aws_iam_role.aws_lz_gft_eks_role[count.index].arn
 
   vpc_config {
-    subnet_ids = var.eks_vpc_subnet_list
+    subnet_ids = module.aws_lz_ingress_vpc.public_subnets #var.eks_vpc_subnet_list
   }
 
   depends_on = [
