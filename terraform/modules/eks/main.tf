@@ -15,7 +15,7 @@ resource "aws_iam_role_policy_attachment" "aws_lz_gft_AmazonEKSServicePolicy" {
 }
 
 resource "aws_eks_cluster" "eks_ingress_cluster" {
-  name     = "eks_ingress_cluster"
+  name     = var.eks_cluster_name #"eks_ingress_cluster"
   role_arn = aws_iam_role.aws_lz_gft_eks_iam_role.arn
 
   vpc_config {

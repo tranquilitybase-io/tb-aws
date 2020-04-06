@@ -3,10 +3,10 @@ variable "eks_iam_role_name" {
   default     = ""
 }
 
-#variable "eks_cluster_name" {
-#  description = "EKS name"
-#  type = string
-#}
+variable "eks_cluster_name" {
+  description = "EKS name"
+  type = string
+}
 
 #variable "eks_role_arn" {
 #  description = "EKS role ARN"
