@@ -48,6 +48,26 @@ variable "eks_user_policy" {
 POLICY
 }
 
+variable "node_group_role_policy" {
+  type        = string
+  description = "Default policy applied to the node group role"
+  default     = <<POLICY
+{
+  "Version": "2012-10-17"
+  "Statement": [
+    {
+      "Effect": "Allow"
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+POLICY
+}
+
+
 variable "subnets" {
   description = "List of subnets"
   default     = ""
