@@ -261,6 +261,10 @@ module "ec2_instance_nginx" {
     providers = {
       aws = aws.network-account
     }
+
+    eks_iam_role_name = "eks_iam_ingress_role"
+    #eks_user_policy   = var.
+    
     #eks_cluster_name = "eks_test"
     #eks_role_name = "eks_role_test"
 

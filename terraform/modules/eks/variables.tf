@@ -1,3 +1,8 @@
+variable "eks_iam_role_name" {
+  description = "Role name for cluster administration"
+  default = ""
+}
+
 #variable "eks_cluster_name" {
 #  description = "EKS name"
 #  type = string
