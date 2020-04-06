@@ -53,10 +53,10 @@ variable "node_group_role_policy" {
   description = "Default policy applied to the node group role"
   default     = <<POLICY
 {
-  "Version": "2012-10-17"
+  "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect": "Allow"
+      "Effect": "Allow",
       "Principal": {
         "Service": "ec2.amazonaws.com"
       },
