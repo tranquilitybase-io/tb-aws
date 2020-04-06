@@ -152,5 +152,5 @@ variable "nodes_group_name" {
 
 variable "ingress_cluster_node_group_role_name" {
   description = "Ingress Cluster node group name"
-  description = "awslz_eks_ingress_node_group"
+  default     = "awslz_eks_ingress_node_group"
 }
