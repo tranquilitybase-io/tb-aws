@@ -8,10 +8,10 @@ variable "eks_role_arn" {
   type = string
 }
 
-variable "eks_vpc_subnet_list" {
-  description = "List of subnets in the VPC to be used by EKS"
-  type = list(string)
-}
+#variable "eks_vpc_subnet_list" {
+#  description = "List of subnets in the VPC to be used by EKS"
+#  type = list(string)
+#}
 
 variable "eks_role_name" {
   type = string

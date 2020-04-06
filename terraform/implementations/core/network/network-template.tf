@@ -262,5 +262,6 @@ module "ec2_instance_nginx" {
       aws = aws.network-account
     }
     eks_cluster_name = "eks_test"
+    
     #tags = { (var.tag_key_project_id) = var.awslz_proj_id }
   }
