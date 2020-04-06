@@ -150,12 +150,12 @@ variable "ingress_subnets_list" {
   default     = ""
 }
 
-variable "ingress_node_group_name" {
+variable "ingress_eks_node_group_name" {
   description = "Name of the node group for the cluster"
   default     = "awslz_eks_node_group_ingress_cluster"
 }
 
-variable "ingress_cluster_node_group_role_name" {
+variable "ingress_eks_node_group_role_name" {
   description = "Ingress Cluster node group name"
   default     = "awslz_eks_ingress_node_group"
 }

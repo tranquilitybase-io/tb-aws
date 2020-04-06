@@ -8,7 +8,7 @@ variable "eks_cluster_name" {
   type = string
 }
 
-variable "nodes_group_name" {
+variable "node_group_name" {
   description = "Node group name"
   default     = ""
 }
@@ -72,6 +72,12 @@ variable "subnets" {
   description = "List of subnets"
   default     = ""
 }
+
+variable "node_group_subnets" {
+  description = "List subnets for node group"
+  default     = ""
+}
+
 
 variable "node_group_role_name" {
   description = "Node group role name"
