@@ -56,7 +56,6 @@ module "aws_lz_lambda_guarduty_findings" {
 }
 
 module "aws_lz_lambda_cloudwatch_finding_event"{
-  module "aws_lz_lambda_guarduty_findings" {
   source = "./modules/cloudwatch"
 
   providers = {
