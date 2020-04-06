@@ -32,7 +32,7 @@ resource "aws_eks_cluster" "eks_ingress_cluster" {
 ###### Node Group
 resource "aws_eks_node_group" "awslz_eks_node_group" {
   cluster_name    = var.eks_cluster_name
-  node_group_name = var.nodes_group_name
+  node_group_name = var.node_group_name
   node_role_arn   = aws_iam_role.awslz_eks_node_group_role.arn
   subnet_ids      = var.node_group_subnets
 
