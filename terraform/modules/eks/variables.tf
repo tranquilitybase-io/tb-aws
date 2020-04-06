@@ -8,6 +8,12 @@ variable "eks_cluster_name" {
   type = string
 }
 
+variable "nodes_group_name" {
+  description = "Node group name"
+  default     = ""
+}
+
+
 #variable "eks_role_arn" {
 #  description = "EKS role ARN"
 #  type = string

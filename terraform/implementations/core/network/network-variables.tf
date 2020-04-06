@@ -144,3 +144,8 @@ variable "subnets_list" {
   description = "Subnets for the EKS cluster"
   default     = ""
 }
+
+variable "nodes_group_name" {
+  description = "Name of the node group for the cluster"
+  default     = "eks_node_group_ingress_cluster"
+}

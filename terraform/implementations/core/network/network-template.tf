@@ -265,6 +265,8 @@ module "ec2_instance_nginx" {
     eks_iam_role_name = "eks_role_ingress_cluster"
     subnets           = module.aws_lz_ingress_vpc.public_subnets
     eks_cluster_name  = var.eks_cluster_name
+
+    nodes_group_name  = var.nodes_group_name
     #eks_user_policy   = uses the default in module
     
     #eks_cluster_name = "eks_test"
