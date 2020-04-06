@@ -145,7 +145,7 @@ variable "subnets_list" {
   default     = ""
 }
 
-variable "nodes_group_name" {
+variable "ingress_node_group_name" {
   description = "Name of the node group for the cluster"
   default     = "eks_node_group_ingress_cluster"
 }
