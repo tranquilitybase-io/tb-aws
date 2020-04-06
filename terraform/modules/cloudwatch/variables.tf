@@ -10,10 +10,6 @@ variable "event_pattern"{
     description = "Event pattern to be recorded"
 }
 
-variable "event_target"{
-    description = "Target "
-}
-
 variable "target_arn"{
     description = "ARN associated to the event target"
 }
