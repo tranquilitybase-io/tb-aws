@@ -6,20 +6,20 @@
 */
 
 # IAM Role for EKS Node Group
-resource "aws_iam_role" "aws_lz_gft_eks_role" {
-  name = "eks-node-group-eks_role"
-
-  assume_role_policy = jsonencode({
-    Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
-      Principal = {
-        Service = "ec2.amazonaws.com"
-      }
-    }]
-    Version = "2012-10-17"
-  })
-}
+#resource "aws_iam_role" "aws_lz_gft_eks_role" {
+  #name = "eks-node-group-eks_role"
+#
+  #assume_role_policy = jsonencode({
+    #Statement = [{
+      #Action = "sts:AssumeRole"
+      #Effect = "Allow"
+      #Principal = {
+        #Service = "ec2.amazonaws.com"
+      #}
+    #}]
+    #Version = "2012-10-17"
+  #})
+#}
 
 resource "aws_iam_role_policy_attachment" "aws_lz_gft_AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
