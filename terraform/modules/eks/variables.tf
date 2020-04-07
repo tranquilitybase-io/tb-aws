@@ -13,22 +13,6 @@ variable "node_group_name" {
   default     = ""
 }
 
-
-#variable "eks_role_arn" {
-#  description = "EKS role ARN"
-#  type = string
-#}
-
-#variable "eks_vpc_subnet_list" {
-#  description = "List of subnets in the VPC to be used by EKS"
-#  type = list(string)
-#}
-
-#variable "eks_role_name" {
-#  type = string
-#  description = "EKS role name"
-#}
- 
 variable "eks_user_policy" {
   type = string
   description = "Defaul policy applied to EKS user"
@@ -82,4 +66,9 @@ variable "node_group_subnets" {
 variable "node_group_role_name" {
   description = "Node group role name"
   default     = ""
+}
+
+variable "node_group_instance_types" {
+  description = "List of instance types"
+  type        = list(string)
 }

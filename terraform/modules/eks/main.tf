@@ -1,6 +1,5 @@
 resource "aws_iam_role" "aws_lz_gft_eks_iam_role" {
-  name = var.eks_iam_role_name #"eks-cluster-ingress-role"
-
+  name = var.eks_iam_role_name
   assume_role_policy = var.eks_user_policy
 }
 
@@ -15,11 +14,10 @@ resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSServicePolicy" {
 }
 
 resource "aws_eks_cluster" "eks_ingress_cluster" {
-  name     = var.eks_cluster_name #"eks_ingress_cluster"
+  name     = var.eks_cluster_name
   role_arn = aws_iam_role.aws_lz_gft_eks_iam_role.arn
 
   vpc_config {
-    #subnet_ids = ["${aws_subnet.example1.id}", "${aws_subnet.example2.id}"]
     subnet_ids = var.subnets
   }
 
@@ -35,7 +33,7 @@ resource "aws_eks_node_group" "awslz_eks_node_group" {
   node_group_name   = var.node_group_name
   node_role_arn     = aws_iam_role.awslz_eks_node_group_role.arn
   subnet_ids        = var.node_group_subnets
-  instance_types    = ["t2.micro"] 
+  instance_types    = var.node_group_instance_types
 
   scaling_config {
     desired_size = 1
@@ -43,8 +41,6 @@ resource "aws_eks_node_group" "awslz_eks_node_group" {
     min_size     = 1
   }
 
-  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
-  # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
   depends_on = [
     aws_eks_cluster.eks_ingress_cluster,
     aws_iam_role_policy_attachment.awslz_AmazonEKSWorkerNodePolicy,

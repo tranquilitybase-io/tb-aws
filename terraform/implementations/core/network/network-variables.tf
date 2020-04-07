@@ -159,3 +159,8 @@ variable "ingress_eks_node_group_role_name" {
   description = "Ingress Cluster node group name"
   default     = "awslz_eks_ingress_node_group"
 }
+
+variable "ingress_eks_node_group_instance_types" {
+  description = "Instances types for the node group"
+  default     = [t2.micro]
+}
