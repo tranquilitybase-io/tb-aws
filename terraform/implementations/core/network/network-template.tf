@@ -265,13 +265,13 @@ module "ec2_instance_nginx" {
     }
 
     eks_iam_role_name     = var.ingress_eks_role_name
-    subnets               = module.aws_lz_ingress_vpc.public_subnets
+    subnets               = concat(module.aws_lz_ingress_vpc.public_subnets, module.aws_lz_ingress_vpc.private_subnets)
     eks_cluster_name      = var.ingress_eks_cluster_name
 
     node_group_name       = var.ingress_eks_node_group_name
 
     node_group_role_name  = var.ingress_eks_node_group_role_name
-    node_group_subnets    = module.aws_lz_ingress_vpc.public_subnets
+    node_group_subnets    = concat(module.aws_lz_ingress_vpc.public_subnets, module.aws_lz_ingress_vpc.private_subnets) # module.aws_lz_ingress_vpc.public_subnets
     #eks_user_policy   = uses the default in module
     
     #eks_cluster_name = "eks_test"
