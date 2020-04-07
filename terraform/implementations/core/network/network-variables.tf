@@ -130,15 +130,11 @@ variable "cgw_static_route" {
   default = false
 }
 
+# Ingress EKS cluster variables
 variable "ingress_eks_cluster_name" {
   description = "Ingress VPC EKS cluster name"
   default = "awslz_eks_ingress_cluster"
 }
-
-#variable "eks_role_name" {
-#  description = "EKS role name"
-#  default = ""
-#}
 
 variable "ingress_eks_role_name" {
   description = "EKS role name"
