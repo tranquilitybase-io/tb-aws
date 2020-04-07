@@ -111,7 +111,7 @@ module "aws_lz_ingress_vpc" {
   single_nat_gateway = false
   one_nat_gateway_per_az = false
 
-  private_subnets_tags = {"kubernetes.io/role/internal-elb" = 1}
+  private_subnet_tags = {"kubernetes.io/role/internal-elb" = 1}
   public_subnet_tags = {"kubernetes.io/role/elb" = 1}
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network", "kubernetes.io/cluster/${var.ingress_eks_cluster_name}" = "shared"}
