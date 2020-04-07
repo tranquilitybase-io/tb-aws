@@ -258,6 +258,7 @@ module "ec2_instance_nginx" {
   }
 ### END VPN Connection <--
 
+/*
 # Create EKS cluster
   module "ingress_eks_cluster" {
     source = "./modules/eks"
@@ -270,7 +271,6 @@ module "ec2_instance_nginx" {
     eks_cluster_name      = var.ingress_eks_cluster_name
 
     node_group_name       = var.ingress_eks_node_group_name
-
     node_group_role_name  = var.ingress_eks_node_group_role_name
     node_group_subnets    = module.aws_lz_ingress_vpc.private_subnets # module.aws_lz_ingress_vpc.public_subnets
     #eks_user_policy   = uses the default in module
@@ -280,3 +280,4 @@ module "ec2_instance_nginx" {
 
     #tags = { (var.tag_key_project_id) = var.awslz_proj_id }
   }
+  */
