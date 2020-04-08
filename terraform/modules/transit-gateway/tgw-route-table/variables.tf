@@ -1,6 +1,6 @@
 
 
-variable "corr" {
+variable "route_table_name" {
   description = "Tag Name for Route Table"
   default = ""
 }
