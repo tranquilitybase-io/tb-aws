@@ -44,8 +44,8 @@ def search_file_path(import_file):
 # This function lists the files to be generated: main, variables and output
 # It gets the file and the path from search_file_path(file)
 def merge_files():
-    files_merged = ['main.tf','variables.tf','outputs.tf']
-    file_filter_names = ['template','variables','outputs']
+    files_merged = ['main.tf','variables.tf','outputs.tf','version.tf', 'providers.tf','data.tf']
+    file_filter_names = ['template','variables','outputs','version','providers','data']
     for item in files_merged:
         item_index = files_merged.index(item)
         import_list = read_import_files(file_filter_names[item_index])
