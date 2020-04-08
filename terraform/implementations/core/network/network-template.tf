@@ -73,11 +73,13 @@ module "aws_lz_tgw_route" {
     aws = aws.network-account
   }
 
+  route_table_id = "default"
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
   attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }
 
+### Route Table DEV
 module "aws_lz_tgw_route_table_dev" {
   source = "./modules/transit-gateway/tgw-route-table"
 
@@ -91,6 +93,21 @@ module "aws_lz_tgw_route_table_dev" {
 
 }
 
+module "aws_lz_tgw_route_dev" {
+  source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_id = module.aws_lz_tgw_route_table_dev.tgw_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
+}
+###
+
+### Route Table TEST
 module "aws_lz_tgw_route_table_test" {
   source = "./modules/transit-gateway/tgw-route-table"
 
@@ -104,6 +121,22 @@ module "aws_lz_tgw_route_table_test" {
 
 }
 
+module "aws_lz_tgw_route_test" {
+  source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_id = module.aws_lz_tgw_route_table_test.tgw_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
+}
+
+###
+
+###Route Table PROD
 module "aws_lz_tgw_route_table_prod" {
   source = "./modules/transit-gateway/tgw-route-table"
 
@@ -116,6 +149,20 @@ module "aws_lz_tgw_route_table_prod" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = "PROD", (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 
 }
+
+module "aws_lz_tgw_route_prod" {
+  source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_id = module.aws_lz_tgw_route_table_prod.tgw_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
+}
+###
 
 ##VPC Routes
 module "aws_lz_tgw_egress_vpc_route"{

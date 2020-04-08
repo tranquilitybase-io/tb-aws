@@ -14,3 +14,8 @@ variable "destination_cidr_block" {
   description = "Destination CIDR Block"
   default = ""
 }
+
+variable "route_table_id" {
+  description = "Route Table ID"
+  default = ""
+}
