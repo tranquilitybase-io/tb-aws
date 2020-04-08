@@ -30,7 +30,7 @@ def get_accounts_data():
 #Get enabled regions
 def get_regions(): 
     regions_list = {}
-    enable_regions_prefix = {"us"}#,"eu","ca","sa"}
+    enable_regions_prefix = {"us","eu","ca","sa"}
     client = boto3.client('ec2')
     regions = client.describe_regions()
     regions_list = [region for region in regions['Regions'] if region['RegionName'][:2] in enable_regions_prefix]        
@@ -89,6 +89,60 @@ def assume_role(account_name, account_id, region):
             #print (message)
             return None
 
+def get_lambda_arn(security,regions_list):
+     for region in regions_list:
+        session = assume_role(security.name, security.id, region["RegionName"])
+        if session != None:
+            client = session.client('lambda')
+            lambda_list = response = client.list_functions()
+            if(lambda_list['Functions']):
+                for func in lambda_list['Functions']:
+                    if 'guarduty_findings' in func['FunctionName']:
+                        return func['FunctionArn']
+
+def create_cloudwatch_event(security,regions_list):
+    lambda_arn = get_lambda_arn(security,regions_list)
+    for region in regions_list:
+        session = assume_role(security.name, security.id, region["RegionName"])
+        if session != None:
+            topic_arn = create_sns_topic(session, lambda_arn)
+            client = session.client('events')
+            rule = client.put_rule(
+                Name='Guardduty_finding_event',
+                EventPattern="""
+                    {
+                        "source": [
+                            "aws.guardduty"
+                        ],
+                        "detail-type": [
+                            "GuardDuty Finding"
+                        ]
+                    }
+                    """,
+                State='ENABLED',
+                Description='Event that sends SNS notification when there is a new finding in guardduty'
+            )                
+            target = client.put_targets(
+                Rule='Guardduty_finding_event',
+                Targets=[
+                    {
+                        'Id': 'Findings_Target',
+                        'Arn': topic_arn
+                    },
+                ]
+            )
+
+
+def create_sns_topic(session, lambda_arn):  
+    client = session.client('sns')
+    topic = client.create_topic(Name='cloudwatch_guardduty_finding_event')
+    subscription = client.subscribe(
+            TopicArn= topic['TopicArn'],
+            Protocol='lambda',
+            Endpoint= lambda_arn
+        )
+    return topic['TopicArn']
+    
 def security_account(account):
     if account.name == "security":
         return True
@@ -271,11 +325,11 @@ def accept_invite(security,members,regions_list):
 def deploy_guardduty():
     regions_list = get_regions()    
     accounts_list = get_accounts_data()
-    for account in accounts_list:
-        if create_guardduty(account, regions_list):
-            print("GuardDuty succesfully created on account with Id: " + account.id)
-        else:
-            print("Couldn't create GuardDuty on account with Id: " + account.id)
+    # for account in accounts_list:
+    #     if create_guardduty(account, regions_list):
+    #         print("GuardDuty succesfully created on account with Id: " + account.id)
+    #     else:
+    #         print("Couldn't create GuardDuty on account with Id: " + account.id)
     security = list(filter(security_account,accounts_list))
     members = list(filter(guardduty_members,accounts_list))
     logarchive = list(filter(logarchive_account,accounts_list))
@@ -289,12 +343,13 @@ def deploy_guardduty():
         else:
             print("LogArchive account not found! Can't save findings on S3")
         for member in members:
-            create_members(security[0], member,regions_list)
+            create_members(security[0], member,regions_list)        
     else:
-        #print("Security account not found! Can't create master GuardDuty nor members")
+        print("Security account not found! Can't create master GuardDuty nor members")
         exit()
     invite_members(security[0],members,regions_list)
     accept_invite(security[0],members,regions_list)
+    create_cloudwatch_event(security[0],regions_list)
 
 if __name__== "__main__":    
     print("***GUARDDUTY SCRIPT START***")

@@ -39,13 +39,3 @@ variable "file_name"{
   default = "guarduty_findings"
   description = "Lambda file name (with no extension)"
 }
-
-variable "event_name"{
-  default = "Guardduty_finding_event"
-  description = "Cloudwatch event name"
-}
- 
-variable "event_description"{
-  default = "Guardduty findings notification via Lambda + SNS"
-  description = "Description for Cloudwatch event"
-}

@@ -9,20 +9,6 @@ module "aws_lz_aggregate_security_sns_topic" {
   required_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = module.aws_lz_account_security.account_id, (var.tag_key_name) = "Aggregate Security" }
 }
 
-module "aws_lz_guardduty_sns_topic" {
-  source = "./modules/snstopic"
-
-  providers = {
-    aws = aws.security-account
-  }
-
-  sns_topic_name = var.guardduty_topic_name
-  required_tags  = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.security_account_id, (var.tag_key_name) = "Guardduty findings" }
-
-  attach_policy = true
-  policy = "${data.aws_iam_policy_document.sns_topic_policy.json}"
-}
-
  module "aws_lz_lambda_role" {
    source = "./modules/iam"
  
@@ -55,28 +41,6 @@ module "aws_lz_lambda_guarduty_findings" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.security_account_id }
 }
 
-module "aws_lz_lambda_cloudwatch_finding_event"{
-  source = "./modules/cloudwatch"
-
-  providers = {
-    aws = aws.security-account
-  }
-
-  event_name = var.event_name
-  event_description = var.event_description
-  event_pattern = <<PATTERN
-  {
-    "source": [
-      "aws.guardduty"
-    ],
-    "detail-type": [
-      "GuardDuty Finding"
-    ]
-  }
-  PATTERN
-
-  target_arn = module.aws_lz_lambda_guarduty_findings.lambda_zip_inline_arn
-}
 
 data "aws_iam_policy_document" "aws_lz_lambda_policy" {
   statement {
@@ -105,44 +69,11 @@ client = session.client('sns')
 def lambda_handler(event, context):
     text = ('Guardduty Finding notification in account {} with severity {} at {} \n\n Finding details: \n {}'.format(event['account'], event['detail']['severity'],event['time'],json.dumps(event, indent = 4)))
     response = client.publish(
-        TopicArn = '${module.aws_lz_guardduty_sns_topic.topic_arn}',
+        TopicArn = '${module.aws_lz_aggregate_security_sns_topic.topic_arn}',
         Message = text,
         Subject = 'Guardduty finding'
     )
 EOF
     filename = "${var.file_name}.py"
-  }
-}
-
-
-data "aws_iam_policy_document" "sns_topic_policy" {
-  policy_id = "__default_policy_ID"
-
-  statement {
-    actions = [
-      "SNS:Publish"
-    ]
-
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceOwner"
-
-      values = [
-        "${local.security_account_id}",
-      ]
-    }
-
-    effect = "Allow"
-
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
-
-    resources = [
-      "${module.aws_lz_aggregate_security_sns_topic.topic_arn}",
-    ]
-
-    sid = "__default_statement_ID"
   }
 }
