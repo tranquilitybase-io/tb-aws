@@ -129,3 +129,34 @@ variable "cgw_static_route" {
   type = bool
   default = false
 }
+
+# Ingress EKS cluster variables
+variable "ingress_eks_cluster_name" {
+  description = "Ingress VPC EKS cluster name"
+  default = "awslz_eks_ingress_cluster"
+}
+
+variable "ingress_eks_role_name" {
+  description = "EKS role name"
+  default = "awslz_eks_ingress_cluster"
+}
+
+variable "ingress_subnets_list" {
+  description = "Subnets for the EKS cluster"
+  default     = ""
+}
+
+variable "ingress_eks_node_group_name" {
+  description = "Name of the node group for the cluster"
+  default     = "awslz_eks_node_group_ingress_cluster"
+}
+
+variable "ingress_eks_node_group_role_name" {
+  description = "Ingress Cluster node group name"
+  default     = "awslz_eks_ingress_node_group"
+}
+
+variable "ingress_eks_node_group_instance_types" {
+  description = "Instances types for the node group"
+  default     = ["t2.micro"]
+}
