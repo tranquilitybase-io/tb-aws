@@ -197,7 +197,11 @@ module "aws_lz_ingress_vpc" {
   single_nat_gateway = false
   one_nat_gateway_per_az = false
 
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+  # Required tags for EKS
+  private_subnet_tags = {"kubernetes.io/role/internal-elb" = 1}
+  public_subnet_tags = {"kubernetes.io/role/elb" = 1}
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network", "kubernetes.io/cluster/${var.ingress_eks_cluster_name}" = "shared"}
 }
 
 module "aws_lz_ingress_vpc_twg_attachment" {
@@ -341,3 +345,21 @@ module "ec2_instance_nginx" {
   }
 ### END VPN Connection <--
 
+
+# Create EKS cluster
+  module "ingress_eks_cluster" {
+    source = "./modules/eks"
+    providers = {
+      aws = aws.network-account
+    }
+
+    eks_iam_role_name         = var.ingress_eks_role_name
+    subnets                   = module.aws_lz_ingress_vpc.public_subnets
+    eks_cluster_name          = var.ingress_eks_cluster_name
+
+    node_group_name           = var.ingress_eks_node_group_name
+    node_group_role_name      = var.ingress_eks_node_group_role_name
+    node_group_subnets        = module.aws_lz_ingress_vpc.private_subnets
+    node_group_instance_types = var.ingress_eks_node_group_instance_types
+  }
+# END Create EKS cluster
