@@ -268,7 +268,7 @@ module "ec2_instance_nginx" {
     }
 
     eks_iam_role_name         = var.ingress_eks_role_name
-    subnets                   = concat(module.aws_lz_ingress_vpc.public_subnets, module.aws_lz_ingress_vpc.private_subnets)
+    subnets                   = module.aws_lz_ingress_vpc.public_subnets
     eks_cluster_name          = var.ingress_eks_cluster_name
 
     node_group_name           = var.ingress_eks_node_group_name
