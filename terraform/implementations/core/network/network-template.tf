@@ -67,18 +67,104 @@ module "aws_lz_egress_vpc_twg_attachment" {
 }
 
 module "aws_lz_tgw_route" {
+  source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_id = "default"
+  destination_cidr_block = "0.0.0.0/0"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
+}
+
+### Route Table DEV
+module "aws_lz_tgw_route_table_dev" {
   source = "./modules/transit-gateway/tgw-route-table"
 
   providers = {
     aws = aws.network-account
   }
 
+  route_table_name = "aws_lz_tgw_route_table_dev"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+
+}
+
+module "aws_lz_tgw_route_dev" {
+  source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_id = module.aws_lz_tgw_route_table_dev.tgw_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
+}
+###
+
+### Route Table TEST
+module "aws_lz_tgw_route_table_test" {
+  source = "./modules/transit-gateway/tgw-route-table"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_name = "aws_lz_tgw_route_table_test"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = "TEST", (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+
+}
+
+module "aws_lz_tgw_route_test" {
+  source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_id = module.aws_lz_tgw_route_table_test.tgw_route_table_id
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
   attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }
 
-##Routes
+###
+
+###Route Table PROD
+module "aws_lz_tgw_route_table_prod" {
+  source = "./modules/transit-gateway/tgw-route-table"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_name = "aws_lz_tgw_route_table_prod"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = "PROD", (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+
+}
+
+module "aws_lz_tgw_route_prod" {
+  source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  route_table_id = module.aws_lz_tgw_route_table_prod.tgw_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  tgw_id = module.aws_lz_tgw.tgw_id
+  attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
+}
+###
+
+##VPC Routes
 module "aws_lz_tgw_egress_vpc_route"{
   source  = "./modules/route"
   providers = {

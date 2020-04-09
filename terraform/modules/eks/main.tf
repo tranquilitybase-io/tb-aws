@@ -1,3 +1,10 @@
+/*
+* # GFT AWS LZ EKS Terraform module
+*
+* Usage: Terraform module which creates EKS cluster and node groups with the required configuration.
+*
+*/
+
 resource "aws_iam_role" "aws_lz_gft_eks_iam_role" {
   name = var.eks_iam_role_name
   assume_role_policy = var.eks_user_policy
