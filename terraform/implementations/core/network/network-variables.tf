@@ -53,7 +53,7 @@ variable "tgw_vpc_internal_traffic_cidr"{
 # Instances variables
 variable "nginx_instance_name" {
   description = "Instance name"
-  default = "awslz_nginx"
+  default = "awslz_nginx-3"
 }
 
 variable "nginx_ami_version" {
@@ -69,6 +69,11 @@ variable "nginx_instance_type" {
 variable "nginx_user_data" {
   description = "User data for the instance"
   default = ""
+}
+
+variable "network_account_key_name" {
+  description = "Key pair name of the Network Account"
+  default = "Deployer-key-2" #"linux-servers-network-aac"
 }
 
 # Security Groups variables
@@ -97,11 +102,7 @@ variable "nginx_egress_rules" {
   default = ["all-all"]
 }
 
-variable "network_account_key_name" {
-  description = "Key pair name of the Network Account"
-  default = "linux-servers-network-aac"
-}
-
+# VPN variables
 variable "create_vpn" {
   description = "Boolean to decide if the VPN is created or not"
   type = bool
@@ -159,4 +160,14 @@ variable "ingress_eks_node_group_role_name" {
 variable "ingress_eks_node_group_instance_types" {
   description = "Instances types for the node group"
   default     = ["t2.micro"]
+}
+
+# Key pair variables
+variable "deployment_key_name" {
+  description = "Deployment key name"
+  default     = "Deployer-key-2"
+}
+
+variable "env_deployment_key" {
+  description = "Environment key" 
 }

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Variables
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -10,8 +10,19 @@ MAIN_PATH=$(pwd)
 AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
 
-cd ${TERRAFORM_PATH}
+echo "------------------------AWS CLI-----------------------------------------------"
+aws --version
+aws configure set aws_access_key_id ${access_key}
+aws configure set aws_secret_access_key ${secret_key}
+aws configure set default.region ${DEV_region}
+bucket=$(aws s3 ls | awk '{print $3}')
 
+echo "------------------------CONNECTION--------------------------------------------"
+ssh-keygen -t rsa -b 2048 -N "" -f temp.key > /dev/null 2>&1
+export TF_VAR_env_deployment_key=$(cat temp.key.pub) #| awk '{print $1 $2}'
+aws s3 cp temp.key s3://${bucket}/ > /dev/null 2>&1 && echo "Check your S3 bucket to download files"
+
+cd ${TERRAFORM_PATH}
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
