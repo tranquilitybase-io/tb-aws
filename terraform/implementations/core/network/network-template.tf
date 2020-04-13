@@ -294,6 +294,7 @@ module "ec2_instance_nginx" {
    #attachment
   role_policy_attach = true
   policy_arn = local.administrator_access_arn
+   env_deployment_key = ""
  }
 
   module "aws_lz_iam_security_audit_network" {
@@ -308,6 +309,7 @@ module "ec2_instance_nginx" {
    #attachment
    role_policy_attach = true
    policy_arn = local.read_only_access_arn
+    env_deployment_key = ""
   }
 
 ### BEGIN VPN Connection modules -->
@@ -325,6 +327,7 @@ module "ec2_instance_nginx" {
     cgw_type = var.cgw_type
 
     tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+    env_deployment_key = ""
   }
 
 #Create VPN Connection
@@ -342,6 +345,7 @@ module "ec2_instance_nginx" {
     cgw_static_route = var.cgw_static_route
 
     tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+    env_deployment_key = ""
   }
 ### END VPN Connection <--
 
@@ -361,5 +365,74 @@ module "ec2_instance_nginx" {
     node_group_role_name      = var.ingress_eks_node_group_role_name
     node_group_subnets        = module.aws_lz_ingress_vpc.private_subnets
     node_group_instance_types = var.ingress_eks_node_group_instance_types
+    env_deployment_key = ""
   }
 # END Create EKS cluster
+
+### </ In-line VPC
+module "aws_lz_inline_vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2.0"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  name = var.inline_vpc_name
+
+  cidr = var.inline_vpc_cidr
+
+  azs             = [local.primary_az,local.secondary_az]
+  public_subnets  = var.inline_vpc_public_subnets
+  private_subnets = var.inline_vpc_private_subnets
+
+  enable_nat_gateway = false
+  single_nat_gateway = false
+  one_nat_gateway_per_az = false
+
+  /*# Required tags for EKS
+  private_subnet_tags = {"kubernetes.io/role/internal-elb" = 1}
+  public_subnet_tags = {"kubernetes.io/role/elb" = 1}
+*/
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network", "kubernetes.io/cluster/${var.ingress_eks_cluster_name}" = "shared"}
+}
+
+module "aws_lz_inline_vpc_twg_attachment" {
+  source  = "./modules/transit-gateway/tgw-vpc-attachment"
+
+  providers = {
+    aws = aws.network-account
+  }
+
+  attach_name = format("aws_lz_inline_vpc_attach_%s",local.network_account_id)
+  transit_gateway_id = module.aws_lz_tgw.tgw_id
+  vpc_id = module.aws_lz_inline_vpc.vpc_id
+  subnets_ids =  module.aws_lz_inline_vpc.private_subnets
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+  env_deployment_key = ""
+}
+
+##In-line VPC Routes
+module "aws_lz_tgw_internet_inline_vpc_route"{
+  source  = "./modules/route"
+  providers = {
+    aws = aws.network-account
+  }
+  route_table = module.aws_lz_inline_vpc.private_route_table_ids
+  destination = var.tgw_vpc_internet_cidr
+  transit_gateway = module.aws_lz_tgw.tgw_id
+  env_deployment_key = ""
+}
+
+module "aws_lz_tgw_ingress_vpc_route"{
+  source  = "./modules/route"
+  providers = {
+    aws = aws.network-account
+  }
+  route_table = module.aws_lz_inline_vpc.private_route_table_ids
+  destination = var.tgw_vpc_internal_traffic_cidr
+  transit_gateway = module.aws_lz_tgw.tgw_id
+  env_deployment_key = ""
+}
+### In-line VPC />

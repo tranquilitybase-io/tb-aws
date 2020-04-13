@@ -42,6 +42,28 @@ variable "egress_vpc_private_subnets"{
   default = ["10.99.2.0/24", "10.99.3.0/24"]
 }
 
+variable "inline_vpc_name" {
+  default = "aws_lz_inline_vpc"
+  description = "In-line VPC Name"
+}
+
+variable "inline_vpc_cidr"{
+  description = "In-line VPC CIDR"
+  default = "10.99.8.0/22"
+}
+
+variable "inline_vpc_public_subnets"{
+  description = "In-line VPC Pubic Subnets list"
+  type = list(string)
+  default = ["10.99.8.0/24", "10.99.9.0/24"]
+}
+
+variable "inline_vpc_private_subnets"{
+  description = "In-line VPC Private Subnets list"
+  type = list(string)
+  default = ["10.99.10.0/24", "10.99.11.0/24"]
+}
+
 variable "tgw_vpc_internet_cidr"{
   default = "0.0.0.0/0"
 }
