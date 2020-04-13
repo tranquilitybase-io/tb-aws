@@ -425,7 +425,7 @@ module "aws_lz_tgw_internet_inline_vpc_route"{
   env_deployment_key = ""
 }
 
-module "aws_lz_tgw_ingress_vpc_route"{
+module "aws_lz_tgw_inline_vpc_route"{
   source  = "./modules/route"
   providers = {
     aws = aws.network-account
