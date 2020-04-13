@@ -280,86 +280,98 @@ module "ec2_instance_nginx" {
 #<----
 
 #SECURITY ROLES
- module "aws_lz_iam_security_admin_network" {
-   source = "./modules/iam"
- 
-   providers = {
-     aws = aws.network-account
-   }
+module "aws_lz_iam_security_admin_network" {
+  source = "./modules/iam"
 
-   role_name = "${local.security_role_name}"
-   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
-   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
-
-   #attachment
-  role_policy_attach = true
-  policy_arn = local.administrator_access_arn
- }
-
-  module "aws_lz_iam_security_audit_network" {
-   source = "./modules/iam"
-   providers = {
-     aws = aws.network-account
-   }
-
-   role_name = "${local.security_role_name_audit}"
-   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
-   role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
-   #attachment
-   role_policy_attach = true
-   policy_arn = local.read_only_access_arn
+  providers = {
+    aws = aws.network-account
   }
+
+  role_name = "${local.security_role_name}"
+  assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+  role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
+
+  #attachment
+role_policy_attach = true
+policy_arn = local.administrator_access_arn
+}
+
+module "aws_lz_iam_security_audit_network" {
+  source = "./modules/iam"
+  providers = {
+    aws = aws.network-account
+  }
+
+  role_name = "${local.security_role_name_audit}"
+  assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+  role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
+  #attachment
+  role_policy_attach = true
+  policy_arn = local.read_only_access_arn
+}
 
 ### BEGIN VPN Connection modules -->
 # Create Customer Gateway
-  module "aws_lz_customer_gateway" {
-    source = "./modules/vpn/customer-gateway"
-    providers = {
-      aws = aws.network-account
-    }
-
-    cgw_name = format("aws_lz_cgw_%s",local.network_account_id)
-    create_cgw = var.create_vpn
-    bgn_asn = var.cgw_bgn_asn
-    customer_ip_address = var.cgw_ip_address
-    cgw_type = var.cgw_type
-
-    tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+module "aws_lz_customer_gateway" {
+  source = "./modules/vpn/customer-gateway"
+  providers = {
+    aws = aws.network-account
   }
+
+  cgw_name = format("aws_lz_cgw_%s",local.network_account_id)
+  create_cgw = var.create_vpn
+  bgn_asn = var.cgw_bgn_asn
+  customer_ip_address = var.cgw_ip_address
+  cgw_type = var.cgw_type
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+}
 
 #Create VPN Connection
-  module "aws_lz_vpn_connection" {
-    source = "./modules/transit-gateway/tgw-vpn-attachment"
-    providers = {
-      aws = aws.network-account
-    }
-
-    vpn_attach_name = format("aws_lz_vpn_tgw_attachment_%s",local.network_account_id)
-    create_vpn_connection = var.create_vpn
-    cgw_id = module.aws_lz_customer_gateway.cgw_id
-    tgw_id = module.aws_lz_tgw.tgw_id
-    cgw_type = module.aws_lz_customer_gateway.cgw_type
-    cgw_static_route = var.cgw_static_route
-
-    tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+module "aws_lz_vpn_connection" {
+  source = "./modules/transit-gateway/tgw-vpn-attachment"
+  providers = {
+    aws = aws.network-account
   }
+
+  vpn_attach_name = format("aws_lz_vpn_tgw_attachment_%s",local.network_account_id)
+  create_vpn_connection = var.create_vpn
+  cgw_id = module.aws_lz_customer_gateway.cgw_id
+  tgw_id = module.aws_lz_tgw.tgw_id
+  cgw_type = module.aws_lz_customer_gateway.cgw_type
+  cgw_static_route = var.cgw_static_route
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+}
 ### END VPN Connection <--
 
 
 # Create EKS cluster
-  module "ingress_eks_cluster" {
-    source = "./modules/eks"
-    providers = {
-      aws = aws.network-account
-    }
-
-    eks_iam_role_name         = var.ingress_eks_role_name
-    subnets                   = module.aws_lz_ingress_vpc.public_subnets
-    eks_cluster_name          = var.ingress_eks_cluster_name
-
-    node_group_name           = var.ingress_eks_node_group_name
-    node_group_role_name      = var.ingress_eks_node_group_role_name
-    node_group_subnets        = module.aws_lz_ingress_vpc.private_subnets
-    node_group_instance_types = var.ingress_eks_node_group_instance_types
+module "ingress_eks_cluster" {
+  source = "./modules/eks"
+  providers = {
+    aws = aws.network-account
   }
+
+  eks_iam_role_name         = var.ingress_eks_role_name
+  subnets                   = module.aws_lz_ingress_vpc.public_subnets
+  eks_cluster_name          = var.ingress_eks_cluster_name
+
+  node_group_name           = var.ingress_eks_node_group_name
+  node_group_role_name      = var.ingress_eks_node_group_role_name
+  node_group_subnets        = module.aws_lz_ingress_vpc.private_subnets
+  node_group_instance_types = var.ingress_eks_node_group_instance_types
+}
 # END Create EKS cluster
+
+# Key pair 
+module "network_account_keypair" {
+  source = "./modules/key-pair"
+  providers = {
+    aws = aws.network-account
+  }
+
+  key_name    = var.deployment_key_name
+  public_key  = var.env_deployment_key
+}
+# END Key pair
