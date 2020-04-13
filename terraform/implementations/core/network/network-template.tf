@@ -366,7 +366,7 @@ module "ingress_eks_cluster" {
 
 # Key pair 
 module "network_account_keypair" {
-  source = "./modules/key-pair"
+  source = "./modules/key-pairs"
   providers = {
     aws = aws.network-account
   }
