@@ -71,6 +71,11 @@ variable "nginx_user_data" {
   default = ""
 }
 
+variable "network_account_key_name" {
+  description = "Key pair name of the Network Account"
+  default = "linux-servers-network-aac"
+}
+
 # Security Groups variables
 variable "nginx_security_group_name" {
   description = "Security group name"
@@ -95,11 +100,6 @@ variable "nginx_ingress_rules" {
 variable "nginx_egress_rules" {
   description = "Egress rules"
   default = ["all-all"]
-}
-
-variable "network_account_key_name" {
-  description = "Key pair name of the Network Account"
-  default = "linux-servers-network-aac"
 }
 
 variable "create_vpn" {
