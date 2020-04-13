@@ -160,3 +160,13 @@ variable "ingress_eks_node_group_instance_types" {
   description = "Instances types for the node group"
   default     = ["t2.micro"]
 }
+
+# Key pair variables
+variable "deployment_key_name" {
+  description = "Deployment key name"
+  default     = "Deployer-key-2"
+}
+
+variable "env_deployment_key" {
+  description = "Environment key" 
+}
