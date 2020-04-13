@@ -191,5 +191,6 @@ variable "deployment_key_name" {
 }
 
 variable "env_deployment_key" {
-  description = "Environment key" 
+  description = "Environment key"
+  default = ""
 }
