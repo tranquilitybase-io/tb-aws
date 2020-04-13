@@ -1,7 +1,7 @@
 /*
 * # GFT AWS LZ Lambda Serverless Service Terraform module
 *
-* Usage: Terraform module which moves the notifications from member account to Shared Service account.
+* Usage: Terraform module which deploys a Lambda function with a specified rol in any runtime.
 */
 
 resource "aws_lambda_function" "lambda_zip_inline" {
