@@ -4,7 +4,7 @@ variable "ingress_vpc_name" {
 }
 
 variable "ingress_vpc_cidr"{
-  description = "Ingress VPC CIDR"
+  description = "Egress VPC CIDR"
   default = "10.99.4.0/22"
 }
 
@@ -19,29 +19,6 @@ variable "ingress_vpc_private_subnets"{
   type = list(string)
   default = ["10.99.6.0/24", "10.99.7.0/24"]
 }
-
-variable "inline_vpc_name" {
-  default = "aws_lz_inline_vpc"
-  description = "In-line VPC Name"
-}
-
-variable "inline_vpc_cidr"{
-  description = "In-line VPC CIDR"
-  default = "10.99.8.0/22"
-}
-
-variable "inline_vpc_public_subnets"{
-  description = "In-line VPC Pubic Subnets list"
-  type = list(string)
-  default = ["10.99.8.0/24", "10.99.9.0/24"]
-}
-
-variable "inline_vpc_private_subnets"{
-  description = "Ingress VPC Private Subnets list"
-  type = list(string)
-  default = ["10.99.10.0/24", "10.99.11.0/24"]
-}
-
 
 variable "egress_vpc_name" {
   default = "aws_lz_egress_vpc"
