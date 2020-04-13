@@ -348,30 +348,30 @@ def accept_invite(security,members,regions_list):
 def deploy_guardduty():
     regions_list = get_regions()    
     accounts_list = get_accounts_data()
-    # for account in accounts_list:
-    #     if create_guardduty(account, regions_list):
-    #         print("GuardDuty succesfully created on account with Id: " + account.id)
-    #     else:
-    #         print("Couldn't create GuardDuty on account with Id: " + account.id)
+    for account in accounts_list:
+        if create_guardduty(account, regions_list):
+            print("GuardDuty succesfully created on account with Id: " + account.id)
+        else:
+            print("Couldn't create GuardDuty on account with Id: " + account.id)
     security = list(filter(security_account,accounts_list))
     members = list(filter(guardduty_members,accounts_list))
     logarchive = list(filter(logarchive_account,accounts_list))
-    # if security:
-    #     if logarchive:
-    #         bucket_name = get_findings_bucket(logarchive)
-    #         bucket_arn = "arn:aws:s3:::"+bucket_name
-    #         key_data = get_key_arn(bucket_name, logarchive)
-    #         guardduty_key_permission(key_data, logarchive)
-    #         config_s3_findings(security[0], regions_list, bucket_arn,key_data["Arn"])
-    #     else:
-    #         print("LogArchive account not found! Can't save findings on S3")
-    #     for member in members:
-    #         create_members(security[0], member,regions_list)        
-    # else:
-    #     print("Security account not found! Can't create master GuardDuty nor members")
-    #     exit()
-    # invite_members(security[0],members,regions_list)
-    # accept_invite(security[0],members,regions_list)
+    if security:
+        if logarchive:
+            bucket_name = get_findings_bucket(logarchive)
+            bucket_arn = "arn:aws:s3:::"+bucket_name
+            key_data = get_key_arn(bucket_name, logarchive)
+            guardduty_key_permission(key_data, logarchive)
+            config_s3_findings(security[0], regions_list, bucket_arn,key_data["Arn"])
+        else:
+            print("LogArchive account not found! Can't save findings on S3")
+        for member in members:
+            create_members(security[0], member,regions_list)        
+    else:
+        print("Security account not found! Can't create master GuardDuty nor members")
+        exit()
+    invite_members(security[0],members,regions_list)
+    accept_invite(security[0],members,regions_list)
     create_cloudwatch_event(security[0],regions_list)
 
 if __name__== "__main__":    
