@@ -103,7 +103,6 @@ def get_lambda_arn(security,regions_list):
 def create_cloudwatch_event(security,regions_list):
     lambda_arn = get_lambda_arn(security,regions_list)
     for region in regions_list:
-        print(region["RegionName"])
         session = assume_role(security.name, security.id, region["RegionName"])
         if session != None:
             topic_arn = create_sns_topic(session, lambda_arn, security.id)
@@ -155,15 +154,11 @@ def create_sns_topic(session, lambda_arn, security_id):
         )
     topic_arn = topic['TopicArn']
     client.add_permission(
-    TopicArn=topic_arn,
-    Label='AWS_LZ_Guardduty_finding_event',
-    AWSAccountId=[
-        security_id,
-    ],
-    ActionName=[
-        'Publish',
-    ]
-)
+        TopicArn=topic_arn,
+        Label='AWS_LZ_Guardduty_finding_event',
+        AWSAccountId=[security_id],
+        ActionName=['Publish']
+    )
     return topic['TopicArn']
     
 def security_account(account):
@@ -370,8 +365,10 @@ def deploy_guardduty():
     else:
         print("Security account not found! Can't create master GuardDuty nor members")
         exit()
+    print("Inviting members and accepting requests")
     invite_members(security[0],members,regions_list)
     accept_invite(security[0],members,regions_list)
+    print("Creating cloudwatch event")
     create_cloudwatch_event(security[0],regions_list)
 
 if __name__== "__main__":    
