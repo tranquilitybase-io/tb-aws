@@ -18,7 +18,7 @@ class Account:
 #Get all accounts in organization
 def get_accounts_data():
     account_list = []
-    client = boto3.client('organizations')
+    client = boto3.client("organizations")
     master_account_data = client.describe_organization()["Organization"]
     account_list.append(Account("Master",master_account_data["MasterAccountId"],master_account_data["MasterAccountEmail"]))
     member_accounts_data = client.list_accounts()["Accounts"]
@@ -31,9 +31,9 @@ def get_accounts_data():
 def get_regions(): 
     regions_list = {}
     enable_regions_prefix = {"us","eu","ca","sa"}
-    client = boto3.client('ec2')
+    client = boto3.client("ec2")
     regions = client.describe_regions()
-    regions_list = [region for region in regions['Regions'] if region['RegionName'][:2] in enable_regions_prefix]        
+    regions_list = [region for region in regions["Regions"] if region["RegionName"][:2] in enable_regions_prefix]        
     return regions_list
 
 def create_guardduty(account, regions_list):
@@ -41,7 +41,7 @@ def create_guardduty(account, regions_list):
     for region in regions_list:
         session = assume_role(account.name, account.id, region["RegionName"])
         if session != None:              
-            client = session.client('guardduty')
+            client = session.client("guardduty")
             detector_id = 0000
             try:
                 #print("Checking GuardDuty on region " + region["RegionName"])
@@ -61,7 +61,7 @@ def create_guardduty(account, regions_list):
                 #print (message)
                 return False
         else:
-            print("Could't assume role for Account " + account.name + " Region: " + region["RegionName"] + ". Trying next region")
+            print("Could"t assume role for Account " + account.name + " Region: " + region["RegionName"] + ". Trying next region")
     return True
 
 def assume_role(account_name, account_id, region):
@@ -78,9 +78,9 @@ def assume_role(account_name, account_id, region):
                 DurationSeconds=900
             )               
             #print("Role OrganizationAccountAccessRole assumed in account " + account_id + " in region " + region + ". Timestamp: " + now.strftime("%Y/%m/%d_%H:%M:%S"))
-            session = Session(aws_access_key_id=response['Credentials']['AccessKeyId'],
-                        aws_secret_access_key=response['Credentials']['SecretAccessKey'],
-                        aws_session_token=response['Credentials']['SessionToken'],
+            session = Session(aws_access_key_id=response["Credentials"]["AccessKeyId"],
+                        aws_secret_access_key=response["Credentials"]["SecretAccessKey"],
+                        aws_session_token=response["Credentials"]["SessionToken"],
                         region_name = region)
             return session
         except Exception as ex:
@@ -93,22 +93,23 @@ def get_lambda_arn(security,regions_list):
      for region in regions_list:
         session = assume_role(security.name, security.id, region["RegionName"])
         if session != None:
-            client = session.client('lambda')
+            client = session.client("lambda")
             lambda_list = response = client.list_functions()
-            if(lambda_list['Functions']):
-                for func in lambda_list['Functions']:
-                    if 'guarduty_findings' in func['FunctionName']:
-                        return func['FunctionArn']
-
+            if(lambda_list["Functions"]):
+                for func in lambda_list["Functions"]:
+                    if "guarduty_findings" in func["FunctionName"]:
+                        return func["FunctionArn"]
+                        
 def create_cloudwatch_event(security,regions_list):
     lambda_arn = get_lambda_arn(security,regions_list)
     for region in regions_list:
+        print(region["RegionName"])
         session = assume_role(security.name, security.id, region["RegionName"])
         if session != None:
-            topic_arn = create_sns_topic(session, lambda_arn)
-            client = session.client('events')
+            topic_arn = create_sns_topic(session, lambda_arn, security.id)
+            client = session.client("events")
             rule = client.put_rule(
-                Name='Guardduty_finding_event',
+                Name="Guardduty_finding_event",
                 EventPattern="""
                     {
                         "source": [
@@ -119,29 +120,51 @@ def create_cloudwatch_event(security,regions_list):
                         ]
                     }
                     """,
-                State='ENABLED',
-                Description='Event that sends SNS notification when there is a new finding in guardduty'
+                State="ENABLED",
+                Description="Event that sends SNS notification when there is a new finding in guardduty"
             )                
             target = client.put_targets(
-                Rule='Guardduty_finding_event',
+                Rule="Guardduty_finding_event",
                 Targets=[
                     {
-                        'Id': 'Findings_Target',
-                        'Arn': topic_arn
+                        "Id": "Findings_Target",
+                        "Arn": topic_arn,
+                        "InputTransformer": {
+                            "InputPathsMap": {
+                                "severity":"$.detail.severity",
+                                "time":"$.time",
+                                "region":"$.region",
+                                "type":"$.detail.type",
+                                "account":"$.account",
+                                "detector_arn":"$.detail.arn"
+                            },
+                            "InputTemplate": "Guardduty detector <detector_arn> has a new finding in account <account>, region <region> at <time>.Severity of finding: <severity>, type: <type>.For more details, go to AWS console and check you Guardduty instance"
+                        }
                     },
                 ]
             )
 
 
-def create_sns_topic(session, lambda_arn):  
-    client = session.client('sns')
-    topic = client.create_topic(Name='cloudwatch_guardduty_finding_event')
+def create_sns_topic(session, lambda_arn, security_id):  
+    client = session.client("sns")
+    topic = client.create_topic(Name="cloudwatch_guardduty_finding_event")
     subscription = client.subscribe(
-            TopicArn= topic['TopicArn'],
-            Protocol='lambda',
+            TopicArn= topic["TopicArn"],
+            Protocol="lambda",
             Endpoint= lambda_arn
         )
-    return topic['TopicArn']
+    topic_arn = topic["TopicArn"]
+    client.add_permission(
+    TopicArn=topic_arn,
+    Label="AWS_LZ_Guardduty_finding_event",
+    AWSAccountId=[
+        security_id,
+    ],
+    ActionName=[
+        "Publish",
+    ]
+)
+    return topic["TopicArn"]
     
 def security_account(account):
     if account.name == "security":
@@ -165,11 +188,11 @@ def get_key_arn(bucket_name, logarchive):
     for account in logarchive:  
         session = assume_role(account.name, account.id,"us-west-2")
         if session != None:              
-            client = session.client('s3')
+            client = session.client("s3")
             response = client.get_bucket_encryption(
                 Bucket=bucket_name
             )
-            client_kms = session.client('kms')            
+            client_kms = session.client("kms")            
             for rule in response["ServerSideEncryptionConfiguration"]["Rules"]:
                 key_id = rule["ApplyServerSideEncryptionByDefault"]["KMSMasterKeyID"]  
                 print(key_id)                              
@@ -179,7 +202,7 @@ def get_key_arn(bucket_name, logarchive):
                 return response_kms["KeyMetadata"]
     
 def get_policy_text(account_id):
-    text =  ''' 
+    text =  """ 
             {   
                 "Id": "key-consolepolicy",
                 "Version": "2012-10-17",
@@ -200,7 +223,7 @@ def get_policy_text(account_id):
                     }
                 ]
             }
-            '''
+            """
     text = text.replace("[ACCOUNT_ID]",account_id)
     return text
     
@@ -208,15 +231,15 @@ def guardduty_key_permission(key_data, logarchive):
 
     for account in logarchive:  
         policy_text = get_policy_text(account.id)       
-        session = assume_role(account.name, account.id, 'us-west-2')
+        session = assume_role(account.name, account.id, "us-west-2")
         print(policy_text)
         print(key_data)
         if session != None:              
-            client = session.client('kms') 
+            client = session.client("kms") 
             try:
                 result = client.put_key_policy(
-                    KeyId=key_data['KeyId'],
-                    PolicyName='default',
+                    KeyId=key_data["KeyId"],
+                    PolicyName="default",
                     Policy= policy_text,
                     BypassPolicyLockoutSafetyCheck=True
                 )                
@@ -225,16 +248,16 @@ def guardduty_key_permission(key_data, logarchive):
 
 def get_findings_bucket(logarchive):  
     for account in logarchive:  
-        session = assume_role(account.name, account.id, 'us-west-2')
+        session = assume_role(account.name, account.id, "us-west-2")
         if session != None:              
-                client = session.client('s3')
+                client = session.client("s3")
                 try:                   
                     result = client.list_buckets()
-                    bucket_list = result['Buckets']
+                    bucket_list = result["Buckets"]
                     for bucket in bucket_list:
                         print(bucket)
-                        if 'aws-lz-s3-guardduty-findings-' in bucket['Name']:
-                            return bucket['Name']
+                        if "aws-lz-s3-guardduty-findings-" in bucket["Name"]:
+                            return bucket["Name"]
                 except Exception as ex:
                     template = "An exception of type {0} occurred. Arguments:\n{1!r}"
                     message = template.format(type(ex).__name__, ex.args)
@@ -244,14 +267,14 @@ def config_s3_findings(security, regions_list, bucket_arn, key):
     for idx, region in enumerate(regions_list):
         session = assume_role(security.name, security.id, region["RegionName"])        
         if session != None:              
-            client = session.client('guardduty')            
+            client = session.client("guardduty")            
             try:
                 response = client.create_publishing_destination(
                     DetectorId = security.guardduty_ids[idx],
-                    DestinationType='S3',
+                    DestinationType="S3",
                     DestinationProperties={
-                        'DestinationArn': bucket_arn,
-                        'KmsKeyArn': key 
+                        "DestinationArn": bucket_arn,
+                        "KmsKeyArn": key 
                     }
                 )
             except Exception as ex:
@@ -262,14 +285,14 @@ def create_members(security, member,regions_list):
     for idx, region in enumerate(regions_list):
         session = assume_role(security.name, security.id, region["RegionName"])
         if session != None:              
-            client = session.client('guardduty')
+            client = session.client("guardduty")
             try:                   
                 result = client.create_members(
                     DetectorId = security.guardduty_ids[idx],
                     AccountDetails=[
                         {
-                            'AccountId': member.id,
-                            'Email': member.email
+                            "AccountId": member.id,
+                            "Email": member.email
                         }
                     ]
                 )
@@ -286,7 +309,7 @@ def invite_members(security,members,regions_list):
     for idx, region in enumerate(regions_list):
         session = assume_role(security.name, security.id, region["RegionName"])
         if session != None:              
-            client = session.client('guardduty')
+            client = session.client("guardduty")
             try:                                   
                 result = client.invite_members(
                     DetectorId=security.guardduty_ids[idx],
@@ -304,10 +327,10 @@ def accept_invite(security,members,regions_list):
         for idx, region in enumerate(regions_list):
             session = assume_role(member.name, member.id, region["RegionName"])
             if session != None:              
-                client = session.client('guardduty')
+                client = session.client("guardduty")
                 try:                 
                     #print(security.guardduty_ids[idx])
-                    invitations = client.list_invitations()['Invitations']
+                    invitations = client.list_invitations()["Invitations"]
                     if invitations:
                         acceptance = client.accept_invitation(
                             DetectorId= member.guardduty_ids[idx],
@@ -325,11 +348,11 @@ def accept_invite(security,members,regions_list):
 def deploy_guardduty():
     regions_list = get_regions()    
     accounts_list = get_accounts_data()
-    # for account in accounts_list:
-    #     if create_guardduty(account, regions_list):
-    #         print("GuardDuty succesfully created on account with Id: " + account.id)
-    #     else:
-    #         print("Couldn't create GuardDuty on account with Id: " + account.id)
+    for account in accounts_list:
+        if create_guardduty(account, regions_list):
+            print("GuardDuty succesfully created on account with Id: " + account.id)
+        else:
+            print("Couldn't create GuardDuty on account with Id: " + account.id)
     security = list(filter(security_account,accounts_list))
     members = list(filter(guardduty_members,accounts_list))
     logarchive = list(filter(logarchive_account,accounts_list))
@@ -341,11 +364,11 @@ def deploy_guardduty():
             guardduty_key_permission(key_data, logarchive)
             config_s3_findings(security[0], regions_list, bucket_arn,key_data["Arn"])
         else:
-            print("LogArchive account not found! Can't save findings on S3")
+            print("LogArchive account not found! Can"t save findings on S3")
         for member in members:
             create_members(security[0], member,regions_list)        
     else:
-        print("Security account not found! Can't create master GuardDuty nor members")
+        print("Security account not found! Can"t create master GuardDuty nor members")
         exit()
     invite_members(security[0],members,regions_list)
     accept_invite(security[0],members,regions_list)

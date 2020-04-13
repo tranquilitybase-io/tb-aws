@@ -48,7 +48,7 @@ data "aws_iam_policy_document" "aws_lz_lambda_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
+      identifiers = ["sns.amazonaws.com"]
     }
 
     effect = "Allow"
@@ -67,7 +67,10 @@ session = boto3.Session()
 client = session.client('sns')
 
 def lambda_handler(event, context):
-    text = ('Guardduty Finding notification in account {} with severity {} at {} \n\n Finding details: \n {}'.format(event['account'], event['detail']['severity'],event['time'],json.dumps(event, indent = 4)))
+    records = event['Records']
+    notif = records[0]
+    sns_content = notif["Sns"]
+    text = sns_content["Message"]
     response = client.publish(
         TopicArn = '${module.aws_lz_aggregate_security_sns_topic.topic_arn}',
         Message = text,
