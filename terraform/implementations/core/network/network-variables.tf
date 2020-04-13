@@ -53,7 +53,7 @@ variable "tgw_vpc_internal_traffic_cidr"{
 # Instances variables
 variable "nginx_instance_name" {
   description = "Instance name"
-  default = "awslz_nginx"
+  default = "awslz_nginx-3"
 }
 
 variable "nginx_ami_version" {
@@ -73,7 +73,7 @@ variable "nginx_user_data" {
 
 variable "network_account_key_name" {
   description = "Key pair name of the Network Account"
-  default = "linux-servers-network-aac"
+  default = "Deployer-key-2" #"linux-servers-network-aac"
 }
 
 # Security Groups variables
@@ -102,6 +102,7 @@ variable "nginx_egress_rules" {
   default = ["all-all"]
 }
 
+# VPN variables
 variable "create_vpn" {
   description = "Boolean to decide if the VPN is created or not"
   type = bool
