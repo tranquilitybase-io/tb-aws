@@ -260,25 +260,6 @@ module "nginx_security_group" {
 }
 #<----
 
-#EC2 Instances
-module "ec2_instance_nginx" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "2.13.0"
-  providers = {
-    aws = aws.network-account
-  }
-  name = var.nginx_instance_name
-  ami = var.nginx_ami_version
-  instance_type = var.nginx_instance_type
-  subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
-  vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
-  user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
-  key_name = var.network_account_key_name
-
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
-}
-#<----
-
 #SECURITY ROLES
  module "aws_lz_iam_security_admin_network" {
    source = "./modules/iam"
@@ -435,3 +416,22 @@ module "aws_lz_tgw_inline_vpc_route"{
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 ### In-line VPC />
+
+#EC2 Instances
+module "ec2_instance_nginx" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "2.13.0"
+  providers = {
+    aws = aws.network-account
+  }
+  name = var.nginx_instance_name
+  ami = var.nginx_ami_version
+  instance_type = var.nginx_instance_type
+  subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
+  vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
+  user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
+  key_name = module.network_account_keypair.key_name #var.network_account_key_name
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+}
+#<----
