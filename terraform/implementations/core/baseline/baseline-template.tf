@@ -181,7 +181,6 @@ module "vpc_sandbox" {
   public_subnets  =  var.vpc_sandbox_1_public_subnets_cidr
 
   enable_nat_gateway = var.enable_nat_gateway
-  enable_vpn_gateway = var.enable_vpn_gateway
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox_account_id, (var.tag_key_name) = "sandbox" }
 }
@@ -199,7 +198,6 @@ module "vpc_sandbox_2" {
   public_subnets  = var.vpc_sandbox_2_public_subnets_cidr
 
   enable_nat_gateway = var.enable_nat_gateway
-  enable_vpn_gateway = var.enable_vpn_gateway
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sandbox2_account_id, (var.tag_key_name) = "sandbox" }
 }
