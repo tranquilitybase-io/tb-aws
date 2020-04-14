@@ -9,6 +9,8 @@ resource "aws_key_pair" "key_pair" {
   public_key = var.public_key
  
   lifecycle { 
-    ignore_changes = [public_key, ]
+    ignore_changes = [public_key, tags]
   }
+
+  tags       = var.tags
 }
