@@ -20,7 +20,7 @@ resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSServicePolicy" {
   role       = aws_iam_role.aws_lz_gft_eks_iam_role.name
 }
 
-resource "aws_eks_cluster" "eks_ingress_cluster" {
+resource "aws_eks_cluster" "aws_lz_eks_cluster" {
   name     = var.eks_cluster_name
   role_arn = aws_iam_role.aws_lz_gft_eks_iam_role.arn
 
