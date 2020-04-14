@@ -62,11 +62,6 @@ variable "enable_nat_gateway"{
     default = false
 }
 
-variable "enable_vpn_gateway"{
-    description = "Enable VPN gateway"
-    default = false
-}
-
 variable "internet_cidr"{
     default = "0.0.0.0/0"
 }

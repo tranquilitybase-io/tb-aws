@@ -55,13 +55,13 @@ variable "inline_vpc_cidr"{
 variable "inline_vpc_public_subnets"{
   description = "In-line VPC Pubic Subnets list"
   type = list(string)
-  default = ["10.99.8.0/24", "10.99.9.0/24"]
+  default = []
 }
 
 variable "inline_vpc_private_subnets"{
   description = "In-line VPC Private Subnets list"
   type = list(string)
-  default = ["10.99.10.0/24", "10.99.11.0/24"]
+  default = ["10.99.8.0/24", "10.99.9.0/24"]
 }
 
 variable "tgw_vpc_internet_cidr"{
