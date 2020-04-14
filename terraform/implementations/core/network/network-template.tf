@@ -417,7 +417,6 @@ module "aws_lz_tgw_inline_vpc_route"{
 }
 ### In-line VPC />
 
-/*
 #EC2 Instances
 module "ec2_instance_nginx" {
   source  = "terraform-aws-modules/ec2-instance/aws"
@@ -436,4 +435,3 @@ module "ec2_instance_nginx" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 # END EC2 Instances
-*/
