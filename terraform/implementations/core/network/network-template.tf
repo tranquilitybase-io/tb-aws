@@ -367,7 +367,6 @@ module "ingress_eks_cluster" {
 }
 # END Create EKS cluster
 
-/*
 # Key pair
 module "network_account_keypair" {
   source = "./modules/key-pairs"
@@ -380,7 +379,6 @@ module "network_account_keypair" {
   tags        = { generation_date = var.env_generation_date }
 }
 # END Key pair
-*/
 
 ### </ In-line VPC
 module "aws_lz_inline_vpc" {
