@@ -194,3 +194,7 @@ variable "env_deployment_key" {
   description = "Environment key"
   default = ""
 }
+
+variable "env_generation_date" {
+  description = "Key pair generation date"
+}

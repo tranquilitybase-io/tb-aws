@@ -376,6 +376,7 @@ module "network_account_keypair" {
 
   key_name    = var.deployment_key_name
   public_key  = var.env_deployment_key
+  tags        = { generation_date = var.env_generation_date }
 }
 # END Key pair
 
