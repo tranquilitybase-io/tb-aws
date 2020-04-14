@@ -287,8 +287,8 @@ module "ec2_instance_nginx" {
      aws = aws.network-account
    }
 
-   role_name = "${local.security_role_name}"
-   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+   role_name = local.security_role_name
+   assume_role_policy = data.aws_iam_policy_document.aws_lz_assume_role_security.json
    role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
 
    #attachment
@@ -303,8 +303,8 @@ module "ec2_instance_nginx" {
      aws = aws.network-account
    }
 
-   role_name = "${local.security_role_name_audit}"
-   assume_role_policy = "${data.aws_iam_policy_document.aws_lz_assume_role_security.json}"
+   role_name = local.security_role_name_audit
+   assume_role_policy = data.aws_iam_policy_document.aws_lz_assume_role_security.json
    role_tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
    #attachment
    role_policy_attach = true
@@ -330,7 +330,7 @@ module "ec2_instance_nginx" {
 
   }
 
-#Create VPN Connection
+###Create VPN Connection
   module "aws_lz_vpn_connection" {
     source = "./modules/transit-gateway/tgw-vpn-attachment"
     providers = {
