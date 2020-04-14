@@ -57,3 +57,30 @@ provider "local" {
 provider "null" {
   version = "~> 2.1"
 }
+
+/*
+provider "kubernetes" {
+  alias  = "shared_services"
+  load_config_file = false
+
+  host     = "https://${module.Transform-Cluster.endpoint}"
+  username = "${module.Transform-Cluster.username}"
+  password = "${module.Transform-Cluster.password}"
+
+  client_certificate     = "${base64decode(module.Transform-Cluster.client_certificate)}"
+  client_key             = "${base64decode(module.Transform-Cluster.client_key)}"
+  cluster_ca_certificate = "${base64decode(module.Transform-Cluster.cluster_ca_certificate)}"
+}
+
+provider "kubernetes" {
+  alias  = "network"
+  load_config_file = false
+
+  host     = "https://${module.Transform-Cluster.endpoint}"
+  username = "${module.Transform-Cluster.username}"
+  password = "${module.Transform-Cluster.password}"
+
+  client_certificate     = "${base64decode(module.Transform-Cluster.client_certificate)}"
+  client_key             = "${base64decode(module.Transform-Cluster.client_key)}"
+  cluster_ca_certificate = "${base64decode(module.Transform-Cluster.cluster_ca_certificate)}"
+}*/

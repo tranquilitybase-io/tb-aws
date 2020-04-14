@@ -5,6 +5,9 @@
 terraform/main.tf
 terraform/outputs.tf
 terraform/variables.tf
+terraform/data.tf
+terraform/providers.tf
+terraform/version.tf
 .vscode/settings.json
 /.idea/*
 
