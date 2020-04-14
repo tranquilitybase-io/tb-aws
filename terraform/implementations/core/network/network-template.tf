@@ -379,6 +379,8 @@ module "network_account_keypair" {
 }
 # END Key pair
 
+/*
+
 ### </ In-line VPC
 module "aws_lz_inline_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -434,3 +436,4 @@ module "aws_lz_tgw_inline_vpc_route"{
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 ### In-line VPC />
+*/
