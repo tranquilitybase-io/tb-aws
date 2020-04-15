@@ -86,3 +86,9 @@ variable "internal_ingress_cidr_blocks" {
   description = "Internal ingress cidr block"
   default = ["10.0.0.0/8"]
 }
+
+# Instances variables
+variable "kubectl_instance_name" {
+  description = "Linux kubectl instance name"
+  default = "awslz_kubectl_server-1"
+}

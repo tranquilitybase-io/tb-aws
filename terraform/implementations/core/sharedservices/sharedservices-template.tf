@@ -135,7 +135,7 @@ module "kubectl_security_group" {
 }
 #END Security Groups
 
-/*
+
 #EC2 Instances
 # kubectl controller
 module "ec2_instance_kubectl" {
@@ -145,14 +145,13 @@ module "ec2_instance_kubectl" {
     aws = aws.sharedservices-account
   }
   name = var.kubectl_instance_name
-  ami = var.kubectl_ami_version
+  ami = var.ubuntu18_04_ami_version
   instance_type = var.t2_micro_instance_type
   subnet_id = element(tolist(module.vpc_shared_services.private_subnets),0)
-  vpc_security_group_ids = list(module.bastion_security_group.this_security_group_id)
+  vpc_security_group_ids = list(module.kubectl_security_group.this_security_group_id)
   #user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
-  key_name = module.network_account_keypair.key_name #var.network_account_key_name
+  key_name = module.sharedservices_account_keypair.key_name #var.network_account_key_name
   disable_api_termination = true
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
 }
 # END EC2 Instances
-*/

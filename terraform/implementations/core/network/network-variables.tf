@@ -78,7 +78,7 @@ variable "nginx_instance_name" {
   default = "awslz_nginx-3"
 }
 
-variable "nginx_ami_version" {
+variable "ubuntu18_04_ami_version" {
   description = "AMI version to deploy Ubuntu 18.04"
   default = "ami-0d1cd67c26f5fca19"
 }
