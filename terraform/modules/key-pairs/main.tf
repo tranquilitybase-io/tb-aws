@@ -9,7 +9,7 @@ resource "aws_key_pair" "key_pair" {
   public_key = var.public_key
 
   provisioner "local-exec" {
-     command = "aws s3 cp ../temp--${TF_VAR_env_generation_date}.key s3://${bucket}/"
+     command = "aws s3 cp ../temp--$TF_VAR_env_generation_date.key s3://$bucket/"
      #"echo -------------------; ls -la; pwd; ls ../" 
      #"aws s3 cp path_to_my_file ${aws_s3_bucket.my-bucket.id}"
      #aws s3 cp temp--${TF_VAR_env_generation_date}.key s3://${bucket}/ > /dev/null 2>&1 && echo "Check your S3 bucket to download files"
