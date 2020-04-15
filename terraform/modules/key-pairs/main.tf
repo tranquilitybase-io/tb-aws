@@ -9,7 +9,7 @@ resource "aws_key_pair" "key_pair" {
   public_key = var.public_key
 
   provisioner "local-exec" {
-     command = echo -------------------; ls -la#"aws s3 cp path_to_my_file ${aws_s3_bucket.my-bucket.id}"
+     command = "echo -------------------; ls -la" #"aws s3 cp path_to_my_file ${aws_s3_bucket.my-bucket.id}"
   }
 
   lifecycle { 
