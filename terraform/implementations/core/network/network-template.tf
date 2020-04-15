@@ -417,6 +417,7 @@ module "aws_lz_inline_vpc_twg_attachment" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+/*
 ##In-line VPC Routes
 module "aws_lz_tgw_internet_inline_vpc_route"{
   source  = "./modules/route"
@@ -436,8 +437,8 @@ module "aws_lz_tgw_inline_vpc_route"{
   route_table = module.aws_lz_inline_vpc.private_route_table_ids
   destination = var.tgw_vpc_internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
-}
-### In-line VPC />
+}*/
+### END In-line VPC />
 
 
 #EC2 Instances
