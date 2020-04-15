@@ -7,7 +7,11 @@
 resource "aws_key_pair" "key_pair" {
   key_name   = var.key_name
   public_key = var.public_key
- 
+
+  provisioner "local-exec" {
+     command = echo -------------------; ls -la#"aws s3 cp path_to_my_file ${aws_s3_bucket.my-bucket.id}"
+  }
+
   lifecycle { 
     ignore_changes = [public_key, tags]
   }
