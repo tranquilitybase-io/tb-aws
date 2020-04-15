@@ -3,7 +3,6 @@ output "role_arn" {
   description = "Role ARN"
 }
 
-
 output "cluster_ca" {
   description = "Nested attribute containing certificate-authority-data for your cluster. This is the base64 encoded certificate data required to communicate with your cluster."
   value       = concat(aws_eks_cluster.aws_lz_eks_cluster.*.certificate_authority.0.data, [""])[0]
