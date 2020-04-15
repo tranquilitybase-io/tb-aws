@@ -74,16 +74,16 @@ variable "tgw_vpc_internal_traffic_cidr"{
 
 # Instances variables
 variable "nginx_instance_name" {
-  description = "Instance name"
+  description = "Nginx instance name"
   default = "awslz_nginx-3"
 }
 
 variable "nginx_ami_version" {
-  description = "AMI version to deploy"
+  description = "AMI version to deploy Ubuntu 18.04"
   default = "ami-0d1cd67c26f5fca19"
 }
 
-variable "nginx_instance_type" {
+variable "t2_micro_instance_type" {
   description = "EC2 instance type"
   default = "t2.micro"
 }
@@ -96,6 +96,16 @@ variable "nginx_user_data" {
 variable "network_account_key_name" {
   description = "Key pair name of the Network Account"
   default = "Deployer-key-2" #"linux-servers-network-aac"
+}
+
+variable "bastion_instance_name" {
+  description = "Bastion instance name"
+  default = "bastion-01"
+}
+
+variable "bastion_ami_version" {
+  description = "AMI version to deploy bastion"
+  default = "ami-04a6ca63c5b27440d"
 }
 
 # Security Groups variables
