@@ -30,7 +30,7 @@ terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
-#terraform apply -auto-approve
+terraform apply -auto-approve
 
 
 #This scripts generates the Guardduty instances in all accounts and all regions
@@ -54,4 +54,4 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #terraform state rm module.aws_lz_config_service_2.aws_iam_role
 #terraform state rm module.aws_lz_config_service.aws_iam_role
 
-terraform state rm module.aws_lz_inline_vpc.aws_vpc.this[0]
+#terraform state rm module.aws_lz_inline_vpc.aws_vpc.this[0]
