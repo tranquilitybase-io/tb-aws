@@ -455,7 +455,7 @@ module "ec2_instance_bastion" {
   vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
   #user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
   key_name = module.network_account_keypair.key_name #var.network_account_key_name
-
+  disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 # END EC2 Instances
