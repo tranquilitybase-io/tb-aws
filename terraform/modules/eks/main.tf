@@ -6,21 +6,21 @@
 */
 
 resource "aws_iam_role" "aws_lz_gft_eks_iam_role" {
-  count = length(var.eks_iam_role_name) > 0 ? 1 : 0
+  #count = length(var.eks_iam_role_name) > 0 ? 1 : 0
 
   name = var.eks_iam_role_name
   assume_role_policy = var.eks_user_policy
 }
 
 resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSClusterPolicy" {
-  count = length(var.eks_iam_role_name) > 0 ? 1 : 0
+  #count = length(var.eks_iam_role_name) > 0 ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.aws_lz_gft_eks_iam_role.name
 }
 
 resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSServicePolicy" {
-  count = length(var.eks_iam_role_name) > 0 ? 1 : 0
+  #count = length(var.eks_iam_role_name) > 0 ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
   role       = aws_iam_role.aws_lz_gft_eks_iam_role.name
@@ -68,28 +68,28 @@ resource "aws_eks_node_group" "awslz_eks_node_group" {
 
 ###### IAM Role for EKS Node Group
 resource "aws_iam_role" "awslz_eks_node_group_role" {
-  count = length(var.node_group_role_name) > 0 ? 1 : 0
+  #count = length(var.node_group_role_name) > 0 ? 1 : 0
 
   name = var.node_group_role_name
   assume_role_policy = var.node_group_role_policy 
 }
 
 resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSWorkerNodePolicy" {
-  count = length(var.node_group_role_name) > 0 ? 1 : 0
+  #count = length(var.node_group_role_name) > 0 ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.awslz_eks_node_group_role.name
 }
 
 resource "aws_iam_role_policy_attachment" "awslz_AmazonEKS_CNI_Policy" {
-  count = length(var.node_group_role_name) > 0 ? 1 : 0
+  #count = length(var.node_group_role_name) > 0 ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   role       = aws_iam_role.awslz_eks_node_group_role.name
 }
 
 resource "aws_iam_role_policy_attachment" "awslz_AmazonEC2ContainerRegistryReadOnly" {
-  count = length(var.node_group_role_name) > 0 ? 1 : 0
+  #count = length(var.node_group_role_name) > 0 ? 1 : 0
 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.awslz_eks_node_group_role.name
