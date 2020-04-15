@@ -22,7 +22,7 @@ export TF_VAR_env_generation_date=$(date +%d-%m-%Y_%H-%M)
 ssh-keygen -t rsa -b 2048 -N "" -f temp--${TF_VAR_env_generation_date}.key > /dev/null 2>&1
 export TF_VAR_env_deployment_key=$(cat temp--${TF_VAR_env_generation_date}.key.pub) #| awk '{print $1 $2}'
 #aws s3 cp temp--${TF_VAR_env_generation_date}.key s3://${bucket}/ > /dev/null 2>&1 && echo "Check your S3 bucket to download files"
-
+ls
 
 cd ${TERRAFORM_PATH}
 
