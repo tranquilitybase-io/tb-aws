@@ -117,12 +117,12 @@ variable "nginx_security_group_name" {
 
 variable "nginx_security_group_description" {
   description = "Security group description"
-  default = "Internal server: http, ssh and icmp"
+  default = "Internal server: http and https"
 }
 
 variable "nginx_ingress_rules" {
   description = "Ingress rules"
-  default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
+  default = ["https-443-tcp","http-80-tcp"]
 }
 
 # Bastion
