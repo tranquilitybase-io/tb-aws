@@ -83,6 +83,7 @@ module "internal_route_sharedservices"{
    policy_arn = local.read_only_access_arn
   }
 
+# EKS cluster
 module "aws_lz_eks_eagleconsole_cluster" {
   source = "./modules/eks"
   providers = {
@@ -98,3 +99,17 @@ module "aws_lz_eks_eagleconsole_cluster" {
   node_group_subnets        = module.vpc_shared_services.private_subnets
   node_group_instance_types = var.ec_eks_node_group_instance_types
 }
+# END EKS cluster
+
+# Key pair
+module "sharedservices_account_keypair" {
+  source = "./modules/key-pairs"
+  providers = {
+    aws = aws.sharedservices-account
+  }
+
+  key_name    = var.shared_services_deployment_key_name
+  public_key  = var.env_deployment_key
+  tags        = { generation_date = var.env_generation_date } 
+}
+# END Key pair

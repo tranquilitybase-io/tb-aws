@@ -58,3 +58,9 @@ variable "ec_eks_node_group_instance_types" {
     description = "Instances types for the node group"
     default     = ["t2.micro"]
 }
+
+# Key pair variables
+variable "shared_services_deployment_key_name" {
+  description = "Shared Services deployment key name"
+  default     = "Deployer-key"
+}
