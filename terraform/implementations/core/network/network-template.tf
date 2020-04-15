@@ -330,6 +330,7 @@ module "nginx_security_group" {
   }
 ### END VPN Connection <--
 
+/*
 # Create EKS cluster
 module "ingress_eks_cluster" {
   source = "./modules/eks"
@@ -347,6 +348,7 @@ module "ingress_eks_cluster" {
   node_group_instance_types = var.ingress_eks_node_group_instance_types
 }
 # END Create EKS cluster
+*/
 
 # Key pair
 module "network_account_keypair" {
