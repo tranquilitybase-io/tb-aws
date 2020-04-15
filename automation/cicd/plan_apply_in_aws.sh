@@ -15,7 +15,7 @@ aws --version
 aws configure set aws_access_key_id ${access_key}
 aws configure set aws_secret_access_key ${secret_key}
 aws configure set default.region ${DEV_region}
-bucket=$(aws s3 ls | awk '{print $3}')
+export bucket=$(aws s3 ls | awk '{print $3}')
 
 echo "------------------------CONNECTION--------------------------------------------"
 export TF_VAR_env_generation_date=$(date +%d-%m-%Y_%H-%M)
