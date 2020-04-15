@@ -64,3 +64,25 @@ variable "shared_services_deployment_key_name" {
   description = "Shared Services deployment key name"
   default     = "Deployer-key"
 }
+
+# Security Groups variables
+# Linux kubectl
+variable "kubectl_security_group_name" {
+  description = "Linux kubectl security group name"
+  default = "kubectl_server"
+}
+
+variable "kubectl_security_group_description" {
+  description = "Linux kubectl security group description"
+  default = "Internal server: kubectl controller"
+}
+
+variable "kubectl_ingress_rules" {
+  description = "Linux kubectl ingress rules"
+  default = ["ssh-tcp"]
+}
+
+variable "internal_ingress_cidr_blocks" {
+  description = "Internal ingress cidr block"
+  default = ["10.0.0.0/8"]
+}

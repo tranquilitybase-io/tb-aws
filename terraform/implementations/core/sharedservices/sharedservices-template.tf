@@ -113,3 +113,46 @@ module "sharedservices_account_keypair" {
   tags        = { generation_date = var.env_generation_date } 
 }
 # END Key pair
+
+#Security Group
+# Linux kubectl
+module "kubectl_security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.sharedservices-account
+  }
+  name = var.kubectl_security_group_name
+  description = var.kubectl_security_group_description
+  vpc_id = module.vpc_shared_services.vpc_id
+
+  ingress_cidr_blocks = var.internal_ingress_cidr_blocks
+  ingress_rules       = var.kubectl_ingress_rules
+  egress_rules        = var.all_all_egress_rules
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sharedservices_account_id }
+}
+#END Security Groups
+
+/*
+#EC2 Instances
+# kubectl controller
+module "ec2_instance_kubectl" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "2.13.0"
+  providers = {
+    aws = aws.sharedservices-account
+  }
+  name = var.kubectl_instance_name
+  ami = var.kubectl_ami_version
+  instance_type = var.t2_micro_instance_type
+  subnet_id = element(tolist(module.vpc_shared_services.private_subnets),0)
+  vpc_security_group_ids = list(module.bastion_security_group.this_security_group_id)
+  #user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
+  key_name = module.network_account_keypair.key_name #var.network_account_key_name
+  disable_api_termination = true
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+}
+# END EC2 Instances
+*/
