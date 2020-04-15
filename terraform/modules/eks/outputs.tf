@@ -11,12 +11,13 @@ output "role_arn" {
 
 output "cluster_ca" {
   description = "Nested attribute containing certificate-authority-data for your cluster. This is the base64 encoded certificate data required to communicate with your cluster."
-  value       = element(concat(aws_eks_cluster.this[*].certificate_authority[0].data, list("")), 0)
+  value       = concat(aws_eks_cluster.aws_lz_eks_cluster.*.certificate_authority.data, [""])[0]
 }
 
 output "cluster_endpoint" {
   description = "The endpoint for your EKS Kubernetes API."
-  value       = element(concat(aws_eks_cluster.this[*].endpoint, list("")), 0)
+  value       = concat(aws_eks_cluster.aws_lz_eks_cluster.*.endpoint, [""])[0]
+  #value       = element(concat(aws_eks_cluster.this[*].endpoint, list("")), 0)
 }
 
 
