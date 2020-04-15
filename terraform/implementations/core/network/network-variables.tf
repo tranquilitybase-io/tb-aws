@@ -105,7 +105,7 @@ variable "bastion_instance_name" {
 
 variable "bastion_ami_version" {
   description = "AMI version to deploy bastion"
-  default = "ami-04a6ca63c5b27440d"
+  default = "ami-0d6621c01e8c2de2c"
 }
 
 # Security Groups variables
