@@ -100,7 +100,7 @@ variable "network_account_key_name" {
 
 variable "bastion_instance_name" {
   description = "Bastion instance name"
-  default = "bastion-01"
+  default = "awslz_bastion-01"
 }
 
 variable "bastion_ami_version" {
