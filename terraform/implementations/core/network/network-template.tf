@@ -241,6 +241,7 @@ module "aws_lz_tgw_ingress_vpc_route"{
 ### Ingress VPC />
 
 #Security Group
+# Nginx Reverse proxy
 module "nginx_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "3.4.0"
@@ -252,13 +253,31 @@ module "nginx_security_group" {
   description = var.nginx_security_group_description
   vpc_id = module.aws_lz_ingress_vpc.vpc_id
 
-  ingress_cidr_blocks = var.nginx_ingress_cidr_blocks
+  ingress_cidr_blocks = var.internet_ingress_cidr_blocks
   ingress_rules       = var.nginx_ingress_rules
-  egress_rules        = var.nginx_egress_rules
+  egress_rules        = var.all_all_egress_rules
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
-#<----
+
+module "bastion_security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.network-account
+  }
+  name = var.bastion_security_group_name
+  description = var.bastion_security_group_description
+  vpc_id = module.aws_lz_ingress_vpc.vpc_id
+
+  ingress_cidr_blocks = var.internet_ingress_cidr_blocks
+  ingress_rules       = var.bastion_ingress_rules
+  egress_rules        = var.all_all_egress_rules
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+}
+#END Security Groups
 
 #SECURITY ROLES
  module "aws_lz_iam_security_admin_network" {
@@ -440,7 +459,7 @@ module "ec2_instance_nginx" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
-/*
+
 # Bastion
 module "ec2_instance_bastion" {
   source  = "terraform-aws-modules/ec2-instance/aws"
@@ -452,10 +471,10 @@ module "ec2_instance_bastion" {
   ami = var.bastion_ami_version
   instance_type = var.t2_micro_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
-  vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
+  vpc_security_group_ids = list(module.bastion_security_group.this_security_group_id)
   #user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
   key_name = module.network_account_keypair.key_name #var.network_account_key_name
   disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
-}*/
+}
 # END EC2 Instances

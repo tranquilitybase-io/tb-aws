@@ -109,6 +109,7 @@ variable "bastion_ami_version" {
 }
 
 # Security Groups variables
+# Nginx
 variable "nginx_security_group_name" {
   description = "Security group name"
   default = "external_webserver"
@@ -119,17 +120,33 @@ variable "nginx_security_group_description" {
   default = "Internal server: http, ssh and icmp"
 }
 
-variable "nginx_ingress_cidr_blocks" {
-  description = "Ingress cidr block"
-  default = ["0.0.0.0/0"]
-}
-
 variable "nginx_ingress_rules" {
   description = "Ingress rules"
   default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
 }
 
-variable "nginx_egress_rules" {
+# Bastion
+variable "bastion_security_group_name" {
+  description = "Bastion security group name"
+  default = "awslz_bastion_sg"
+}
+
+variable "bastion_security_group_description" {
+  description = "Bastion Security group description"
+  default = "Bastion server: ssh and icmp"
+}
+
+variable "bastion_ingress_rules" {
+  description = "Bastion ingress rules"
+  default = ["ssh-tcp"]
+}
+
+variable "internet_ingress_cidr_blocks" {
+  description = "Ingress cidr block"
+  default = ["0.0.0.0/0"]
+}
+
+variable "all_all_egress_rules" {
   description = "Egress rules"
   default = ["all-all"]
 }
