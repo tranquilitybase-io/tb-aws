@@ -21,6 +21,8 @@ resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSServicePolicy" {
 }
 
 resource "aws_eks_cluster" "aws_lz_eks_cluster" {
+  count = length(var.eks_cluster_name) > 0 ? 1 : 0
+
   name     = var.eks_cluster_name
   role_arn = aws_iam_role.aws_lz_gft_eks_iam_role.arn
 
@@ -36,6 +38,8 @@ resource "aws_eks_cluster" "aws_lz_eks_cluster" {
 
 ###### Node Group
 resource "aws_eks_node_group" "awslz_eks_node_group" {
+  count = length(var.node_group_name) > 0 ? 1 : 0
+
   cluster_name      = var.eks_cluster_name
   node_group_name   = var.node_group_name
   node_role_arn     = aws_iam_role.awslz_eks_node_group_role.arn
