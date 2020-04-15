@@ -82,3 +82,19 @@ module "internal_route_sharedservices"{
    role_policy_attach = true
    policy_arn = local.read_only_access_arn
   }
+
+module "aws_lz_eks_eagleconsole_cluster" {
+  source = "./modules/eks"
+  providers = {
+    aws = aws.sharedservices-account
+  }
+
+  eks_cluster_name          = var.ec_eks_cluster_name
+  eks_iam_role_name         = var.ec_eks_role_name
+  subnets                   = module.vpc_shared_services.private_subnets
+
+  node_group_name           = var.ec_eks_node_group_name
+  node_group_role_name      = var.ec_eks_node_group_role_name
+  node_group_subnets        = module.vpc_shared_services.private_subnets
+  node_group_instance_types = var.ec_eks_node_group_instance_types
+}
