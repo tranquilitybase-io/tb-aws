@@ -441,7 +441,7 @@ module "ec2_instance_nginx" {
 }
 
 # Bastion
-module "ec2_instance_nginx" {
+module "ec2_instance_bastion" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.13.0"
   providers = {
