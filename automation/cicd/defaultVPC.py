@@ -52,8 +52,8 @@ def assume_role(account_name, account_id, region):
                 RoleArn="arn:aws:iam::" + account_id + ":role/AWSLZCoreOUAdminRole", #Role Name is case sensitive!
                 RoleSessionName= "Guardduty_Master_Creation_" + now.strftime("%Y%m%d_%H%M%S"),
                 DurationSeconds=900
-            )               
-            #print("Role OrganizationAccountAccessRole assumed in account " + account_id + " in region " + region + ". Timestamp: " + now.strftime("%Y/%m/%d_%H:%M:%S"))
+            )
+            print("Role AWSLZCoreOUAdminRole assumed in account " + account_id + " in region " + region + ". Timestamp: " + now.strftime("%Y/%m/%d_%H:%M:%S"))
             session = Session(aws_access_key_id=response['Credentials']['AccessKeyId'],
                         aws_secret_access_key=response['Credentials']['SecretAccessKey'],
                         aws_session_token=response['Credentials']['SessionToken'],
@@ -65,18 +65,18 @@ def assume_role(account_name, account_id, region):
             #print (message)
             return None
           
-def get_default_vpcs(client):
+def get_default_vpcs(session):
   vpc_list = []
+  client = session.client('ec2')
   vpcs = client.describe_vpcs(
     Filters=[
       {
           'Name' : 'isDefault',
-          'Values' : ['true'],
+          'Values' : ['true',],
       },
     ]
   )
   vpcs = vpcs['Vpcs']
-
   for vpc in vpcs:
     vpc_list.append(vpc['VpcId'])
   
@@ -91,8 +91,8 @@ def delete_igw(ec2,vpc):
         print("Dettaching and deleting IGW for VPC " + vpc)
         igw.detach_from_vpc(VpcId=vpc)
         igw.delete()
-      except boto3.exceptions.Boto3Error as e:
-        print(e)
+      except Exception as e:
+        print('Cannot delete IGW since it has some dependencies')
 
 def delete_sub(ec2, vpcid):
   vpc_resource = ec2.Vpc(vpcid)
@@ -100,8 +100,11 @@ def delete_sub(ec2, vpcid):
   if (subnets):
     for subnet in subnets:
       print("Deleting subnet " + subnet.id)
-      subnet.delete()
-
+      try:
+        subnet.delete()
+      except Exception as e:
+        print('Cannot delete Subnet since it has some dependencies')
+        
 def delete_rtb(ec2, vpcid):  
   vpc_resource = ec2.Vpc(vpcid)
   rtbs = vpc_resource.route_tables.all() 
@@ -114,7 +117,10 @@ def delete_rtb(ec2, vpcid):
         continue
       table = ec2.RouteTable(rtb.id)
       print ("Deleting Route table " + rtb.id)
-      table.delete()
+      try:
+        table.delete()
+      except Exception as e:
+        print('Cannot delete Route table since it has some dependencies')
 
 def delete_acl(ec2, vpcid):   
   vpc_resource = ec2.Vpc(vpcid)      
@@ -126,7 +132,10 @@ def delete_acl(ec2, vpcid):
         print(acl.id + " is the default NACL, continue...")
         continue
       print("Removing acl ", acl.id)
-      acl.delete()
+      try: 
+        acl.delete()
+      except Exception as e:
+        print('Cannot delete ACL since it has some dependencies')
       
 def delete_sgp(ec2, vpcid):  
   vpc_resource = ec2.Vpc(vpcid)
@@ -138,24 +147,30 @@ def delete_sgp(ec2, vpcid):
         print(sg.id + " is the default security group, continue...")
         continue
       print("Removing sg ", sg.id)
-      sg.delete()
+      try:
+        sg.delete()
+      except Exception as e:
+        print('Cannot delete SG since it has some dependencies')
       
 def delete_vpc(ec2, vpcid):
   vpc_resource = ec2.Vpc(vpcid)
   print("Removing VPC ", vpc_resource.id)
-  vpc_resource.delete()
+  try:
+    vpc_resource.delete()
+  except Exception as e:
+        print('Cannot delete VPC since it has some dependencies')
 
 def start_delete():
     client = boto3.client('ec2')
     accounts = get_accounts()
+    
     regions = get_regions(client)
     for account in accounts:
       for region in regions:
-        print ("account " + account.name + " region " + region)
-        assume_role(account.name, account.id, region)
-        client = boto3.client('ec2', region_name = region)
-        ec2 = boto3.resource('ec2', region_name = region)
-        vpcs = get_default_vpcs(client)
+        print ("\n\nAccount " + account.name + " region " + region)
+        session = assume_role(account.name, account.id, region)                
+        ec2 = session.resource('ec2')
+        vpcs = get_default_vpcs(session)
         for vpc in vpcs:
           delete_igw(ec2,vpc)
           delete_sub(ec2, vpc)
