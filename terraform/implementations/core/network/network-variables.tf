@@ -74,16 +74,16 @@ variable "tgw_vpc_internal_traffic_cidr"{
 
 # Instances variables
 variable "nginx_instance_name" {
-  description = "Instance name"
+  description = "Nginx instance name"
   default = "awslz_nginx-3"
 }
 
-variable "nginx_ami_version" {
-  description = "AMI version to deploy"
+variable "ubuntu18_04_ami_version" {
+  description = "AMI version to deploy Ubuntu 18.04"
   default = "ami-0d1cd67c26f5fca19"
 }
 
-variable "nginx_instance_type" {
+variable "t2_micro_instance_type" {
   description = "EC2 instance type"
   default = "t2.micro"
 }
@@ -98,7 +98,18 @@ variable "network_account_key_name" {
   default = "Deployer-key-2" #"linux-servers-network-aac"
 }
 
+variable "bastion_instance_name" {
+  description = "Bastion instance name"
+  default = "awslz_bastion-01"
+}
+
+variable "bastion_ami_version" {
+  description = "AMI version to deploy bastion"
+  default = "ami-0d6621c01e8c2de2c"
+}
+
 # Security Groups variables
+# Nginx
 variable "nginx_security_group_name" {
   description = "Security group name"
   default = "external_webserver"
@@ -106,20 +117,36 @@ variable "nginx_security_group_name" {
 
 variable "nginx_security_group_description" {
   description = "Security group description"
-  default = "Internal server: http, ssh and icmp"
-}
-
-variable "nginx_ingress_cidr_blocks" {
-  description = "Ingress cidr block"
-  default = ["0.0.0.0/0"]
+  default = "Internal server: http and https"
 }
 
 variable "nginx_ingress_rules" {
   description = "Ingress rules"
-  default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
+  default = ["https-443-tcp","http-80-tcp"]
 }
 
-variable "nginx_egress_rules" {
+# Bastion
+variable "bastion_security_group_name" {
+  description = "Bastion security group name"
+  default = "awslz_bastion_sg"
+}
+
+variable "bastion_security_group_description" {
+  description = "Bastion Security group description"
+  default = "Bastion server: ssh and icmp"
+}
+
+variable "bastion_ingress_rules" {
+  description = "Bastion ingress rules"
+  default = ["ssh-tcp"]
+}
+
+variable "internet_ingress_cidr_blocks" {
+  description = "Ingress cidr block"
+  default = ["0.0.0.0/0"]
+}
+
+variable "all_all_egress_rules" {
   description = "Egress rules"
   default = ["all-all"]
 }

@@ -20,7 +20,7 @@ resource "aws_iam_role_policy_attachment" "awslz_AmazonEKSServicePolicy" {
   role       = aws_iam_role.aws_lz_gft_eks_iam_role.name
 }
 
-resource "aws_eks_cluster" "eks_ingress_cluster" {
+resource "aws_eks_cluster" "aws_lz_eks_cluster" {
   name     = var.eks_cluster_name
   role_arn = aws_iam_role.aws_lz_gft_eks_iam_role.arn
 
@@ -49,7 +49,7 @@ resource "aws_eks_node_group" "awslz_eks_node_group" {
   }
 
   depends_on = [
-    aws_eks_cluster.eks_ingress_cluster,
+    aws_eks_cluster.aws_lz_eks_cluster,
     aws_iam_role_policy_attachment.awslz_AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.awslz_AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.awslz_AmazonEC2ContainerRegistryReadOnly,

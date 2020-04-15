@@ -57,3 +57,22 @@ provider "local" {
 provider "null" {
   version = "~> 2.1"
 }
+
+/*
+provider "kubernetes" {
+  alias  = "shared_services"
+
+  load_config_file        = false
+  host                    = module.aws_lz_eks_eagleconsole_cluster.cluster_endpoint
+  cluster_ca_certificate  = base64decode(module.aws_lz_eks_eagleconsole_cluster.cluster_ca)
+  token                   = data.external.heptio_authenticator_aws_sharedservices.result.token
+}
+
+provider "kubernetes" {
+  alias  = "network"
+
+  load_config_file        = false
+  host                    = module.ingress_eks_cluster.cluster_endpoint
+  cluster_ca_certificate  = base64decode(module.ingress_eks_cluster.cluster_ca)
+  token                   = data.external.heptio_authenticator_aws_network.result.token
+}*/
