@@ -131,10 +131,31 @@ variable "network_reverse_proxy_ingress_rules" {
   default = ["https-443-tcp","http-80-tcp"]
 }
 
-# Bastion
+# Bastion access to internal network
+variable "network_bastion_internal_access_security_group_name" {
+  description = "Bastion security group name to access internal network"
+  default = "awslz_bastion_access_to_internal"
+}
+
+variable "network_bastion_internal_access_security_group_description" {
+  description = "Bastion Security group description"
+  default = "Bastion access to internal network"
+}
+
+variable "network_bastion_internal_access_ingress_rules" {
+  description = "Bastion ingress rules"
+  default = ["ssh-tcp"]
+}
+
+variable "internal_ingress_cidr_blocks" {
+  description = "Ingress cidr block"
+  default = ["10.0.0.0/8"]
+}
+
+# Bastion access from Internet
 variable "bastion_security_group_name" {
   description = "Bastion security group name"
-  default = "awslz_bastion_sg"
+  default = "awslz_bastion_access_from_internet"
 }
 
 variable "bastion_security_group_description" {
