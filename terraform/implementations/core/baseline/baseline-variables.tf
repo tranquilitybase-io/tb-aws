@@ -81,6 +81,13 @@ variable "sandbox_deployment_key_name" {
   description = "Deployment key name"
   default     = "Deployer-key"
 }
+
+variable "sandbox_web_server_private_ip" {
+  description = "Private ip for the Sandbox web server"
+  type        = string
+  default     = "10.100.1.100"
+}
+
 #variable "ami_version" {
   #description = "AMI version to deploy"
   #default = "ami-0d1cd67c26f5fca19"
