@@ -3,6 +3,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | all\_all\_egress\_rules | Egress rules | `list` | <pre>[<br>  "all-all"<br>]</pre> | no |
+| amzn2\_ami\_version | AMI version to deploy Amazon Linux 2 | `string` | `"ami-0d6621c01e8c2de2c"` | no |
 | bastion\_ami\_version | AMI version to deploy bastion | `string` | `"ami-0d6621c01e8c2de2c"` | no |
 | bastion\_ingress\_rules | Bastion ingress rules | `list` | <pre>[<br>  "ssh-tcp"<br>]</pre> | no |
 | bastion\_instance\_name | Bastion instance name | `string` | `"awslz_bastion-01"` | no |
@@ -18,6 +19,7 @@
 | egress\_vpc\_name | Egress VPC Name | `string` | `"aws_lz_egress_vpc"` | no |
 | egress\_vpc\_private\_subnets | Egress VPC Private Subnets list | `list(string)` | <pre>[<br>  "10.99.2.0/24",<br>  "10.99.3.0/24"<br>]</pre> | no |
 | egress\_vpc\_public\_subnets | Egress VPC Pubic Subnets list | `list(string)` | <pre>[<br>  "10.99.0.0/24",<br>  "10.99.1.0/24"<br>]</pre> | no |
+| email\_netmon | Email account for networking events notification | `string` | `"cesar.sanchez@gft.com"` | no |
 | env\_deployment\_key | Environment key | `string` | `""` | no |
 | env\_generation\_date | Key pair generation date | `string` | `""` | no |
 | ingress\_eks\_cluster\_name | Ingress VPC EKS cluster name | `string` | `"awslz_eks_ingress_cluster"` | no |
@@ -35,6 +37,10 @@
 | inline\_vpc\_private\_subnets | In-line VPC Private Subnets list | `list(string)` | <pre>[<br>  "10.99.8.0/24",<br>  "10.99.9.0/24"<br>]</pre> | no |
 | inline\_vpc\_public\_subnets | In-line VPC Pubic Subnets list | `list(string)` | `[]` | no |
 | internet\_ingress\_cidr\_blocks | Ingress cidr block | `list` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
+| netmon\_ingress\_rules | Ingress rules | `list(string)` | <pre>[<br>  "https-443-tcp",<br>  "http-80-tcp",<br>  "ssh-tcp"<br>]</pre> | no |
+| netmon\_instance\_name | Network Monitoring instance name | `string` | `"aws_lz_netmon"` | no |
+| netmon\_security\_group\_description | Security group description | `string` | `"Internal server: http, https, ssh"` | no |
+| netmon\_security\_group\_name | Security group name | `string` | `"aws_lz_netmon_sg"` | no |
 | network\_account\_key\_name | Key pair name of the Network Account | `string` | `"Deployer-key-2"` | no |
 | nginx\_ingress\_rules | Ingress rules | `list` | <pre>[<br>  "https-443-tcp",<br>  "http-80-tcp"<br>]</pre> | no |
 | nginx\_instance\_name | Nginx instance name | `string` | `"awslz_nginx-3"` | no |

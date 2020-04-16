@@ -110,7 +110,7 @@ variable "bastion_ami_version" {
 
 variable "netmon_instance_name" {
   description = "Network Monitoring instance name"
-  default = "aws_lz_netmon"
+  default = "aws_lz_nagios_netmon"
 }
 
 variable "amzn2_ami_version" {

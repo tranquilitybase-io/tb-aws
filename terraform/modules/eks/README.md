@@ -20,5 +20,8 @@ Usage: Terraform module which creates EKS cluster and node groups with the requi
 
 | Name | Description |
 |------|-------------|
+| cluster\_ca | Nested attribute containing certificate-authority-data for your cluster. This is the base64 encoded certificate data required to communicate with your cluster. |
+| cluster\_endpoint | The endpoint for your EKS Kubernetes. |
+| cluster\_id | ID for your EKS Kubernetes. |
 | role\_arn | Role ARN |
 
