@@ -88,16 +88,6 @@ variable "sandbox_deployment_key_name" {
   default     = "Deployer-key"
 }
 
-#variable "ami_version" {
-  #description = "AMI version to deploy"
-  #default = "ami-0d1cd67c26f5fca19"
-#}
-
-#variable "instance_type" {
-  #description = "EC2 instance type"
-  #default = "t2.micro"
-#}
-
 variable "user_data" {
   description = "User data for the instance"
   default = "apt-get update; apt-get install apache2; systemctl start apache2.service; systemctl enable apache2"
