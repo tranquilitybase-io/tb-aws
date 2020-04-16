@@ -494,8 +494,8 @@ module "netmon_security_group" {
   vpc_id = module.aws_lz_inline_vpc.vpc_id
 
   ingress_cidr_blocks = var.internet_ingress_cidr_blocks
-  ingress_rules       = var.netmon_ingress_rules
-  egress_rules        = var.all_all_egress_rules
+  ingress_rules       = [var.netmon_ingress_rules]
+  egress_rules        = [var.all_all_egress_rules]
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
