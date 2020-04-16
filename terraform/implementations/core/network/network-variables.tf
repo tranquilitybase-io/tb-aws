@@ -128,7 +128,7 @@ variable "network_reverse_proxy_security_group_description" {
 
 variable "network_reverse_proxy_ingress_rules" {
   description = "Ingress rules"
-  default = ["https-443-tcp","http-80-tcp"]
+  default = ["https-443-tcp","http-80-tcp","http-8080-tcp"]
 }
 
 # Bastion access to internal network
