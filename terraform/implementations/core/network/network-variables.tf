@@ -120,7 +120,7 @@ variable "amzn2_ami_version" {
 
 variable "netmon_security_group_name" {
   description = "Security group name"
-  default = "external_admin_netmon_webserver"
+  default = "aws_lz_netmon_sg"
 }
 
 variable "netmon_security_group_description" {
@@ -131,7 +131,7 @@ variable "netmon_security_group_description" {
 variable "netmon_ingress_rules" {
   description = "Ingress rules"
   type = list(string)
-  default = ["https-443-tcp","http-80-tcp"]
+  default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
 }
 
 # Security Groups variables
