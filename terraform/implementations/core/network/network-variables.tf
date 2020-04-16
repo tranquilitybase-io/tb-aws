@@ -73,9 +73,15 @@ variable "tgw_vpc_internal_traffic_cidr"{
 }
 
 # Instances variables
-variable "nginx_instance_name" {
+variable "network_reverse_proxy_instance_name" {
   description = "Nginx instance name"
-  default = "awslz_nginx-3"
+  default = "awslz_reverse_proxy"
+}
+
+variable "network_reverse_proxy_private_ip" {
+  description = "Private ip for the Sandbox web server"
+  type        = string
+  default     = "10.99.4.100"
 }
 
 variable "ubuntu18_04_ami_version" {
@@ -109,26 +115,42 @@ variable "bastion_ami_version" {
 }
 
 # Security Groups variables
-# Nginx
-variable "nginx_security_group_name" {
+# Reverse proxy
+variable "network_reverse_proxy_security_group_name" {
   description = "Security group name"
-  default = "external_webserver"
+  default = "reverse_proxy_internet"
 }
 
-variable "nginx_security_group_description" {
+variable "network_reverse_proxy_security_group_description" {
   description = "Security group description"
-  default = "Internal server: http and https"
+  default = "Reverse proxy server: http and https"
 }
 
-variable "nginx_ingress_rules" {
+variable "network_reverse_proxy_ingress_rules" {
   description = "Ingress rules"
-  default = ["https-443-tcp","http-80-tcp"]
+  default = ["https-443-tcp","http-80-tcp","http-8080-tcp"]
 }
 
-# Bastion
+# Bastion access to internal network
+variable "network_bastion_internal_access_security_group_name" {
+  description = "Bastion security group name to access internal network"
+  default = "awslz_bastion_access_to_internal"
+}
+
+variable "network_bastion_internal_access_security_group_description" {
+  description = "Bastion Security group description"
+  default = "Bastion access to internal network"
+}
+
+variable "network_bastion_internal_access_ingress_rules" {
+  description = "Bastion ingress rules"
+  default = ["ssh-tcp","all-icmp"]
+}
+
+# Bastion access from Internet
 variable "bastion_security_group_name" {
   description = "Bastion security group name"
-  default = "awslz_bastion_sg"
+  default = "awslz_bastion_access_from_internet"
 }
 
 variable "bastion_security_group_description" {
@@ -217,11 +239,14 @@ variable "deployment_key_name" {
   default     = "Deployer-key-2"
 }
 
+# Environment variables
+# ssh-keygen
 variable "env_deployment_key" {
   description = "Environment key"
   default = ""
 }
 
+# date from environment
 variable "env_generation_date" {
   description = "Key pair generation date"
 }

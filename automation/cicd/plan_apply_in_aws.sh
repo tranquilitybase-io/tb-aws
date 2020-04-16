@@ -54,4 +54,4 @@ terraform apply -auto-approve
 #terraform state rm module.aws_lz_config_service_2.aws_iam_role
 #terraform state rm module.aws_lz_config_service.aws_iam_role
 
-
+#terraform state rm module.aws_lz_inline_vpc.aws_vpc.this[0]
