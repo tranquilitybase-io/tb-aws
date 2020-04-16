@@ -8,6 +8,7 @@ Usage: Generic Terraform module to create AWS key pairs in order to using EC2 in
 |------|-------------|------|---------|:-----:|
 | key\_name | Key name to use in AWS | `string` | n/a | yes |
 | public\_key | Key pair generate in the deployment process | `string` | n/a | yes |
+| tags | A map of tags to add to the key pair | `map(string)` | `{}` | no |
 
 ## Outputs
 

@@ -249,4 +249,42 @@ variable "env_deployment_key" {
 # date from environment
 variable "env_generation_date" {
   description = "Key pair generation date"
+  default = ""
+}
+
+variable "netmon_instance_name" {
+  description = "Network Monitoring instance name"
+  default = "aws_lz_nagios_netmon"
+}
+
+variable "amzn2_ami_version" {
+  description = "AMI version to deploy Amazon Linux 2"
+  default = "ami-0d6621c01e8c2de2c"
+}
+
+variable "netmon_security_group_name" {
+  description = "Security group name"
+  default = "aws_lz_netmon_sg"
+}
+
+variable "netmon_security_group_description" {
+  description = "Security group description"
+  default = "Internal server: http, https, ssh"
+}
+
+variable "netmon_ingress_rules" {
+  description = "Ingress rules"
+  type = list(string)
+  default = ["https-443-tcp","http-80-tcp","ssh-tcp"]
+}
+
+variable "email_netmon" {
+  description = "Email account for networking events notification"
+  default = "cesar.sanchez@gft.com"
+}
+
+variable "netmon_reverse_proxy_private_ip" {
+  description = "Private ip for the Sandbox web server"
+  type        = string
+  default     = "10.99.8.100"
 }
