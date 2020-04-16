@@ -115,18 +115,18 @@ variable "bastion_ami_version" {
 }
 
 # Security Groups variables
-# Nginx
-variable "nginx_security_group_name" {
+# Reverse proxy
+variable "network_reverse_proxy_security_group_name" {
   description = "Security group name"
-  default = "external_webserver"
+  default = "reverse_proxy_internet"
 }
 
-variable "nginx_security_group_description" {
+variable "network_reverse_proxy_security_group_description" {
   description = "Security group description"
-  default = "Internal server: http and https"
+  default = "Reverse proxy server: http and https"
 }
 
-variable "nginx_ingress_rules" {
+variable "network_reverse_proxy_ingress_rules" {
   description = "Ingress rules"
   default = ["https-443-tcp","http-80-tcp"]
 }

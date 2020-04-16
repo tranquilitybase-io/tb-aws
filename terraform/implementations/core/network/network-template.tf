@@ -242,19 +242,19 @@ module "aws_lz_tgw_ingress_vpc_route"{
 
 #Security Group
 # Nginx Reverse proxy
-module "nginx_security_group" {
+module "network_reverse_proxy_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "3.4.0"
   
   providers = {
     aws = aws.network-account
   }
-  name = var.nginx_security_group_name
-  description = var.nginx_security_group_description
+  name = var.network_reverse_proxy_security_group_name
+  description = var.network_reverse_proxy_security_group_description
   vpc_id = module.aws_lz_ingress_vpc.vpc_id
 
   ingress_cidr_blocks = var.internet_ingress_cidr_blocks
-  ingress_rules       = var.nginx_ingress_rules
+  ingress_rules       = var.network_reverse_proxy_ingress_rules
   egress_rules        = var.all_all_egress_rules
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
