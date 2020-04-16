@@ -73,7 +73,7 @@ variable "internal_traffic_cidr"{
 # Instances variables
 variable "sandbox_web_server_instance_name" {
   description = "Instance name"
-  default = "awslz_ubuntu"
+  default = "awslz_test_web_server"
 }
 
 variable "sandbox_web_server_private_ip" {
