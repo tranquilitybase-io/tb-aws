@@ -71,21 +71,21 @@ variable "internal_traffic_cidr"{
 }
 
 # Instances variables
-variable "web_server_instance_name" {
+variable "sandbox_web_server_instance_name" {
   description = "Instance name"
   default = "awslz_ubuntu"
-}
-
-# Key pair variables
-variable "sandbox_deployment_key_name" {
-  description = "Deployment key name"
-  default     = "Deployer-key"
 }
 
 variable "sandbox_web_server_private_ip" {
   description = "Private ip for the Sandbox web server"
   type        = string
   default     = "10.100.1.100"
+}
+
+# Key pair variables
+variable "sandbox_deployment_key_name" {
+  description = "Deployment key name"
+  default     = "Deployer-key"
 }
 
 #variable "ami_version" {
