@@ -57,9 +57,17 @@ _There are different flavors on implementations but all have point described abo
 
 ![Generic Member Account](./automation/images/Current_network.PNG)
 
-### Exploed Network View
+### Egress VPC Network View
 
 ![Generic Member Account](./automation/images/EgressVPCRouteDiagram.PNG)
+
+### Ingress VPC Network View
+
+![Generic Member Account](./automation/images/IngressVPCRouteDiagram.PNG)
+
+### In-Line VPC Network View
+
+![Generic Member Account](./automation/images/InLineVPC.PNG)
 
 ### Sandbox Account VPC 
 
