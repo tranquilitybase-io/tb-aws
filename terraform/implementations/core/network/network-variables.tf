@@ -147,11 +147,6 @@ variable "network_bastion_internal_access_ingress_rules" {
   default = ["ssh-tcp"]
 }
 
-variable "internal_ingress_cidr_blocks" {
-  description = "Ingress cidr block"
-  default = ["10.0.0.0/8"]
-}
-
 # Bastion access from Internet
 variable "bastion_security_group_name" {
   description = "Bastion security group name"
