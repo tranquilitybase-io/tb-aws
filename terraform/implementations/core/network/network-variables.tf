@@ -144,7 +144,7 @@ variable "network_bastion_internal_access_security_group_description" {
 
 variable "network_bastion_internal_access_ingress_rules" {
   description = "Bastion ingress rules"
-  default = ["ssh-tcp"]
+  default = ["ssh-tcp","all-icmp"]
 }
 
 # Bastion access from Internet
