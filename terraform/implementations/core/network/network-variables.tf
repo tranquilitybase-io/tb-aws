@@ -108,6 +108,31 @@ variable "bastion_ami_version" {
   default = "ami-0d6621c01e8c2de2c"
 }
 
+variable "netmon_instance_name" {
+  description = "Network Monitoring instance name"
+  default = "aws_lz_netmon"
+}
+
+variable "amzn2_ami_version" {
+  description = "AMI version to deploy Amazon Linux 2"
+  default = "ami-0d6621c01e8c2de2c"
+}
+
+variable "netmon_security_group_name" {
+  description = "Security group name"
+  default = "external_admin_netmon_webserver"
+}
+
+variable "netmon_security_group_description" {
+  description = "Security group description"
+  default = "Internal server: http, https, ssh"
+}
+
+variable "netmon_ingress_rules" {
+  description = "Ingress rules"
+  default = ["https-443-tcp","http-80-tcp","ssh-22-tcp"]
+}
+
 # Security Groups variables
 # Nginx
 variable "nginx_security_group_name" {
@@ -149,6 +174,11 @@ variable "internet_ingress_cidr_blocks" {
 variable "all_all_egress_rules" {
   description = "Egress rules"
   default = ["all-all"]
+}
+
+variable "email_netmon" {
+  description = "Email account for networking events notification"
+  default = "cesar.sanchez@gft.com"
 }
 
 # VPN variables
@@ -224,4 +254,5 @@ variable "env_deployment_key" {
 
 variable "env_generation_date" {
   description = "Key pair generation date"
+  default = ""
 }
