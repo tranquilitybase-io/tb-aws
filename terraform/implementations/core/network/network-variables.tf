@@ -217,11 +217,14 @@ variable "deployment_key_name" {
   default     = "Deployer-key-2"
 }
 
+# Environment variables
+# ssh-keygen
 variable "env_deployment_key" {
   description = "Environment key"
   default = ""
 }
 
+# date from environment
 variable "env_generation_date" {
   description = "Key pair generation date"
 }

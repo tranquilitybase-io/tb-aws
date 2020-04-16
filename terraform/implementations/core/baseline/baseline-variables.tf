@@ -70,20 +70,26 @@ variable "internal_traffic_cidr"{
     default = "10.0.0.0/8"
 }
 
-variable "instance_name" {
+# Instances variables
+variable "web_server_instance_name" {
   description = "Instance name"
   default = "awslz_ubuntu"
 }
 
-variable "ami_version" {
-  description = "AMI version to deploy"
-  default = "ami-0d1cd67c26f5fca19"
+# Key pair variables
+variable "sandbox_deployment_key_name" {
+  description = "Deployment key name"
+  default     = "Deployer-key"
 }
+#variable "ami_version" {
+  #description = "AMI version to deploy"
+  #default = "ami-0d1cd67c26f5fca19"
+#}
 
-variable "instance_type" {
-  description = "EC2 instance type"
-  default = "t2.micro"
-}
+#variable "instance_type" {
+  #description = "EC2 instance type"
+  #default = "t2.micro"
+#}
 
 variable "user_data" {
   description = "User data for the instance"
