@@ -444,20 +444,20 @@ module "aws_lz_tgw_inline_vpc_route"{
 
 #EC2 Instances
 # NGINX Server
-module "ec2_instance_nginx" {
+module "network_reverse_proxy_ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.13.0"
   providers = {
     aws = aws.network-account
   }
-  name = var.nginx_instance_name
+  name = var.network_reverse_proxy_instance_name
   ami = var.ubuntu18_04_ami_version
   instance_type = var.t2_micro_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
   vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
   user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.sandbox_web_server_ec2_instance.private_ip),0))
-  key_name = module.network_account_keypair.key_name #var.network_account_key_name
-
+  key_name = module.network_account_keypair.key_name
+  private_ip = var.network_reverse_proxy_private_ip
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 

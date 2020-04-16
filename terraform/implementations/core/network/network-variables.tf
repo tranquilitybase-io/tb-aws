@@ -73,9 +73,15 @@ variable "tgw_vpc_internal_traffic_cidr"{
 }
 
 # Instances variables
-variable "nginx_instance_name" {
+variable "network_reverse_proxy_instance_name" {
   description = "Nginx instance name"
-  default = "awslz_nginx-3"
+  default = "awslz_reverse_proxy"
+}
+
+variable "network_reverse_proxy_private_ip" {
+  description = "Private ip for the Sandbox web server"
+  type        = string
+  default     = "10.99.4.100"
 }
 
 variable "ubuntu18_04_ami_version" {
