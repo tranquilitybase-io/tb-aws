@@ -131,7 +131,7 @@ variable "netmon_security_group_description" {
 variable "netmon_ingress_rules" {
   description = "Ingress rules"
   type = list(string)
-  default = ["https-443-tcp","http-80-tcp","ssh-22-tcp"]
+  default = ["https-443-tcp","http-80-tcp"]
 }
 
 # Security Groups variables
