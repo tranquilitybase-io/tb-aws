@@ -282,3 +282,9 @@ variable "email_netmon" {
   description = "Email account for networking events notification"
   default = "cesar.sanchez@gft.com"
 }
+
+variable "netmon_reverse_proxy_private_ip" {
+  description = "Private ip for the Sandbox web server"
+  type        = string
+  default     = "10.99.8.100"
+}

@@ -537,8 +537,10 @@ module "aws_lz_net_monitor_instance" {
   ami = var.amzn2_ami_version
   instance_type = var.t2_micro_instance_type
   subnet_id = element(module.aws_lz_inline_vpc.private_subnets,0)
+  private_ip = var.netmon_reverse_proxy_private_ip
   vpc_security_group_ids = [module.netmon_security_group.this_security_group_id]
   user_data = replace(file("../automation/user_data_scripts/nagios_install.sh"),"NETMON_EMAIL",var.email_netmon)
-  key_name = module.network_account_keypair.key_name #var.network_account_key_name
+  key_name = module.network_account_keypair.key_name
+  disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
