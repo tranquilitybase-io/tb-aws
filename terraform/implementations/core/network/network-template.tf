@@ -241,25 +241,45 @@ module "aws_lz_tgw_ingress_vpc_route"{
 ### Ingress VPC />
 
 #Security Group
-# Nginx Reverse proxy
-module "nginx_security_group" {
+# Security group for bastion ssh access
+module "network_bastion_internal_access_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "3.4.0"
   
   providers = {
     aws = aws.network-account
   }
-  name = var.nginx_security_group_name
-  description = var.nginx_security_group_description
+  name = var.network_bastion_internal_access_security_group_name
+  description = var.network_bastion_internal_access_security_group_description
   vpc_id = module.aws_lz_ingress_vpc.vpc_id
 
-  ingress_cidr_blocks = var.internet_ingress_cidr_blocks
-  ingress_rules       = var.nginx_ingress_rules
+  ingress_cidr_blocks = var.internal_ingress_cidr_blocks
+  ingress_rules       = var.network_bastion_internal_access_ingress_rules
   egress_rules        = var.all_all_egress_rules
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+# Nginx Reverse proxy
+module "network_reverse_proxy_security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.network-account
+  }
+  name = var.network_reverse_proxy_security_group_name
+  description = var.network_reverse_proxy_security_group_description
+  vpc_id = module.aws_lz_ingress_vpc.vpc_id
+
+  ingress_cidr_blocks = var.internet_ingress_cidr_blocks
+  ingress_rules       = var.network_reverse_proxy_ingress_rules
+  egress_rules        = var.all_all_egress_rules
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+}
+
+# Bastion
 module "bastion_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "3.4.0"
@@ -384,6 +404,7 @@ module "network_account_keypair" {
 
 
 ### </ In-line VPC
+
 module "aws_lz_inline_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
@@ -417,6 +438,7 @@ module "aws_lz_inline_vpc_twg_attachment" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+
 ##In-line VPC Routes
 module "aws_lz_tgw_internet_inline_vpc_route"{
   source  = "./modules/route"
@@ -437,25 +459,26 @@ module "aws_lz_tgw_inline_vpc_route"{
   destination = var.tgw_vpc_internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
-### In-line VPC />
+### END In-line VPC />
 
 
 #EC2 Instances
-# NGINX Server
-module "ec2_instance_nginx" {
+# NGINX Reverse proxy
+module "network_reverse_proxy_ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.13.0"
   providers = {
     aws = aws.network-account
   }
-  name = var.nginx_instance_name
+  name = var.network_reverse_proxy_instance_name
   ami = var.ubuntu18_04_ami_version
   instance_type = var.t2_micro_instance_type
   subnet_id = element(tolist(module.aws_lz_ingress_vpc.public_subnets),0)
-  vpc_security_group_ids = list(module.nginx_security_group.this_security_group_id)
-  user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
-  key_name = module.network_account_keypair.key_name #var.network_account_key_name
-
+  vpc_security_group_ids = list(module.network_reverse_proxy_security_group.this_security_group_id, module.network_bastion_internal_access_security_group.this_security_group_id)
+  user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.sandbox_web_server_ec2_instance.private_ip),0))
+  key_name = module.network_account_keypair.key_name
+  private_ip = var.network_reverse_proxy_private_ip
+  disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
@@ -478,7 +501,6 @@ module "ec2_instance_bastion" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 # END EC2 Instances
-
 
 #Security Group
 # NetMon Reverse proxy

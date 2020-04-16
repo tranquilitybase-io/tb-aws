@@ -70,19 +70,22 @@ variable "internal_traffic_cidr"{
     default = "10.0.0.0/8"
 }
 
-variable "instance_name" {
+# Instances variables
+variable "sandbox_web_server_instance_name" {
   description = "Instance name"
-  default = "awslz_ubuntu"
+  default = "awslz_test_web_server"
 }
 
-variable "ami_version" {
-  description = "AMI version to deploy"
-  default = "ami-0d1cd67c26f5fca19"
+variable "sandbox_web_server_private_ip" {
+  description = "Private ip for the Sandbox web server"
+  type        = string
+  default     = "10.100.1.100"
 }
 
-variable "instance_type" {
-  description = "EC2 instance type"
-  default = "t2.micro"
+# Key pair variables
+variable "sandbox_deployment_key_name" {
+  description = "Deployment key name"
+  default     = "Deployer-key"
 }
 
 variable "user_data" {

@@ -293,21 +293,35 @@ module "web_internal_security_group" {
 #<----
 
 #EC2 Instances
-module "ec2_instance" {
+module "sandbox_web_server_ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.13.0"
   providers = {
     aws = aws.sandbox-account
   }
-  name = var.instance_name
-  ami = var.ami_version
-  instance_type = var.instance_type
+  name = var.sandbox_web_server_instance_name
+  ami = var.ubuntu18_04_ami_version
+  instance_type = var.t2_micro_instance_type
   subnet_id = element(tolist(module.vpc_sandbox.private_subnets),0)
   vpc_security_group_ids = list(module.web_internal_security_group.this_security_group_id)
   user_data = file("../automation/user_data_scripts/ubuntu_apache.sh") 
-  key_name = var.sandbox_2_account_key_name 
+  key_name = var.sandbox_2_account_key_name
+  private_ip = var.sandbox_web_server_private_ip
 }
 #<----
+
+# Key pair
+module "sandox_account_keypair" {
+  source = "./modules/key-pairs"
+  providers = {
+    aws = aws.sandbox-account
+  }
+
+  key_name    = var.sandbox_deployment_key_name
+  public_key  = var.env_deployment_key
+  tags        = { generation_date = var.env_generation_date } 
+}
+# END Key pair
 
 #SECURITY ROLES
  module "aws_lz_iam_security_admin_sandbox" {
