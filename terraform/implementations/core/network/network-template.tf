@@ -510,7 +510,7 @@ module "aws_lz_net_monitor_instance" {
   name = var.netmon_instance_name
   ami = var.amzn2_ami_version
   instance_type = var.t2_micro_instance_type
-  subnet_id = element(tolist(module.aws_lz_inline_vpc.public_subnets),0)
+  subnet_id = [module.aws_lz_inline_vpc.private_subnets]
   vpc_security_group_ids = list(module.netmon_security_group.this_security_group_id)
   user_data = file("../automation/user_data_scripts/nagios_install.sh ${var.email_netmon}")
   key_name = module.network_account_keypair.key_name #var.network_account_key_name
