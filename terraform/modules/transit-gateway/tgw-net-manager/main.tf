@@ -10,6 +10,7 @@ locals {
 
 resource "null_resource" "aws_lz_ena_net_manager" {
   provisioner "local-exec" {
-    command = "aws networkmanager create-global-network --description ${var.global_network_description} --tags ${local.gn_tags}"
+    #command = "aws networkmanager create-global-network --region ${var.region} --description ${var.global_network_description} --tags ${local.gn_tags}"
+    command = "aws networkmanager create-global-network --description 'Head offices global network' --region us-west-2"
   }
 }
