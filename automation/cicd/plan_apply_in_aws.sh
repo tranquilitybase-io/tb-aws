@@ -32,6 +32,8 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 terraform apply -auto-approve
 
+echo "------------------------get-caller-identity---------------------------------------"
+aws sts get-caller-identity
 
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
