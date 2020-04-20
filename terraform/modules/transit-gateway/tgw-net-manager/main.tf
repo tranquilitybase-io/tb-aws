@@ -5,7 +5,7 @@
 */
 
 locals {
-  gn_tags = merge(map({"Name" = format("%s", var.global_network_name)}, var.tags))
+  gn_tags = merge({"Name" = format("%s", var.global_network_name)}, var.tags)
 }
 
 resource "null_resource" "aws_lz_ena_net_manager" {
