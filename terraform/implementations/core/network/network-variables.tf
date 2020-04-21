@@ -180,6 +180,11 @@ variable "create_vpn" {
   default = false
 }
 
+variable "activate_globalnet" {
+  description = "Boolean to activate Global Network"
+  default = false
+}
+
 variable "cgw_bgn_asn" {
   description = "BGN ASN number"
   type = number
