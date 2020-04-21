@@ -6,8 +6,15 @@
 
 resource "null_resource" "aws_lz_ena_net_manager" {
     provisioner "local-exec" {
-    command = "aws networkmanager create-global-network --name '${var.global_network_name}' --description '${var.global_network_description}' > ${data.template_file.log_name.rendered}"
+    command = "aws networkmanager create-global-network --description '${var.global_network_description}' --tags Key=Name,Value=${var.global_network_name} > ${data.template_file.log_name.rendered}"
   }
 }
 
-#--tags Key=Name,Value=${var.global_network_name}
+/*resource "null_resource" "aws_lz_register_tgw_globalnet" {
+  provisioner "local-exec" {
+    command = "aws networkmanager register-transit-gateway --global-network-id "
+  }
+}*/
+
+
+

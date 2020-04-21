@@ -14,8 +14,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
-variable "region" {
-  description = "Region Name"
-  default = ""
-}
