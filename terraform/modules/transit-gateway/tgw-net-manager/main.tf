@@ -16,7 +16,7 @@ resource "null_resource" "aws_lz_ena_net_manager" {
 
 resource "null_resource" "aws_lz_register_tgw_globalnet" {
   provisioner "local-exec" {
-    command = "aws networkmanager register-transit-gateway --global-network-id '${local.output_json.GlobalNetwork.GlobalNetworkId}' --transit-gateway-arn '${var.tgw_arn}'"
+    command = "aws networkmanager register-transit-gateway --global-network-id ${local.output_json.GlobalNetwork.GlobalNetworkId} --transit-gateway-arn ${var.tgw_arn}"
   }
   depends_on = [null_resource.aws_lz_ena_net_manager]
 }
