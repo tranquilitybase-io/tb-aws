@@ -1,5 +1,5 @@
 
-output "aws_cli_output" {
+output "globalnet_json_output" {
   description = "Output string with the information of Global Network"
-  value = data.local_file.create_globalnet.content
+  value = jsondecode(data.local_file.create_globalnet.content)
 }
