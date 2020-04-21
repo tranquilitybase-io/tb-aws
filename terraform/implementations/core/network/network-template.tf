@@ -544,7 +544,6 @@ module "aws_lz_net_monitor_instance" {
   disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
-/*
 
 ###Network Manager
 ###Create Global Network
@@ -558,5 +557,3 @@ module "aws_lz_create_global_network" {
   region = local.region
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
-
-*/
