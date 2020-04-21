@@ -1,7 +1,3 @@
-variable "activate_globalnet" {
-  description = "Boolean to activate Global Network"
-  default = true
-}
 
 variable "global_network_name" {
   description = "Name for Global Network"
