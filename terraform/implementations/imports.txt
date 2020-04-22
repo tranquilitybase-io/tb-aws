@@ -20,8 +20,8 @@
 ### Shared Services
 /core/sharedservices/sharedservices-template.tf
 /core/sharedservices/sharedservices-variables.tf
-#/core/sharedservices/ec-template.tf
-#/core/sharedservices/ec-variables.tf
+/core/sharedservices/ec-template.tf
+/core/sharedservices/ec-variables.tf
 
 ### Network Accounts
 /core/network/network-template.tf

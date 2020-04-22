@@ -35,14 +35,6 @@ export TF_VAR_env_generation_date=$(date +%d-%m-%Y_%H-%M)
 ssh-keygen -t rsa -b 2048 -N "" -f temp--${TF_VAR_env_generation_date}.key > /dev/null 2>&1
 export TF_VAR_env_deployment_key=$(cat temp--${TF_VAR_env_generation_date}.key.pub)
 
-cd ${TERRAFORM_PATH}
-
-echo "------------------------TERRAFORM INIT--------------------------------------------"
-#terraform init
-echo "------------------------TERRAFORM APPLY-------------------------------------------"
-#TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
-#python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
-#terraform apply -auto-approve
 
 echo "------------------------get-caller-identity-----TERRAFORM-------------------------"
 aws sts get-caller-identity
@@ -61,6 +53,15 @@ kubectl get svc
 
 echo "----------------------------------------------------------------------------------"
 more ~/.kube/config
+
+echo "------------------------TERRAFORM INIT--------------------------------------------"
+cd ${TERRAFORM_PATH}
+terraform init
+echo "------------------------TERRAFORM APPLY-------------------------------------------"
+#TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
+#python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
+terraform apply -auto-approve
+
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
 
