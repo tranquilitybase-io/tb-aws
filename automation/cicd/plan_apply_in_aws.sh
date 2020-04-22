@@ -56,6 +56,9 @@ more ~/.kube/config
 
 echo "------------------------TERRAFORM INIT--------------------------------------------"
 cd ${TERRAFORM_PATH}
+export AWS_ACCESS_KEY_ID=${access_key}
+export AWS_SECRET_ACCESS_KEY=${secret_key}
+export AWS_DEFAULT_REGION=${DEV_region}
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
