@@ -36,7 +36,7 @@ resource "kubernetes_deployment" "aws_lz_k8s_deployment_eagleconsole" {
     }
   }
 
-  provider = kubernetes.network
+  provider = kubernetes.shared_services
 }
 
 resource "kubernetes_service" "aws_lz_k8s_service_eagleconsole" {
@@ -65,7 +65,7 @@ resource "kubernetes_service" "aws_lz_k8s_service_eagleconsole" {
       app = "eagleconsole"
     }
   }
-  provider = kubernetes.network
+  provider = kubernetes.shared_services
 }
 
 
@@ -126,7 +126,7 @@ resource "kubernetes_deployment" "aws_lz_k8s_deployment_houstonsrv" {
       }
     }
   }
-  provider = kubernetes.network
+  provider = kubernetes.shared_services
 }
 
 resource "kubernetes_service" "aws_lz_k8s_service_houstonsrv" {
@@ -155,7 +155,7 @@ resource "kubernetes_service" "aws_lz_k8s_service_houstonsrv" {
       app = "houstonservice"
     }
   }
-  provider = kubernetes.network
+  provider = kubernetes.shared_services
 }
 
 
@@ -226,7 +226,7 @@ resource "kubernetes_deployment" "aws_lz_k8s_deployment_mysql" {
     }
   }
 
-  provider = kubernetes.network
+  provider = kubernetes.shared_services
 }
 
 
@@ -248,5 +248,5 @@ resource "kubernetes_service" "aws_lz_k8s_service_mysql" {
 
     cluster_ip = "None"
   }
-  provider = kubernetes.network
+  provider = kubernetes.shared_services
 }
