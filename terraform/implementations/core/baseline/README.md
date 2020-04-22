@@ -2,18 +2,18 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| ami\_version | AMI version to deploy | `string` | `"ami-0d1cd67c26f5fca19"` | no |
 | cidr\_blocks | Ingress cidr block | `list` | <pre>[<br>  "10.0.0.0/8"<br>]</pre> | no |
 | cloudtrail\_name | Config Service name | `string` | `"aws_lz_cloudtrail"` | no |
 | cloudtrail\_topic\_name | Name of topic for CloudTrail service | `string` | `"aws_lz_cloudtrail_alarm_sns_topic"` | no |
 | config\_name | Config Service name | `string` | `"aws_lz_config"` | no |
 | config\_topic\_name | Name of topic for Config service | `string` | `"aws_lz_config_sns_topic"` | no |
 | enable\_nat\_gateway | Enable NAT gateway | `bool` | `false` | no |
-| instance\_name | Instance name | `string` | `"awslz_ubuntu"` | no |
-| instance\_type | EC2 instance type | `string` | `"t2.micro"` | no |
 | internal\_traffic\_cidr | n/a | `string` | `"10.0.0.0/8"` | no |
 | internet\_cidr | n/a | `string` | `"0.0.0.0/0"` | no |
 | sandbox\_2\_account\_key\_name | Key pair name of the Sandbox 2 Account | `string` | `"aws-lz"` | no |
+| sandbox\_deployment\_key\_name | Deployment key name | `string` | `"Deployer-key"` | no |
+| sandbox\_web\_server\_instance\_name | Instance name | `string` | `"awslz_test_web_server"` | no |
+| sandbox\_web\_server\_private\_ip | Private ip for the Sandbox web server | `string` | `"10.100.1.100"` | no |
 | security\_group\_description | Security group description | `string` | `"Internal server: http, ssh and icmp"` | no |
 | security\_group\_name | Security group name | `string` | `"internal_webserver"` | no |
 | user\_data | User data for the instance | `string` | `"apt-get update; apt-get install apache2; systemctl start apache2.service; systemctl enable apache2"` | no |

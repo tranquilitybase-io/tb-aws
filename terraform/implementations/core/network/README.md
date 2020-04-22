@@ -8,7 +8,7 @@
 | bastion\_ingress\_rules | Bastion ingress rules | `list` | <pre>[<br>  "ssh-tcp"<br>]</pre> | no |
 | bastion\_instance\_name | Bastion instance name | `string` | `"awslz_bastion-01"` | no |
 | bastion\_security\_group\_description | Bastion Security group description | `string` | `"Bastion server: ssh and icmp"` | no |
-| bastion\_security\_group\_name | Bastion security group name | `string` | `"awslz_bastion_sg"` | no |
+| bastion\_security\_group\_name | Bastion security group name | `string` | `"awslz_bastion_access_from_internet"` | no |
 | cgw\_bgn\_asn | BGN ASN number | `number` | `64998` | no |
 | cgw\_ip\_address | Customer IP address | `string` | `"34.82.155.58"` | no |
 | cgw\_static\_route | Static Route ? | `bool` | `false` | no |
@@ -38,14 +38,19 @@
 | inline\_vpc\_public\_subnets | In-line VPC Pubic Subnets list | `list(string)` | `[]` | no |
 | internet\_ingress\_cidr\_blocks | Ingress cidr block | `list` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | netmon\_ingress\_rules | Ingress rules | `list(string)` | <pre>[<br>  "https-443-tcp",<br>  "http-80-tcp",<br>  "ssh-tcp"<br>]</pre> | no |
-| netmon\_instance\_name | Network Monitoring instance name | `string` | `"aws_lz_netmon"` | no |
+| netmon\_instance\_name | Network Monitoring instance name | `string` | `"aws_lz_nagios_netmon"` | no |
+| netmon\_reverse\_proxy\_private\_ip | Private ip for the Sandbox web server | `string` | `"10.99.8.100"` | no |
 | netmon\_security\_group\_description | Security group description | `string` | `"Internal server: http, https, ssh"` | no |
 | netmon\_security\_group\_name | Security group name | `string` | `"aws_lz_netmon_sg"` | no |
 | network\_account\_key\_name | Key pair name of the Network Account | `string` | `"Deployer-key-2"` | no |
-| nginx\_ingress\_rules | Ingress rules | `list` | <pre>[<br>  "https-443-tcp",<br>  "http-80-tcp"<br>]</pre> | no |
-| nginx\_instance\_name | Nginx instance name | `string` | `"awslz_nginx-3"` | no |
-| nginx\_security\_group\_description | Security group description | `string` | `"Internal server: http and https"` | no |
-| nginx\_security\_group\_name | Security group name | `string` | `"external_webserver"` | no |
+| network\_bastion\_internal\_access\_ingress\_rules | Bastion ingress rules | `list` | <pre>[<br>  "ssh-tcp",<br>  "all-icmp"<br>]</pre> | no |
+| network\_bastion\_internal\_access\_security\_group\_description | Bastion Security group description | `string` | `"Bastion access to internal network"` | no |
+| network\_bastion\_internal\_access\_security\_group\_name | Bastion security group name to access internal network | `string` | `"awslz_bastion_access_to_internal"` | no |
+| network\_reverse\_proxy\_ingress\_rules | Ingress rules | `list` | <pre>[<br>  "https-443-tcp",<br>  "http-80-tcp",<br>  "http-8080-tcp"<br>]</pre> | no |
+| network\_reverse\_proxy\_instance\_name | Nginx instance name | `string` | `"awslz_reverse_proxy"` | no |
+| network\_reverse\_proxy\_private\_ip | Private ip for the Sandbox web server | `string` | `"10.99.4.100"` | no |
+| network\_reverse\_proxy\_security\_group\_description | Security group description | `string` | `"Reverse proxy server: http and https"` | no |
+| network\_reverse\_proxy\_security\_group\_name | Security group name | `string` | `"reverse_proxy_internet"` | no |
 | nginx\_user\_data | User data for the instance | `string` | `""` | no |
 | t2\_micro\_instance\_type | EC2 instance type | `string` | `"t2.micro"` | no |
 | tgw\_vpc\_internal\_traffic\_cidr | n/a | `string` | `"10.0.0.0/8"` | no |
