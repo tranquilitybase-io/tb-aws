@@ -1,0 +1,37 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: mysql57
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql57
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql57
+    spec:
+      containers:
+        - name: mysql57
+          image: gcr.io/tranquility-base-images/tb-houston-mysql57:landingzone
+          resources:
+            requests:
+              cpu: "100m"
+          imagePullPolicy: IfNotPresent #Always
+          ports:
+            - name: mysql57
+              containerPort: 3306
+          env:
+            # Use secret in real usage
+            - name: MYSQL_ROOT_PASSWORD
+              value: my-secret-pw
+            - name: MYSQL_USER
+              value: eagle-user
+            # Use secret in real usage
+            - name: MYSQL_PASSWORD
+              value: eagle-user-secret-pw
+            - name: MYSQL_DATABASE
+              value: eagle_db

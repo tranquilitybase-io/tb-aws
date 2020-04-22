@@ -5,6 +5,7 @@ variables:
 stages:
   - Generate+Validate Terraform
   - Apply in AWS
+  - K8S Apply
   - Provision
   - Permissions
 
@@ -55,6 +56,23 @@ Validate Terraform files:
       - automation/cicd/.gitlab-ci.yml
       - automation/cicd/generate_validate_tf_files.sh
       - automation/cicd/terraform-pre-run.py
+
+# Apply the Terraform files in AWS root account
+AWS K8S Deploy:
+  extends: .docker_terraform
+  stage: K8S Apply
+  tags:
+    - docker
+  script:
+    - ${CICD_SCRIPTS_DIR}/aws_post_deploy.sh
+  cache:
+    paths:
+      - terraform/*.tf
+  only:
+    changes:
+      - automation/k8s/**/*
+      - automation/cicd/.gitlab-ci.yml
+      - automation/cicd/aws_post_deploy.sh
 
 # Template job
 configure_aws_config:
