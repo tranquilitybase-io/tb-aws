@@ -28,8 +28,8 @@ export AWS_SESSION_TOKEN=$(echo ${temp_json} | jq -r ".Credentials | .SessionTok
 aws sts get-caller-identity
 
 echo "------------------------Validate kubeconfig and kubectl---------------------------"
-#aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_ingress_cluster
-#kubectl get svc
+aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_ingress_cluster
+kubectl get svc
 
 echo "----------------------------------------------------------------------------------"
 #more ~/.kube/config
