@@ -1,6 +1,21 @@
 #!/bin/bash
 # Commennt
 # Commennt
+echo "------------------------AWS Environment VAriables -----------------------------------------------"
+export AWS_ACCESS_KEY_ID=${access_key}
+export AWS_SECRET_ACCESS_KEY=${secret_key}
+export AWS_DEFAULT_REGION=${DEV_region}
+
+# Paths
+MAIN_PATH=$(pwd)
+AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
+TERRAFORM_PATH="${MAIN_PATH}/terraform"
+
+echo "------------------------AWS CLI-----------------------------------------------"
+aws --version
+aws configure set aws_access_key_id ${access_key}
+aws configure set aws_secret_access_key ${secret_key}
+aws configure set default.region ${DEV_region}
 echo "------------------------get-caller-identity-----TERRAFORM-------------------------"
 aws sts get-caller-identity
 
