@@ -60,8 +60,7 @@ aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_ingress_cluste
 kubectl get svc
 
 echo "----------------------------------------------------------------------------------"
-pwd
-ls -la
+more ~/.kube/config
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
 
