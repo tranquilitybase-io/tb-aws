@@ -15,8 +15,21 @@ aws --version
 aws configure set aws_access_key_id ${access_key}
 aws configure set aws_secret_access_key ${secret_key}
 aws configure set default.region ${DEV_region}
-export bucket=$(aws s3 ls | awk '{print $3}')
+echo "------------------------Create Profiles for AWS CLI ---------------------------------------"
+ACCOUNT_LIST=$(aws organizations list-accounts)
+for row in $(echo "${ACCOUNT_LIST}" | jq -r '.Accounts[] | @base64'); do
+    ACCOUNT_ID=$(echo ${row} | base64 --decode | jq -r '.Id')
+    ACCOUNT_NAME=$(echo ${row} | base64 --decode | jq -r '.Name')
+    if [ $ACCOUNT_NAME != 'aws-lz' ] && [ $ACCOUNT_NAME != 'test-account' ] ; then
+      echo "[profile ${ACCOUNT_NAME}]" >> ~/.aws/config
+      echo "    role_arn = arn:aws:iam::${ACCOUNT_ID}:role/AWSLZCoreOUAdminRole" >> ~/.aws/config
+      echo "    source_profile = default" >> ~/.aws/config
+    fi
+done
+more ~/.aws/config
+echo "------------------------Create Profiles for AWS CLI ---------------------------------------"
 
+export bucket=$(aws s3 ls | awk '{print $3}')
 echo "------------------------CONNECTION--------------------------------------------"
 export TF_VAR_env_generation_date=$(date +%d-%m-%Y_%H-%M)
 ssh-keygen -t rsa -b 2048 -N "" -f temp--${TF_VAR_env_generation_date}.key > /dev/null 2>&1

@@ -31,3 +31,22 @@ data "external" "heptio_authenticator_aws_network" {
     cluster_name = var.ingress_eks_cluster_name
   }
 }
+
+data "aws_iam_policy_document" "aws_lz_eks_cluster_sharedservices" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "sts:AssumeRole"]
+
+    principals {
+      type = "AWS"
+      identifiers = [
+        "arn:aws:iam::${module.aws_lz_account_sharedservices.account_id}:role/${var.org_admin_role}"]
+    }
+    principals {
+      type = "Service"
+      identifiers = [
+        "eks.amazonaws.com"]
+    }
+  }
+}
