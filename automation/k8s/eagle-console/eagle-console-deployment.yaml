@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: eagleconsole
-          image: gcr.io/tranquility-base-images/tb-eagle-console:landingzone
+          image: 615513573213.dkr.ecr.us-west-2.amazonaws.com/ec-images:latest
           resources:
             requests:
               cpu: "100m"
