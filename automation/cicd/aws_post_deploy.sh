@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Comment
 echo "------------------------get-caller-identity-----TERRAFORM-------------------------"
 #aws sts get-caller-identity
 
