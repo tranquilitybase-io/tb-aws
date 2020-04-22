@@ -33,7 +33,7 @@ aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_ingress_cluste
 kubectl get svc
 kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-deployment.yaml
 kubectl get pods
-sleep 1m
+sleep 4m
 kubectl get pods
 echo "----------------------------------------------------------------------------------"
 #more ~/.kube/config
