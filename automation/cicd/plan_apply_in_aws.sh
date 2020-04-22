@@ -55,7 +55,9 @@ export AWS_SECRET_ACCESS_KEY=$(echo ${temp_json} | jq -r ".Credentials | .Secret
 export AWS_SESSION_TOKEN=$(echo ${temp_json} | jq -r ".Credentials | .SessionToken")
 aws sts get-caller-identity
 
+echo "------------------------Validate kubeconfig and kubectl---------------------------"
 aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_ingress_cluster
+kubectl get svc
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
 
