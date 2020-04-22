@@ -10,6 +10,7 @@ export AWS_DEFAULT_REGION=${DEV_region}
 MAIN_PATH=$(pwd)
 AUTOMATION_SCRIPTS="${MAIN_PATH}/automation/cicd"
 TERRAFORM_PATH="${MAIN_PATH}/terraform"
+K8S_PATH="${MAIN_PATH}/automation/k8s"
 
 echo "------------------------AWS CLI-----------------------------------------------"
 aws --version
@@ -30,6 +31,9 @@ aws sts get-caller-identity
 echo "------------------------Validate kubeconfig and kubectl---------------------------"
 aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_ingress_cluster
 kubectl get svc
-
+kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-deployment.yaml
+kubectl get pods
+sleep 1m
+kubectl get pods
 echo "----------------------------------------------------------------------------------"
 #more ~/.kube/config
