@@ -70,6 +70,7 @@ AWS K8S Deploy:
       - terraform/*.tf
   only:
     changes:
+      - terraform/**/*
       - automation/k8s/**/*
       - automation/cicd/.gitlab-ci.yml
       - automation/cicd/aws_post_deploy.sh
