@@ -15,7 +15,11 @@ module "vpc_shared_services" {
   enable_nat_gateway = var.enable_nat_gateway_sharedservices
   enable_vpn_gateway = var.enable_vpn_gateway_sharedservices
 
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sharedservices_account_id, (var.tag_key_name) = "sharedservices" }
+  # Required tags for EKS
+  private_subnet_tags = {"kubernetes.io/role/internal-elb" = 1}
+  public_subnet_tags = {"kubernetes.io/role/elb" = 1}
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sharedservices_account_id, (var.tag_key_name) = "sharedservices", "kubernetes.io/cluster/${var.ec_eks_cluster_name}" = "shared"}
 }
 
 module "vpc_sharedservices_twg_attachment" {
