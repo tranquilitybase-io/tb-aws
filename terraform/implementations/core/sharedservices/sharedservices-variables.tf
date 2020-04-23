@@ -56,7 +56,7 @@ variable "ec_eks_node_group_role_name" {
 
 variable "ec_eks_node_group_instance_types" {
     description = "Instances types for the node group"
-    default     = ["t2.micro"]
+    default     = ["t3.small"]
 }
 
 # Key pair variables
