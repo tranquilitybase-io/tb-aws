@@ -74,9 +74,8 @@ _There are different flavors on implementations but all have point described abo
 ![Generic Member Account](./automation/images/SandBoxVPCDiagram.PNG)
 
 ### Site-to-Site VPN connection between GCP and AWS Transit Gateway with dynamic BGP routing.
-https://github.com/tranquilitybase-io/tb-aws/tree/master/automation/docs/vpn_aws_gcp.pdf
 
-Read More [here](./automation/docs/vpn_aws_gcp.pdf)
+Read More [here](./automation/docs/vpn_aws_gcp.pdf) about the steps to configure a VPN between AWS and GCP.
 
 ## Guidelines
 
