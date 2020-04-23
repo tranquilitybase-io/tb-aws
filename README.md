@@ -6,8 +6,15 @@
     + [Core Organization Unit and its core components anatomy](#core-organization-unit-and-its-core-components-anatomy)
     + [Generic account anatomy](#generic-account-anatomy)
     + [Account Creation in LZ](#account-creation-in-lz)
+  * [Network](#network)
+    + [Current Network Infrastructure](#current-network-infrastructure)
+    + [Egress VPC Network Diagram](#egress-vpc-network-view)
+    + [Ingress VPC Network Diagram](#ingress-vpc-network-view)
+    + [In-Line VPC Network Diagram](#in-line-vpc-network-view)
+    + [SandBox Account Structure](#sandbox-account-vpc)
+    + [Cloud-to-Cloud VPN connection between AWS & GCP](#site-to-site-vpn-connection-between-gcp-and-aws-transit-gateway-with-dynamic-bgp-routing)
   * [Code Blueprints](#code-blueprints)
-    + [Infrastucure as code Development](#infrastucure-as-code-development)
+    + [Infrastructure as code Development](#infrastucure-as-code-development)
     + [Directory Structure](#directory-structure)
     + [Local / Remote Execution sequence steps](#local---remote-execution-sequence-steps)
     + [Coding standards and naming conventions](#coding-standards-and-naming-conventions)
@@ -72,6 +79,10 @@ _There are different flavors on implementations but all have point described abo
 ### Sandbox Account VPC 
 
 ![Generic Member Account](./automation/images/SandBoxVPCDiagram.PNG)
+
+### Site-to-Site VPN connection between GCP and AWS Transit Gateway with dynamic BGP routing.
+
+Read more [here](./automation/docs/vpn_aws_gcp.pdf) about the steps to configure a VPN between AWS and GCP.
 
 ## Guidelines
 
