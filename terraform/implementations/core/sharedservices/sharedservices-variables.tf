@@ -1,3 +1,4 @@
+# VPC 
 variable "vpc_sharedservices_cidr"{
     description = "Shared Services VPC CIDR range"
     default = "10.99.8.0/22"
@@ -35,13 +36,14 @@ variable "internal_traffic_cidr_sharedservices"{
     default = "10.0.0.0/8"
 }
 
+# EKS Cluster
 variable "ec_eks_cluster_name" {
-    default = "aws_lz_eks_eagleconsole"
+    default = "awslz_eks_eagleconsole"
 }
 
 variable "ec_eks_role_name" {
     description = "EKS role name"
-    default = "awslz_eks_cluster_role"
+    default = "awslz_eks_eagleconsole_cluster_role"
 }
 
 variable "ec_eks_node_group_name" {
@@ -56,7 +58,7 @@ variable "ec_eks_node_group_role_name" {
 
 variable "ec_eks_node_group_instance_types" {
     description = "Instances types for the node group"
-    default     = ["t2.micro"]
+    default     = ["t3.small"]
 }
 
 # Key pair variables
