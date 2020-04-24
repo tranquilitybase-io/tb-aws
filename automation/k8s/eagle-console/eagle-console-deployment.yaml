@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: eagleconsole
-          image: 615513573213.dkr.ecr.us-west-2.amazonaws.com/ec-images:latest
+          image: 000516684594.dkr.ecr.us-west-2.amazonaws.com/eagle-console:latest
           resources:
             requests:
               cpu: "100m"
