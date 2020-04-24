@@ -502,6 +502,7 @@ module "ec2_instance_bastion" {
 }
 # END EC2 Instances
 
+/*
 #Security Group
 # NetMon Reverse proxy
 module "netmon_security_group" {
@@ -525,7 +526,7 @@ module "netmon_security_group" {
 locals {
   user_data_raw = file("../automation/user_data_scripts/nagios_install.sh")
 }
-
+*/
 /*
 # Network Monitoring Server
 module "aws_lz_net_monitor_instance" {
