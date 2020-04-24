@@ -31,6 +31,8 @@ echo "------------------------Validate kubeconfig and kubectl-------------------
 aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_eagleconsole
 kubectl get svc
 kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-deployment.yaml
+kubectl apply -f ${K8S_PATH}/eagle-console/houston-deployment.yaml
+kubectl apply -f ${K8S_PATH}/eagle-console/mysql-deployment.yaml
 kubectl get pods
 sleep 10s
 kubectl get pods
