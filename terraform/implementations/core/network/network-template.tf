@@ -404,7 +404,6 @@ module "network_account_keypair" {
 
 
 ### </ In-line VPC
-/*
 module "aws_lz_inline_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
@@ -460,7 +459,7 @@ module "aws_lz_tgw_inline_vpc_route"{
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 ### END In-line VPC />
-*/
+
 
 #EC2 Instances
 # NGINX Reverse proxy
