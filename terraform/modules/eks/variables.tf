@@ -1,16 +1,16 @@
 variable "eks_iam_role_name" {
   description = "Role name for cluster administration"
-  default     = ""
+  type        = string
 }
 
 variable "eks_cluster_name" {
   description = "EKS name"
-  type = string
+  type        = string
 }
 
 variable "node_group_name" {
   description = "Node group name"
-  default     = ""
+  type        = string
 }
 
 variable "eks_user_policy" {
@@ -65,7 +65,7 @@ variable "node_group_subnets" {
 
 variable "node_group_role_name" {
   description = "Node group role name"
-  default     = ""
+  type        = string
 }
 
 variable "node_group_instance_types" {
