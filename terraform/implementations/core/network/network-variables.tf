@@ -283,8 +283,8 @@ variable "email_netmon" {
   default = "cesar.sanchez@gft.com"
 }
 
-variable "netmon_reverse_proxy_private_ip" {
+variable "netmon_private_ip" {
   description = "Private ip for the Sandbox web server"
   type        = string
-  default     = "10.99.8.100"
+  default     = "10.99.12.100"
 }
