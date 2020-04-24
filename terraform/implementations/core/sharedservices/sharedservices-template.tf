@@ -72,7 +72,7 @@ module "internal_route_sharedservices"{
   policy_arn = local.administrator_access_arn
  }
 
-  module "aws_lz_iam_security_audit_sharedservices" {
+ module "aws_lz_iam_security_audit_sharedservices" {
    source = "./modules/iam"
    providers = {
      aws = aws.sharedservices-account
@@ -86,27 +86,6 @@ module "internal_route_sharedservices"{
    policy_arn = local.read_only_access_arn
   }
 
-/*
-# EKS cluster
-module "aws_lz_eks_eagleconsole_cluster" {
-  source = "./modules/eks"
-  providers = {
-    aws = aws.sharedservices-account
-  }
-
-  eks_cluster_name          = var.ec_eks_cluster_name
-  eks_iam_role_name         = var.ec_eks_role_name
-  subnets                   = module.vpc_shared_services.private_subnets
-#  eks_user_policy           = data.aws_iam_policy_document.aws_lz_eks_cluster_sharedservices.json
-
-  node_group_name           = var.ec_eks_node_group_name
-  node_group_role_name      = var.ec_eks_node_group_role_name
-  node_group_subnets        = module.vpc_shared_services.private_subnets
-  node_group_instance_types = ["t3.small"]
-}
-# END EKS cluster
-*/
-
 # Key pair
 module "sharedservices_account_keypair" {
   source = "./modules/key-pairs"
@@ -116,7 +95,7 @@ module "sharedservices_account_keypair" {
 
   key_name    = var.shared_services_deployment_key_name
   public_key  = var.env_deployment_key
-  tags        = { generation_date = var.env_generation_date } 
+  tags        = { generation_date = var.env_generation_date }
 }
 # END Key pair
 
