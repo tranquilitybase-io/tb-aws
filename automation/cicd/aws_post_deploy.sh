@@ -1,6 +1,9 @@
 #!/bin/bash
-# Commennt
-# Commennt
+
+sharedservices_eks_cluster="awslz_eks_eagleconsole"
+network_eks_cluster=""
+
+
 echo "------------------------AWS Environment VAriables -----------------------------------------------"
 export AWS_ACCESS_KEY_ID=${access_key}
 export AWS_SECRET_ACCESS_KEY=${secret_key}
@@ -26,6 +29,7 @@ export AWS_ACCESS_KEY_ID=$(echo ${temp_json} | jq -r ".Credentials | .AccessKeyI
 export AWS_SECRET_ACCESS_KEY=$(echo ${temp_json} | jq -r ".Credentials | .SecretAccessKey")
 export AWS_SESSION_TOKEN=$(echo ${temp_json} | jq -r ".Credentials | .SessionToken")
 aws sts get-caller-identity
+
 
 echo "------------------------Validate kubeconfig and kubectl---------------------------"
 aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_eagleconsole
