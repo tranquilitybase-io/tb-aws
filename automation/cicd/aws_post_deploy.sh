@@ -20,15 +20,15 @@ aws configure set default.region ${DEV_region}
 echo "------------------------get-caller-identity-----TERRAFORM-------------------------"
 aws sts get-caller-identity
 
-echo "------------------------get-caller-identity-----Network AdminOU-------------------"
-temp_json=$(aws sts assume-role --role-arn "arn:aws:iam::615513573213:role/AWSLZCoreOUAdminRole" --role-session-name AWSCLI-Session-network)
+echo "------------------------get-caller-identity-----Shared Services AdminOU-------------------"
+temp_json=$(aws sts assume-role --role-arn "arn:aws:iam::000516684594:role/AWSLZCoreOUAdminRole" --role-session-name AWSCLI-Session-sharedservices)
 export AWS_ACCESS_KEY_ID=$(echo ${temp_json} | jq -r ".Credentials | .AccessKeyId")
 export AWS_SECRET_ACCESS_KEY=$(echo ${temp_json} | jq -r ".Credentials | .SecretAccessKey")
 export AWS_SESSION_TOKEN=$(echo ${temp_json} | jq -r ".Credentials | .SessionToken")
 aws sts get-caller-identity
 
 echo "------------------------Validate kubeconfig and kubectl---------------------------"
-aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_ingress_cluster
+aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_eagleconsole
 kubectl get svc
 kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-deployment.yaml
 kubectl get pods
