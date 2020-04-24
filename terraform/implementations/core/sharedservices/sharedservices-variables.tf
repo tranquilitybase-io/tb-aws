@@ -38,12 +38,13 @@ variable "internal_traffic_cidr_sharedservices"{
 
 # EKS Cluster
 variable "ec_eks_cluster_name" {
-    default = "awslz_eks_eagleconsole"
+    description = "Shared Services EKS cluster name"
+    default     = "awslz_eks_eagleconsole"
 }
 
 variable "ec_eks_role_name" {
     description = "EKS role name"
-    default = "awslz_eks_eagleconsole_cluster_role"
+    default     = "awslz_eks_eagleconsole_cluster_role"
 }
 
 variable "ec_eks_node_group_name" {

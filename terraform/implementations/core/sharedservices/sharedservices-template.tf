@@ -86,7 +86,7 @@ module "internal_route_sharedservices"{
    policy_arn = local.read_only_access_arn
   }
 
-
+/*
 # EKS cluster
 module "aws_lz_eks_eagleconsole_cluster" {
   source = "./modules/eks"
@@ -102,10 +102,10 @@ module "aws_lz_eks_eagleconsole_cluster" {
   node_group_name           = var.ec_eks_node_group_name
   node_group_role_name      = var.ec_eks_node_group_role_name
   node_group_subnets        = module.vpc_shared_services.private_subnets
-  node_group_instance_types = var.ec_eks_node_group_instance_types
+  node_group_instance_types = ["t3.small"]
 }
 # END EKS cluster
-
+*/
 
 # Key pair
 module "sharedservices_account_keypair" {
