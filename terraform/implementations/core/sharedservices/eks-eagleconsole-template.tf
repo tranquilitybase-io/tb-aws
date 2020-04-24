@@ -13,6 +13,6 @@ module "aws_lz_eks_eagleconsole_cluster" {
   node_group_name           = var.ec_eks_node_group_name
   node_group_role_name      = var.ec_eks_node_group_role_name
   node_group_subnets        = module.vpc_shared_services.private_subnets
-  node_group_instance_types = ec_eks_node_group_instance_types
+  node_group_instance_types = var.ec_eks_node_group_instance_types
 }
 # END EKS cluster
