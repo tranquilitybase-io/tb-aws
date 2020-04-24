@@ -33,7 +33,10 @@ kubectl get svc
 kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-deployment.yaml
 kubectl apply -f ${K8S_PATH}/eagle-console/houston-deployment.yaml
 kubectl apply -f ${K8S_PATH}/eagle-console/mysql-deployment.yaml
+sleep 1m
 kubectl get pods
-sleep 10s
-kubectl get pods
-echo "----------------------------------------------------------------------------------"
+echo "------------------------Services deployments--------------------------------------"
+kubectl get svc
+kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-service.yaml
+sleep 1m
+kubectl get svc
