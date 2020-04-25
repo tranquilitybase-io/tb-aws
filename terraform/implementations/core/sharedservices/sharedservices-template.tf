@@ -15,6 +15,9 @@ module "vpc_shared_services" {
   enable_nat_gateway = var.enable_nat_gateway_sharedservices
   enable_vpn_gateway = var.enable_vpn_gateway_sharedservices
 
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
   # Required tags for EKS
   private_subnet_tags = {"kubernetes.io/role/internal-elb" = 1}
 
