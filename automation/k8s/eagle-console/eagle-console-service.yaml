@@ -4,6 +4,8 @@ metadata:
   name: eagleconsole
   labels:
     app: eagleconsole
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
 spec:
   selector:
     app: eagleconsole
