@@ -38,7 +38,6 @@ function share_acc_session(){
 
 function check_share_acc_eks_cluster() { 
     echo "-----------------------Clusters List------------------------------------"
-    #aws eks list-clusters
     cluster_exists=$(aws eks list-clusters | jq -r '.clusters | contains(["awslz_eks_eagleconsole"])')
     if ${cluster_exists} -eq "true" 
     then
@@ -46,6 +45,7 @@ function check_share_acc_eks_cluster() {
         deploy_share_acc_pods
         deploy_share_acc_services
     else
+        aws eks list-clusters | jq -r '.clusters'
         echo "Cluster does not exists"
         echo "Exiting process"
     fi
@@ -69,6 +69,8 @@ function deploy_share_acc_services() {
     echo "------------------------Services deployments--------------------------------------"
     kubectl get svc
     kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-service.yaml
+    kubectl apply -f ${K8S_PATH}/eagle-console/houston-service.yaml
+    kubectl apply -f ${K8S_PATH}/eagle-console/mysql-service.yaml
     sleep 1m
     kubectl get svc
 }
