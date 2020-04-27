@@ -47,12 +47,12 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 
-terraform state list
+#terraform state list
 
-#terraform apply -auto-approve
+terraform apply -auto-approve
 
 
-terraform state rm module.eks.kubernetes_config_map.aws_auth[0]
+#terraform state rm module.eks.kubernetes_config_map.aws_auth[0]
 
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
