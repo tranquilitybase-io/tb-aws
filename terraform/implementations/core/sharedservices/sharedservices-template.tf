@@ -138,7 +138,7 @@ module "ec2_instance_kubectl" {
   instance_type = var.t2_micro_instance_type
   subnet_id = element(tolist(module.vpc_shared_services.private_subnets),0)
   vpc_security_group_ids = list(module.kubectl_security_group.this_security_group_id)
-  user_data = file("../automation/user_data_scripts/ubuntu_kubectl.sh")
+  //user_data = file("../automation/user_data_scripts/ubuntu_kubectl.sh")
   key_name = module.sharedservices_account_keypair.key_name #var.network_account_key_name
   disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
