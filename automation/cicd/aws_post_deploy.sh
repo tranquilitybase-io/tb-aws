@@ -40,6 +40,7 @@ function check_eks_cluster() {
     echo "-----------------------Clusters List------------------------------------"
     aws eks list-clusters
     aws eks list-clusters | jq -r '.clusters | index("awslz_eks_eagleconsole")'
+    echo $?
 }
 
 function run_kubeconfig() {
