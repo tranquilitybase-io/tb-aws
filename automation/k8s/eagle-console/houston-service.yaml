@@ -16,3 +16,4 @@ spec:
       name: https
   selector:
     app: houstonservice
+  type: LoadBalancer
