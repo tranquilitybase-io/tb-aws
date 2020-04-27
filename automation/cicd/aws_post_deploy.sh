@@ -38,7 +38,7 @@ function share_acc_session(){
 
 function check_share_acc_eks_cluster() { 
     echo "-----------------------Clusters List------------------------------------"
-    cluster_exists=$(aws eks list-clusters | jq -r '.clusters | contains(["awslz_eks_eagleconsole"])')
+    cluster_exists=$(aws eks list-clusters | jq -r '.clusters | contains(["_awslz_eks_eagleconsole"])')
     if ${cluster_exists} -eq "true" 
     then
         run_share_acc_kubeconfig
