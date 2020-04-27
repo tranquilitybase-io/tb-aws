@@ -24,7 +24,7 @@ module "vpc_shared_services" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sharedservices_account_id, (var.tag_key_name) = "sharedservices"}
   //, "kubernetes.io/cluster/${var.ec_eks_cluster_name}" = "shared"
 }
-
+ 
 module "vpc_sharedservices_twg_attachment" {
   source  = "./modules/transit-gateway/tgw-vpc-attachment"
 
