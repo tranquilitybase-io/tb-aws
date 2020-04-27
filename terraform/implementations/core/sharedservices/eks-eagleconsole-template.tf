@@ -1,5 +1,5 @@
 # EKS cluster
-/*
+
 module "aws_lz_eks_eagleconsole_cluster" {
   source = "./modules/eks"
   providers = {
@@ -16,7 +16,8 @@ module "aws_lz_eks_eagleconsole_cluster" {
   node_group_instance_types = var.ec_eks_node_group_instance_types
 }
 # END EKS cluster
-*/
+
+/*
 provider "random" {
   version = "~> 2.1"
 }
@@ -32,7 +33,7 @@ data "aws_eks_cluster" "cluster" {
 data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
-*/
+
 provider "kubernetes" {
 //  host                   = data.aws_eks_cluster.cluster.endpoint
   host                   = module.eks.cluster_id.endpoint
@@ -63,7 +64,7 @@ module "aws_eks_sg" {
 
   eks_vpc_id = module.vpc.vpc_id
 }
-*/
+
 
 module "eks_vpc" {
   providers = {
@@ -171,3 +172,4 @@ module "eks" {
   //map_users                            = var.map_users
   //map_accounts                         = var.map_accounts
 }
+*/
