@@ -20,10 +20,7 @@ provider "kubernetes" {
 //data "aws_availability_zones" "available" {
 //}
 
-resource "random_string" "suffix" {
-  length  = 8
-  special = false
-}
+
 
 resource "aws_security_group" "worker_group_mgmt_one" {
 

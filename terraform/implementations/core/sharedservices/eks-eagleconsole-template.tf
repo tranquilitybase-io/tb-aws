@@ -17,6 +17,12 @@ module "aws_lz_eks_eagleconsole_cluster" {
 }
 # END EKS cluster
 */
+
+resource "random_string" "suffix" {
+  length  = 8
+  special = false
+}
+
 locals {
   cluster_name = "ec-eks-${random_string.suffix.result}"
 }
