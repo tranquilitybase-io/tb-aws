@@ -17,6 +17,9 @@ module "aws_lz_eks_eagleconsole_cluster" {
 }
 # END EKS cluster
 */
+provider "random" {
+  version = "~> 2.1"
+}
 
 resource "random_string" "suffix" {
   length  = 8
