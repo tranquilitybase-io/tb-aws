@@ -13,6 +13,7 @@
     + [In-Line VPC Network Diagram](#in-line-vpc-network-view)
     + [SandBox Account Structure](#sandbox-account-vpc)
     + [Cloud-to-Cloud VPN connection between AWS & GCP](#site-to-site-vpn-connection-between-gcp-and-aws-transit-gateway-with-dynamic-bgp-routing)
+    + [CIDR Table Reference](#cidr-table-reference)
   * [Code Blueprints](#code-blueprints)
     + [Infrastructure as code Development](#infrastucure-as-code-development)
     + [Directory Structure](#directory-structure)
@@ -60,6 +61,7 @@ Some of the pitfalls that we found are:
 _There are different flavors on implementations but all have point described above in common._
 
 ## Network
+
 ### Current Network Infrastructure
 
 ![Generic Member Account](./automation/images/Current_network.PNG)
@@ -79,6 +81,56 @@ _There are different flavors on implementations but all have point described abo
 ### Sandbox Account VPC 
 
 ![Generic Member Account](./automation/images/SandBoxVPCDiagram.PNG)
+
+### CIDR Table reference
+| Network    			|     CIDR  	     | 
+| --------------------- |:------------------:| 
+|Egress			        | **10.99.0.0/22** 	 |
+|                       | 10.99.0.0/24       | 
+|                       | 10.99.1.0/24       |
+|                       | 10.99.2.0/24       |
+|                       | 10.99.3.0/24       |
+|                       |                    |
+|Ingress    	        | **10.99.4.0/22** 	 |
+|                       | 10.99.4.0/24       |
+|                       | 10.99.5.0/24       |
+|                       | 10.99.6.0/24       |
+|                       | 10.99.7.0/24       |
+|                       |                    |
+|In-Line                | **10.99.12.0/22**  |
+|                       | 10.99.12.0/24      |
+|                       | 10.99.13.0/24      |
+|-----------------------|--------------------|
+
+| Shared Services		| 10.99.08.0/22      | 
+| --------------------- |:------------------:| 
+|Private Subnets        | 10.99.08.0/24      |
+|                       | 10.99.09.0/24      |
+|                       |                    |
+|EKS Cluster            | **10.99.16.0/22**  |
+|                       | 10.99.16.0/24      |
+|                       | 10.99.17.0/24      |
+|                       | 10.99.18.0/24      |
+|                       | 10.99.19.0/24      |
+| --------------------- | -------------------|
+
+| Security      		| 10.99.20.0/22      | 
+| --------------------- |:------------------:| 
+|Private Subnets        | 10.99.20.0/24      |
+|                       | 10.99.21.0/24      |
+| --------------------- | -------------------|
+
+| SandBox 1      		| 10.100.0.0/22      | 
+| --------------------- |:------------------:| 
+|Private Subnets        | 10.100.0.0/24      |
+|                       | 10.100.1.0/24      |
+| --------------------- | -------------------|
+
+| SandBox 2      		| 10.101.0.0/22      | 
+| --------------------- |:------------------:| 
+|Private Subnets        | 10.101.0.0/24      |
+|                       | 10.101.1.0/24      |
+| --------------------- | -------------------|
 
 ### Site-to-Site VPN connection between GCP and AWS Transit Gateway with dynamic BGP routing.
 
