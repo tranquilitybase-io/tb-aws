@@ -51,6 +51,10 @@ locals {
 }
 
 resource "random_string" "suffix" {
+  providers = {
+    aws = aws.sharedservices-account
+  }
+  
   length  = 8
   special = false
 }
