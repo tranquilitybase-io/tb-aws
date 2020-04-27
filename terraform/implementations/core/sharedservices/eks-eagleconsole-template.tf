@@ -25,6 +25,14 @@ provider "template" {
   version = "~> 2.1"
 }
 
+data "aws_eks_cluster" "cluster" {
+  name = module.eks.cluster_id
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks.cluster_id
+}
+
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
@@ -33,21 +41,13 @@ provider "kubernetes" {
   version                = "~> 1.11"
 }
 
-resource "random_string" "suffix" {
-  length  = 8
-  special = false
-}
-
 locals {
   cluster_name = "ec-eks-${random_string.suffix.result}"
 }
 
-data "aws_eks_cluster" "cluster" {
-  name = module.eks.cluster_id
-}
-
-data "aws_eks_cluster_auth" "cluster" {
-  name = module.eks.cluster_id
+resource "random_string" "suffix" {
+  length  = 8
+  special = false
 }
 
 /*
