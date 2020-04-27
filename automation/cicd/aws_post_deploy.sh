@@ -38,11 +38,11 @@ function share_session(){
 
 function check_eks_cluster() {
     echo "-----------------------Clusters List------------------------------------"
-    aws eks list-clusters
+    #aws eks list-clusters
     cluster_exists=$(aws eks list-clusters | jq -r '.clusters | contains(["awslz_eks_eagleconsole"])')
     if ${cluster_exists} -eq "true" 
     then
-        echo "cluster exists"
+        run_kubeconfig
     else
         echo "cluster does not exists"
     fi
