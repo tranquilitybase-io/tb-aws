@@ -39,7 +39,7 @@ function share_session(){
 function check_eks_cluster() {
     echo "-----------------------Clusters List------------------------------------"
     aws eks list-clusters
-    aws eks list-clusters | jq -r '.clusters | contains(["awslz_eks_eagleconsole_"])'
+    aws eks list-clusters | jq -r ".clusters | contains(["awslz_eks_eagleconsole"])"
     echo $?
 }
 
