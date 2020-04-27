@@ -27,7 +27,7 @@ function aws_config(){
     aws sts get-caller-identity
 }
 
-function share_session(){
+function share_acc_session(){
     echo "------------------------get-caller-identity-----Shared Services AdminOU-------------------"
     temp_json=$(aws sts assume-role --role-arn "arn:aws:iam::000516684594:role/AWSLZCoreOUAdminRole" --role-session-name AWSCLI-Session-sharedservices)
     export AWS_ACCESS_KEY_ID=$(echo ${temp_json} | jq -r ".Credentials | .AccessKeyId")
@@ -75,5 +75,5 @@ function deploy_share_acc_services() {
 
 init_config
 aws_config
-share_session
-check_share_eks_cluster
+share_acc_session
+check_share_acc_eks_cluster
