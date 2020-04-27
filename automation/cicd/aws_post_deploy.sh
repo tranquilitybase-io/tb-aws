@@ -43,6 +43,8 @@ function check_eks_cluster() {
     if ${cluster_exists} -eq "true" 
     then
         run_kubeconfig
+        deploy_pods
+        deploy_services
     else
         echo "cluster does not exists"
     fi
