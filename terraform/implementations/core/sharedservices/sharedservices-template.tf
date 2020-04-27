@@ -124,7 +124,7 @@ module "kubectl_security_group" {
 }
 #END Security Groups
 
-/*
+/*   
 #EC2 Instances
 # kubectl controller
 module "ec2_instance_kubectl" {
