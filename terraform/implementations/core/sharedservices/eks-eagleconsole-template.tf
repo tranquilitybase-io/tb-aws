@@ -56,6 +56,10 @@ resource "random_string" "suffix" {
 }
 
 resource "aws_security_group" "worker_group_mgmt_one" {
+  providers = {
+    aws = aws.sharedservices-account
+  }
+
   name_prefix = "worker_group_mgmt_one"
   vpc_id      = module.vpc.vpc_id
 
@@ -71,6 +75,10 @@ resource "aws_security_group" "worker_group_mgmt_one" {
 }
 
 resource "aws_security_group" "worker_group_mgmt_two" {
+  providers = {
+    aws = aws.sharedservices-account
+  }
+
   name_prefix = "worker_group_mgmt_two"
   vpc_id      = module.vpc.vpc_id
 
@@ -86,6 +94,10 @@ resource "aws_security_group" "worker_group_mgmt_two" {
 }
 
 resource "aws_security_group" "all_worker_mgmt" {
+  providers = {
+    aws = aws.sharedservices-account
+  }
+
   name_prefix = "all_worker_management"
   vpc_id      = module.vpc.vpc_id
 
@@ -103,6 +115,10 @@ resource "aws_security_group" "all_worker_mgmt" {
 }
 
 module "vpc" {
+  providers = {
+    aws = aws.sharedservices-account
+  }
+
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.6.0"
 
@@ -127,6 +143,10 @@ module "vpc" {
 }
 
 module "eks" {
+  providers = {
+    aws = aws.sharedservices-account
+  }
+  
   source        = "terraform-aws-modules/eks/aws"
   version       = "11.1.0"
   cluster_name  = local.cluster_name
