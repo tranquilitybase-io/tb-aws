@@ -51,6 +51,9 @@ terraform state list
 
 #terraform apply -auto-approve
 
+
+terraform state rm module.eks.kubernetes_config_map.aws_auth[0]
+
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
 
