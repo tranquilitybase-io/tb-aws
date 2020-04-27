@@ -17,6 +17,13 @@ module "aws_lz_eks_eagleconsole_cluster" {
 }
 # END EKS cluster
 */
+data "aws_eks_cluster" "cluster" {
+  name = module.eks.cluster_id
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks.cluster_id
+}
 
 module "aws_eks_sg" {
   source      = "./modules/eks-2"
@@ -24,7 +31,7 @@ module "aws_eks_sg" {
   providers = {
     aws = aws.sharedservices-account
   }
-  
+
   eks_vpc_id = module.vpc.vpc_id
 }
 
