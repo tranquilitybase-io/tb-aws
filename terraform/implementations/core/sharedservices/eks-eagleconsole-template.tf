@@ -34,7 +34,8 @@ data "aws_eks_cluster_auth" "cluster" {
 }
 */
 provider "kubernetes" {
-  host                   = data.aws_eks_cluster.cluster.endpoint
+//  host                   = data.aws_eks_cluster.cluster.endpoint
+  host                   = module.eks.cluster_id.endpoint
 //  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   cluster_ca_certificate = base64decode(module.eks.cluster_id.certificate_authority.0.data)
 //  token                  = data.aws_eks_cluster_auth.cluster.token
