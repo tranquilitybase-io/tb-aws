@@ -45,8 +45,9 @@ function check_share_acc_eks_cluster() {
         deploy_share_acc_pods
         deploy_share_acc_services
     else
-        aws eks list-clusters | jq -r '.clusters'
         echo "Cluster does not exists"
+        echo "Current clusters: "
+        aws eks list-clusters | jq -r '.clusters'
         echo "Exiting process"
     fi
 }
