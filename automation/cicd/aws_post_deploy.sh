@@ -36,7 +36,7 @@ function share_acc_session(){
     aws sts get-caller-identity
 }
 
-function check_share_acc_eks_cluster() {
+function check_share_acc_eks_cluster() { 
     echo "-----------------------Clusters List------------------------------------"
     #aws eks list-clusters
     cluster_exists=$(aws eks list-clusters | jq -r '.clusters | contains(["awslz_eks_eagleconsole"])')
