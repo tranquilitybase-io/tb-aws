@@ -127,9 +127,10 @@ module "vpc" {
 }
 
 module "eks" {
-  source       = "../.."
-  cluster_name = local.cluster_name
-  subnets      = module.vpc.private_subnets
+  source        = "terraform-aws-modules/eks/aws"
+  version       = "11.1.0"
+  cluster_name  = local.cluster_name
+  subnets       = module.vpc.private_subnets
 
   tags = {
     Environment = "test"
