@@ -124,7 +124,7 @@ module "kubectl_security_group" {
 }
 #END Security Groups
 
-/*   
+
 #EC2 Instances
 # kubectl controller
 module "ec2_instance_kubectl" {
@@ -144,4 +144,3 @@ module "ec2_instance_kubectl" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }
 }
 # END EC2 Instances
-*/
