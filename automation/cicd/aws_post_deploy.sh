@@ -38,7 +38,7 @@ function share_session(){
 
 function check_eks_cluster() {
     echo "-----------------------Clusters List------------------------------------"
-    aws eks list-clusters | jq -r ".clusters"
+    aws eks list-clusters | jq -r ".clusters" | test(${sharedservices_eks_cluster})
 }
 
 function run_kubeconfig() {
