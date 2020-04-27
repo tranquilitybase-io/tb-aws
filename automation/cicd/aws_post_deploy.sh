@@ -36,27 +36,28 @@ function share_session(){
     aws sts get-caller-identity
 }
 
-function check_eks_cluster() {
+function check_share_acc_eks_cluster() {
     echo "-----------------------Clusters List------------------------------------"
     #aws eks list-clusters
     cluster_exists=$(aws eks list-clusters | jq -r '.clusters | contains(["awslz_eks_eagleconsole"])')
     if ${cluster_exists} -eq "true" 
     then
-        run_kubeconfig
-        deploy_pods
-        deploy_services
+        run_share_acc_kubeconfig
+        deploy_share_acc_pods
+        deploy_share_acc_services
     else
-        echo "cluster does not exists"
+        echo "Cluster does not exists"
+        echo "Exiting process"
     fi
 }
 
-function run_kubeconfig() {
+function run_share_acc_kubeconfig() {
     echo "------------------------Kubeconfig and kubectl---------------------------"
     aws eks --region ${DEV_region} update-kubeconfig --name awslz_eks_eagleconsole
     kubectl get svc
 }
 
-function deploy_pods {
+function deploy_share_acc_pods {
     kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-deployment.yaml
     kubectl apply -f ${K8S_PATH}/eagle-console/houston-deployment.yaml
     kubectl apply -f ${K8S_PATH}/eagle-console/mysql-deployment.yaml
@@ -64,7 +65,7 @@ function deploy_pods {
     kubectl get pods
 }
 
-function deploy_services() {
+function deploy_share_acc_services() {
     echo "------------------------Services deployments--------------------------------------"
     kubectl get svc
     kubectl apply -f ${K8S_PATH}/eagle-console/eagle-console-service.yaml
@@ -75,4 +76,4 @@ function deploy_services() {
 init_config
 aws_config
 share_session
-check_eks_cluster
+check_share_eks_cluster
