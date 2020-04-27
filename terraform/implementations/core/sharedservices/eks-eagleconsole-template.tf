@@ -135,7 +135,7 @@ module "eks" {
       asg_desired_capacity          = 2
       //additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
       //additional_security_group_ids = var.sg_worker_group_mgmt_one_id
-      additional_security_group_ids = module.worker_group_mgmt_one.id 
+      additional_security_group_ids = module.worker_group_mgmt_one.this_security_group_id 
     },
     {
       name                          = "worker-group-2"
@@ -143,7 +143,7 @@ module "eks" {
       additional_userdata           = "echo foo bar"
       //additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
       //additional_security_group_ids = var.sg_worker_group_mgmt_two_id
-      additional_security_group_ids = module.worker_group_mgmt_two.id 
+      additional_security_group_ids = module.worker_group_mgmt_two.this_security_group_id 
       asg_desired_capacity          = 1
     },
   ]
