@@ -146,6 +146,10 @@ function get_aws_lz() {
     unzip master.zip > /dev/null
 }
 
+function validate_bucket() {
+    bucket_name = $1
+    aws s3api head-bucket --bucket ${bucket_name}
+}
 
 function start_lz_deployment() {
     echo -e "${HLC}------------------------------------------------------------------------------------${NC}"
