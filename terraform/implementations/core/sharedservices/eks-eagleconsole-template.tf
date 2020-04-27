@@ -92,6 +92,23 @@ module "worker_group_mgmt_one" {
 
 }
 
+module "worker_group_mgmt_two" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.sharedservices-account
+  }
+  name = "worker_group_mgmt_two"
+  description = "worker_group_mgmt_two"
+  vpc_id = module.eks_vpc.vpc_id
+
+  ingress_cidr_blocks = ["192.168.0.0/16"]
+  ingress_rules       = ["ssh-tcp"]
+  egress_rules        = var.all_all_egress_rules
+
+}
+
 module "eks" {
   providers = {
     aws = aws.sharedservices-account
@@ -126,7 +143,7 @@ module "eks" {
       additional_userdata           = "echo foo bar"
       //additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
       //additional_security_group_ids = var.sg_worker_group_mgmt_two_id
-      additional_security_group_ids = module.aws_eks_sg.worker_group_mgmt_two_id 
+      additional_security_group_ids = module.worker_group_mgmt_two.id 
       asg_desired_capacity          = 1
     },
   ]
