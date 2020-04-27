@@ -58,7 +58,7 @@ provider "null" {
   version = "~> 2.1"
 }
 
-
+/*
 provider "kubernetes" {
   alias  = "shared_services"
 
@@ -76,3 +76,4 @@ provider "kubernetes" {
   cluster_ca_certificate  = base64decode(module.ingress_eks_cluster.cluster_ca)
   token                   = data.external.heptio_authenticator_aws_network.result.token
 }
+*/

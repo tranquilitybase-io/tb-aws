@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: houstonservice-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: houstonservice
+        version: v1
+    spec:
+      containers:
+        - name: houstonservice
+          image: gcr.io/tranquility-base-images/tb-houston-service:landingzone
+          resources:
+            requests:
+              cpu: "100m"
+          imagePullPolicy: IfNotPresent #Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: SQLALCHEMY_DATABASE_URI
+              value: mysql+mysqlconnector://eagle-user:eagle-user-secret-pw@mysql57/eagle_db
+            - name: SQLALCHEMY_ECHO
+              value: "True"
+            - name: SQLALCHEMY_TRACK_MODIFICATIONS
+              value: "True"

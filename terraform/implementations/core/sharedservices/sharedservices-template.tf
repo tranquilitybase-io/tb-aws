@@ -15,9 +15,16 @@ module "vpc_shared_services" {
   enable_nat_gateway = var.enable_nat_gateway_sharedservices
   enable_vpn_gateway = var.enable_vpn_gateway_sharedservices
 
-  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sharedservices_account_id, (var.tag_key_name) = "sharedservices" }
-}
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 
+  # Required tags for EKS
+  private_subnet_tags = {"kubernetes.io/role/internal-elb" = 1}
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sharedservices_account_id, (var.tag_key_name) = "sharedservices"}
+  //, "kubernetes.io/cluster/${var.ec_eks_cluster_name}" = "shared"
+}
+ 
 module "vpc_sharedservices_twg_attachment" {
   source  = "./modules/transit-gateway/tgw-vpc-attachment"
 
@@ -69,7 +76,7 @@ module "internal_route_sharedservices"{
   policy_arn = local.administrator_access_arn
  }
 
-  module "aws_lz_iam_security_audit_sharedservices" {
+ module "aws_lz_iam_security_audit_sharedservices" {
    source = "./modules/iam"
    providers = {
      aws = aws.sharedservices-account
@@ -83,25 +90,6 @@ module "internal_route_sharedservices"{
    policy_arn = local.read_only_access_arn
   }
 
-# EKS cluster
-module "aws_lz_eks_eagleconsole_cluster" {
-  source = "./modules/eks"
-  providers = {
-    aws = aws.sharedservices-account
-  }
-
-  eks_cluster_name          = var.ec_eks_cluster_name
-  eks_iam_role_name         = var.ec_eks_role_name
-  subnets                   = module.vpc_shared_services.private_subnets
-  eks_user_policy           = data.aws_iam_policy_document.aws_lz_eks_cluster_sharedservices.json
-
-  node_group_name           = var.ec_eks_node_group_name
-  node_group_role_name      = var.ec_eks_node_group_role_name
-  node_group_subnets        = module.vpc_shared_services.private_subnets
-  node_group_instance_types = var.ec_eks_node_group_instance_types
-}
-# END EKS cluster
-
 # Key pair
 module "sharedservices_account_keypair" {
   source = "./modules/key-pairs"
@@ -111,7 +99,7 @@ module "sharedservices_account_keypair" {
 
   key_name    = var.shared_services_deployment_key_name
   public_key  = var.env_deployment_key
-  tags        = { generation_date = var.env_generation_date } 
+  tags        = { generation_date = var.env_generation_date }
 }
 # END Key pair
 
@@ -150,7 +138,7 @@ module "ec2_instance_kubectl" {
   instance_type = var.t2_micro_instance_type
   subnet_id = element(tolist(module.vpc_shared_services.private_subnets),0)
   vpc_security_group_ids = list(module.kubectl_security_group.this_security_group_id)
-  #user_data = replace(file("../automation/user_data_scripts/ubuntu_nginx.sh"),"internal_server_ip",element(tolist(module.ec2_instance.private_ip),0))
+  user_data = file("../automation/user_data_scripts/ubuntu_kubectl.sh")
   key_name = module.sharedservices_account_keypair.key_name #var.network_account_key_name
   disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id }

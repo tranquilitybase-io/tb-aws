@@ -202,6 +202,7 @@ module "aws_lz_ingress_vpc" {
   public_subnet_tags = {"kubernetes.io/role/elb" = 1}
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network", "kubernetes.io/cluster/${var.ingress_eks_cluster_name}" = "shared"}
+  //,"kubernetes.io/cluster/${var.ec_eks_cluster_name}" = "shared"
 }
 
 module "aws_lz_ingress_vpc_twg_attachment" {
@@ -369,7 +370,7 @@ module "bastion_security_group" {
   }
 ### END VPN Connection <--
 
-/*
+
 # Create EKS cluster
 module "ingress_eks_cluster" {
   source = "./modules/eks"
@@ -387,7 +388,7 @@ module "ingress_eks_cluster" {
   node_group_instance_types = var.ingress_eks_node_group_instance_types
 }
 # END Create EKS cluster
-*/
+
 
 # Key pair
 module "network_account_keypair" {
@@ -404,7 +405,6 @@ module "network_account_keypair" {
 
 
 ### </ In-line VPC
-
 module "aws_lz_inline_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
@@ -502,6 +502,7 @@ module "ec2_instance_bastion" {
 }
 # END EC2 Instances
 
+
 #Security Group
 # NetMon Reverse proxy
 module "netmon_security_group" {
@@ -526,6 +527,7 @@ locals {
   user_data_raw = file("../automation/user_data_scripts/nagios_install.sh")
 }
 
+
 # Network Monitoring Server
 module "aws_lz_net_monitor_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
@@ -537,7 +539,7 @@ module "aws_lz_net_monitor_instance" {
   ami = var.amzn2_ami_version
   instance_type = var.t2_micro_instance_type
   subnet_id = element(module.aws_lz_inline_vpc.private_subnets,0)
-  private_ip = var.netmon_reverse_proxy_private_ip
+  private_ip = var.netmon_private_ip
   vpc_security_group_ids = [module.netmon_security_group.this_security_group_id]
   user_data = replace(file("../automation/user_data_scripts/nagios_install.sh"),"NETMON_EMAIL",var.email_netmon)
   key_name = module.network_account_keypair.key_name

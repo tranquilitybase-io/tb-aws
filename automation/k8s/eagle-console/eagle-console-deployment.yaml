@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eagleconsole-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eagleconsole
+        version: v1
+    spec:
+      containers:
+        - name: eagleconsole
+          image: 000516684594.dkr.ecr.us-west-2.amazonaws.com/eagle-console:latest
+          resources:
+            requests:
+              cpu: "100m"
+          imagePullPolicy: IfNotPresent #Always
+          ports:
+            - containerPort: 80

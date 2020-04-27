@@ -30,6 +30,7 @@ resource "aws_eks_cluster" "aws_lz_eks_cluster" {
     subnet_ids = var.subnets
   }
 
+
   depends_on = [
     aws_iam_role_policy_attachment.awslz_AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.awslz_AmazonEKSServicePolicy,

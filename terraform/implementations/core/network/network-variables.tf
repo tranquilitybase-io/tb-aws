@@ -49,7 +49,7 @@ variable "inline_vpc_name" {
 
 variable "inline_vpc_cidr"{
   description = "In-line VPC CIDR"
-  default = "10.99.8.0/22"
+  default = "10.99.12.0/22"
 }
 
 variable "inline_vpc_public_subnets"{
@@ -61,7 +61,7 @@ variable "inline_vpc_public_subnets"{
 variable "inline_vpc_private_subnets"{
   description = "In-line VPC Private Subnets list"
   type = list(string)
-  default = ["10.99.8.0/24", "10.99.9.0/24"]
+  default = ["10.99.12.0/24", "10.99.13.0/24"]
 }
 
 variable "tgw_vpc_internet_cidr"{
@@ -230,7 +230,7 @@ variable "ingress_eks_node_group_role_name" {
 
 variable "ingress_eks_node_group_instance_types" {
   description = "Instances types for the node group"
-  default     = ["t2.micro"]
+  default     = ["t3.small"]
 }
 
 # Key pair variables
@@ -283,8 +283,8 @@ variable "email_netmon" {
   default = "cesar.sanchez@gft.com"
 }
 
-variable "netmon_reverse_proxy_private_ip" {
+variable "netmon_private_ip" {
   description = "Private ip for the Sandbox web server"
   type        = string
-  default     = "10.99.8.100"
+  default     = "10.99.12.100"
 }

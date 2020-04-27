@@ -15,6 +15,7 @@ aws --version
 aws configure set aws_access_key_id ${access_key}
 aws configure set aws_secret_access_key ${secret_key}
 aws configure set default.region ${DEV_region}
+
 echo "------------------------Create Profiles for AWS CLI ---------------------------------------"
 ACCOUNT_LIST=$(aws organizations list-accounts)
 for row in $(echo "${ACCOUNT_LIST}" | jq -r '.Accounts[] | @base64'); do
@@ -27,26 +28,31 @@ for row in $(echo "${ACCOUNT_LIST}" | jq -r '.Accounts[] | @base64'); do
     fi
 done
 more ~/.aws/config
-echo "------------------------Create Profiles for AWS CLI ---------------------------------------"
+echo "------------------------END Create Profiles for AWS CLI -----------------------------------"
 
 export bucket=$(aws s3 ls | awk '{print $3}')
-echo "------------------------CONNECTION--------------------------------------------"
 export TF_VAR_env_generation_date=$(date +%d-%m-%Y_%H-%M)
 ssh-keygen -t rsa -b 2048 -N "" -f temp--${TF_VAR_env_generation_date}.key > /dev/null 2>&1
-export TF_VAR_env_deployment_key=$(cat temp--${TF_VAR_env_generation_date}.key.pub) #| awk '{print $1 $2}'
-#aws s3 cp temp--${TF_VAR_env_generation_date}.key s3://${bucket}/ > /dev/null 2>&1 && echo "Check your S3 bucket to download files"
+export TF_VAR_env_deployment_key=$(cat temp--${TF_VAR_env_generation_date}.key.pub)
 
-cd ${TERRAFORM_PATH}
+
 
 echo "------------------------TERRAFORM INIT--------------------------------------------"
+cd ${TERRAFORM_PATH}
+#export AWS_ACCESS_KEY_ID=${access_key}
+#export AWS_SECRET_ACCESS_KEY=${secret_key}
+#export AWS_DEFAULT_REGION=${DEV_region}
 terraform init
 echo "------------------------TERRAFORM APPLY-------------------------------------------"
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
+
+#terraform state list
+
 terraform apply -auto-approve
 
-echo "------------------------get-caller-identity---------------------------------------"
-aws sts get-caller-identity
+
+#terraform state rm module.eks.kubernetes_config_map.aws_auth[0]
 
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
