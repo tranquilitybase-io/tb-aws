@@ -51,16 +51,15 @@ locals {
 }
 
 resource "random_string" "suffix" {
-  providers = {
-    aws = aws.sharedservices-account
-  }
-  
   length  = 8
   special = false
 }
 
 resource "aws_security_group" "worker_group_mgmt_one" {
-
+  providers = {
+    aws = aws.sharedservices-account
+  }
+  
   name_prefix = "worker_group_mgmt_one"
   vpc_id      = module.vpc.vpc_id
 
