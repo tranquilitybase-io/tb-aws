@@ -37,7 +37,8 @@ function share_session(){
 }
 
 function check_eks_cluster() {
-    aws eks list-clusters
+    echo "-----------------------Clusters List------------------------------------"
+    aws eks list-clusters | jq -r ".clusters"
 }
 
 function run_kubeconfig() {
