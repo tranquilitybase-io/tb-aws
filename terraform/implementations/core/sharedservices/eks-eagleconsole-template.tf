@@ -82,7 +82,7 @@ module "worker_group_mgmt_one" {
   providers = {
     aws = aws.sharedservices-account
   }
-  name = worker_group_mgmt_one
+  name = "worker_group_mgmt_one"
   description = "worker_group_mgmt_one"
   vpc_id = module.eks_vpc.vpc_id
 
