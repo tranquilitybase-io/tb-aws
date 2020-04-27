@@ -35,6 +35,7 @@ data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
 
+/*
 module "aws_eks_sg" {
   source      = "./modules/eks-2"
 
@@ -44,8 +45,9 @@ module "aws_eks_sg" {
 
   eks_vpc_id = module.vpc.vpc_id
 }
+*/
 
-module "vpc" {
+module "eks_vpc" {
   providers = {
     aws = aws.sharedservices-account
   }
@@ -53,7 +55,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.6.0"
 
-  name                 = "test-vpc"
+  name                 = "eks-vpc"
   cidr                 = "10.99.16.0/22"
   azs                  = data.aws_availability_zones.available.names
   private_subnets      = ["10.99.16.0/24", "10.99.17.0/24"]
@@ -73,6 +75,23 @@ module "vpc" {
   }
 }
 
+module "worker_group_mgmt_one" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "3.4.0"
+  
+  providers = {
+    aws = aws.sharedservices-account
+  }
+  name = worker_group_mgmt_one
+  description = "worker_group_mgmt_one"
+  vpc_id = module.eks_vpc.vpc_id
+
+  ingress_cidr_blocks = ["10.0.0.0/8"]
+  ingress_rules       = ["ssh-tcp"]
+  egress_rules        = var.all_all_egress_rules
+
+}
+
 module "eks" {
   providers = {
     aws = aws.sharedservices-account
@@ -81,7 +100,7 @@ module "eks" {
   source        = "terraform-aws-modules/eks/aws"
   version       = "11.1.0"
   cluster_name  = local.cluster_name
-  subnets       = module.vpc.private_subnets
+  subnets       = module.eks_vpc.private_subnets
 
   tags = {
     Environment = "test"
@@ -89,7 +108,7 @@ module "eks" {
     GithubOrg   = "terraform-aws-modules"
   }
 
-  vpc_id = module.vpc.vpc_id
+  vpc_id = module.eks_vpc.vpc_id
 
   worker_groups = [
     {
@@ -99,7 +118,7 @@ module "eks" {
       asg_desired_capacity          = 2
       //additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
       //additional_security_group_ids = var.sg_worker_group_mgmt_one_id
-      additional_security_group_ids = module.aws_eks_sg.worker_group_mgmt_one_id 
+      additional_security_group_ids = module.worker_group_mgmt_one.id 
     },
     {
       name                          = "worker-group-2"
