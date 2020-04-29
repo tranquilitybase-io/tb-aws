@@ -211,7 +211,7 @@ module "aws_lz_ingress_vpc_twg_attachment" {
   providers = {
     aws = aws.network-account
   }
-
+  create_attachment = var.create_ingress_attachment
   attach_name = format("aws_lz_ingress_vpc_attach_%s",local.network_account_id)
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   vpc_id = module.aws_lz_ingress_vpc.vpc_id
@@ -431,6 +431,7 @@ module "aws_lz_inline_vpc_twg_attachment" {
     aws = aws.network-account
   }
 
+  #create_attachment = var.create_inline_attachment
   attach_name = format("aws_lz_inline_vpc_attach_%s",local.network_account_id)
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   vpc_id = module.aws_lz_inline_vpc.vpc_id

@@ -1,3 +1,8 @@
+variable "create_attachment" {
+    description = "Flag to create VPC Attachment"
+    default = true
+}
+
 variable "subnets_ids" {
     description= "Identifiers of subnets"
     type = list(string)

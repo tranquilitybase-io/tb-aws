@@ -1,3 +1,18 @@
+variable "create_ingress_attachment" {
+  description = "Flag to create Ingress VPC Attachment"
+  default = false
+}
+
+variable "create_egress_attachment" {
+  description = "Flag to create Egress VPC Attachment"
+  default = false
+}
+
+variable "create_attachment" {
+  description = "Flag to create VPC Attachment"
+  default = false
+}
+
 variable "ingress_vpc_name" {
   default = "aws_lz_ingress_vpc"
   description = "Ingress VPC Name"
