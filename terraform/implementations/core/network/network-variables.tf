@@ -8,6 +8,11 @@ variable "create_egress_attachment" {
   default = false
 }
 
+variable "create_inline_attachment" {
+  description = "Flag to create In-line VPC Attachment"
+  default = false
+}
+
 variable "create_attachment" {
   description = "Flag to create VPC Attachment"
   default = false
