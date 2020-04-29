@@ -1,4 +1,9 @@
-# VPC 
+variable "create_shared_services_attachment" {
+  description = "Flag to create Shared Services VPC Attachment"
+  default = false
+}
+
+# VPC
 variable "vpc_sharedservices_cidr"{
     description = "Shared Services VPC CIDR range"
     default = "10.99.8.0/22"
