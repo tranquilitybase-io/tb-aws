@@ -74,6 +74,7 @@ module "aws_lz_tgw_route" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   route_table_id = "default"
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
@@ -101,6 +102,7 @@ module "aws_lz_tgw_route_dev" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   route_table_id = module.aws_lz_tgw_route_table_dev.tgw_route_table_id
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
@@ -129,6 +131,7 @@ module "aws_lz_tgw_route_test" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   route_table_id = module.aws_lz_tgw_route_table_test.tgw_route_table_id
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
@@ -158,6 +161,7 @@ module "aws_lz_tgw_route_prod" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   route_table_id = module.aws_lz_tgw_route_table_prod.tgw_route_table_id
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
