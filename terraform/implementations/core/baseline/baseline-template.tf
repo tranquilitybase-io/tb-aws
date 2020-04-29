@@ -211,6 +211,7 @@ module "vpc_sandbox_twg_attachment" {
     aws = aws.sandbox-account
   }
 
+  create_attachment = var.create_sandbox1_attachment
   attach_name = format("aws_lz_sandbox_vpc_attach_%s",local.sandbox_account_id)
   subnets_ids = module.vpc_sandbox.private_subnets
   vpc_id = module.vpc_sandbox.vpc_id
@@ -224,6 +225,7 @@ module "vpc_sandbox_2_twg_attachment" {
     aws = aws.sandbox-account-2
   }
 
+  create_attachment = var.create_sandbox2_attachment
   attach_name = format("aws_lz_sandbox2_vpc_attach_%s",local.sandbox2_account_id)
   subnets_ids =  module.vpc_sandbox_2.private_subnets
   vpc_id = module.vpc_sandbox_2.vpc_id

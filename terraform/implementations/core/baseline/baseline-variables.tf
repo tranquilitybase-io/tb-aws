@@ -1,3 +1,12 @@
+variable "create_sandbox1_attachment" {
+  description = "Flag to create Sandbox1 VPC Attachment"
+  default = false
+}
+
+variable "create_sandbox2_attachment" {
+  description = "Flag to create Sandbox2 VPC Attachment"
+  default = false
+}
 
 variable "config_name" {  
     default = "aws_lz_config"
