@@ -2,11 +2,12 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| ec\_eks\_cluster\_name | n/a | `string` | `"aws_lz_eks_eagleconsole"` | no |
-| ec\_eks\_node\_group\_instance\_types | Instances types for the node group | `list` | <pre>[<br>  "t2.micro"<br>]</pre> | no |
+| create\_shared\_services\_attachment | Flag to create Shared Services VPC Attachment | `bool` | `false` | no |
+| ec\_eks\_cluster\_name | Shared Services EKS cluster name | `string` | `"awslz_eks_eagleconsole"` | no |
+| ec\_eks\_node\_group\_instance\_types | Instances types for the node group | `list` | <pre>[<br>  "t3.small"<br>]</pre> | no |
 | ec\_eks\_node\_group\_name | Cluster node group name | `string` | `"awslz_eks_eagleconsole_node_group"` | no |
 | ec\_eks\_node\_group\_role\_name | Cluster node group name role\_role | `string` | `"awslz_eks_eagleconsole_node_group"` | no |
-| ec\_eks\_role\_name | EKS role name | `string` | `"awslz_eks_cluster_role"` | no |
+| ec\_eks\_role\_name | EKS role name | `string` | `"awslz_eks_eagleconsole_cluster_role"` | no |
 | enable\_nat\_gateway\_sharedservices | Enable NAT gateway | `bool` | `false` | no |
 | enable\_vpn\_gateway\_sharedservices | Enable VPN gateway | `bool` | `false` | no |
 | internal\_ingress\_cidr\_blocks | Internal ingress cidr block | `list` | <pre>[<br>  "10.0.0.0/8"<br>]</pre> | no |

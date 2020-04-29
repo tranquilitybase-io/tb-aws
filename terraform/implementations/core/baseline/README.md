@@ -7,6 +7,8 @@
 | cloudtrail\_topic\_name | Name of topic for CloudTrail service | `string` | `"aws_lz_cloudtrail_alarm_sns_topic"` | no |
 | config\_name | Config Service name | `string` | `"aws_lz_config"` | no |
 | config\_topic\_name | Name of topic for Config service | `string` | `"aws_lz_config_sns_topic"` | no |
+| create\_sandbox1\_attachment | Flag to create Sandbox1 VPC Attachment | `bool` | `false` | no |
+| create\_sandbox2\_attachment | Flag to create Sandbox2 VPC Attachment | `bool` | `false` | no |
 | enable\_nat\_gateway | Enable NAT gateway | `bool` | `false` | no |
 | internal\_traffic\_cidr | n/a | `string` | `"10.0.0.0/8"` | no |
 | internet\_cidr | n/a | `string` | `"0.0.0.0/0"` | no |
