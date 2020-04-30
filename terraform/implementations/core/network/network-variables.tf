@@ -5,7 +5,7 @@ variable "create_ingress_attachment" {
 
 variable "create_egress_attachment" {
   description = "Flag to create Egress VPC Attachment"
-  default = true
+  default = false
 }
 
 variable "create_inline_attachment" {
