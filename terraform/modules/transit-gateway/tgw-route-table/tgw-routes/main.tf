@@ -12,7 +12,7 @@ locals {
 }
 
 resource "aws_ec2_transit_gateway_route" "aws_lz_tgw_route" {
-  count = length(var.tgw_id) > 0 ? 1 : 0
+  count = (length(var.tgw_id) > 0 && var.create_attachment) ? 1 : 0
 
   destination_cidr_block         = var.destination_cidr_block
   transit_gateway_attachment_id  = var.attach_id

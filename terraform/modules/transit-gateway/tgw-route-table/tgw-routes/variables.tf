@@ -1,4 +1,7 @@
-
+variable "create_attachment" {
+  description = "Flag to create VPC Attachment"
+  default = true
+}
 
 variable "tgw_id" {
   description = "Transit Gateway ID"

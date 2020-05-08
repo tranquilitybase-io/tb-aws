@@ -10,6 +10,7 @@ Only Terraform 0.12 is supported.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | attach\_name | Attachment Name | `string` | `""` | no |
+| create\_attachment | Flag to create VPC Attachment | `bool` | `true` | no |
 | subnets\_ids | Identifiers of subnets | `list(string)` | n/a | yes |
 | tags | Tags for attachment VPC | `map` | `{}` | no |
 | transit\_gateway\_id | Transit gateway Id | `string` | n/a | yes |

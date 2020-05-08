@@ -31,7 +31,7 @@ module "vpc_sharedservices_twg_attachment" {
   providers = {
     aws = aws.sharedservices-account
   }
-
+  create_attachment = var.create_shared_services_attachment
   attach_name = format("aws_lz_sharedservices_vpc_attach_%s",local.sharedservices_account_id)
   subnets_ids = module.vpc_shared_services.private_subnets
   vpc_id = module.vpc_shared_services.vpc_id

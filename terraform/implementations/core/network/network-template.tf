@@ -59,6 +59,7 @@ module "aws_lz_egress_vpc_twg_attachment" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   attach_name = format("aws_lz_egress_vpc_attach_%s",local.network_account_id)
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   vpc_id = module.aws_lz_egress_vpc.vpc_id
@@ -73,6 +74,7 @@ module "aws_lz_tgw_route" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   route_table_id = "default"
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
@@ -100,6 +102,7 @@ module "aws_lz_tgw_route_dev" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   route_table_id = module.aws_lz_tgw_route_table_dev.tgw_route_table_id
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
@@ -128,6 +131,7 @@ module "aws_lz_tgw_route_test" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   route_table_id = module.aws_lz_tgw_route_table_test.tgw_route_table_id
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
@@ -157,6 +161,7 @@ module "aws_lz_tgw_route_prod" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_egress_attachment
   route_table_id = module.aws_lz_tgw_route_table_prod.tgw_route_table_id
   destination_cidr_block = "0.0.0.0/0"
   tgw_id = module.aws_lz_tgw.tgw_id
@@ -211,7 +216,7 @@ module "aws_lz_ingress_vpc_twg_attachment" {
   providers = {
     aws = aws.network-account
   }
-
+  create_attachment = var.create_ingress_attachment
   attach_name = format("aws_lz_ingress_vpc_attach_%s",local.network_account_id)
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   vpc_id = module.aws_lz_ingress_vpc.vpc_id
@@ -431,6 +436,7 @@ module "aws_lz_inline_vpc_twg_attachment" {
     aws = aws.network-account
   }
 
+  create_attachment = var.create_inline_attachment
   attach_name = format("aws_lz_inline_vpc_attach_%s",local.network_account_id)
   transit_gateway_id = module.aws_lz_tgw.tgw_id
   vpc_id = module.aws_lz_inline_vpc.vpc_id

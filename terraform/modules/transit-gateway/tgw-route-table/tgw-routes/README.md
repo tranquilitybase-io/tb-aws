@@ -10,6 +10,7 @@ Only Terraform 0.12 is supported.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | attach\_id | TGW-VPC Attachment ID | `string` | `""` | no |
+| create\_attachment | Flag to create VPC Attachment | `bool` | `true` | no |
 | destination\_cidr\_block | Destination CIDR Block | `string` | `""` | no |
 | route\_table\_id | Route Table ID | `string` | `""` | no |
 | tgw\_id | Transit Gateway ID | `string` | `""` | no |
