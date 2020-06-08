@@ -545,6 +545,7 @@ module "aws_lz_tgw_inline_vpc_route"{
 
 #Security Group
 # NetMon Reverse proxy
+/*
 module "netmon_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "3.4.0"
@@ -562,10 +563,13 @@ module "netmon_security_group" {
 
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
+*/
 
+/*
 locals {
   user_data_raw = file("../automation/user_data_scripts/nagios_install.sh")
 }
+*/
 
 /*
 # Network Monitoring Server
