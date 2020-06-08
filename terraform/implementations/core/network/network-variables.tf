@@ -189,21 +189,33 @@ variable "all_all_egress_rules" {
 }
 
 # VPN variables
-variable "create_vpn" {
-  description = "Boolean to decide if the VPN is created or not"
+variable "create_vpn_gcp_int0" {
+  description = "Boolean to decide if the VPN for GCP interface 0 is created or not"
   type = bool
   default = false
 }
 
+variable "create_vpn_gcp_int1" {
+  description = "Boolean to decide if the VPN for GCP interface 1 is created or not"
+  type = bool
+  default = false
+}
+
+
 variable "cgw_bgn_asn" {
   description = "BGN ASN number"
   type = number
-  default = 64998
+  default = 64600
 }
 
-variable "cgw_ip_address" {
-  description = "Customer IP address"
-  default = "34.82.155.58"
+variable "cgw_ip_address_gcp_int0" {
+  description = "Customer IP address from GCP interface 0"
+  default = "35.242.49.95"
+}
+
+variable "cgw_ip_address_gcp_int1" {
+  description = "Customer IP address from GCP interface 1"
+  default = "35.220.53.214"
 }
 
 variable "cgw_type" {

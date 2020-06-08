@@ -339,42 +339,77 @@ module "bastion_security_group" {
   }
 
 ### BEGIN VPN Connection modules -->
-# Create Customer Gateway
-  module "aws_lz_customer_gateway" {
+# Create Customer Gateway GCP Interface 0
+  module "aws_lz_customer_gateway_gcp_int0" {
     source = "./modules/vpn/customer-gateway"
     providers = {
       aws = aws.network-account
     }
 
-    cgw_name = format("aws_lz_cgw_%s",local.network_account_id)
-    create_cgw = var.create_vpn
+    cgw_name = format("aws_lz_cgw_gcp_int0_%s",local.network_account_id)
+    create_cgw = var.create_vpn_gcp_int0
     bgn_asn = var.cgw_bgn_asn
-    customer_ip_address = var.cgw_ip_address
+    customer_ip_address = var.cgw_ip_address_gcp_int0
     cgw_type = var.cgw_type
 
     tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 
   }
 
-###Create VPN Connection
-  module "aws_lz_vpn_connection" {
+###Create VPN Connection for GCP Interface 0
+  module "aws_lz_vpn_connection_gcp_int0" {
     source = "./modules/transit-gateway/tgw-vpn-attachment"
     providers = {
       aws = aws.network-account
     }
 
-    vpn_attach_name = format("aws_lz_vpn_tgw_attachment_%s",local.network_account_id)
-    create_vpn_connection = var.create_vpn
-    cgw_id = module.aws_lz_customer_gateway.cgw_id
+    vpn_attach_name = format("aws_lz_vpn_tgw_attachment_gcp_int0_%s",local.network_account_id)
+    create_vpn_connection = var.create_vpn_gcp_int0
+    cgw_id = module.aws_lz_customer_gateway_gcp_int0.cgw_id
     tgw_id = module.aws_lz_tgw.tgw_id
-    cgw_type = module.aws_lz_customer_gateway.cgw_type
+    cgw_type = module.aws_lz_customer_gateway_gcp_int0.cgw_type
     cgw_static_route = var.cgw_static_route
 
     tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 
   }
-### END VPN Connection <--
 
+# Create Customer Gateway GCP Interface 1
+module "aws_lz_customer_gateway_gcp_int1" {
+  source = "./modules/vpn/customer-gateway"
+  providers = {
+    aws = aws.network-account
+  }
+
+  cgw_name = format("aws_lz_cgw_gcp_int1_%s",local.network_account_id)
+  create_cgw = var.create_vpn_gcp_int1
+  bgn_asn = var.cgw_bgn_asn
+  customer_ip_address = var.cgw_ip_address_gcp_int1
+  cgw_type = var.cgw_type
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+
+}
+
+###Create VPN Connection for GCP Interface 1
+module "aws_lz_vpn_connection_gcp_int1" {
+  source = "./modules/transit-gateway/tgw-vpn-attachment"
+  providers = {
+    aws = aws.network-account
+  }
+
+  vpn_attach_name = format("aws_lz_vpn_tgw_attachment_gcp_int1_%s",local.network_account_id)
+  create_vpn_connection = var.create_vpn_gcp_int1
+  cgw_id = module.aws_lz_customer_gateway_gcp_int1.cgw_id
+  tgw_id = module.aws_lz_tgw.tgw_id
+  cgw_type = module.aws_lz_customer_gateway_gcp_int1.cgw_type
+  cgw_static_route = var.cgw_static_route
+
+  tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
+
+}
+
+### END VPN Connection <--
 
 # Create EKS cluster
 module "ingress_eks_cluster" {
