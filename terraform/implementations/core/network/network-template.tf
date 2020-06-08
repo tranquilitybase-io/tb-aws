@@ -444,7 +444,7 @@ module "network_account_keypair" {
 
 
 ### </ In-line VPC
-module "aws_lz_inline_vpc" {
+/*module "aws_lz_inline_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
 
@@ -498,13 +498,13 @@ module "aws_lz_tgw_inline_vpc_route"{
   route_table = module.aws_lz_inline_vpc.private_route_table_ids
   destination = var.tgw_vpc_internal_traffic_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
-}
+}*/
 ### END In-line VPC />
 
 
 #EC2 Instances
 # NGINX Reverse proxy
-module "network_reverse_proxy_ec2_instance" {
+/*module "network_reverse_proxy_ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.13.0"
   providers = {
@@ -520,11 +520,11 @@ module "network_reverse_proxy_ec2_instance" {
   private_ip = var.network_reverse_proxy_private_ip
   disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
-}
+}*/
 
 
 # Bastion
-module "ec2_instance_bastion" {
+/*module "ec2_instance_bastion" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.13.0"
   providers = {
@@ -539,7 +539,7 @@ module "ec2_instance_bastion" {
   key_name = module.network_account_keypair.key_name #var.network_account_key_name
   disable_api_termination = true
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
-}
+}*/
 # END EC2 Instances
 
 
