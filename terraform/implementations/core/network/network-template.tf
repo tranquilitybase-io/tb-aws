@@ -410,7 +410,6 @@ module "aws_lz_vpn_connection_gcp_int1" {
 }
 
 ### END VPN Connection <--
-
 # Create EKS cluster
 module "ingress_eks_cluster" {
   source = "./modules/eks"

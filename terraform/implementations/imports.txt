@@ -8,14 +8,14 @@
 /core/organization-template.tf
 /core/organization-variables.tf
 ### Log Archive Implementation
-#/core/logarchive/logarchive-template.tf
-#/core/logarchive/logarchive-variables.tf
+/core/logarchive/logarchive-template.tf
+/core/logarchive/logarchive-variables.tf
 ### Security Account - SNS Topic
-#/core/security/security-template.tf
-#/core/security/security-variables.tf
+/core/security/security-template.tf
+/core/security/security-variables.tf
 ### Baseline Accounts
-#/core/baseline/baseline-template.tf
-#/core/baseline/baseline-variables.tf
+/core/baseline/baseline-template.tf
+/core/baseline/baseline-variables.tf
 
 ### Shared Services
 /core/sharedservices/sharedservices-template.tf
