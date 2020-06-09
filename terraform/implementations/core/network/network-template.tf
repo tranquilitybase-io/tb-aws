@@ -14,6 +14,7 @@ module "aws_lz_tgw" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+/*
 module "aws_lz_aws_ram_share_tg" {
   source = "./modules/ram"
 
@@ -27,6 +28,7 @@ module "aws_lz_aws_ram_share_tg" {
     aws = aws.network-account
   }
 }
+*/
 
 /*
 ### </ Egress VPC
