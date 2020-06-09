@@ -48,24 +48,6 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 
 terraform state list
-terraform state rm module.aws_lz_tgw_internet_ingress_vpc_route.aws_route.custom_route[0]
-terraform state rm module.aws_lz_tgw_internet_ingress_vpc_route.aws_route.custom_route[1]
-terraform state rm module.vpc_sandbox.aws_route_table.private[0]
-terraform state rm module.vpc_sandbox.aws_route_table.private[1]
-terraform state rm module.vpc_sandbox.aws_route_table_association.private[0]
-terraform state rm module.vpc_sandbox.aws_route_table_association.private[1]
-terraform state rm module.vpc_sandbox_2.aws_route_table.private[0]
-terraform state rm module.vpc_sandbox_2.aws_route_table.private[1]
-terraform state rm module.vpc_sandbox_2.aws_route_table_association.private[0]
-terraform state rm module.vpc_sandbox_2.aws_route_table_association.private[1]
-terraform state rm module.vpc_shared_services.aws_route_table.private[0]
-terraform state rm module.vpc_shared_services.aws_route_table.private[1]
-terraform state rm module.vpc_shared_services.aws_route_table_association.private[0]
-terraform state rm module.vpc_shared_services.aws_route_table_association.private[1]
-terraform state rm module.aws_lz_tgw_route.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-terraform state rm module.aws_lz_tgw_route_dev.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-terraform state rm module.aws_lz_tgw_route_test.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-terraform state rm module.aws_lz_tgw_route_prod.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
 
 
 terraform apply -auto-approve
