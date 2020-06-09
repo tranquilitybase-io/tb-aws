@@ -48,13 +48,9 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 
 terraform state list
-terraform state rm module.aws_lz_tgw_route_dev
-terraform state rm module.aws_lz_tgw_route_prod
-terraform state rm module.aws_lz_tgw_route_table_dev
-terraform state rm module.aws_lz_tgw_route_table_prod
-terraform state rm module.aws_lz_tgw_route_table_test
-terraform state rm module.aws_lz_tgw_route_test
-#terraform apply -auto-approve
+#terraform state rm module.aws_lz_tgw_route_dev
+
+terraform apply -auto-approve
 
 
 #terraform state rm module.eks.kubernetes_config_map.aws_auth[0]
