@@ -34,6 +34,7 @@ data "external" "heptio_authenticator_aws_network" {
   }
 }
 
+/*
 data "aws_iam_policy_document" "aws_lz_eks_cluster_sharedservices" {
   statement {
     effect = "Allow"
@@ -52,3 +53,4 @@ data "aws_iam_policy_document" "aws_lz_eks_cluster_sharedservices" {
     }
   }
 }
+*/
