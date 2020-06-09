@@ -92,6 +92,13 @@ _There are different flavors on implementations but all have point described abo
 
 Read more [**here**](./automation/docs/vpn_aws_gcp.pdf) about the steps to configure a VPN between AWS and GCP.
 
+### HA VPN connection between GCP and AWS Transit Gateway with dynamic BGP routing.
+
+![Organization](./automation/images/HA_VPN_diagram.png)
+
+Read more [**here**](./automation/docs/ha_vpn_aws_gcp.pdf) about the steps to configure HA VPN between AWS and GCP.
+
+
 ## Guidelines
 
 ### IaC Development
