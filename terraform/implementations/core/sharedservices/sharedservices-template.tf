@@ -103,6 +103,7 @@ module "sharedservices_account_keypair" {
 }
 # END Key pair
 
+/*
 #Security Group
 # Linux kubectl
 module "kubectl_security_group" {
@@ -123,6 +124,7 @@ module "kubectl_security_group" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.sharedservices_account_id }
 }
 #END Security Groups
+*/
 
 /*
 #EC2 Instances
