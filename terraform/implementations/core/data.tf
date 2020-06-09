@@ -25,7 +25,7 @@ data "external" "heptio_authenticator_aws_sharedservices" {
   }
 }
 */
-
+/*
 data "external" "heptio_authenticator_aws_network" {
   program = ["bash", "../automation/cicd/authenticator.sh"]
 
@@ -33,7 +33,7 @@ data "external" "heptio_authenticator_aws_network" {
     cluster_name = var.ingress_eks_cluster_name
   }
 }
-
+*/
 /*
 data "aws_iam_policy_document" "aws_lz_eks_cluster_sharedservices" {
   statement {
