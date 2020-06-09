@@ -48,10 +48,13 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 
 terraform state list
-#terraform state rm module.aws_lz_tgw_route_test.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-#terraform state rm module.aws_lz_tgw_route_prod.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-#terraform state rm module.aws_lz_tgw_route.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-#terraform state rm module.aws_lz_tgw_route_dev.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
+terraform state rm module.bastion_security_group.aws_security_group
+terraform state rm module.kubectl_security_group.aws_security_group
+terraform state rm module.netmon_security_group.aws_security_group
+terraform state rm module.network_bastion_internal_access_security_group.aws_security_group
+terraform state rm module.network_reverse_proxy_security_group.aws_security_group
+terraform state rm module.web_internal_security_group.aws_security_group
+
 
 terraform apply -auto-approve
 

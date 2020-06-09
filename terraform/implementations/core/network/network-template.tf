@@ -246,6 +246,7 @@ module "aws_lz_tgw_ingress_vpc_route"{
 }
 ### Ingress VPC />
 
+/*
 #Security Group
 # Security group for bastion ssh access
 module "network_bastion_internal_access_security_group" {
