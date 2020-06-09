@@ -9,14 +9,16 @@
 | bastion\_instance\_name | Bastion instance name | `string` | `"awslz_bastion-01"` | no |
 | bastion\_security\_group\_description | Bastion Security group description | `string` | `"Bastion server: ssh and icmp"` | no |
 | bastion\_security\_group\_name | Bastion security group name | `string` | `"awslz_bastion_access_from_internet"` | no |
-| cgw\_bgn\_asn | BGN ASN number | `number` | `64998` | no |
-| cgw\_ip\_address | Customer IP address | `string` | `"34.82.155.58"` | no |
+| cgw\_bgn\_asn | BGN ASN number | `number` | `64600` | no |
+| cgw\_ip\_address\_gcp\_int0 | Customer IP address from GCP interface 0 | `string` | `"35.242.49.95"` | no |
+| cgw\_ip\_address\_gcp\_int1 | Customer IP address from GCP interface 1 | `string` | `"35.220.53.214"` | no |
 | cgw\_static\_route | Static Route ? | `bool` | `false` | no |
 | cgw\_type | Type of customer gateway | `string` | `"ipsec.1"` | no |
-| create\_egress\_attachment | Flag to create Egress VPC Attachment | `bool` | `false` | no |
+| create\_egress\_attachment | Flag to create Egress VPC Attachment | `bool` | `true` | no |
 | create\_ingress\_attachment | Flag to create Ingress VPC Attachment | `bool` | `false` | no |
 | create\_inline\_attachment | Flag to create In-line VPC Attachment | `bool` | `false` | no |
-| create\_vpn | Boolean to decide if the VPN is created or not | `bool` | `false` | no |
+| create\_vpn\_gcp\_int0 | Boolean to decide if the VPN for GCP interface 0 is created or not | `bool` | `false` | no |
+| create\_vpn\_gcp\_int1 | Boolean to decide if the VPN for GCP interface 1 is created or not | `bool` | `false` | no |
 | deployment\_key\_name | Deployment key name | `string` | `"Deployer-key-2"` | no |
 | egress\_vpc\_cidr | Egress VPC CIDR | `string` | `"10.99.0.0/22"` | no |
 | egress\_vpc\_name | Egress VPC Name | `string` | `"aws_lz_egress_vpc"` | no |
