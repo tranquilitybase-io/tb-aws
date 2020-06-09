@@ -95,6 +95,7 @@ module "aws_lz_tgw_route_table_dev" {
 
 }
 
+/*
 module "aws_lz_tgw_route_dev" {
   source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
 
@@ -109,6 +110,7 @@ module "aws_lz_tgw_route_dev" {
   attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }
 ###
+*/ 
 
 ### Route Table TEST
 module "aws_lz_tgw_route_table_test" {
@@ -124,6 +126,7 @@ module "aws_lz_tgw_route_table_test" {
 
 }
 
+/*
 module "aws_lz_tgw_route_test" {
   source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
 
@@ -137,8 +140,8 @@ module "aws_lz_tgw_route_test" {
   tgw_id = module.aws_lz_tgw.tgw_id
   attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }
-
 ###
+*/
 
 ###Route Table PROD
 module "aws_lz_tgw_route_table_prod" {
@@ -154,6 +157,7 @@ module "aws_lz_tgw_route_table_prod" {
 
 }
 
+/*
 module "aws_lz_tgw_route_prod" {
   source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
 
@@ -168,6 +172,7 @@ module "aws_lz_tgw_route_prod" {
   attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }
 ###
+*/
 
 ##VPC Routes
 module "aws_lz_tgw_egress_vpc_route"{
