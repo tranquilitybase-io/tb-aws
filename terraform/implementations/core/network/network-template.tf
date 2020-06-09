@@ -266,6 +266,7 @@ module "network_bastion_internal_access_security_group" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+/*
 # Nginx Reverse proxy
 module "network_reverse_proxy_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
@@ -304,6 +305,7 @@ module "bastion_security_group" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 #END Security Groups
+*/
 
 #SECURITY ROLES
  module "aws_lz_iam_security_admin_network" {
@@ -338,6 +340,7 @@ module "bastion_security_group" {
 
   }
 
+/*
 ### BEGIN VPN Connection modules -->
 # Create Customer Gateway GCP Interface 0
   module "aws_lz_customer_gateway_gcp_int0" {
@@ -408,8 +411,10 @@ module "aws_lz_vpn_connection_gcp_int1" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 
 }
-
 ### END VPN Connection <--
+*/
+
+/*
 # Create EKS cluster
 module "ingress_eks_cluster" {
   source = "./modules/eks"
@@ -427,7 +432,7 @@ module "ingress_eks_cluster" {
   node_group_instance_types = var.ingress_eks_node_group_instance_types
 }
 # END Create EKS cluster
-
+*/
 
 # Key pair
 module "network_account_keypair" {
