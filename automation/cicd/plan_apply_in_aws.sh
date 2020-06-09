@@ -48,8 +48,9 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 
 terraform state list
-terraform state rm module.aws_lz_aws_ram_share_tg.aws_ram_resource_association.aws_lz_ram_association[0]
-terraform state rm module.aws_lz_aws_ram_share_tg.aws_ram_resource_share.aws_lz_ram_shared[0]
+terraform state rm module.aws_lz_tgw.aws_ec2_transit_gateway.aws_lz_tgw[0]
+terraform state rm module.aws_lz_register_tgw_globalnet.null_resource.aws_lz_register_tgw_globalnet
+
 
 
 terraform apply -auto-approve
