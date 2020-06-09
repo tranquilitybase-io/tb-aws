@@ -52,6 +52,7 @@ module "aws_lz_egress_vpc" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+/*
 module "aws_lz_egress_vpc_twg_attachment" {
   source  = "./modules/transit-gateway/tgw-vpc-attachment"
 
@@ -66,6 +67,7 @@ module "aws_lz_egress_vpc_twg_attachment" {
   subnets_ids =  module.aws_lz_egress_vpc.private_subnets
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
+*/
 
 /*
 module "aws_lz_tgw_route" {
@@ -116,6 +118,7 @@ module "aws_lz_tgw_route_dev" {
 ###
 */ 
 
+/*
 ### Route Table TEST
 module "aws_lz_tgw_route_table_test" {
   source = "./modules/transit-gateway/tgw-route-table"
@@ -129,6 +132,7 @@ module "aws_lz_tgw_route_table_test" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = "TEST", (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 
 }
+*/
 
 /*
 module "aws_lz_tgw_route_test" {
@@ -147,6 +151,7 @@ module "aws_lz_tgw_route_test" {
 ###
 */
 
+/*
 ###Route Table PROD
 module "aws_lz_tgw_route_table_prod" {
   source = "./modules/transit-gateway/tgw-route-table"
@@ -160,6 +165,7 @@ module "aws_lz_tgw_route_table_prod" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = "PROD", (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 
 }
+*/
 
 /*
 module "aws_lz_tgw_route_prod" {
@@ -178,6 +184,7 @@ module "aws_lz_tgw_route_prod" {
 ###
 */
 
+/*
 ##VPC Routes
 module "aws_lz_tgw_egress_vpc_route"{
   source  = "./modules/route"
@@ -189,6 +196,7 @@ module "aws_lz_tgw_egress_vpc_route"{
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 ### Egress VPC />
+*/
 
 ### </ Ingress VPC
 module "aws_lz_ingress_vpc" {
@@ -219,6 +227,7 @@ module "aws_lz_ingress_vpc" {
   //,"kubernetes.io/cluster/${var.ec_eks_cluster_name}" = "shared"
 }
 
+/*
 module "aws_lz_ingress_vpc_twg_attachment" {
   source  = "./modules/transit-gateway/tgw-vpc-attachment"
 
@@ -232,7 +241,9 @@ module "aws_lz_ingress_vpc_twg_attachment" {
   subnets_ids =  module.aws_lz_ingress_vpc.private_subnets
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
+*/
 
+/*
 ##Routes
 module "aws_lz_tgw_internet_ingress_vpc_route"{
   source  = "./modules/route"
@@ -243,7 +254,9 @@ module "aws_lz_tgw_internet_ingress_vpc_route"{
   destination = var.tgw_vpc_internet_cidr
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
+*/
 
+/*
 module "aws_lz_tgw_ingress_vpc_route"{
   source  = "./modules/route"
   providers = {
@@ -254,6 +267,7 @@ module "aws_lz_tgw_ingress_vpc_route"{
   transit_gateway = module.aws_lz_tgw.tgw_id
 }
 ### Ingress VPC />
+*/
 
 /*
 #Security Group
