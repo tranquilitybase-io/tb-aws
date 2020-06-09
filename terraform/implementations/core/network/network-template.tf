@@ -67,6 +67,7 @@ module "aws_lz_egress_vpc_twg_attachment" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 }
 
+/*
 module "aws_lz_tgw_route" {
   source = "./modules/transit-gateway/tgw-route-table/tgw-routes"
 
@@ -80,7 +81,9 @@ module "aws_lz_tgw_route" {
   tgw_id = module.aws_lz_tgw.tgw_id
   attach_id = module.aws_lz_egress_vpc_twg_attachment.tgw_attach_id
 }
+*/
 
+/*
 ### Route Table DEV
 module "aws_lz_tgw_route_table_dev" {
   source = "./modules/transit-gateway/tgw-route-table"
@@ -94,6 +97,7 @@ module "aws_lz_tgw_route_table_dev" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network" }
 
 }
+*/
 
 /*
 module "aws_lz_tgw_route_dev" {
