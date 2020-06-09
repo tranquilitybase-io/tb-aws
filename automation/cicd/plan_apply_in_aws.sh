@@ -48,11 +48,8 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 
 terraform state list
-#terraform state rm module.aws_lz_tgw_route.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-#terraform state rm module.aws_lz_tgw_route_test.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-#terraform state rm module.aws_lz_tgw_route_prod.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-#terraform state rm module.aws_lz_tgw_route_dev.data.aws_ec2_transit_gateway_route_table.aws_lz_tgw_default_route_table
-
+terraform state rm module.aws_lz_aws_ram_share_tg.aws_ram_resource_association.aws_lz_ram_association[0]
+terraform state rm module.aws_lz_aws_ram_share_tg.aws_ram_resource_share.aws_lz_ram_shared[0]
 
 
 terraform apply -auto-approve
