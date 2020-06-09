@@ -168,7 +168,7 @@ module "aws_lz_cloudtrail_2" {
 
 ### VPC --->
 /*Using terraform VPC module, see https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.29.0 */
-
+/*
 module "vpc_sandbox" {
   source  = "terraform-aws-modules/vpc/aws"
   providers = {
