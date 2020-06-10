@@ -625,6 +625,7 @@ module "aws_lz_net_monitor_instance" {
 }
 */
 
+/*
 ###BEGIN Network Manager
 ###Create Global Network
 module "aws_lz_create_global_network" {
@@ -641,4 +642,4 @@ module "aws_lz_register_tgw_globalnet" {
   tgw_arn = module.aws_lz_tgw.tgw_arn
 }
 ###END Network Manager
-
+*/
