@@ -26,8 +26,8 @@
 #/core/sharedservices/ec-variables.tf
 
 ### Network Accounts
-/core/network/network-template.tf
-/core/network/network-variables.tf
+#/core/network/network-template.tf
+#/core/network/network-variables.tf
 
 # Simple test for resources
 #resources-test-template.tf
