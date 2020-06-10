@@ -31,8 +31,13 @@ for row in $(echo "${ACCOUNT_LIST}" | jq -r '.Accounts[] | @base64'); do
 done
 more ~/.aws/config
 echo "------------------------END Create Profiles for AWS CLI -----------------------------------"
+echo "aws s3 ls"
+aws s3 ls
+echo "aws s3 ls | awk '{print $3}'"
+aws s3 ls | awk '{print $3}'
 
 export bucket=$(aws s3 ls | awk '{print $3}')
+echo $bucket
 export TF_VAR_env_generation_date=$(date +%d-%m-%Y_%H-%M)
 ssh-keygen -t rsa -b 2048 -N "" -f temp--${TF_VAR_env_generation_date}.key > /dev/null 2>&1
 export TF_VAR_env_deployment_key=$(cat temp--${TF_VAR_env_generation_date}.key.pub)
@@ -49,36 +54,11 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 #TF_LOG=DEBUG terraform apply -refresh=true -auto-approve
 #python3 ${TERRAFORM_PATH}/modules/extensions/ram/aws_ram.py
 
-terraform state list
-terraform state rm module.aws_lz_tgw.aws_ec2_transit_gateway.aws_lz_tgw[0]
-terraform state rm module.aws_lz_register_tgw_globalnet.null_resource.aws_lz_register_tgw_globalnet
+#terraform state list
 
-
-
-terraform apply -auto-approve
-
+#terraform apply -auto-approve
 
 #terraform state rm module.eks.kubernetes_config_map.aws_auth[0]
 
 #This scripts generates the Guardduty instances in all accounts and all regions
 #python3 ${AUTOMATION_SCRIPTS}/guardduty.py
-
-#terraform state rm module.aws_lz_aws_ram_share_tg
-
-#terraform state rm module.vpc-network-account
-#terraform state rm module.aws_lz_config_service-2
-#terraform state rm module.aws_lz_cloudtrail-2
-
-#terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_main
-#terraform state rm module.aws_lz_config_bucket.aws_s3_bucket.s3_log
-
-#terraform state rm module.aws_lz_guardduty_bucket.aws_s3_bucket.s3_findings
-#terraform state rm module.aws_s3_bucket_policy_logarchive.aws_s3_bucket.s3_findings
-
-#terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder_status.main
-#terraform state rm module.aws_lz_config_service.aws_config_configuration_recorder.main
-
-#terraform state rm module.aws_lz_config_service_2.aws_iam_role
-#terraform state rm module.aws_lz_config_service.aws_iam_role
-
-#terraform state rm module.aws_lz_inline_vpc.aws_vpc.this[0]
