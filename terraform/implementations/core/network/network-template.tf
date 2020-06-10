@@ -202,6 +202,7 @@ module "aws_lz_tgw_egress_vpc_route"{
 ### Egress VPC />
 */
 
+/*
 ### </ Ingress VPC
 module "aws_lz_ingress_vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -230,6 +231,7 @@ module "aws_lz_ingress_vpc" {
   tags = { (var.tag_key_project_id) = var.awslz_proj_id, (var.tag_key_environment) = var.awslz_environment, (var.tag_key_account_id) = local.network_account_id, (var.tag_key_name) = "network", "kubernetes.io/cluster/${var.ingress_eks_cluster_name}" = "shared"}
   //,"kubernetes.io/cluster/${var.ec_eks_cluster_name}" = "shared"
 }
+*/
 
 /*
 module "aws_lz_ingress_vpc_twg_attachment" {
