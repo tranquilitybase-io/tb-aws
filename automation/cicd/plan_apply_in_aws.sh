@@ -31,13 +31,9 @@ for row in $(echo "${ACCOUNT_LIST}" | jq -r '.Accounts[] | @base64'); do
 done
 more ~/.aws/config
 echo "------------------------END Create Profiles for AWS CLI -----------------------------------"
-echo "aws s3 ls"
-aws s3 ls
-echo "aws s3 ls | awk '{print $3}'"
-aws s3 ls | awk '{print $3}'
 
-export bucket=$(aws s3 ls | awk '{print $3}')
-echo $bucket
+#export bucket=$(aws s3 ls | awk '{print $3}')
+export bucket="control-terraform-states-aws-lz-v01"
 export TF_VAR_env_generation_date=$(date +%d-%m-%Y_%H-%M)
 ssh-keygen -t rsa -b 2048 -N "" -f temp--${TF_VAR_env_generation_date}.key > /dev/null 2>&1
 export TF_VAR_env_deployment_key=$(cat temp--${TF_VAR_env_generation_date}.key.pub)
@@ -56,7 +52,7 @@ echo "------------------------TERRAFORM APPLY-----------------------------------
 
 #terraform state list
 
-#terraform apply -auto-approve
+terraform apply -auto-approve
 
 #terraform state rm module.eks.kubernetes_config_map.aws_auth[0]
 
