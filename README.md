@@ -52,6 +52,23 @@ Some of the pitfalls that we found are:
 
 _There are different flavors on implementations but all have point described above in common._
 
+## IAM Best Practices
+
+- Lock away your root account using MFA and a complex password.
+- Don't use root account unless necessary, most of the time you can use admin accounts instead.
+- Use IAM Users and don't share credentials
+- Manage access with groups and managed policies
+- Develop Custom Managed Policies for groups and applications
+- Use Least privilege (including no privilege) approach to access and when building  custom policies
+- Rotate Credentials regularly and remove old or unnecessary credentials
+- Use a Credential Management Software such as Hashicort Vault or AWS Secrets Manager
+- Use Policy Conditions for Extra Security 
+- GFT recommends strong authentication with MFA for all user accounts 
+- Never embed credentials in apps, use Roles
+- Never Share Access Keys
+- Monitor Activity in tour AWS account via Cloud Watch/Cloud Trail or a 3rd Party Vendor (i.e.  DivyCloud)
+- Review and remove anything stale (users, policies, etc) 
+
 ## Network
 ### Current Network Infrastructure
 
