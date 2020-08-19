@@ -69,6 +69,8 @@ _There are different flavors on implementations but all have point described abo
 - Monitor Activity in tour AWS account via Cloud Watch/Cloud Trail or a 3rd Party Vendor (i.e.  DivyCloud)
 - Review and remove anything stale (users, policies, etc) 
 
+These are some of our best practices for more details from AWS check https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
+
 ## Network
 ### Current Network Infrastructure
 
