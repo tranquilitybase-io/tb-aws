@@ -72,6 +72,11 @@ _There are different flavors on implementations but all have point described abo
 These are some of our best practices for more details from AWS check https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
 
 ## Network
+
+Our approach to Networking is to build a straight forward architecture that is easy to understand and setup while being flexible enough to grow with an organisation as its AWS usage expands and it adds more and more accounts and VPCs. As such we have followed the best practices outlined in https://d1.awsstatic.com/whitepapers/building-a-scalable-and-secure-multi-vpc-aws-network-infrastructure.pdf, creating core accounts for Logging, Security, Networking and Shared Services. A process is in place to create Businessline and Sandbox accounts from templates which will contain their own VPCs (which will reduce blast radius for issues) that will be connected to the core accounts and each other via a Transit Gateway.
+
+Connectivity to the internet will be done via egress and in gress VPCs in the Networking account and connectivity to on-premise infrastructure will be done via VPN or DirectConnect also in the Networking account. 
+
 ### Current Network Infrastructure
 
 ![Generic Member Account](./automation/images/Current_network.PNG)
