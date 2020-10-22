@@ -6,6 +6,7 @@
     + [Core Organization Unit and its core components anatomy](#core-organization-unit-and-its-core-components-anatomy)
     + [Generic account anatomy](#generic-account-anatomy)
     + [Account Creation in LZ](#account-creation-in-lz)
+    + [Monitoring and Logging](#monitoring-and-logging)
   * [Code Blueprints](#code-blueprints)
     + [Infrastucure as code Development](#infrastucure-as-code-development)
     + [Directory Structure](#directory-structure)
@@ -51,6 +52,22 @@ Some of the pitfalls that we found are:
 - Currently Control Tower can do it however baseline accounts will differ so we can be in the scenario described before (*). 
 
 _There are different flavors on implementations but all have point described above in common._
+
+### Monitoring and Logging
+Monitoring allows you mitigate potential security issues. Monitoring is considered a crucial compononent in wellarchitected landing zone. Monitoring lines are stored in log files. Therefore monitoring and logging are related matters.
+In the landing zone we have one account log-archive which is has the responsibility of store and keep safe logs files for all other accounts for all regions. Logs files can be reviewed by auditors and account owners.
+As a best practice AWS Config , AWS CloudTrail, AWS Guarddutty and other services are storing log-archive account logfiles. Centralizing logging allow more easily debug multi-point of failures when those happens.
+
+https://d1.awsstatic.com/whitepapers/aws-security-at-scale-logging-in-aws.pdf
+
+AWS Well-Architected Framework in the Security pillar has desing principal that says:
+
+"Enable traceability: Monitor, alert, and audit actions and changes to your environment in real time. Integrate log and metric collection with systems to automatically
+investigate and take action."
+
+That Design Principle is achived in with those accounts security activate and config services and log-archive store logs in centralized fashion for all account in your organization. 
+
+https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf
 
 ## IAM Best Practices
 
